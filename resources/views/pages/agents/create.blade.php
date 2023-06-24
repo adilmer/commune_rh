@@ -135,7 +135,7 @@
               </div>
 
               <div class="col-8 mt-3">
-                <label for="rib">رقم الحساب البنكي</label>
+                <label for="rib">رقم الحساب البنكي </label>
                 <input name="rib" type="text" class="form-control" id="rib" placeholder="">
               </div>
               <div class="col-4 mt-3">
