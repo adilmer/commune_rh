@@ -1,63 +1,67 @@
 @extends('templates.site')
 @section('content')
 
-
+<form action="{{route('agent.update')}}" method="post" enctype="multipart/form-data">
+    @csrf
 <div class="card">
     <div class="card-body">
       <h5 class="card-title fw-semibold mb-4">المعلومات الشخصية</h5>
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-6 mt-3">
+            <div class="col-6">
               <label for="nom_ar" >الإسم الكامل بالعربية</label>
-              <input type="text" class="form-control" id="inputEmail4" name="nom_ar" placeholder="">
+              <input type="text" class="form-control" id="nom_ar" value="{{$agent->nom_ar}}" name="nom_ar" placeholder="">
             </div>
-            <div class="col-6 mt-3">
+            <input type="hidden" name="{{$agent->id_agent}}">
+            <div class="col-6 ">
               <label for="nom_fr">الإسم الكامل بالفرنسية</label>
-              <input name="nom_fr" type="text" class="form-control" id="nom_fr" placeholder="">
+              <input value="{{$agent->nom_fr}}" name="nom_fr" type="text" class="form-control" id="nom_fr" placeholder="">
             </div>
             <div class="col-4 mt-3">
               <label for="sexe" >الجنس</label>
               <select name="sexe" class="form-control custom-select custom-select-lg mb-3">
-                <option selected>ذكر</option>
-                <option >أنثى</option>
+                <option value="Masculin" {{ $agent->sexe == 'Masculin' ? 'selected' : '' }}>ذكر</option>
+                <option value="Féminin" {{ $agent->sexe == 'Féminin' ? 'selected' : '' }}>أنثى</option>
               </select>
             </div>
             <div class="col-4 mt-3">
               <label for="situation_fam">الحالة العائلية</label>
               <select name="situation_fam" class="custom-select custom-select-lg mb-3 form-control">
-                <option selected>عازب(ة)</option>
-                <option >متزوج(ة)</option>
-                <option >مطلق(ة)</option>
+                <option value="Célibataire" {{ $agent->situation_fam == 'Célibataire' ? 'selected' : '' }}>عازب(ة)</option>
+                <option value="Marié" {{ $agent->situation_fam == 'Marié' ? 'selected' : '' }} >متزوج(ة)</option>
+                <option value="Divorcé" {{ $agent->situation_fam == 'Divorcé' ? 'selected' : '' }}>مطلق(ة)</option>
+                <option value="Veuf" {{ $agent->situation_fam == 'Veuf' ? 'selected' : '' }}>أرمل(ة)</option>
               </select>
             </div>
             <div class="col-4 mt-3">
               <label for="nbr_enfant">عدد الأبناء</label>
-              <input name="nbr_enfant" type="number" class="form-control" id="nbr_enfant" placeholder="">
+              <input value="{{$agent->nbr_enfant}}" name="nbr_enfant" type="number" class="form-control" id="nbr_enfant" placeholder="" >
             </div>
             <div class="col-4 mt-3">
               <label for="lieu_naiss" >مكان الإزدياد</label>
-              <input name="lieu_naiss" type="text" class="form-control" id="lieu_naiss" placeholder="">
+              <input value="{{$agent->lieu_naiss}}" name="lieu_naiss" type="text" class="form-control" id="lieu_naiss" placeholder="">
             </div>
             <div class="col-4 mt-3">
               <label for="date_naiss">تاريخ الإزدياد</label>
-              <input name="date_naiss" type="date" class="form-control" id="date_naiss" placeholder="">
+              <input value="{{$agent->date_naiss}}" name="date_naiss" type="date" class="form-control" id="date_naiss" placeholder="">
             </div>
             <div class="col-4 mt-3">
               <label for="tel">  الهاتف</label>
-              <input name="tel" type="text" class="form-control" id="tel" placeholder="">
+              <input value="{{$agent->tel}}" name="tel" type="text" class="form-control" id="tel" placeholder="">
             </div>
             <div class="col-6 mt-3">
             <label for="adresse_ar" >العنوان بالعربية</label>
-            <input name="adresse_ar" type="text" class="form-control" id="adresse_ar" placeholder="">
+            <input value="{{$agent->adresse_ar}}" name="adresse_ar" type="text" class="form-control" id="adresse_ar" placeholder="">
           </div>
           <div class="col-6 mt-3">
             <label for="adresse_fr"></label>العنوان بالفرنسية</label>
-            <input name="adresse_fr" type="text" class="form-control" id="adresse_fr" placeholder="">
+            <input value="{{$agent->adresse_fr}}" name="adresse_fr" type="text" class="form-control" id="adresse_fr" placeholder="">
           </div>
             <div class="col mt-3">
               <label for="photo" >الصورة الشخصية</label>
-              <input name="photo" type="file" class="form-control" id="photo" placeholder="">
+              <input name="photo" type="file" class="form-control" id="photo" placeholder="" accept="image/*">
+              <img src="{{asset('assets/images/profile/user-1.jpg')}}" class="img-fluid m-3" width="100px" height="70px"  alt="">
             </div>
           </div>
         </div>
@@ -68,103 +72,132 @@
           <div class="row">
             <div class="col-4 mt-3">
                 <label for="ppr" >PPR</label>
-                <input name="ppr" type="text" class="form-control" id="ppr" placeholder="">
+                <input value="{{$agent->ppr}}" name="ppr" type="text" class="form-control" id="ppr" placeholder="">
               </div>
               <div class="col-4 mt-3">
                 <label for="mat">MAT</label>
-                <input name="mat" type="text" class="form-control" id="mat" placeholder="">
+                <input value="{{$agent->mat}}" name="mat" type="text" class="form-control" id="mat" placeholder="">
               </div>
               <div class="col-4 mt-3">
                 <label for="cin">رقم البطاقة الوطنية</label>
-                <input name="cin" type="text" class="form-control" id="cin" placeholder="">
+                <input value="{{$agent->cin}}" name="cin" type="text" class="form-control" id="cin" placeholder="">
               </div>
               <div class="col-3 mt-3">
-                <label for="nom_grade_ar" >الدرجة</label>
-                <input name="nom_grade_ar" type="text" class="form-control" id="nom_grade_ar" placeholder="">
+                <label for="id_grade" >الدرجة</label>
+                <select id="id_grade" name="id_grade" class="custom-select custom-select-lg mb-3 form-control">
+                    <option value="0" disabled>اختر درجة</option>
+                    @foreach ($grades as $grades)
+                    <option value="{{$grades->id_grade}} {{ $agent->id_grade == $grades->id_grade ? 'selected' : '' }}">{{$grades->nom_grade_ar}}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في الدرجة</label>
-                <input name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
+                <input value="{{$agent->date_grade}}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
               </div>
               <div class="col-3 mt-3">
-                <label for="echl" >السلم</label>
-                <input name="echl" type="text" class="form-control" id="echl" placeholder="">
+                <label for="echelle" >السلم</label>
+                <input value="{{$agent->echelle}}" name="echelle" type="number" class="form-control" id="echelle" placeholder="">
               </div>
-              <div class="col-3 mt-3">
+              {{-- <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في السلم</label>
-                <input name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
-              </div>
+                <input value="{{$agent->date_grade}}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
+              </div> --}}
               <div class="col-4 mt-3">
                 <label for="echellon">الرتبة</label>
-                <input name="echellon" type="text" class="form-control" id="echellon" placeholder="">
+                <input value="{{$agent->echellon}}" name="echellon" type="number" class="form-control" id="echellon" placeholder="">
               </div>
               <div class="col-4 mt-3">
                 <label for="indice">الرقم الاستدلالي</label>
-                <input name="indice" type="text" class="form-control" id="indice" placeholder="">
+                <input value="{{$agent->indice}}" name="indice" type="number" class="form-control" id="indice" placeholder="">
               </div>
               <div class="col-4 mt-3">
-                <label for="date_ret">تاريخ الإحالة على التقاعد</label>
-                <input name="date_ret" type="date" class="form-control" id="date_ret" placeholder="">
+                <label for="id_fonction">المنصب الإداري</label>
+                <select id="id_fonction" name="id_fonction" class="custom-select custom-select-lg mb-3 form-control">
+                    @foreach ($fonctions as $fonctions)
+                    <option value="{{$fonctions->id_fonction}} {{ $agent->id_fonction == $fonctions->id_fonction ? 'selected' : '' }}">{{$fonctions->nom_fonction_ar}}</option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="col-6 mt-3">
+                <label for="departements">القسم</label>
+                <select id="departements" class="custom-select custom-select-lg mb-3 form-control">
+                    <option value="0" disabled selected>اختر قسم</option>
+                    @foreach ($departements as $departements)
+                    <option value="{{$departements->id_departement}}" {{ $agent->bureau->service->departement->id_departement == $departements->id_departement ? 'selected' : '' }} >{{$departements->nom_departement_ar}}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="col-6 mt-3">
                 <label for="nom_service_ar">المصلحة</label>
-                <select name="nom_service_ar" class="custom-select custom-select-lg mb-3 form-control">
-                  <option selected>المصلحة</option>
+                <select id="services" class="custom-select custom-select-lg mb-3 form-control">
                 </select>
               </div>
+
               <div class="col-6 mt-3">
-                <label for="nom_departement_ar">القسم</label>
-                <select name="nom_departement_ar" class="custom-select custom-select-lg mb-3 form-control">
-                  <option selected>القسم</option>
-                </select>
-              </div>
-              <div class="col-6 mt-3">
-                <label for="nom_bureau_ar">المكتب</label>
-                <select name="nom_bureau_ar" class="custom-select custom-select-lg mb-3 form-control">
-                  <option selected>المكتب</option>
+                <label for="id_bureau">المكتب</label>
+                <select id="id_bureau" value="{{$agent->id_bureau}}" name="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
+
                 </select>
               </div>
               <div class="col-6 mt-3">
                 <label for="date_rec">تاريخ الترسيم</label>
-                <input name="date_rec" type="date" class="form-control" id="date_rec" placeholder="">
+                <input value="{{$agent->date_rec}}" name="date_rec" type="date" class="form-control" id="date_rec" placeholder="">
               </div>
 
               <div class="col-8 mt-3">
-                <label for="rib">رقم الحساب البنكي</label>
-                <input name="rib" type="text" class="form-control" id="rib" placeholder="">
+                <label for="rib">رقم الحساب البنكي </label>
+                <input value="{{$agent->rib}}" name="rib" type="text" class="form-control" id="rib" placeholder="">
               </div>
               <div class="col-4 mt-3">
                 <label for="agence">Agence</label>
-                <input name="agence" type="text" class="form-control" id="agence" placeholder="">
+                <input value="{{$agent->agence}}" name="agence" type="text" class="form-control" id="agence" placeholder="">
               </div>
 
               <div class="col-4 mt-3">
                 <label for="n_affilation" >رقم التعاضدية  </label>
-                <input name="n_affilation" type="text" class="form-control" id="n_affilation" placeholder="">
+                <input value="{{$agent->n_affilation}}" name="n_affilation" type="text" class="form-control" id="n_affilation" placeholder="">
               </div>
               <div class="col-4 mt-3">
                 <label for="aff_mutuelle">نوع الإنخراط</label>
-                <select name="aff_mutuelle" class="custom-select custom-select-lg mb-3 form-control">
-                  <option selected>General</option>
-                  <option selected>omfam</option>
+                <select value="{{$agent->aff_mutuelle}}" name="aff_mutuelle" class="custom-select custom-select-lg mb-3 form-control">
+                  <option value="GENERAL" class="text-uppercase" {{ $agent->aff_mutuelle == 'GENERAL' ? 'selected' : '' }}>Géneral</option>
+                  <option value="OMFAM" class="text-uppercase" {{ $agent->aff_mutuelle == 'OMFAM' ? 'selected' : '' }}>omfam</option>
                 </select>
               </div>
               <div class="col-4 mt-3">
                 <label for="aff_cmr" >CMR رقم الإنخراط </label>
-                <input name="aff_cmr" type="text" class="form-control" id="aff_cmr" placeholder="">
+                <input value="{{$agent->aff_cmr}}" name="aff_cmr" type="text" class="form-control" id="aff_cmr" placeholder="">
               </div>
-
-
 
           </div>
         </div>
       </div>
     </div>
-    <div class="btnsimple text-start mb-4 ">
-      <button class="btn btn-primary">تعديــل المعلومــات</button>
+    <div class="btnsimple text-start m-4 ">
+      <button class="btn btn-primary">حفظ المعلومــات</button>
     </div>
   </div>
 
 
 </div>
+@endsection
+@section('script')
+$(document).ready(function() {
+
+    $("#departements").on("click", function(){
+        $id = this.value
+        $url = "{{ route('service.filter_departement') }}"
+        $("#services").html("");
+         get_ajax($id,$url,"#services")
+        });
+
+    $("#services").on("click", function(){
+            $id = this.value
+            $url = "{{ route('service.filter_service') }}"
+            $("#id_bureau").html("");
+             get_ajax($id,$url,"#id_bureau")
+            });
+
+});
 @endsection

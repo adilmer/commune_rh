@@ -6,7 +6,8 @@ use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Departement;
-
+use App\Models\Fonction;
+use App\Models\Grade;
 class AgentController extends Controller
 {
     /**
@@ -28,7 +29,9 @@ class AgentController extends Controller
     public function create()
     {
         $departements = Departement::all();
-        return \view('pages.agents.create',compact('departements'));
+        $grades = Grade::all();
+        $fonctions = Fonction::all();
+        return \view('pages.agents.create',compact(['departements','grades','fonctions']));
     }
 
     /**
@@ -39,7 +42,9 @@ class AgentController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $requestData = $request->all();
+        $requestData['photo'] = "fffff";
+        dd($requestData);
         Agent::create(
             $request->all());
 
@@ -52,7 +57,7 @@ class AgentController extends Controller
      * @param  \App\Models\Agent  $agent
      * @return \Illuminate\Http\Response
      */
-    public function show(Agent $agent)
+    public function show(Request $request)
     {
         //
     }
@@ -63,9 +68,14 @@ class AgentController extends Controller
      * @param  \App\Models\Agent  $agent
      * @return \Illuminate\Http\Response
      */
-    public function edit(Agent $agent)
+    public function edit(Request $request)
     {
-        return \view('pages.agents.create');
+        $departements = Departement::all();
+        $grades = Grade::all();
+        $fonctions = Fonction::all();
+        $agent = Agent::findOrFail($request->id_agent);
+
+        return \view('pages.agents.edit',compact(['departements','grades','fonctions','agent']));
     }
 
     /**
@@ -75,9 +85,13 @@ class AgentController extends Controller
      * @param  \App\Models\Agent  $agent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Agent $agent)
+    public function update(Request $request)
     {
-        //
+        $requestData = $request->all();
+        $requestData['photo'] = "fffff";
+        dd($requestData);
+
+        return redirect(route('agent.index'));
     }
 
     /**
@@ -86,7 +100,7 @@ class AgentController extends Controller
      * @param  \App\Models\Agent  $agent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Agent $agent)
+    public function destroy(Request $request)
     {
         //
     }
