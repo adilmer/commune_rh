@@ -80,8 +80,13 @@
                 <input name="cin" type="text" class="form-control" id="cin" placeholder="">
               </div>
               <div class="col-3 mt-3">
-                <label for="id_grade_ar" >الدرجة</label>
-                <input name="id_grade_ar" type="text" class="form-control" id="id_grade_ar" placeholder="">
+                <label for="id_grade" >الدرجة</label>
+                <select id="id_grade" name="id_grade" class="custom-select custom-select-lg mb-3 form-control">
+                    <option value="0"></option>
+                    @foreach ($grades as $grades)
+                    <option value="{{$grades->id_grade}}">{{$grades->nom_grade_ar}}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في الدرجة</label>
@@ -103,10 +108,10 @@
                 <label for="indice">الرقم الاستدلالي</label>
                 <input name="indice" type="text" class="form-control" id="indice" placeholder="">
               </div>
-              <div class="col-4 mt-3">
+              {{-- <div class="col-4 mt-3">
                 <label for="date_ret">تاريخ الإحالة على التقاعد</label>
                 <input name="date_ret" type="date" class="form-control" id="date_ret" placeholder="">
-              </div>
+              </div> --}}
               <div class="col-6 mt-3">
                 <label for="nom_departement_ar">القسم</label>
                 <select id="departements" class="custom-select custom-select-lg mb-3 form-control">
