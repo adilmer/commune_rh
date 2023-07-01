@@ -83,9 +83,9 @@
                       </td>
                       <td class="border-bottom-0">
                         <div class="d-flex align-items-center gap-2">
-                          <span class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></span>
+                          <a href="{{route('agent.details',$agents->id_agent)}}" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></a>
                           <a href="{{route('agent.edit',$agents->id_agent)}}" class="badge bg-success rounded-3 fw-semibold"><i class="ti ti-edit"></i></a>
-                          <span class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></span>
+                          <a href="{{route('agent.delete',$agents->id_agent)}}" onclick="return confirm('هل تريد إزالة هذا الموظف من قاعدة البيانات ؟')" class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></a>
                         </div>
                       </td>
                     </tr>

@@ -63,6 +63,11 @@ class ServiceController extends Controller
     }
 
 
+    /**
+     * Summary of filter_departement
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function filter_departement(Request $request)
     {
         $data = Service::where('id_departement',$request->id)
@@ -70,6 +75,11 @@ class ServiceController extends Controller
 
        return Response(json_encode($data));
     }
+    /**
+     * Summary of filter_service
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function filter_service(Request $request)
     {
         $data = Bureau::where('id_service',$request->id)

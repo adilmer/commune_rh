@@ -13,7 +13,7 @@
               <label for="nom_ar" >الإسم الكامل بالعربية</label>
               <input type="text" class="form-control" id="nom_ar" value="{{$agent->nom_ar}}" name="nom_ar" placeholder="">
             </div>
-            <input type="hidden" name="{{$agent->id_agent}}">
+            <input type="hidden" name="id_agent" value="{{$agent->id_agent}}">
             <div class="col-6 ">
               <label for="nom_fr">الإسم الكامل بالفرنسية</label>
               <input value="{{$agent->nom_fr}}" name="nom_fr" type="text" class="form-control" id="nom_fr" placeholder="">
@@ -61,7 +61,7 @@
             <div class="col mt-3">
               <label for="photo" >الصورة الشخصية</label>
               <input name="photo" type="file" class="form-control" id="photo" placeholder="" accept="image/*">
-              <img src="{{asset('assets/images/profile/user-1.jpg')}}" class="img-fluid m-3" width="100px" height="70px"  alt="">
+              <img src="{{asset('photos_agents/'.$agent->photo)}}" class="rounded-circle m-3" width="100px" alt="">
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@
                 <select id="id_grade" name="id_grade" class="custom-select custom-select-lg mb-3 form-control">
                     <option value="0" disabled>اختر درجة</option>
                     @foreach ($grades as $grades)
-                    <option value="{{$grades->id_grade}} {{ $agent->id_grade == $grades->id_grade ? 'selected' : '' }}">{{$grades->nom_grade_ar}}</option>
+                    <option value="{{$grades->id_grade}}" {{ $agent->id_grade == $grades->id_grade ? 'selected' : '' }}>{{$grades->nom_grade_ar}}</option>
                     @endforeach
                 </select>
               </div>
@@ -115,7 +115,7 @@
                 <label for="id_fonction">المنصب الإداري</label>
                 <select id="id_fonction" name="id_fonction" class="custom-select custom-select-lg mb-3 form-control">
                     @foreach ($fonctions as $fonctions)
-                    <option value="{{$fonctions->id_fonction}} {{ $agent->id_fonction == $fonctions->id_fonction ? 'selected' : '' }}">{{$fonctions->nom_fonction_ar}}</option>
+                    <option value="{{$fonctions->id_fonction}}" {{ $agent->id_fonction == $fonctions->id_fonction ? 'selected' : '' }}>{{$fonctions->nom_fonction_ar}}</option>
                     @endforeach
                 </select>
               </div>
@@ -131,13 +131,18 @@
               <div class="col-6 mt-3">
                 <label for="nom_service_ar">المصلحة</label>
                 <select id="services" class="custom-select custom-select-lg mb-3 form-control">
+                    @foreach ($services as $services)
+                    <option value="{{$services->id_service}}" {{ $agent->bureau->service->id_service == $services->id_service ? 'selected' : '' }} >{{$services->nom_service_ar}}</option>
+                    @endforeach
                 </select>
               </div>
 
               <div class="col-6 mt-3">
                 <label for="id_bureau">المكتب</label>
                 <select id="id_bureau" value="{{$agent->id_bureau}}" name="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
-
+                    @foreach ($bureaux as $bureaux)
+                    <option value="{{$bureaux->id_bureau}}" {{ $agent->bureau->id_bureau == $bureaux->id_bureau ? 'selected' : '' }} >{{$bureaux->nom_bureau_ar}}</option>
+                    @endforeach
                 </select>
               </div>
               <div class="col-6 mt-3">

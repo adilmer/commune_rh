@@ -3,18 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Models\Bureau;
 use App\Models\Departement;
+use App\Models\Document;
 use App\Models\Fonction;
 use App\Models\Grade;
+use App\Models\Service;
+use App\Traits\UploadTrait;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+
+/**
+ * Summary of AgentController
+ */
 class AgentController extends Controller
 {
+    use UploadTrait;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $agents = Agent::all();
@@ -43,10 +53,11 @@ class AgentController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-        $requestData['photo'] = "fffff";
-        dd($requestData);
+        if ($request->photo!=null){
+            $requestData['photo'] = $this->saveAs($request->photo,$request->ppr,"photos_agents");
+        }
         Agent::create(
-            $request->all());
+            $requestData);
 
         return redirect(route('agent.index'));
     }
@@ -59,7 +70,9 @@ class AgentController extends Controller
      */
     public function show(Request $request)
     {
-        //
+        $agent = Agent::findOrFail($request->id_agent);
+        $documents = Document::where('id_agent',$request->id_agent);
+        return \view('pages.agents.details',compact('agent','documents'));
     }
 
     /**
@@ -73,9 +86,17 @@ class AgentController extends Controller
         $departements = Departement::all();
         $grades = Grade::all();
         $fonctions = Fonction::all();
+        $services = Service::all();
+        $bureaux = Bureau::all();
         $agent = Agent::findOrFail($request->id_agent);
 
-        return \view('pages.agents.edit',compact(['departements','grades','fonctions','agent']));
+        return \view('pages.agents.edit',compact(['departements','grades','fonctions','agent','services','bureaux']));
+    }
+
+    public function uploadDocuments($request)
+    {
+        
+        return \view('pages.agents.documents',compact('documents'));
     }
 
     /**
@@ -87,9 +108,15 @@ class AgentController extends Controller
      */
     public function update(Request $request)
     {
+      // dd($request->all());
+        $agent = Agent::findOrFail($request->id_agent);
+        //dd($agent);
         $requestData = $request->all();
-        $requestData['photo'] = "fffff";
-        dd($requestData);
+        if ($request->photo!=null){
+            $requestData['photo'] = $this->saveAs($request->photo,$request->ppr,"photos_agents");
+        }
+
+		$agent->update($requestData);
 
         return redirect(route('agent.index'));
     }
@@ -102,6 +129,9 @@ class AgentController extends Controller
      */
     public function destroy(Request $request)
     {
-        //
+        $agent = Agent::findOrFail($request->id_agent);
+        $agent->delete();
+
+        return redirect(route('agent.index'));
     }
 }

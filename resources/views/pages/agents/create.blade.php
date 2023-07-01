@@ -70,7 +70,7 @@
           <div class="row">
             <div class="col-4 mt-3">
                 <label for="ppr" >PPR</label>
-                <input name="ppr" type="text" class="form-control" id="ppr" placeholder="">
+                <input name="ppr" type="text" class="form-control" id="ppr" placeholder="" required>
               </div>
               <div class="col-4 mt-3">
                 <label for="mat">MAT</label>
