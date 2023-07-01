@@ -27,7 +27,7 @@
     @include('includes.menu')
 <!-- End Sidebar navigation -->
  <!--  Header End -->
-    <div class="container-fluid">
+    <div class="container">
 
         @yield('content')
 

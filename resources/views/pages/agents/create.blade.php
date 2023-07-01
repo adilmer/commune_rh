@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col-6 ">
               <label for="nom_ar" >الإسم الكامل بالعربية</label>
-              <input type="text" class="form-control" id="inputEmail4" name="nom_ar" placeholder="">
+              <input type="text" class="form-control" id="nom_ar" name="nom_ar" placeholder="">
             </div>
             <div class="col-6 ">
               <label for="nom_fr">الإسم الكامل بالفرنسية</label>
@@ -20,21 +20,22 @@
             <div class="col-4 mt-3">
               <label for="sexe" >الجنس</label>
               <select name="sexe" class="form-control custom-select custom-select-lg mb-3">
-                <option selected>ذكر</option>
-                <option >أنثى</option>
+                <option value="Masculin" selected>ذكر</option>
+                <option value="Féminin">أنثى</option>
               </select>
             </div>
             <div class="col-4 mt-3">
               <label for="situation_fam">الحالة العائلية</label>
               <select name="situation_fam" class="custom-select custom-select-lg mb-3 form-control">
-                <option selected>عازب(ة)</option>
-                <option >متزوج(ة)</option>
-                <option >مطلق(ة)</option>
+                <option value="Célibataire" selected>عازب(ة)</option>
+                <option value="Marié" >متزوج(ة)</option>
+                <option value="Divorcé">مطلق(ة)</option>
+                <option value="Veuf">أرمل(ة)</option>
               </select>
             </div>
             <div class="col-4 mt-3">
               <label for="nbr_enfant">عدد الأبناء</label>
-              <input name="nbr_enfant" type="number" class="form-control" id="nbr_enfant" placeholder="">
+              <input name="nbr_enfant" type="number" class="form-control" id="nbr_enfant" placeholder="" value="0">
             </div>
             <div class="col-4 mt-3">
               <label for="lieu_naiss" >مكان الإزدياد</label>
@@ -58,7 +59,7 @@
           </div>
             <div class="col mt-3">
               <label for="photo" >الصورة الشخصية</label>
-              <input name="photo" type="file" class="form-control" id="photo" placeholder="">
+              <input name="photo" type="file" class="form-control" id="photo" placeholder="" accept="image/*">
             </div>
           </div>
         </div>
@@ -80,37 +81,46 @@
                 <input name="cin" type="text" class="form-control" id="cin" placeholder="">
               </div>
               <div class="col-3 mt-3">
-                <label for="id_grade_ar" >الدرجة</label>
-                <input name="id_grade_ar" type="text" class="form-control" id="id_grade_ar" placeholder="">
+                <label for="id_grade" >الدرجة</label>
+                <select id="id_grade" name="id_grade" class="custom-select custom-select-lg mb-3 form-control">
+                    <option value="0"></option>
+                    @foreach ($grades as $grades)
+                    <option value="{{$grades->id_grade}}">{{$grades->nom_grade_ar}}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في الدرجة</label>
-                <input name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
+                <input name="date_grade" type="date"  class="form-control" id="date_grade" placeholder="">
               </div>
               <div class="col-3 mt-3">
-                <label for="echl" >السلم</label>
-                <input name="echl" type="text" class="form-control" id="echl" placeholder="">
+                <label for="echelle" >السلم</label>
+                <input name="echelle" type="number" class="form-control" id="echelle" placeholder="">
               </div>
-              <div class="col-3 mt-3">
+              {{-- <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في السلم</label>
                 <input name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
-              </div>
+              </div> --}}
               <div class="col-4 mt-3">
                 <label for="echellon">الرتبة</label>
-                <input name="echellon" type="text" class="form-control" id="echellon" placeholder="">
+                <input name="echellon" type="number" class="form-control" id="echellon" placeholder="">
               </div>
               <div class="col-4 mt-3">
                 <label for="indice">الرقم الاستدلالي</label>
-                <input name="indice" type="text" class="form-control" id="indice" placeholder="">
+                <input name="indice" type="number" class="form-control" id="indice" placeholder="">
               </div>
               <div class="col-4 mt-3">
-                <label for="date_ret">تاريخ الإحالة على التقاعد</label>
-                <input name="date_ret" type="date" class="form-control" id="date_ret" placeholder="">
+                <label for="id_fonction">المنصب الإداري</label>
+                <select id="id_fonction" name="id_fonction" class="custom-select custom-select-lg mb-3 form-control">
+                    @foreach ($fonctions as $fonctions)
+                    <option value="{{$fonctions->id_fonction}}">{{$fonctions->nom_fonction_ar}}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="col-6 mt-3">
-                <label for="nom_departement_ar">القسم</label>
+                <label for="departements">القسم</label>
                 <select id="departements" class="custom-select custom-select-lg mb-3 form-control">
-                    <option value="0"></option>
+                    <option value="0" disabled selected>اختر قسم</option>
                     @foreach ($departements as $departements)
                     <option value="{{$departements->id_departement}}">{{$departements->nom_departement_ar}}</option>
                     @endforeach
@@ -119,7 +129,6 @@
               <div class="col-6 mt-3">
                 <label for="nom_service_ar">المصلحة</label>
                 <select id="services" class="custom-select custom-select-lg mb-3 form-control">
-
                 </select>
               </div>
 
@@ -135,7 +144,7 @@
               </div>
 
               <div class="col-8 mt-3">
-                <label for="rib">رقم الحساب البنكي</label>
+                <label for="rib">رقم الحساب البنكي </label>
                 <input name="rib" type="text" class="form-control" id="rib" placeholder="">
               </div>
               <div class="col-4 mt-3">
