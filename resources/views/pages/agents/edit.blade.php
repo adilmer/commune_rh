@@ -61,7 +61,6 @@
             <div class="col mt-3">
               <label for="photo" >الصورة الشخصية</label>
               <input name="photo" type="file" class="form-control" id="photo" placeholder="" accept="image/*">
-              <img src="{{asset('photos_agents/'.$agent->photo)}}" class="rounded-circle m-3" width="100px" alt="">
             </div>
           </div>
         </div>

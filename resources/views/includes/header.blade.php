@@ -2,8 +2,8 @@
 <nav class="navbar navbar-light bg-light">
       <div class="container">
         <a href="./index.html" class="text-nowrap logo-img">
-          <img src="../assets/images/logos/dark-logo.svg" width="180px" alt="" />
-        </a> 
+          <img src="{{asset('assets/images/logos/dark-logo.svg')}}" width="180px" alt="" />
+        </a>
         <form class="d-flex">
           <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
             <li class="nav-item">
@@ -15,7 +15,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                <img src="{{asset('assets/images/profile/user-1.jpg')}}" alt="" width="35" height="35" class="rounded-circle">
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                 <div class="message-body">

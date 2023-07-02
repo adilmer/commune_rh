@@ -25,6 +25,7 @@ Route::prefix('agents')->group(function () {
     Route::get("/details/{id_agent}","AgentController@show")->name("agent.details");
     Route::post("/save","AgentController@store")->name("agent.save");
     Route::post("/update","AgentController@update")->name("agent.update");
+    Route::post("/uploadDocuments","AgentController@uploadDocuments")->name("agent.uploadDocuments");
     Route::get("/delete/{id}","AgentController@destroy")->name("agent.delete");
 });
 Route::prefix('services')->group(function () {
