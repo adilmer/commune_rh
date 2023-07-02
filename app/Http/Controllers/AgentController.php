@@ -71,7 +71,8 @@ class AgentController extends Controller
     public function show(Request $request)
     {
         $agent = Agent::findOrFail($request->id_agent);
-        $documents = Document::where('id_agent',$request->id_agent);
+        $documents = Document::where('id_agent',$request->id_agent)->get();
+        //dd($documents);
         return \view('pages.agents.details',compact('agent','documents'));
     }
 
@@ -93,10 +94,16 @@ class AgentController extends Controller
         return \view('pages.agents.edit',compact(['departements','grades','fonctions','agent','services','bureaux']));
     }
 
-    public function uploadDocuments($request)
+    public function uploadDocuments(Request $request)
     {
-        
-        return \view('pages.agents.documents',compact('documents'));
+        $requestData = $request->all();
+        if ($request->path!=null){
+            $requestData['path'] = $this->saveAs($request->path,time(),"documents_agents");
+        }
+        Document::create(
+            $requestData);
+
+        return redirect(route('agent.details',$request->id_agent));
     }
 
     /**

@@ -16,7 +16,11 @@
            <div class="row align-items-center">
             <div class="col-4">
               <div class="img" >
-                <img src="{{asset('photos_agents/'.$agent->photo)}}" class="rounded-circle" width="140px">
+                @if (isset($agent->photo))
+                <img src="{{asset('photos_agents/'.$agent->photo)}}" class="rounded-circle" width="140px" height="140px">
+                @else
+                <img src="{{asset('assets/images/profile/user-1.jpg')}}" class="rounded-circle" width="140px" height="140px">
+                @endif
               </div>
             </div>
 
@@ -272,7 +276,7 @@
                   <div class="mb-3 mb-sm-0">
                     <h5 class="card-title fw-semibold">أرشيف الموظف</h5>
                   </div>
-                  <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">رفع ملف <i class="ti ti-cloud-upload"></i></button>
+                  <button data-bs-toggle="modal" data-bs-target="#uploadDocumentsModal" class="btn btn-primary">رفع ملف <i class="ti ti-cloud-upload"></i></button>
                 </div>
                 <div class="row align-items-center">
                   <table class="table text-nowrap mb-0 align-middle">
@@ -287,18 +291,15 @@
                     </thead>
                     <tbody>
                         @foreach ($documents as $documents)
-
                       <tr>
                         <td class="border-bottom-0">
                             <p class="mb-0 fw-normal">{{$documents->titre}}</p>
                           </td>
                         <td class="border-bottom-0">
-                          <a href="{{$documents->path}}" class="btn btn-danger"><i class="ti ti-file-text"></i></a>
+                          <a target="_blank" href="{{asset('documents_agents/'.$documents->path)}}" class="btn btn-danger"><i class="ti ti-file-text"></i></a>
                         </td>
                       </tr>
-
                       @endforeach
-
                     </tbody>
                   </table>
                 </div>
@@ -322,27 +323,30 @@
 
 <!-- modul add file-->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="uploadDocumentsModal" tabindex="-1" aria-labelledby="uploadDocumentsModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        <form action="{{route('agent.uploadDocuments')}}" method="post" enctype="multipart/form-data" >
+            @csrf
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">رفع الملفات</h5>
-
+          <input type="hidden" name="id_agent" value="{{$agent->id_agent}}">
         </div>
         <div class="modal-body">
           <div class="col-md-12">
-            <label for="inputEmail4" class="form-label">إسم الملف</label>
-            <input type="email" class="form-control" id="inputEmail4">
+            <label for="titre" class="form-label">إسم الملف</label>
+            <input type="text" name="titre" class="form-control" id="titre">
           </div>
           <div class="col-md-12">
-            <label for="inputCity" class="form-label">تحديد الملف</label>
-            <input type="file" class="form-control" id="inputCity">
+            <label for="path" class="form-label">تحديد الملف</label>
+            <input type="file" name="path" class="form-control" id="path">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-          <button type="button" class="btn btn-primary">رفع الملف</button>
+          <button type="submit" class="btn btn-primary">رفع الملف</button>
         </div>
+    </form>
       </div>
     </div>
 

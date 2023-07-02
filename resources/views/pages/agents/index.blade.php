@@ -52,10 +52,10 @@
                     <tr>
                       <td class="border-bottom-0">
                         <div class="img" >
-                            @if ($agents->photo==null)
-                            <img class="rounded-circle" width="50px" src="../assets/images/profile/user-1.jpg" alt="" srcset="">
+                            @if (isset($agents->photo))
+                            <img class="rounded-circle " width="50px" height="50px" src="{{asset('photos_agents/'.$agents->photo)}}" alt="" srcset="">
                             @else
-                            <img class="rounded-circle" width="50px" src="../assets/images/profile/user-1.jpg" alt="" srcset="">
+                            <img class="rounded-circle" width="50px" height="50px" src="../assets/images/profile/user-1.jpg" alt="" srcset="">
                             @endif
                         </div>
                       </td>
