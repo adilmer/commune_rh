@@ -22,7 +22,7 @@
             <span class="hide-menu">الموظفين</span>
           </a>
           <ul class="dropdown-menu text-end">
-            <li> <a class="dropdown-item" href="agent.html"> لائحة الموظفين </a></li>
+            <li> <a class="dropdown-item" href="{{route('agent.index')}}"> لائحة الموظفين </a></li>
             <li> <a class="dropdown-item" href="ilhaq.html"> الإلحاق</a> </li>
             <li> <a class="dropdown-item" href="idmaj.html"> الإدماج</a> </li>
             <li> <a class="dropdown-item" href="rahnichara.html"> رهن إشارة</a> </li>

@@ -32,6 +32,74 @@ class AgentController extends Controller
         return view('pages.agents.index',compact('agents'));
     }
 
+    public function filter(Request $request)
+    {
+        //dd($request);
+        $agents = Agent::orderby('nom_fr');
+        $agents_count = Agent::orderby('nom_fr');
+
+        if ($request->text != '') {
+
+            $agents = $agents
+                ->where(function ($query) use ($request) {
+                    $query->where('ppr', 'like', '%' . $request->text . '%')
+                          ->orWhere('nom_fr', 'like', '%' . $request->text . '%')
+                          ->orWhere('prenom_fr', 'like', '%' . $request->text . '%')
+                          ->orWhere('date_entree', 'like', '%' . $request->text . '%')
+                          ->orWhere('cin', 'like', '%' . $request->text . '%');
+                });
+
+            $agents_count = $agents_count
+                ->where(function ($query) use ($request) {
+            $query->where('ppr', 'like', '%' . $request->text . '%')
+                  ->orWhere('nom_fr', 'like', '%' . $request->text . '%')
+                  ->orWhere('prenom_fr', 'like', '%' . $request->text . '%')
+                  ->orWhere('date_entree', 'like', '%' . $request->text . '%')
+                  ->orWhere('cin', 'like', '%' . $request->text . '%');
+        });
+        }
+
+        $agents = $agents->where('status', "1");
+        $agents_count = $agents_count->where('status', "1");
+        $agents = $agents->where('id_user', Auth::id())->get();
+        $agents_count = $agents_count->where('id_user', Auth::id())->count();
+       // dd($agents->first());
+        $data = '';
+
+        foreach ($agents as $key => $agent) {
+            $poste = Poste::find($agent->id_lieu_now)->nom;
+            $poste1 = Poste::find($agent->id_lieu_aff)->nom;
+            $data .=
+                "<tr>
+        <td><a href='" .
+                route('agent.details', $agent->id) .
+                "'>$agent->ppr</a></td>
+        <td class='row-2'>$agent->nom_fr $agent->prenom_fr</td>
+        <td class='row-3'>$agent->nom_ar $agent->prenom_ar</td>
+        <td class='row-4'>$agent->cin</td>
+        <td class='row-5'>{$agent->grade->nom}</td>
+        <td class='row-6'>{$agent->specialite->nom}</td>
+        <td class='row-7'>$agent->description</td>
+        <td class='row-8'>$agent->tel_one</td>
+        <td class='row-9'>$agent->date_entree</td>
+        <td class='row-10'>$agent->datenaiss</td>
+        <td class='row-11'>$poste1</td>
+        <td class='row-12'>$poste</td>
+        <td class='col-1'><a href='" .
+                route('agent.edit', $agent->id) .
+                "' class='btn btn-sm btn-outline-primary btn-round'><i class='la la-edit'></i></a>
+            <a href='" .
+                route('agent.delete', $agent->id) .
+                "' onclick='return confirm(`voulez vous supprimer ?`)' class='btn btn-sm btn-outline-danger btn-round'><i class='la la-remove'></i></a>
+        </td>
+    </tr>";
+        }
+        //dd($data);
+        return Response(['data' => $data, 'count' => $agents_count]);
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

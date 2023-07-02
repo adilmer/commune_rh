@@ -26,7 +26,7 @@ Route::prefix('agents')->group(function () {
     Route::post("/save","AgentController@store")->name("agent.save");
     Route::post("/update","AgentController@update")->name("agent.update");
     Route::post("/uploadDocuments","AgentController@uploadDocuments")->name("agent.uploadDocuments");
-    Route::get("/delete/{id}","AgentController@destroy")->name("agent.delete");
+    Route::get("/delete/{id_agent}","AgentController@destroy")->name("agent.delete");
 });
 Route::prefix('services')->group(function () {
     Route::get('/filter_departement','ServiceController@filter_departement')->name('service.filter_departement');
