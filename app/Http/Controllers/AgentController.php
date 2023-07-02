@@ -8,6 +8,7 @@ use App\Models\Departement;
 use App\Models\Document;
 use App\Models\Fonction;
 use App\Models\Grade;
+use App\Models\Position;
 use App\Models\Service;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
@@ -89,9 +90,10 @@ class AgentController extends Controller
         $fonctions = Fonction::all();
         $services = Service::all();
         $bureaux = Bureau::all();
+        $positions = Position::all();
         $agent = Agent::findOrFail($request->id_agent);
 
-        return \view('pages.agents.edit',compact(['departements','grades','fonctions','agent','services','bureaux']));
+        return \view('pages.agents.edit',compact(['departements','grades','fonctions','agent','services','bureaux','positions']));
     }
 
     public function uploadDocuments(Request $request)
