@@ -96,6 +96,11 @@ class AgentController extends Controller
         return \view('pages.agents.edit',compact(['departements','grades','fonctions','agent','services','bureaux','positions']));
     }
 
+    /**
+     * Summary of uploadDocuments
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function uploadDocuments(Request $request)
     {
         $requestData = $request->all();
