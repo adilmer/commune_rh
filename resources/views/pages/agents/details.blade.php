@@ -244,7 +244,7 @@
                     <h6 class="fw-semibold mb-0"> رقم الحساب</h6>
                   </th>
                   <th class="border-bottom-0">
-                    <h6 class="fw-semibold mb-0">  </h6>
+                    <h6 class="fw-semibold mb-0"> نوع الإحالة</h6>
                   </th>
                 </tr>
               </thead>
@@ -255,6 +255,32 @@
                   </td>
                   <td class="border-bottom-0">
                     <p class="mb-0 fw-normal">{{$agent->rib}}</p>
+                  </td>
+                  <td class="border-bottom-0">
+                    <p class="mb-0 fw-normal">لا شيء</p>
+                  </td>
+                </tr>
+              </tbody>
+              <thead class="text-dark fs-4 table-light">
+                <tr>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0"> مكان الإحالة</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0"> تاريخ الإحالة</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0"> </h6>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border-bottom-0">
+                    <p class="mb-0 fw-normal"> جماعة الوطية</p>
+                  </td>
+                  <td class="border-bottom-0">
+                    <p class="mb-0 fw-normal">12/11/2021</p>
                   </td>
                   <td class="border-bottom-0">
                     <p class="mb-0 fw-normal"></p>
