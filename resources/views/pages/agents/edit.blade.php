@@ -178,6 +178,31 @@
           </div>
         </div>
       </div>
+      
+      <h5 class="card-title fw-semibold mt-4">معلومات أخرى (الإلحاق , رهن الإشارة , الإدماج) </h5>
+            <div class="card mb-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-4 mt-3">
+                    <label for="aff_mutuelle">نوع الإحالة</label>
+                    <select name="aff_mutuelle" class="custom-select custom-select-lg mb-3 form-control">
+                      <option selected>لا شيء</option>
+                      <option >إدماج</option>
+                      <option >رهن إشارة</option>
+                      <option >إلحاق </option>
+                    </select>     
+                  </div> 
+                  <div class="col-4 mt-3">
+                      <label for="ppr" >تاريخ الإحالة</label>
+                      <input name="ppr" type="text" class="form-control" id="ppr" placeholder="">  
+                    </div>
+                    <div class="col-4 mt-3">
+                      <label for="mat">مكان الإحالة</label>
+                      <input name="mat" type="text" class="form-control" id="mat" placeholder="">     
+                    </div>
+                </div>
+              </div>
+            </div>
     </div>
     <div class="btnsimple text-start m-4 ">
       <button class="btn btn-primary">حفظ المعلومــات</button>
