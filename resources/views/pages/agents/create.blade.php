@@ -181,7 +181,7 @@
 </div>
 @endsection
 @section('script')
-$(document).ready(function() {
+
 
     $("#departements").on("click", function(){
         $id = this.value
@@ -197,5 +197,5 @@ $(document).ready(function() {
              get_ajax($id,$url,"#id_bureau")
             });
 
-});
+
 @endsection

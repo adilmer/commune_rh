@@ -2,7 +2,7 @@
 @section('content')
 <div class="row " style="justify-content: flex-end;">
     <div class="col-sm-3 pl-0 mb-2">
-      <input type="text" class="form-control  " placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
+      <input type="text" class="form-control" id="txt_cherch" placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
     </div>
     <div class="col-sm-2 ">
       <a href="{{route('agent.create')}}" class="btn btn-primary"><i class="ti ti-user-plus"></i> إضافة موظف</a>
@@ -12,10 +12,10 @@
         <div class="col-lg-12 d-flex align-items-stretch">
           <div class="card w-100">
             <div class="card-body p-4">
-              <h5 class="card-title fw-semibold mb-4">لائحة الموظفين</h5>
-              <div class="table-responsive">
-                <table class="table text-nowrap mb-0 align-middle">
-                  <thead class="text-dark fs-4">
+              <h5 class="card-title  fw-semibold mb-4">لائحة الموظفين</h5>
+              <div class="table-sm ">
+                <table class="table p-4 text-nowrap mb-0 align-middle">
+                  <thead class="text-dark fs-4 ">
                     <tr>
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0"></h6>
@@ -41,12 +41,23 @@
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0">المصلحة</h6>
                       </th>
+                      @if ($agents[0]->id_position!=1)
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">نوع الإحالة</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">تاريخ الإحالة</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">مكان الإحالة</h6>
+                      </th>
+                      @endif
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0">إعدادات</h6>
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="table_agents">
                       {{-- liste agents --}}
                       @foreach ($agents as $agents)
                     <tr>
@@ -81,8 +92,20 @@
                       <td class="border-bottom-0">
                         <p class="mb-0 fw-normal">{{$agents->bureau->service->nom_service_ar}}</p>
                       </td>
+                      @if ($agents->id_position!=1)
                       <td class="border-bottom-0">
-                        <div class="d-flex align-items-center gap-2">
+                        <p class="mb-0 fw-normal">{{$agents->position->nom_position_ar}}</p>
+                      </td>
+                      <td class="border-bottom-0">
+                        <p class="mb-0 fw-normal">{{$agents->date_position}}</p>
+                      </td>
+                      <td class="border-bottom-0">
+                        <p class="mb-0 fw-normal">{{$agents->lieu_position}}</p>
+                      </td>
+                      @endif
+
+                      <td class="border-bottom-0">
+                        <div class="d-flex  align-items-center gap-2">
                           <a href="{{route('agent.details',$agents->id_agent)}}" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></a>
                           <a href="{{route('agent.edit',$agents->id_agent)}}" class="badge bg-success rounded-3 fw-semibold"><i class="ti ti-edit"></i></a>
                           <a href="{{route('agent.delete',$agents->id_agent)}}" onclick="return confirm('هل تريد إزالة هذا الموظف من قاعدة البيانات ؟')" class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></a>
@@ -104,4 +127,13 @@
 
 
   </div>
+@endsection
+@section('script')
+$("#txt_cherch").on("input", function(){
+    $text = this.value
+    $url = "{{ route('agent.filter') }}"
+    $("#table_agents").html("");
+    get_table_ajax_find($text,$url,"#table_agents")
+
+    });
 @endsection

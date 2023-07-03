@@ -35,8 +35,7 @@ class AgentController extends Controller
     public function filter(Request $request)
     {
         //dd($request);
-        $agents = Agent::orderby('nom_fr');
-        $agents_count = Agent::orderby('nom_fr');
+        $agents = Agent::orderby('mat');
 
         if ($request->text != '') {
 
@@ -44,58 +43,79 @@ class AgentController extends Controller
                 ->where(function ($query) use ($request) {
                     $query->where('ppr', 'like', '%' . $request->text . '%')
                           ->orWhere('nom_fr', 'like', '%' . $request->text . '%')
-                          ->orWhere('prenom_fr', 'like', '%' . $request->text . '%')
-                          ->orWhere('date_entree', 'like', '%' . $request->text . '%')
+                          ->orWhere('nom_ar', 'like', '%' . $request->text . '%')
+                          ->orWhere('mat', 'like', '%' . $request->text . '%')
                           ->orWhere('cin', 'like', '%' . $request->text . '%');
                 });
-
-            $agents_count = $agents_count
-                ->where(function ($query) use ($request) {
-            $query->where('ppr', 'like', '%' . $request->text . '%')
-                  ->orWhere('nom_fr', 'like', '%' . $request->text . '%')
-                  ->orWhere('prenom_fr', 'like', '%' . $request->text . '%')
-                  ->orWhere('date_entree', 'like', '%' . $request->text . '%')
-                  ->orWhere('cin', 'like', '%' . $request->text . '%');
-        });
         }
 
-        $agents = $agents->where('status', "1");
-        $agents_count = $agents_count->where('status', "1");
-        $agents = $agents->where('id_user', Auth::id())->get();
-        $agents_count = $agents_count->where('id_user', Auth::id())->count();
+
+        $agents = $agents->get();
        // dd($agents->first());
         $data = '';
 
-        foreach ($agents as $key => $agent) {
-            $poste = Poste::find($agent->id_lieu_now)->nom;
-            $poste1 = Poste::find($agent->id_lieu_aff)->nom;
+        foreach ($agents as $key => $agents) {
+            $nom_service_ar = $agents->bureau->service->nom_service_ar;
+            $nom_position_ar = $agents->position->nom_position_ar;
+            $nom_grade_ar = $agents->grade->nom_grade_ar;
+            $photo_url=asset('photos_agents/'.$agents->photo);
             $data .=
-                "<tr>
-        <td><a href='" .
-                route('agent.details', $agent->id) .
-                "'>$agent->ppr</a></td>
-        <td class='row-2'>$agent->nom_fr $agent->prenom_fr</td>
-        <td class='row-3'>$agent->nom_ar $agent->prenom_ar</td>
-        <td class='row-4'>$agent->cin</td>
-        <td class='row-5'>{$agent->grade->nom}</td>
-        <td class='row-6'>{$agent->specialite->nom}</td>
-        <td class='row-7'>$agent->description</td>
-        <td class='row-8'>$agent->tel_one</td>
-        <td class='row-9'>$agent->date_entree</td>
-        <td class='row-10'>$agent->datenaiss</td>
-        <td class='row-11'>$poste1</td>
-        <td class='row-12'>$poste</td>
-        <td class='col-1'><a href='" .
-                route('agent.edit', $agent->id) .
-                "' class='btn btn-sm btn-outline-primary btn-round'><i class='la la-edit'></i></a>
-            <a href='" .
-                route('agent.delete', $agent->id) .
-                "' onclick='return confirm(`voulez vous supprimer ?`)' class='btn btn-sm btn-outline-danger btn-round'><i class='la la-remove'></i></a>
-        </td>
-    </tr>";
+            "<tr>
+            <td class='border-bottom-0'>
+              <div class='img' >";
+                  if ($agents->photo!=null)
+                  $data .="<img class='rounded-circle ' width='50px' height='50px' src='$photo_url' alt='' srcset=''>";
+                  else
+                  $data .="<img class='rounded-circle' width='50px' height='50px' src='../assets/images/profile/user-1.jpg' alt='' srcset=''>";
+
+            $data .="</div>
+            </td>
+            <td class='border-bottom-0'>
+              <h6 class='fw-semibold mb-0'>$agents->mat</h6>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->ppr</p>
+            </td>
+            <td class='border-bottom-0'>
+                <h6 class='fw-semibold mb-1'>$agents->nom_ar</h6>
+                <span class='fw-normal'>$agents->nom_fr</span>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$nom_grade_ar</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->echelle</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->echellon</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$nom_service_ar</p>
+            </td>";
+            if ($agents->id_position!=1)
+            $data .= "<td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$nom_position_ar</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->date_position</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->lieu_position</p>
+            </td>";
+            $route_details = route('agent.details',$agents->id_agent);
+            $route_edit = route('agent.edit',$agents->id_agent);
+            $route_delete = route('agent.delete',$agents->id_agent);
+            $data .="<td class='border-bottom-0'>
+              <div class='d-flex  align-items-center gap-2'>
+                <a href='$route_details' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
+                <a href='$route_edit' class='badge bg-success rounded-3 fw-semibold'><i class='ti ti-edit'></i></a>
+                <a href='$route_delete' onclick='return confirm(`هل تريد إزالة هذا الموظف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+              </div>
+            </td>
+          </tr>";
         }
         //dd($data);
-        return Response(['data' => $data, 'count' => $agents_count]);
+        return Response(['data' => $data]);
 
     }
 
