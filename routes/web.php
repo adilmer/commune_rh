@@ -24,6 +24,7 @@ Route::prefix('agents')->group(function () {
     Route::get('/edit/{id_agent}','AgentController@edit')->name('agent.edit');
     Route::get("/details/{id_agent}","AgentController@show")->name("agent.details");
     Route::get("/filter/{name?}","AgentController@filter")->name("agent.filter");
+    Route::get("/filterByPosition/{name?}","AgentController@filterByPosition")->name("agent.filterByPosition");
     Route::post("/save","AgentController@store")->name("agent.save");
     Route::post("/update","AgentController@update")->name("agent.update");
     Route::post("/uploadDocuments","AgentController@uploadDocuments")->name("agent.uploadDocuments");

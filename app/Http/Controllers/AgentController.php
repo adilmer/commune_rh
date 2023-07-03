@@ -29,7 +29,9 @@ class AgentController extends Controller
     public function index()
     {
         $agents = Agent::all();
-        return view('pages.agents.index',compact('agents'));
+        $positions = Position::all();
+
+        return view('pages.agents.index',compact('agents','positions'));
     }
 
     public function filter(Request $request)
@@ -92,7 +94,7 @@ class AgentController extends Controller
             <td class='border-bottom-0'>
               <p class='mb-0 fw-normal'>$nom_service_ar</p>
             </td>";
-            if ($agents->id_position!=1)
+            if ($agents->id_position !=1)
             $data .= "<td class='border-bottom-0'>
               <p class='mb-0 fw-normal'>$nom_position_ar</p>
             </td>
@@ -119,6 +121,87 @@ class AgentController extends Controller
 
     }
 
+    public function filterByPosition(Request $request)
+    {
+        //dd($request);
+        $agents = Agent::orderby('mat');
+
+        if ($request->text != '0') {
+
+            $agents = $agents
+                ->where('id_position', $request->text);
+        }
+
+
+        $agents = $agents->get();
+       // dd($agents->first());
+        $data = '';
+
+        foreach ($agents as $key => $agents) {
+            $nom_service_ar = $agents->bureau->service->nom_service_ar;
+            $nom_position_ar = $agents->position->nom_position_ar;
+            $nom_grade_ar = $agents->grade->nom_grade_ar;
+            $photo_url=asset('photos_agents/'.$agents->photo);
+            $data .=
+            "<tr>
+            <td class='border-bottom-0'>
+              <div class='img' >";
+                  if ($agents->photo!=null)
+                  $data .="<img class='rounded-circle ' width='50px' height='50px' src='$photo_url' alt='' srcset=''>";
+                  else
+                  $data .="<img class='rounded-circle' width='50px' height='50px' src='../assets/images/profile/user-1.jpg' alt='' srcset=''>";
+
+            $data .="</div>
+            </td>
+            <td class='border-bottom-0'>
+              <h6 class='fw-semibold mb-0'>$agents->mat</h6>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->ppr</p>
+            </td>
+            <td class='border-bottom-0'>
+                <h6 class='fw-semibold mb-1'>$agents->nom_ar</h6>
+                <span class='fw-normal'>$agents->nom_fr</span>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$nom_grade_ar</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->echelle</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$agents->echellon</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$nom_service_ar</p>
+            </td>
+           <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>$nom_position_ar</p>
+            </td>";
+
+            if ($request->text !=1)
+            $data .= "<td class='border-bottom-0 pos'>
+              <p class='mb-0 fw-normal'>$agents->date_position</p>
+            </td>
+            <td class='border-bottom-0 pos'>
+              <p class='mb-0 fw-normal'>$agents->lieu_position</p>
+            </td>";
+            $route_details = route('agent.details',$agents->id_agent);
+            $route_edit = route('agent.edit',$agents->id_agent);
+            $route_delete = route('agent.delete',$agents->id_agent);
+            $data .="<td class='border-bottom-0'>
+              <div class='d-flex  align-items-center gap-2'>
+                <a href='$route_details' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
+                <a href='$route_edit' class='badge bg-success rounded-3 fw-semibold'><i class='ti ti-edit'></i></a>
+                <a href='$route_delete' onclick='return confirm(`هل تريد إزالة هذا الموظف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+              </div>
+            </td>
+          </tr>";
+        }
+        //dd($data);
+        return Response(['data' => $data]);
+
+    }
 
     /**
      * Show the form for creating a new resource.

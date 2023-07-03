@@ -33,7 +33,22 @@
                                     <span class="fw-normal">{{ $agent->nom_fr }}</span>
                                 </div>
                                 <div class="d">
-                                    <span class="  mb-1"> الحالة العائلية : {{ $agent->situation_fam }}</span>
+                                    @php
+                                    $situation_fam = "";
+                                        if ($agent->situation_fam == "Célibataire" ) {
+                                            $situation_fam = "عازب(ة)";
+                                        }
+                                        if ($agent->situation_fam =="Marié" ) {
+                                            $situation_fam = "متزوج(ة)";
+                                        }
+                                        if ($agent->situation_fam =="Divorcé" ) {
+                                            $situation_fam = "مطلق(ة)";
+                                        }
+                                        if ($agent->situation_fam =="Veuf" ) {
+                                            $situation_fam = "أرمل(ة)";
+                                        }
+                                    @endphp
+                                    <span class="  mb-1"> الحالة العائلية : {{ $situation_fam  }}</span>
                                 </div>
                                 <div class="d">
                                     <span class="  mb-1"> عدد الأبناء: {{ $agent->nbr_enfant }} </span>
@@ -45,7 +60,7 @@
                                     <span class="  mb-1"> مكان الإزدياد: {{ $agent->lieu_naiss }}</span>
                                 </div>
                                 <div class="d">
-                                    <span class="  mb-1"> تاريخ الإزدياد: {{ $agent->date_naiss->format('Y-m-d') }}</span>
+                                    <span class="  mb-1"> تاريخ الإزدياد: {{ $agent->date_naiss?->format('Y-m-d') ?? '' }}</span>
                                 </div>
                                 <div class="d">
                                     <span class="  mb-1"> العنوان: {{ $agent->adresse_ar }}</span>
@@ -55,24 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="infoagent text-center">
-                 <div class="img" >
-                  <img class="rounded-circle" width="140px" src="../assets/images/profile/user-1.jpg" alt="" srcset="">
-                </div>
-                <div class="d">
-                  <h4 class="fw-semibold mb-1">وليد المرزوكي</h4>
-                  <span class="fw-normal">Oualid Elmerzougui</span>
-                </div>
-                <div class="d">
-                  <span class="  mb-1">تقني الدرجة الثالتة </span>
-                </div>
-                <div class="d">
-                  <span class="  mb-1">  السلم: 8  | الرتبة: 9 </span>
-                </div>
-                <div class="d">
-                  <span class="  mb-1"> مصلحة الشؤون المالية </span>
-                </div>
-               </div>-->
+                        
                         <div class="infoagent text-center mt-5">
                             <table class="table       text-nowrap mb-0 align-middle">
                                 <thead class="text-dark fs-4 table-light">
@@ -146,10 +144,10 @@
                                             <p class="mb-0 fw-normal"> {{ $agent->indice }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $agent->date_grade->format('Y-m-d') }}</p>
+                                            <p class="mb-0 fw-normal">{{ $agent->date_grade?->format('Y-m-d') ?? '' }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $agent->date_echellon->format('Y-m-d') }}</p>
+                                            <p class="mb-0 fw-normal">{{ $agent->date_echellon?->format('Y-m-d') ?? '' }}</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -203,13 +201,13 @@
                                             $dateTutularisation = $dateTutularisation->addYears(1);
                                         @endphp
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"> {{ $dateRetrait->format('Y-m-d') }}</p>
+                                            <p class="mb-0 fw-normal"> {{ $dateRetrait?->format('Y-m-d') }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $dateTutularisation->format('Y-m-d') }}</p>
+                                            <p class="mb-0 fw-normal">{{ $dateTutularisation?->format('Y-m-d') }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $agent->date_naiss->format('Y-m-d') }}</p>
+                                            <p class="mb-0 fw-normal">{{ $agent->date_naiss?->format('Y-m-d') }}</p>
                                         </td>
                                     </tr>
                                 </tbody>

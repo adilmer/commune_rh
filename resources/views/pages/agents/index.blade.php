@@ -1,8 +1,16 @@
 @extends('templates.site')
 @section('content')
 <div class="row " style="justify-content: flex-end;">
-    <div class="col-sm-3 pl-0 mb-2">
-      <input type="text" class="form-control" id="txt_cherch" placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
+    <div class="col-sm-6 pl-0 mb-2  ">
+      <input type="text" class="form-control " id="txt_cherch" placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
+    </div>
+    <div class="col-sm-3 pl-0 mb-2  ">
+    <select id="id_position" class="form-select">
+        <option value="0" selected> - كل الموظفين  ...  </option>
+        @foreach($positions as $positions)
+        <option value="{{$positions->id_position}}">{{$positions->nom_position_ar}}</option>
+        @endforeach
+      </select>
     </div>
     <div class="col-sm-2 ">
       <a href="{{route('agent.create')}}" class="btn btn-primary"><i class="ti ti-user-plus"></i> إضافة موظف</a>
@@ -41,14 +49,15 @@
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0">المصلحة</h6>
                       </th>
-                      @if ($agents[0]->id_position!=1)
+
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0">نوع الإحالة</h6>
                       </th>
-                      <th class="border-bottom-0">
+                      @if ($agents[0]->id_position>1)
+                      <th class="border-bottom-0 pos">
                         <h6 class="fw-semibold mb-0">تاريخ الإحالة</h6>
                       </th>
-                      <th class="border-bottom-0">
+                      <th class="border-bottom-0 pos" >
                         <h6 class="fw-semibold mb-0">مكان الإحالة</h6>
                       </th>
                       @endif
@@ -92,14 +101,15 @@
                       <td class="border-bottom-0">
                         <p class="mb-0 fw-normal">{{$agents->bureau->service->nom_service_ar}}</p>
                       </td>
-                      @if ($agents->id_position!=1)
-                      <td class="border-bottom-0">
+
+                      <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->position->nom_position_ar}}</p>
                       </td>
-                      <td class="border-bottom-0">
+                      @if ($agents->where('id_position','!=',1)->count()>0)
+                      <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->date_position}}</p>
                       </td>
-                      <td class="border-bottom-0">
+                      <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->lieu_position}}</p>
                       </td>
                       @endif
@@ -136,4 +146,17 @@ $("#txt_cherch").on("input", function(){
     get_table_ajax_find($text,$url,"#table_agents")
 
     });
+    $("#id_position").on("change", function(){
+        $id = this.value
+        if($id!==1){
+            $(".pos").hide();
+        }
+        if($id!=1){
+            $(".pos").show();
+        }
+        $url = "{{ route('agent.filterByPosition') }}"
+        $("#table_agents").html("");
+        get_table_ajax_find($id,$url,"#table_agents")
+
+        });
 @endsection
