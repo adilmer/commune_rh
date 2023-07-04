@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Agent
- *
+ * 
  * @property int $id_agent
  * @property int|null $mat
  * @property int|null $ppr
@@ -25,10 +25,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $date_rec
  * @property int|null $id_grade
  * @property Carbon|null $date_grade
- * @property int $echelle
+ * @property int|null $echelle
  * @property int|null $echellon
  * @property Carbon|null $date_echellon
  * @property int|null $indice
+ * @property Carbon|null $date_position
+ * @property string|null $lieu_position
  * @property int $id_fonction
  * @property int $id_bureau
  * @property int $id_position
@@ -46,7 +48,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $adresse_fr
  * @property string|null $adresse_ar
  * @property string|null $photo
- *
+ * 
  * @property Grade|null $grade
  * @property Fonction $fonction
  * @property Bureau $bureau
@@ -72,6 +74,7 @@ class Agent extends Model
 		'echellon' => 'int',
 		'date_echellon' => 'datetime',
 		'indice' => 'int',
+		'date_position' => 'datetime',
 		'id_fonction' => 'int',
 		'id_bureau' => 'int',
 		'id_position' => 'int',
@@ -94,6 +97,8 @@ class Agent extends Model
 		'echellon',
 		'date_echellon',
 		'indice',
+		'date_position',
+		'lieu_position',
 		'id_fonction',
 		'id_bureau',
 		'id_position',

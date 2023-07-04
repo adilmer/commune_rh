@@ -30,6 +30,20 @@ Route::prefix('agents')->group(function () {
     Route::post("/uploadDocuments","AgentController@uploadDocuments")->name("agent.uploadDocuments");
     Route::get("/delete/{id_agent}","AgentController@destroy")->name("agent.delete");
 });
+Route::prefix('archives')->group(function () {
+    Route::get('/','ArchiveController@index')->name('archive.index');
+    Route::get('/create','ArchiveController@create')->name('archive.create');
+    Route::get('/edit/{id_archive}','ArchiveController@edit')->name('archive.edit');
+    Route::get("/details/{id_archive}","ArchiveController@show")->name("archive.details");
+    Route::get("/filter/{name?}","ArchiveController@filter")->name("archive.filter");
+    Route::get("/filterByCategorie/{name?}","ArchiveController@filterByCategorie")->name("archive.filterByCategorie");
+    Route::get("/filterByDate/{name?}","ArchiveController@filterByDate")->name("archive.filterByDate");
+    Route::post("/save","ArchiveController@store")->name("archive.save");
+    Route::post("/saveCategorie","ArchiveController@storeCategorie")->name("archive.saveCategorie");
+    Route::post("/update","ArchiveController@update")->name("archive.update");
+    Route::post("/uploadDocuments","ArchiveController@uploadDocuments")->name("archive.uploadDocuments");
+    Route::get("/delete/{id_archive?}","ArchiveController@destroy")->name("archive.delete");
+});
 Route::prefix('services')->group(function () {
     Route::get('/filter_departement','ServiceController@filter_departement')->name('service.filter_departement');
     Route::get('/filter_service','ServiceController@filter_service')->name('service.filter_service');

@@ -13,6 +13,7 @@ use App\Models\Service;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\File;
 
 /**
  * Summary of AgentController
@@ -94,7 +95,7 @@ class AgentController extends Controller
             <td class='border-bottom-0'>
               <p class='mb-0 fw-normal'>$nom_service_ar</p>
             </td>";
-            if ($agents->id_position !=1)
+
             $data .= "<td class='border-bottom-0'>
               <p class='mb-0 fw-normal'>$nom_position_ar</p>
             </td>
@@ -179,7 +180,7 @@ class AgentController extends Controller
               <p class='mb-0 fw-normal'>$nom_position_ar</p>
             </td>";
 
-            if ($request->text !=1)
+
             $data .= "<td class='border-bottom-0 pos'>
               <p class='mb-0 fw-normal'>$agents->date_position</p>
             </td>

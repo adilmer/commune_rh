@@ -53,14 +53,14 @@
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0">نوع الإحالة</h6>
                       </th>
-                      @if ($agents[0]->id_position>1)
+
                       <th class="border-bottom-0 pos">
                         <h6 class="fw-semibold mb-0">تاريخ الإحالة</h6>
                       </th>
                       <th class="border-bottom-0 pos" >
                         <h6 class="fw-semibold mb-0">مكان الإحالة</h6>
                       </th>
-                      @endif
+
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0">إعدادات</h6>
                       </th>
@@ -105,14 +105,14 @@
                       <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->position->nom_position_ar}}</p>
                       </td>
-                      @if ($agents->where('id_position','!=',1)->count()>0)
+
                       <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->date_position}}</p>
                       </td>
                       <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->lieu_position}}</p>
                       </td>
-                      @endif
+
 
                       <td class="border-bottom-0">
                         <div class="d-flex  align-items-center gap-2">
@@ -148,12 +148,6 @@ $("#txt_cherch").on("input", function(){
     });
     $("#id_position").on("change", function(){
         $id = this.value
-        if($id!==1){
-            $(".pos").hide();
-        }
-        if($id!=1){
-            $(".pos").show();
-        }
         $url = "{{ route('agent.filterByPosition') }}"
         $("#table_agents").html("");
         get_table_ajax_find($id,$url,"#table_agents")

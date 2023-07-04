@@ -23,10 +23,6 @@
           </a>
           <ul class="dropdown-menu text-end">
             <li> <a class="dropdown-item" href="{{route('agent.index')}}"> لائحة الموظفين </a></li>
-            <li> <a class="dropdown-item" href="ilhaq.html"> الإلحاق</a> </li>
-            <li> <a class="dropdown-item" href="idmaj.html"> الإدماج</a> </li>
-            <li> <a class="dropdown-item" href="rahnichara.html"> رهن إشارة</a> </li>
-            <li> <a class="dropdown-item" href="retraite.html"> التقاعد</a> </li>
             <li> <a class="dropdown-item" href="#"> الترقية</a> </li>
             <li> <a class="dropdown-item" href="#"> الحضور</a> </li>
             <li> <a class="dropdown-item" href="#"> الكفاءة المهنية</a> </li>
@@ -57,7 +53,7 @@
           </ul>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="archive.html" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('archive.index')}}" aria-expanded="false">
             <span>
               <i class="ti ti-archive"></i>
             </span>
