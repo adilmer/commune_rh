@@ -132,19 +132,19 @@
             @php
                 $categories = App\Models\Category::all();
             @endphp
-          <select id="id_categorie" name="id_categorie" class="form-select">
+          <select id="combo_categorie" name="id_categorie" class="form-select">
             <option selected> - تصنيف الملف   ...  </option>
                   @foreach ($categories as $category)
                   <option value="{{$category->id_categorie}}"> {{$category->nom_categorie_ar}}</option>
                     @endforeach
           </select>
 
-          <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar">
+          <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar1">
         </div>
 
         <div class="col-2">
           <a id="btn_add_cat" class="btn btn-secondary btn_add_cat"><i class="ti ti-plus"></i></a>
-          <button type="button" class="btn btn-sm btn-primary  my-3 cat">إضافة</button>
+          <button type="button"  class="btn btn-sm btn-primary  my-3 cat btn_submit">إضافة</button>
         </div>
       </div>
 
@@ -190,7 +190,7 @@
                 @php
                     $categories = App\Models\Category::all();
                 @endphp
-              <select id="id_categorie" name="id_categorie" class="form-select">
+              <select id="combo_categorie" name="id_categorie" class="form-select">
                 <option selected> - تصنيف الملف   ...  </option>
                       @foreach ($categories as $category)
                       <option value="{{$category->id_categorie}}"> {{$category->nom_categorie_ar}}</option>
@@ -281,6 +281,14 @@ $("#txt_cherch").on("input", function(){
             $(".cat").show();
         });
 
-        
+        $(".btn_submit").on("click", function(){
+
+            $id = $("#nom_categorie_ar1").val();
+
+            $url = "{{ route('archive.saveCategorie') }}"
+            get_ajax($id,$url,"#combo_categorie")
+        });
+
+
 
 @endsection

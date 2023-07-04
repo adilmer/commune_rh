@@ -39,7 +39,7 @@ Route::prefix('archives')->group(function () {
     Route::get("/filterByCategorie/{name?}","ArchiveController@filterByCategorie")->name("archive.filterByCategorie");
     Route::get("/filterByDate/{name?}","ArchiveController@filterByDate")->name("archive.filterByDate");
     Route::post("/save","ArchiveController@store")->name("archive.save");
-    Route::post("/saveCategorie","ArchiveController@storeCategorie")->name("archive.saveCategorie");
+    Route::get("/saveCategorie","ArchiveController@storeCategorie")->name("archive.saveCategorie");
     Route::post("/update","ArchiveController@update")->name("archive.update");
     Route::post("/uploadDocuments","ArchiveController@uploadDocuments")->name("archive.uploadDocuments");
     Route::get("/delete/{id_archive?}","ArchiveController@destroy")->name("archive.delete");

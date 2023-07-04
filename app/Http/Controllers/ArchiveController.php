@@ -53,10 +53,14 @@ class ArchiveController extends Controller
 
     public function storeCategorie(Request $request)
     {
-         $DataRequest = $request->all();
 
+         $DataRequest['nom_categorie_ar'] = $request->id;
+        // dd($DataRequest);
          Category::create($DataRequest);
-         return redirect()->route('archive.index');
+
+         $data = Category::all();
+
+       return Response($data);
 
     }
 
