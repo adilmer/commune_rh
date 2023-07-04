@@ -280,4 +280,7 @@ $("#txt_cherch").on("input", function(){
         $(".btn_add_cat").on("click", function(){
             $(".cat").show();
         });
+
+        
+
 @endsection
