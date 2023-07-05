@@ -53,12 +53,12 @@ class ArchiveController extends Controller
 
     public function storeCategorie(Request $request)
     {
-
+        if ($request->id!="") {
          $DataRequest['nom_categorie_ar'] = $request->id;
         // dd($DataRequest);
          Category::create($DataRequest);
-
-         $data = Category::all();
+            }
+         $data = Category::select('id_categorie as id','nom_categorie_ar as nom')->get();
 
        return Response($data);
 

@@ -132,14 +132,14 @@
             @php
                 $categories = App\Models\Category::all();
             @endphp
-          <select id="combo_categorie" name="id_categorie" class="form-select">
+          <select id="combo_categorie1" name="id_categorie" class="form-select">
             <option selected> - تصنيف الملف   ...  </option>
                   @foreach ($categories as $category)
                   <option value="{{$category->id_categorie}}"> {{$category->nom_categorie_ar}}</option>
                     @endforeach
           </select>
 
-          <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar1">
+          <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar" required>
         </div>
 
         <div class="col-2">
@@ -190,17 +190,18 @@
                 @php
                     $categories = App\Models\Category::all();
                 @endphp
-              <select id="combo_categorie" name="id_categorie" class="form-select">
+              <select id="combo_categorie2" name="id_categorie" class="form-select">
                 <option selected> - تصنيف الملف   ...  </option>
                       @foreach ($categories as $category)
                       <option value="{{$category->id_categorie}}"> {{$category->nom_categorie_ar}}</option>
                         @endforeach
               </select>
-
+              <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar2" required>
             </div>
 
             <div class="col-2">
-              <button type="button"   data-bs-toggle="modal" data-bs-target="#exampleModal1" class="btn btn-secondary"><i class="ti ti-plus"></i></button>
+                <a id="btn_add_cat2" class="btn btn-secondary btn_add_cat"><i class="ti ti-plus"></i></a>
+                <button type="button"  class="btn btn-sm btn-primary  my-3 cat btn_submit2">إضافة</button>
             </div>
           </div>
         </div>
@@ -216,7 +217,7 @@
 
 
 
-<!-- modul add category-->
+{{-- <!-- modul add category-->
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 <div class="modal-dialog">
     <form action="{{route('archive.saveCategorie')}}" method="post">
@@ -237,7 +238,7 @@
   </div>
 </div>
 </form>
-</div>
+</div> --}}
 @endsection
 
 @section('script')
@@ -283,10 +284,22 @@ $("#txt_cherch").on("input", function(){
 
         $(".btn_submit").on("click", function(){
 
-            $id = $("#nom_categorie_ar1").val();
+            $id = $("#nom_categorie_ar").val();
 
             $url = "{{ route('archive.saveCategorie') }}"
-            get_ajax($id,$url,"#combo_categorie")
+            $("#combo_categorie1").html("");
+            $(".cat").hide();
+            get_ajax($id,$url,"#combo_categorie1")
+        });
+
+        $(".btn_submit2").on("click", function(){
+
+            $id = $("#nom_categorie_ar2").val();
+
+            $url = "{{ route('archive.saveCategorie') }}"
+            $("#combo_categorie2").html("");
+            $(".cat").hide();
+            get_ajax($id,$url,"#combo_categorie2")
         });
 
 
