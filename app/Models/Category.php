@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Category
  * 
  * @property int $id_categorie
- * @property string|null $nom_categorie_ar
+ * @property string $nom_categorie_ar
  * 
  * @property Collection|Archive[] $archives
  *

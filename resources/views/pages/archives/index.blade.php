@@ -65,7 +65,7 @@
                     <h6 class="fw-semibold mb-0">تصنيف الملف</h6>
                   </th>
                   <th class="border-bottom-0">
-                    <h6 class="fw-semibold mb-0">تاريخ الرفع</h6>
+                    <h6 class="fw-semibold mb-0">التاريخ </h6>
                   </th>
                   <th class="border-bottom-0">
                     <h6 class="fw-semibold mb-0">خيارات</h6>
@@ -83,11 +83,11 @@
                         <h6 class="fw-semibold mb-1">{{$archives->category->nom_categorie_ar}}</h6>
                     </td>
                     <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal">{{$archives->created_at}}</p>
+                      <p class="mb-0 fw-normal">{{$archives->date_archive}}</p>
                     </td>
                     <td class="border-bottom-0">
                          <a target="_blank" href="{{asset('documents_archive/'.$archives->path_archive)}}"  class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></a>
-                          <a class="badge bg-success rounded-3 fw-semibold" data-bs-toggle="modal" data-nom_archive_ar="{{$archives->nom_archive_ar}}" data-id_archive="{{$archives->id_archive}}" data-id_categorie="{{$archives->id_categorie}}" data-bs-target="#editArchive"><i class="ti ti-edit"></i></a>
+                          <a class="badge bg-success rounded-3 fw-semibold" data-bs-toggle="modal" data-nom_archive_ar2="{{$archives->nom_archive_ar}}" data-date_archive2="{{\Carbon\Carbon::parse($archives->date_archive)->format('Y-m-d')}}" data-id_archive2="{{$archives->id_archive}}" data-id_categorie2="{{$archives->id_categorie}}" data-bs-target="#editArchive"><i class="ti ti-edit"></i></a>
                           <a href="{{route('archive.delete',$archives->id_archive)}}" onclick="return confirm('هل تريد إزالة هذا الملف من قاعدة البيانات ؟')" class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></a>
                     </td>
                   </tr>
@@ -124,6 +124,10 @@
       <input type="text" name="nom_archive_ar" class="form-control" id="nom_archive_ar">
     </div>
     <div class="col-md-12">
+        <label for="nom_archive_ar" class="form-label">إسم الملف</label>
+        <input type="date" name="date_archive" class="form-control" id="date_archive">
+      </div>
+    <div class="col-md-12">
       <div class="row">
 
 
@@ -139,7 +143,7 @@
                     @endforeach
           </select>
 
-          <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar" required>
+          <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar" >
         </div>
 
         <div class="col-2">
@@ -178,9 +182,13 @@
       <div class="modal-body">
         <div class="col-md-12">
           <label for="nom_archive_ar" class="form-label">إسم الملف</label>
-          <input type="text" name="nom_archive_ar" class="form-control" id="nom_archive_ar">
-          <input type="hidden" name="id_archive" class="form-control" id="id_archive">
+          <input type="text" name="nom_archive_ar" class="form-control" id="nom_archive_ar2">
+          <input type="hidden" name="id_archive" class="form-control" id="id_archive2">
         </div>
+        <div class="col-md-12">
+            <label for="nom_archive_ar" class="form-label">إسم الملف</label>
+            <input type="date" name="date_archive" class="form-control" id="date_archive2">
+          </div>
         <div class="col-md-12">
           <div class="row">
 
@@ -191,12 +199,12 @@
                     $categories = App\Models\Category::all();
                 @endphp
               <select id="combo_categorie2" name="id_categorie" class="form-select">
-                <option selected> - تصنيف الملف   ...  </option>
+                <option value=""> - تصنيف الملف   ...  </option>
                       @foreach ($categories as $category)
                       <option value="{{$category->id_categorie}}"> {{$category->nom_categorie_ar}}</option>
                         @endforeach
               </select>
-              <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar2" required>
+              <input type="text"  placeholder="إسم التصنيف الجديد" class="form-control my-2 cat" id="nom_categorie_ar2" >
             </div>
 
             <div class="col-2">
@@ -245,14 +253,16 @@
 $('#editArchive').on('show.bs.modal', function (event) {
 
     var button = $(event.relatedTarget)
-    var id_archive = button.data('id_archive')
-    var nom_archive_ar = button.data('nom_archive_ar')
-    var id_categorie = button.data('id_categorie')
+    var id_archive2 = button.data('id_archive2')
+    var nom_archive_ar2 = button.data('nom_archive_ar2')
+    var id_categorie2 = button.data('id_categorie2')
+    var date_archive2 = button.data('date_archive2')
     var modal = $(this)
 
-    modal.find('.modal-body #id_archive').val(id_archive);
-    modal.find('.modal-body #nom_archive_ar').val(nom_archive_ar);
-    modal.find('.modal-body #id_categorie').val(id_categorie);
+    modal.find('.modal-body #id_archive2').val(id_archive2);
+    modal.find('.modal-body #nom_archive_ar2').val(nom_archive_ar2);
+    modal.find('.modal-body #combo_categorie2').val(id_categorie2);
+    modal.find('.modal-body #date_archive2').val(date_archive2);
 })
 
 

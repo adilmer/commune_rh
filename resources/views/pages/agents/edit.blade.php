@@ -44,7 +44,7 @@
             </div>
             <div class="col-4 mt-3">
               <label for="date_naiss">تاريخ الإزدياد</label>
-              <input value="{{$agent->date_naiss}}" name="date_naiss" type="date" class="form-control" id="date_naiss" placeholder="">
+              <input value="{{ \Carbon\Carbon::parse($agent->date_naiss)->format('Y-m-d') }}" name="date_naiss" type="date" class="form-control" id="date_naiss" placeholder="">
             </div>
             <div class="col-4 mt-3">
               <label for="tel">  الهاتف</label>
@@ -92,7 +92,7 @@
               </div>
               <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في الدرجة</label>
-                <input value="{{$agent->date_grade}}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
+                <input value="{{ \Carbon\Carbon::parse($agent->date_grade)->format('Y-m-d') }}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
               </div>
               <div class="col-3 mt-3">
                 <label for="echelle" >السلم</label>
@@ -100,7 +100,7 @@
               </div>
               {{-- <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في السلم</label>
-                <input value="{{$agent->date_grade}}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
+                <input value="{{ \Carbon\Carbon::parse($agent->date_grade}}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
               </div> --}}
               <div class="col-4 mt-3">
                 <label for="echellon">الرتبة</label>
@@ -146,7 +146,7 @@
               </div>
               <div class="col-6 mt-3">
                 <label for="date_rec">تاريخ الترسيم</label>
-                <input value="{{$agent->date_rec}}" name="date_rec" type="date" class="form-control" id="date_rec" placeholder="">
+                <input value="{{ \Carbon\Carbon::parse($agent->date_rec)->format('Y-m-d') }}" name="date_rec" type="date" class="form-control" id="date_rec" placeholder="">
               </div>
 
               <div class="col-8 mt-3">
@@ -193,7 +193,7 @@
                   </div>
                   <div class="col-4 mt-3">
                       <label for="date_position" >تاريخ الإحالة</label>
-                      <input name="date_position" type="date" value="{{$agent->date_position}}"  class="form-control" id="date_position" placeholder="">
+                      <input name="date_position" type="date" value="{{ \Carbon\Carbon::parse($agent->date_position)->format('Y-m-d') }}"  class="form-control" id="date_position" placeholder="">
                     </div>
                     <div class="col-4 mt-3">
                       <label for="lieu_position">مكان الإحالة</label>

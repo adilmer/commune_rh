@@ -15,7 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_archive
  * @property string $nom_archive_ar
  * @property int|null $id_categorie
- * @property string $path_archive
+ * @property Carbon|null $date_archive
+ * @property string|null $path_archive
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * 
@@ -29,12 +30,14 @@ class Archive extends Model
 	protected $primaryKey = 'id_archive';
 
 	protected $casts = [
-		'id_categorie' => 'int'
+		'id_categorie' => 'int',
+		'date_archive' => 'datetime'
 	];
 
 	protected $fillable = [
 		'nom_archive_ar',
 		'id_categorie',
+		'date_archive',
 		'path_archive'
 	];
 

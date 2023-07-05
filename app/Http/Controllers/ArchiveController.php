@@ -93,7 +93,7 @@ class ArchiveController extends Controller
                         <h6 class='fw-semibold mb-1'>$nom_categorie_ar</h6>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>$archives->created_at</p>
+              <p class='mb-0 fw-normal'>$archives->date_archive</p>
             </td>
             <td class='border-bottom-0'>
                  <a target='_blank' href='$doc_url' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
@@ -116,7 +116,7 @@ class ArchiveController extends Controller
         if ($request->text != '') {
 
             $archives = $archives
-                ->where('created_at','like', '%' . $request->text . '%');
+                ->where('date_archive','like', '%' . $request->text . '%');
         }
 
 
@@ -137,7 +137,7 @@ class ArchiveController extends Controller
                         <h6 class='fw-semibold mb-1'>$nom_categorie_ar</h6>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>$archives->created_at</p>
+              <p class='mb-0 fw-normal'>$archives->date_archive</p>
             </td>
             <td class='border-bottom-0'>
                  <a target='_blank' href='$doc_url' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
@@ -183,7 +183,7 @@ class ArchiveController extends Controller
                         <h6 class='fw-semibold mb-1'>$nom_categorie_ar</h6>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>$archives->created_at</p>
+              <p class='mb-0 fw-normal'>$archives->date_archive</p>
             </td>
             <td class='border-bottom-0'>
                  <a target='_blank' href='$doc_url' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
