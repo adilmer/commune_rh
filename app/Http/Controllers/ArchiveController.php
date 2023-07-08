@@ -48,7 +48,7 @@ class ArchiveController extends Controller
         }
          Archive::create($requestData);
 
-         return redirect()->route('archive.index');
+         return redirect()->route('archives.index');
     }
 
     public function storeCategorie(Request $request)
@@ -83,6 +83,9 @@ class ArchiveController extends Controller
         foreach ($archives as $key => $archives) {
             $nom_categorie_ar = $archives->category->nom_categorie_ar;
             $doc_url=asset('documents_agents/'.$archives->path_archive);
+            $delete_route = route('archive.delete',$archives->id_archive);
+            $date_archive = \Carbon\Carbon::parse($archives->date_archive)->format('Y-m-d');
+
             $data .=
             "<tr>
             <td class='border-bottom-0'><h6 class='fw-semibold mb-0'>$archives->id_archive</h6></td>
@@ -93,12 +96,12 @@ class ArchiveController extends Controller
                         <h6 class='fw-semibold mb-1'>$nom_categorie_ar</h6>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>$archives->date_archive</p>
+              <p class='mb-0 fw-normal'>{$archives->date_archive->format('Y-m-d')}</p>
             </td>
             <td class='border-bottom-0'>
                  <a target='_blank' href='$doc_url' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
-                 <a class='badge bg-success rounded-3 fw-semibold' data-bs-toggle='modal' data-nom_archive_ar='$archives->nom_archive_ar' data-id_archive='$archives->id_archive' data-id_categorie='$archives->id_categorie' data-bs-target='#editArchive'><i class='ti ti-edit'></i></a>
-                  <a href='route('archive.delete',$archives->id_archive)' onclick='return confirm(`هل تريد إزالة هذا الملف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+                 <a class='badge bg-success rounded-3 fw-semibold' data-bs-toggle='modal' data-nom_archive_ar2='$archives->nom_archive_ar' data-date_archive2='$date_archive' data-id_archive2='$archives->id_archive' data-id_categorie2='$archives->id_categorie' data-bs-target='#editArchive'><i class='ti ti-edit'></i></a>
+                  <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذا الملف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
             </td>
           </tr>";
         }
@@ -127,6 +130,8 @@ class ArchiveController extends Controller
         foreach ($archives as $key => $archives) {
             $nom_categorie_ar = $archives->category->nom_categorie_ar;
             $doc_url=asset('documents_agents/'.$archives->path_archive);
+            $delete_route = route('archive.delete',$archives->id_archive);
+            $date_archive = \Carbon\Carbon::parse($archives->date_archive)->format('Y-m-d');
             $data .=
             "<tr>
             <td class='border-bottom-0'><h6 class='fw-semibold mb-0'>$archives->id_archive</h6></td>
@@ -137,12 +142,12 @@ class ArchiveController extends Controller
                         <h6 class='fw-semibold mb-1'>$nom_categorie_ar</h6>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>$archives->date_archive</p>
+              <p class='mb-0 fw-normal'>{$archives->date_archive->format('Y-m-d')}</p>
             </td>
             <td class='border-bottom-0'>
                  <a target='_blank' href='$doc_url' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
-                 <a class='badge bg-success rounded-3 fw-semibold' data-bs-toggle='modal' data-nom_archive_ar='$archives->nom_archive_ar' data-id_archive='$archives->id_archive' data-id_categorie='$archives->id_categorie' data-bs-target='#editArchive'><i class='ti ti-edit'></i></a>
-                  <a href='route('archive.delete',$archives->id_archive)' onclick='return confirm(`هل تريد إزالة هذا الملف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+                 <a class='badge bg-success rounded-3 fw-semibold' data-bs-toggle='modal' data-nom_archive_ar2='$archives->nom_archive_ar' data-date_archive2='$date_archive' data-id_archive2='$archives->id_archive' data-id_categorie2='$archives->id_categorie' data-bs-target='#editArchive'><i class='ti ti-edit'></i></a>
+                  <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذا الملف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
             </td>
           </tr>";
         }
@@ -173,6 +178,8 @@ class ArchiveController extends Controller
         foreach ($archives as $key => $archives) {
             $nom_categorie_ar = $archives->category->nom_categorie_ar;
             $doc_url=asset('documents_agents/'.$archives->path_archive);
+            $delete_route = route('archive.delete',$archives->id_archive);
+            $date_archive = \Carbon\Carbon::parse($archives->date_archive)->format('Y-m-d');
             $data .=
             "<tr>
             <td class='border-bottom-0'><h6 class='fw-semibold mb-0'>$archives->id_archive</h6></td>
@@ -183,12 +190,12 @@ class ArchiveController extends Controller
                         <h6 class='fw-semibold mb-1'>$nom_categorie_ar</h6>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>$archives->date_archive</p>
+              <p class='mb-0 fw-normal'>{$archives->date_archive->format('Y-m-d')}</p>
             </td>
             <td class='border-bottom-0'>
                  <a target='_blank' href='$doc_url' class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></a>
-                 <a class='badge bg-success rounded-3 fw-semibold' data-bs-toggle='modal' data-nom_archive_ar='$archives->nom_archive_ar' data-id_archive='$archives->id_archive' data-id_categorie='$archives->id_categorie' data-bs-target='#editArchive'><i class='ti ti-edit'></i></a>
-                  <a href='route('archive.delete',$archives->id_archive)' onclick='return confirm(`هل تريد إزالة هذا الملف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+                 <a class='badge bg-success rounded-3 fw-semibold' data-bs-toggle='modal' data-nom_archive_ar2='$archives->nom_archive_ar' data-date_archive2='$date_archive' data-id_archive2='$archives->id_archive' data-id_categorie2='$archives->id_categorie' data-bs-target='#editArchive'><i class='ti ti-edit'></i></a>
+                  <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذا الملف من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
             </td>
           </tr>";
         }
