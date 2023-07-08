@@ -57,7 +57,7 @@
           </a>
         </li>
         <li class="sidebar-item" id="myDropdown">
-          <a class="sidebar-link" href="{{route('formations.index')}}" data-bs-toggle="dropdown">
+          <a class="sidebar-link" href="#" data-bs-toggle="dropdown">
             <span>
               <i class="ti ti-book-2"></i>
             </span>
@@ -65,7 +65,7 @@
           </a>
         </li>
         <li class="sidebar-item"  id="myDropdown">
-          <a class="sidebar-link" href="{{route('stagiaires.index')}}" data-bs-toggle="dropdown">
+          <a class="sidebar-link" href="#" data-bs-toggle="dropdown">
             <span>
               <i class="ti ti-user"></i>
             </span>
@@ -73,7 +73,7 @@
           </a>
         </li>
         <li class="sidebar-item"  id="myDropdown">
-          <a class="sidebar-link" href="{{route('documents.index')}}" data-bs-toggle="dropdown">
+          <a class="sidebar-link" href="#" data-bs-toggle="dropdown">
             <span>
               <i class="ti ti-file-description"></i>
             </span>
