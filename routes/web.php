@@ -32,18 +32,28 @@ Route::prefix('agents')->group(function () {
 });
 Route::prefix('archives')->group(function () {
     Route::get('/','ArchiveController@index')->name('archive.index');
-    Route::get('/create','ArchiveController@create')->name('archive.create');
-    Route::get('/edit/{id_archive}','ArchiveController@edit')->name('archive.edit');
-    Route::get("/details/{id_archive}","ArchiveController@show")->name("archive.details");
     Route::get("/filter/{name?}","ArchiveController@filter")->name("archive.filter");
     Route::get("/filterByCategorie/{name?}","ArchiveController@filterByCategorie")->name("archive.filterByCategorie");
     Route::get("/filterByDate/{name?}","ArchiveController@filterByDate")->name("archive.filterByDate");
     Route::post("/save","ArchiveController@store")->name("archive.save");
     Route::get("/saveCategorie","ArchiveController@storeCategorie")->name("archive.saveCategorie");
     Route::post("/update","ArchiveController@update")->name("archive.update");
-    Route::post("/uploadDocuments","ArchiveController@uploadDocuments")->name("archive.uploadDocuments");
     Route::get("/delete/{id_archive?}","ArchiveController@destroy")->name("archive.delete");
 });
+
+Route::prefix('formations')->group(function () {
+    Route::get('/','FormationController@index')->name('formation.index');
+    Route::get('/create','FormationController@create')->name('formation.create');
+    Route::get('/edit/{id_formation}','FormationController@edit')->name('formation.edit');
+    Route::get("/details/{id_formation}","FormationController@show")->name("formation.details");
+    Route::get("/filter/{name?}","FormationController@filter")->name("formation.filter");
+    Route::get("/filterByPosition/{name?}","FormationController@filterByPosition")->name("formation.filterByPosition");
+    Route::post("/save","FormationController@store")->name("formation.save");
+    Route::post("/update","FormationController@update")->name("formation.update");
+    Route::post("/uploadDocuments","FormationController@uploadDocuments")->name("formation.uploadDocuments");
+    Route::get("/delete/{id_formation}","FormationController@destroy")->name("formation.delete");
+});
+
 Route::prefix('services')->group(function () {
     Route::get('/filter_departement','ServiceController@filter_departement')->name('service.filter_departement');
     Route::get('/filter_service','ServiceController@filter_service')->name('service.filter_service');

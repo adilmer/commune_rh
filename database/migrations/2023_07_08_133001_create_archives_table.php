@@ -16,8 +16,10 @@ class CreateArchivesTable extends Migration {
 		Schema::create('archives', function(Blueprint $table)
 		{
 			$table->integer('id_archive', true);
-			$table->integer('nom_archive_ar');
-			$table->string('path_archive', 120);
+			$table->string('nom_archive_ar', 200);
+			$table->integer('id_categorie')->nullable()->index('id_categorie');
+			$table->date('date_archive')->nullable();
+			$table->string('path_archive', 120)->nullable();
 			$table->timestamps(10);
 		});
 	}
