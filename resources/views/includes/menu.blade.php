@@ -47,10 +47,6 @@
             </span>
             <span class="hide-menu">الرخص الإدارية</span>
           </a>
-          <ul class="dropdown-menu text-end">
-            <li> <a class="dropdown-item" href="createconge.html"> طلب رخصة</a></li>
-            <li> <a class="dropdown-item" href="conge.html"> ارشيف الرخص</a> </li>
-          </ul>
         </li>
         <li class="sidebar-item">
           <a class="sidebar-link" href="{{route('archive.index')}}" aria-expanded="false">
@@ -67,10 +63,6 @@
             </span>
             <span class="hide-menu">التكوينات</span>
           </a>
-          <ul class="dropdown-menu text-end">
-            <li> <a class="dropdown-item" href="formation.html"> لائحة التكوينات </a></li>
-            <li> <a class="dropdown-item" href="creatformation.html"> تكوين جديد </a> </li>
-          </ul>
         </li>
         <li class="sidebar-item"  id="myDropdown">
           <a class="sidebar-link" href="#" data-bs-toggle="dropdown">
@@ -79,10 +71,6 @@
             </span>
             <span class="hide-menu"> المتدربين</span>
           </a>
-          <ul class="dropdown-menu text-end">
-            <li> <a class="dropdown-item" href="stagiaire.html"> لائحة المتدربين </a></li>
-            <li> <a class="dropdown-item" href="createstagiaire.html"> متدرب جديد </a> </li>
-          </ul>
         </li>
         <li class="sidebar-item"  id="myDropdown">
           <a class="sidebar-link" href="#" data-bs-toggle="dropdown">

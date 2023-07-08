@@ -124,7 +124,7 @@
       <input type="text" name="nom_archive_ar" class="form-control" id="nom_archive_ar">
     </div>
     <div class="col-md-12">
-        <label for="nom_archive_ar" class="form-label">إسم الملف</label>
+        <label for="nom_archive_ar" class="form-label">تاريخ الملف</label>
         <input type="date" name="date_archive" class="form-control" id="date_archive">
       </div>
     <div class="col-md-12">
