@@ -65,7 +65,7 @@
           </a>
         </li>
         <li class="sidebar-item"  id="myDropdown">
-          <a class="sidebar-link" href="#" data-bs-toggle="dropdown">
+          <a class="sidebar-link" href="{{route('stagiaire.index')}}" data-bs-toggle="false">
             <span>
               <i class="ti ti-user"></i>
             </span>

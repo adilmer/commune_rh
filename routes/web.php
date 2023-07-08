@@ -47,12 +47,24 @@ Route::prefix('formations')->group(function () {
     Route::get('/edit/{id_formation}','FormationController@edit')->name('formation.edit');
     Route::get("/details/{id_formation}","FormationController@show")->name("formation.details");
     Route::get("/filter/{name?}","FormationController@filter")->name("formation.filter");
-    Route::get("/filterByPosition/{name?}","FormationController@filterByPosition")->name("formation.filterByPosition");
     Route::post("/save","FormationController@store")->name("formation.save");
     Route::post("/update","FormationController@update")->name("formation.update");
-    Route::post("/uploadDocuments","FormationController@uploadDocuments")->name("formation.uploadDocuments");
     Route::get("/delete/{id_formation}","FormationController@destroy")->name("formation.delete");
 });
+
+Route::prefix('stagiaires')->group(function () {
+    Route::get('/','StagiaireController@index')->name('stagiaire.index');
+    Route::get('/create','StagiaireController@create')->name('stagiaire.create');
+    Route::get('/edit/{id_stagiaire}','StagiaireController@edit')->name('stagiaire.edit');
+    Route::get("/details/{id_stagiaire}","StagiaireController@show")->name("stagiaire.details");
+    Route::get("/filter/{name?}","StagiaireController@filter")->name("stagiaire.filter");
+    Route::post("/save","StagiaireController@store")->name("stagiaire.save");
+    Route::post("/update","StagiaireController@update")->name("stagiaire.update");
+    Route::post("/uploadDocuments","StagiaireController@uploadDocuments")->name("stagiaire.uploadDocuments");
+    Route::get("/delete/{id_stagiaire}","StagiaireController@destroy")->name("stagiaire.delete");
+});
+
+
 
 Route::prefix('services')->group(function () {
     Route::get('/filter_departement','ServiceController@filter_departement')->name('service.filter_departement');

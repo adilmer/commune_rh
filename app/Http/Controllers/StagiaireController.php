@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stagiaire;
+use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class StagiaireController extends Controller
 {
+    use UploadTrait;
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,8 @@ class StagiaireController extends Controller
      */
     public function index()
     {
-        //
+        $stagiaires = Stagiaire::all();
+       return view('pages.stagiaires.index', compact('stagiaires'));
     }
 
     /**
@@ -23,7 +28,7 @@ class StagiaireController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.stagiaires.create');
     }
 
     /**
@@ -34,7 +39,14 @@ class StagiaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->all();
+        if ($request->path_stagiaire!=null){
+            $requestData['path_stagiaire'] = $this->saveAs($request->path_stagiaire,time(),"documents_stagiaires");
+        }
+        Stagiaire::create(
+            $requestData);
+
+        return redirect(route('stagiaire.index'));
     }
 
     /**
@@ -43,9 +55,55 @@ class StagiaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+       return view('pages.stagiaires.details', compact('stagiaire'));
+    }
+
+    public function filter(Request $request)
+    {
+        //dd($request->text);
+        $stagiaires = Stagiaire::orderby('id_stagiaire');
+
+        if ($request->text != '') {
+
+            $stagiaires = $stagiaires
+                ->where(function ($query) use ($request) {
+                    $query->where('nom_stagiaire_ar', 'like', '%' . $request->text . '%');
+                });
+
+        }
+       // dd($stagiaires->getQuery());
+
+        $stagiaires = $stagiaires->get();
+        //dd($stagiaires->first());
+        $data = '';
+
+        foreach ($stagiaires as $key => $stagiaires) {
+            $show_route = route('stagiaire.details',$stagiaires->id_stagiaire);
+            $edit_route = route('stagiaire.edit',$stagiaires->id_stagiaire);
+            $delete_route = route('stagiaire.delete',$stagiaires->id_stagiaire);
+
+            $data .=
+            "<tr>
+            <td class='border-bottom-0'>
+              <h6 class='fw-semibold mb-0'>$stagiaires->nom_stagiaire_ar</h6>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>{$stagiaires->date_stagiaire->format('Y-m-d')}</p>
+            </td>
+            <td class='border-bottom-0'>
+              <div class='d-flex align-items-center gap-2'>
+               <a href='$show_route'><span class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></span></a>
+               <a href='$edit_route'><span class='badge bg-success rounded-3 fw-semibold'><i class='ti ti-edit'></i></span></a>
+               <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذا التكوين من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+            </td>
+          </tr>";
+        }
+        //dd($data);
+        return Response(['data' => $data]);
+
     }
 
     /**
@@ -54,9 +112,10 @@ class StagiaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+       return view('pages.stagiaires.edit', compact('stagiaire'));
     }
 
     /**
@@ -66,9 +125,11 @@ class StagiaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+        $stagiaire->update($request->all());
+       return redirect()->route('stagiaire.index');
     }
 
     /**
@@ -77,8 +138,11 @@ class StagiaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+        $stagiaire->delete();
+
+        return redirect(route('stagiaire.index'));
     }
 }

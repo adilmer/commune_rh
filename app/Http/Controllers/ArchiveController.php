@@ -82,7 +82,7 @@ class ArchiveController extends Controller
 
         foreach ($archives as $key => $archives) {
             $nom_categorie_ar = $archives->category->nom_categorie_ar;
-            $doc_url=asset('documents_agents/'.$archives->path_archive);
+            $doc_url=asset('documents_archive/'.$archives->path_archive);
             $delete_route = route('archive.delete',$archives->id_archive);
             $date_archive = \Carbon\Carbon::parse($archives->date_archive)->format('Y-m-d');
 
@@ -129,7 +129,7 @@ class ArchiveController extends Controller
 
         foreach ($archives as $key => $archives) {
             $nom_categorie_ar = $archives->category->nom_categorie_ar;
-            $doc_url=asset('documents_agents/'.$archives->path_archive);
+            $doc_url=asset('documents_archive/'.$archives->path_archive);
             $delete_route = route('archive.delete',$archives->id_archive);
             $date_archive = \Carbon\Carbon::parse($archives->date_archive)->format('Y-m-d');
             $data .=
@@ -177,7 +177,7 @@ class ArchiveController extends Controller
 
         foreach ($archives as $key => $archives) {
             $nom_categorie_ar = $archives->category->nom_categorie_ar;
-            $doc_url=asset('documents_agents/'.$archives->path_archive);
+            $doc_url=asset('documents_archive/'.$archives->path_archive);
             $delete_route = route('archive.delete',$archives->id_archive);
             $date_archive = \Carbon\Carbon::parse($archives->date_archive)->format('Y-m-d');
             $data .=

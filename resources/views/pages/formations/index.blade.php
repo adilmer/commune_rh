@@ -2,7 +2,7 @@
 @section('content')
 <div class="row " style="justify-content: flex-end;">
           <div class="col-sm-3 pl-0 mb-2">
-            <input type="text" class="form-control  " placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" id="txt_cherch" class="form-control  " placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
           </div>
           <div class="col-sm-2 ">
             <a href="{{route('formation.create')}}" class="btn btn-primary"><i class="ti ti-user-plus"></i> إضافة تكوين جديد</a>
@@ -28,20 +28,20 @@
                             </th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="table_formations">
                             @foreach ($formations as $formations)
                           <tr>
                             <td class="border-bottom-0">
                               <h6 class="fw-semibold mb-0">{{$formations->nom_formation_ar}}</h6>
                             </td>
                             <td class="border-bottom-0">
-                              <p class="mb-0 fw-normal">{{$formations->date_formation}}</p>
+                              <p class="mb-0 fw-normal">{{$formations->date_formation->format('Y-m-d')}}</p>
                             </td>
                             <td class="border-bottom-0">
                               <div class="d-flex align-items-center gap-2">
                                <a href="{{route('formation.details',$formations->id_formation)}}"><span class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></span></a>
                                <a href="{{route('formation.edit',$formations->id_formation)}}"><span class="badge bg-success rounded-3 fw-semibold"><i class="ti ti-edit"></i></span></a>
-                               <a href="{{route('formation.delete',$formations->id_formation)}}"><span class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></span></a>
+                               <a href="{{route('formation.delete',$formations->id_formation)}}"  onclick="return confirm('هل تريد إزالة هذا التكوين من قاعدة البيانات ؟')"  ><span class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></span></a>
                               </div>
                             </td>
                           </tr>
@@ -56,4 +56,14 @@
 
 
           </div>
+@endsection
+
+@section('script')
+$("#txt_cherch").on("input", function(){
+    $text = this.value
+    $url = "{{ route('formation.filter') }}"
+    $("#table_formations").html("");
+    get_table_ajax_find($text,$url,"#table_formations")
+
+    });
 @endsection

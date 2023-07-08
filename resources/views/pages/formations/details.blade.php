@@ -3,7 +3,7 @@
 <div class="row " style="justify-content: flex-end;">
 
           <div class="col-sm-2 m-3 ">
-            <button class="btn btn-primary"> لائحة التكوينات</button>
+            <a href="{{route('formation.index')}}" class="btn btn-primary"> لائحة التكوينات</a>
           </div>
             <div class="row">
 
