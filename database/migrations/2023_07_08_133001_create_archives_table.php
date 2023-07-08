@@ -20,7 +20,7 @@ class CreateArchivesTable extends Migration {
 			$table->integer('id_categorie')->nullable()->index('id_categorie');
 			$table->date('date_archive')->nullable();
 			$table->string('path_archive', 120)->nullable();
-			$table->timestamps(10);
+			$table->dateTime('created_at')->timestamps();
 		});
 	}
 
