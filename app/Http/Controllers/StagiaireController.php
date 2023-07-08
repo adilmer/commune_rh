@@ -91,13 +91,16 @@ class StagiaireController extends Controller
               <h6 class='fw-semibold mb-0'>$stagiaires->nom_stagiaire_ar</h6>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>{$stagiaires->date_stagiaire->format('Y-m-d')}</p>
+              <p class='mb-0 fw-normal'>{$stagiaires->date_debut_stage->format('Y-m-d')}</p>
+            </td>
+            <td class='border-bottom-0'>
+              <p class='mb-0 fw-normal'>{$stagiaires->date_fin_stage->format('Y-m-d')}</p>
             </td>
             <td class='border-bottom-0'>
               <div class='d-flex align-items-center gap-2'>
                <a href='$show_route'><span class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></span></a>
                <a href='$edit_route'><span class='badge bg-success rounded-3 fw-semibold'><i class='ti ti-edit'></i></span></a>
-               <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذا التكوين من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+               <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذا المتدرب من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
             </td>
           </tr>";
         }

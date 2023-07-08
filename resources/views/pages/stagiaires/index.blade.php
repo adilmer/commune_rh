@@ -2,7 +2,7 @@
 @section('content')
 <div class="row " style="justify-content: flex-end;">
           <div class="col-sm-3 pl-0 mb-2">
-            <input type="text" class="form-control  " placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control"  id="txt_cherch" placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
           </div>
           <div class="col-sm-2 ">
             <a href="{{route('stagiaire.create')}}" class="btn btn-primary"><i class="ti ti-user-plus"></i> إضافة متدرب جديد</a>
@@ -31,7 +31,7 @@
                             </th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="table_stagiaires">
                             @foreach ($stagiaires as $stagiaires)
                           <tr>
                             <td class="border-bottom-0">
@@ -47,7 +47,7 @@
                               <div class="d-flex align-items-center gap-2">
                                <a href="{{route('stagiaire.details',$stagiaires->id_stagiaire)}}"><span class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></span></a>
                                <a href="{{route('stagiaire.edit',$stagiaires->id_stagiaire)}}"><span class="badge bg-success rounded-3 fw-semibold"><i class="ti ti-edit"></i></span></a>
-                               <a href="{{route('stagiaire.delete',$stagiaires->id_stagiaire)}}"><span class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></span></a>
+                               <a href="{{route('stagiaire.delete',$stagiaires->id_stagiaire)}}" onclick="return confirm('هل تريد إزالة هذا المتدرب من قاعدة البيانات ؟')"><span class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></span></a>
                               </div>
                             </td>
                           </tr>
@@ -60,4 +60,14 @@
               </div>
             </div>
           </div>
+@endsection
+
+@section('script')
+$("#txt_cherch").on("input", function(){
+    $text = this.value
+    $url = "{{ route('stagiaire.filter') }}"
+    $("#table_stagiaires").html("");
+    get_table_ajax_find($text,$url,"#table_stagiaires")
+
+    });
 @endsection
