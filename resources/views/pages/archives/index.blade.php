@@ -83,7 +83,7 @@
                         <h6 class="fw-semibold mb-1">{{$archives->category->nom_categorie_ar}}</h6>
                     </td>
                     <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal">{{$archives->date_archive}}</p>
+                      <p class="mb-0 fw-normal">{{$archives->date_archive->format('Y-m-d')}}</p>
                     </td>
                     <td class="border-bottom-0">
                          <a target="_blank" href="{{asset('documents_archive/'.$archives->path_archive)}}"  class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></a>
