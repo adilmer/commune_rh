@@ -8,6 +8,7 @@
   <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logos/favicon.png')}}" />
   <link rel="stylesheet" href="{{asset('assets/css/styles.min.css')}}" />
   <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}" />
+  <link rel="stylesheet" href="{{asset('assets/libs/apexcharts/dist/apexcharts.css')}}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
