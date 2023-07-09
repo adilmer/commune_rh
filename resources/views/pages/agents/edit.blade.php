@@ -186,7 +186,7 @@
                     <label for="aff_mutuelle">نوع الإحالة</label>
                     <select name="aff_mutuelle" class="custom-select custom-select-lg mb-3 form-control">
                         @foreach ($positions as $positions)
-                        <option value="$positions->id_position" {{ $agent->id_position == $positions->id_position ? 'selected' : '' }}>{{$positions->nom_position_ar}}</option>
+                        <option value="{{$positions->id_position}}" {{ $agent->id_position == $positions->id_position ? 'selected' : '' }}>{{$positions->nom_position_ar}}</option>
                         @endforeach
 
                     </select>

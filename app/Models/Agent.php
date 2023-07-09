@@ -53,6 +53,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Fonction $fonction
  * @property Bureau $bureau
  * @property Position $position
+ * @property Collection|Conge[] $conges
  * @property Collection|Document[] $documents
  *
  * @package App\Models
@@ -136,6 +137,11 @@ class Agent extends Model
 	public function position()
 	{
 		return $this->belongsTo(Position::class, 'id_position');
+	}
+
+	public function conges()
+	{
+		return $this->hasMany(Conge::class, 'id_agent');
 	}
 
 	public function documents()

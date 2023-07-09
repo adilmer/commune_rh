@@ -41,7 +41,7 @@
           </ul>
           </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="# " data-bs-toggle="dropdown">
+          <a class="sidebar-link" href="{{route('conge.index')}}" aria-expanded="false">
             <span>
               <i class="ti ti-file-description"></i>
             </span>

@@ -64,6 +64,17 @@ Route::prefix('stagiaires')->group(function () {
     Route::get("/delete/{id_stagiaire}","StagiaireController@destroy")->name("stagiaire.delete");
 });
 
+Route::prefix('conges')->group(function () {
+    Route::get('/','CongeController@index')->name('conge.index');
+    Route::get('/create','CongeController@create')->name('conge.create');
+    Route::get('/edit/{id_conge}','CongeController@edit')->name('conge.edit');
+    Route::get("/details/{id_conge}","CongeController@show")->name("conge.details");
+    Route::get("/filter/{name?}","CongeController@filter")->name("conge.filter");
+    Route::post("/save","CongeController@store")->name("conge.save");
+    Route::post("/update","CongeController@update")->name("conge.update");
+    Route::post("/uploadDocuments","CongeController@uploadDocuments")->name("conge.uploadDocuments");
+    Route::get("/delete/{id_conge}","CongeController@destroy")->name("conge.delete");
+});
 
 
 Route::prefix('services')->group(function () {
