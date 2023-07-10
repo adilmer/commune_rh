@@ -26,6 +26,7 @@
             <li> <a class="dropdown-item" href="#"> الترقية</a> </li>
             <li> <a class="dropdown-item" href="#"> الحضور</a> </li>
             <li> <a class="dropdown-item" href="#"> الكفاءة المهنية</a> </li>
+            <li> <a class="dropdown-item" href="{{route('agent.export')}}"> تحميل excel</a> </li>
           </ul>
         </li>
         <li class="sidebar-item">

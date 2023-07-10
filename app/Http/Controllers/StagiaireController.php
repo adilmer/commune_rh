@@ -6,6 +6,7 @@ use App\Models\Stagiaire;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\File;
 
 class StagiaireController extends Controller
 {
@@ -144,6 +145,7 @@ class StagiaireController extends Controller
     public function destroy(Request $request)
     {
         $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+        File::delete(public_path('documents_stagiaires/' . $stagiaire->path_stagiaire));
         $stagiaire->delete();
 
         return redirect(route('stagiaire.index'));

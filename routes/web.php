@@ -21,6 +21,7 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
 Route::prefix('agents')->group(function () {
     Route::get('/','AgentController@index')->name('agent.index');
     Route::get('/create','AgentController@create')->name('agent.create');
+    Route::get('/export','AgentController@export')->name('agent.export');
     Route::get('/edit/{id_agent}','AgentController@edit')->name('agent.edit');
     Route::get("/details/{id_agent}","AgentController@show")->name("agent.details");
     Route::get("/filter/{name?}","AgentController@filter")->name("agent.filter");

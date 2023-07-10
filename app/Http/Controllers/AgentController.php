@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AgentsExport;
 use App\Models\Agent;
 use App\Models\Bureau;
 use App\Models\Departement;
@@ -14,6 +15,7 @@ use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Summary of AgentController
@@ -34,6 +36,11 @@ class AgentController extends Controller
 
         return view('pages.agents.index',compact('agents','positions'));
     }
+
+    public function export()
+{
+   return Excel::download(new AgentsExport, 'agents.xlsx');
+}
 
     public function filter(Request $request)
     {
@@ -316,6 +323,11 @@ class AgentController extends Controller
     public function destroy(Request $request)
     {
         $agent = Agent::findOrFail($request->id_agent);
+        $documents = Document::where('id_agent',$request->id_agent)->get();
+        File::delete(public_path('photos_agents/' . $agent->photo));
+        foreach($documents as $documents)
+        File::delete(public_path('documents_agents/' . $documents->path));
+
         $agent->delete();
 
         return redirect(route('agent.index'));

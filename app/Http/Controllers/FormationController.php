@@ -6,6 +6,7 @@ use App\Models\Formation;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\File;
 
 class FormationController extends Controller
 {
@@ -141,6 +142,7 @@ class FormationController extends Controller
     public function destroy(Request $request)
     {
         $formation = Formation::findOrFail($request->id_formation);
+        File::delete(public_path('documents_formations/' . $formation->path_formation));
         $formation->delete();
 
         return redirect(route('formation.index'));

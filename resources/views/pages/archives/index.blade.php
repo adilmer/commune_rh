@@ -225,28 +225,6 @@
 
 
 
-{{-- <!-- modul add category-->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-<div class="modal-dialog">
-    <form action="{{route('archive.saveCategorie')}}" method="post">
-        @csrf
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">إضافة تصنيف جديد</h5>
-  </div>
-    <div class="modal-body">
-      <div class="col-md-12 my-5">
-        <label for="nom_categorie_ar" class="form-label">إسم التصنيف الجديد</label>
-        <input type="text" name="nom_categorie_ar" class="form-control" id="nom_categorie_ar">
-      </div>
-    </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">إضافة</button>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-  </div>
-</div>
-</form>
-</div> --}}
 @endsection
 
 @section('script')
