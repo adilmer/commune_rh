@@ -114,7 +114,7 @@
                       </td>
 
                       <td class="border-bottom-0 pos">
-                        <p class="mb-0 fw-normal">{{$agents->date_position->format('Y-m-d')}}</p>
+                        <p class="mb-0 fw-normal">{{$agents->date_position}}</p>
                       </td>
                       <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->lieu_position}}</p>
