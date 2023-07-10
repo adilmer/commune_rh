@@ -140,7 +140,7 @@
       </div>
 
 
-   
+
 @endsection
 @section('script')
 $("#txt_cherch").on("input", function(){

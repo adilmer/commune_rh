@@ -13,7 +13,7 @@
             <div class="row">
               <div class="col-12 mt-4">
                 <label for="combo_agent" >الإسم الكامل   </label>
-                <select class="form-select" name="id_agent" id="combo_agent">
+                <select class="form-select" name="id_agent" id="combo_agents">
                     <option value="" selected>اختيار الموظف ...</option>
                     @foreach ($agents as $agents)
                     <option value="{{$agents->id_agent}}">{{$agents->nom_ar}}</option>
@@ -62,20 +62,6 @@
           <div class="col-5  bg-light p-3">
             <div class="col-12">
               <h5 class="card-title fw-semibold  mb-4">أرشيف الرخص </h5>
-                  <div class="table-responsive">
-                    <table class="table text-nowrap mb-0 align-middle">
-                      <tbody>
-                        <tr>
-                          <td class="border-bottom-0">
-                            <h6 class="fw-semibold fs-5 mb-0">عدد الأيام المتاحة  :</h6>
-                          </td>
-                          <td class="border-bottom-0">
-                            <p class="mb-0 fw-normal fs-5">11   </p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
             </div>
             <div class="col-12">
               <div class="table-responsive">
@@ -96,19 +82,10 @@
                         <h6 class="fw-semibold mb-0">برسم سنة </h6>
                       </th>
                   </thead>
-                  <tbody>
+                  <tbody id="table_history">
                     <tr>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">12/01/2023</p>
-                      </td>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">1</p>
-                      </td>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">إستثنائية</p>
-                      </td>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">2023</p>
+                      <td colspan="4" class="border-bottom-0">
+                        <p class="mb-0 fw-normal ">المرجو اختيار الموظف من لائحة الموظفين لمشاهدة أرشيف رخصه</p>
                       </td>
                     </tr>
                   </tbody>
@@ -125,4 +102,14 @@
     </div>
 
 </div>
+@endsection
+
+@section('script')
+$("#combo_agents").on("change", function(){
+    $text = this.value
+    $url = "{{ route('conge.filterHistory') }}"
+    $("#table_history").html("");
+    get_table_ajax_find($text,$url,"#table_history")
+
+    });
 @endsection

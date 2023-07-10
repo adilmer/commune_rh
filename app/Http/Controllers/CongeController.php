@@ -18,7 +18,7 @@ class CongeController extends Controller
      */
     public function index()
     {
-        $conges = Conge::all();
+        $conges = Conge::orderby('date_debut_conge')->get();
        return view('pages.conges.index', compact('conges'));
     }
 
@@ -42,9 +42,6 @@ class CongeController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-        if ($request->path_conge!=null){
-            $requestData['path_conge'] = $this->saveAs($request->path_conge,time(),"documents_conges");
-        }
         Conge::create(
             $requestData);
 
@@ -66,19 +63,19 @@ class CongeController extends Controller
     public function filter(Request $request)
     {
         //dd($request->text);
-        $conges = Conge::orderby('id_conge');
-
+        $conges = Conge::join('agents','agents.id_agent','conges.id_agent');
+        //dd($conges->get());
         if ($request->text != '') {
 
             $conges = $conges
                 ->where(function ($query) use ($request) {
-                    $query->where('nom_conge_ar', 'like', '%' . $request->text . '%');
+                    $query->where('nom_ar', 'like', '%' . $request->text . '%');
                 });
 
         }
        // dd($conges->getQuery());
 
-        $conges = $conges->get();
+        $conges = $conges->orderby('date_debut_conge')->get();
         //dd($conges->first());
         $data = '';
 
@@ -90,21 +87,82 @@ class CongeController extends Controller
             $data .=
             "<tr>
             <td class='border-bottom-0'>
-              <h6 class='fw-semibold mb-0'>$conges->nom_conge_ar</h6>
-            </td>
-            <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>{$conges->date_debut_stage->format('Y-m-d')}</p>
-            </td>
-            <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>{$conges->date_fin_stage->format('Y-m-d')}</p>
-            </td>
+                          <h6 class='fw-semibold mb-0'>{$conges->agent->nom_ar}</h6>
+                        </td>
+                        <td class='border-bottom-0'>
+                          <p class='mb-0 fw-normal'>{$conges->date_debut_conge->format('Y-m-d')}</p>
+                        </td>
+                        <td class='border-bottom-0'>
+                          <p class='mb-0 fw-normal'>{$conges->date_fin_conge->format('Y-m-d')}</p>
+                        </td>
+                        <td class='border-bottom-0'>
+                          <p class='mb-0 fw-normal'>$conges->nbr_jours</p>
+                        </td>
+                        <td class='border-bottom-0'>
+                          <p class='mb-0 fw-normal'>$conges->type_conge</p>
+                        </td>
+                        <td class='border-bottom-0'>
+                          <p class='mb-0 fw-normal'>$conges->annee_conge</p>
+                        </td>
             <td class='border-bottom-0'>
               <div class='d-flex align-items-center gap-2'>
                <a href='$show_route'><span class='badge bg-primary rounded-3 fw-semibold'><i class='ti ti-eye'></i></span></a>
                <a href='$edit_route'><span class='badge bg-success rounded-3 fw-semibold'><i class='ti ti-edit'></i></span></a>
-               <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذا المتدرب من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
+               <a href='$delete_route' onclick='return confirm(`هل تريد إزالة هذه الرخصة من قاعدة البيانات ؟`)' class='badge bg-danger rounded-3 fw-semibold'><i class='ti ti-trash'></i></a>
             </td>
           </tr>";
+        }
+        //dd($data);
+        return Response(['data' => $data]);
+
+    }
+
+    public function filterHistory(Request $request)
+    {
+        //dd($request->text);
+        $conges = Conge::orderby('date_debut_conge');
+        //dd($conges->get());
+        if ($request->text != '') {
+
+            $conges = $conges
+                ->where(function ($query) use ($request) {
+                    $query->where('id_agent', '=', $request->text);
+                });
+
+        }
+       // dd($conges->getQuery());
+
+        $conges = $conges->get();
+        //dd($conges->first());
+        $data = '';
+
+        foreach ($conges as $key => $conges) {
+
+            $data .=
+            "<tr>
+            <td class='border-bottom-0'>
+            <p class='mb-0 fw-normal'>{$conges->date_debut_conge->format('Y-m-d')}</p>
+          </td>
+          <td class='border-bottom-0'>
+            <p class='mb-0 fw-normal'>{$conges->nbr_jours}</p>
+          </td>
+          <td class='border-bottom-0'>
+            <p class='mb-0 fw-normal'>{$conges->type_conge}</p>
+          </td>
+          <td class='border-bottom-0'>
+            <p class='mb-0 fw-normal'>{$conges->annee_conge}</p>
+          </td></tr> ";
+        }
+
+        if ($conges->count()==0){
+            $data = "<tr><td colspan='4' class='border-bottom-0'>
+            <p class='mb-0 fw-normal '>المعني بالأمر لم يستفد من أي رخصة</p>
+          </td></tr>";
+        }
+        if ($request->text == ''){
+            $data = "<tr><td colspan='4' class='border-bottom-0'>
+            <p class='mb-0 fw-normal '>المرجو اختيار الموظف من لائحة الموظفين لمشاهدة أرشيف رخصه</p>
+          </td></tr>";
         }
         //dd($data);
         return Response(['data' => $data]);
@@ -120,7 +178,8 @@ class CongeController extends Controller
     public function edit(Request $request)
     {
         $conge = Conge::findOrFail($request->id_conge);
-       return view('pages.conges.edit', compact('conge'));
+        $conges = Conge::where('id_agent', $conge->id_agent)->orderby('date_debut_conge')->get();
+       return view('pages.conges.edit', compact('conge','conges'));
     }
 
     /**
