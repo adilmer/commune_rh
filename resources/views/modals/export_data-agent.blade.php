@@ -3,7 +3,7 @@
      aria-hidden="true">
      <div class="modal-dialog modal-lg  modal-dialog-centered"  role="document">
          <div class="modal-content">
-             <form action="{{ route('agent.export') }}" method="post" enctype="multipart/form-data" >
+             <form action="{{ route('agent.export') }}" method="get" enctype="multipart/form-data" >
                  {{ csrf_field() }}
                  <div class="modal-header bg-primary">
                      <h6 class="modal-title text-uppercase"><i class="la la-hospital-o"></i> Exporter les données </h6>
@@ -152,7 +152,7 @@
                      </div>
                      <div class="modal-footer">
                          <button type="submit" class="btn btn-success btn-round">Exporter</button>
-                         <button type="button" class="btn btn-danger btn-round" data-dismiss="modal">Fermer</button>
+                         <button type="button" class="btn btn-danger btn-round" data-bs-dismiss="modal">Fermer</button>
                      </div>
 				 </div>
              </form>
