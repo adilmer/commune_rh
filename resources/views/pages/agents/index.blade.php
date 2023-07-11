@@ -125,11 +125,7 @@
                       </td>
 
                       <td class="border-bottom-0 pos">
-<<<<<<< HEAD
-                        <p class="mb-0 fw-normal">{{$agents->date_position}}</p>
-=======
                         <p class="mb-0 fw-normal">{{\Carbon\Carbon::parse($agents->date_position)->format('Y-m-d')}}</p>
->>>>>>> fe509a2c006c4843c76f8bebd7895b1d325fd043
                       </td>
                       <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal">{{$agents->lieu_position}}</p>
