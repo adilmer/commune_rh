@@ -27,7 +27,7 @@
             </div>
             <div class="col-4 mt-3">
               <label for="situation_fam">الحالة العائلية</label>
-              <select name="situation_fam" class="custom-select custom-select-lg mb-3 form-control">
+              <select name="situation_fam" class="custom-select custom-select-lg mb-3 form-control" value="{{$agent->situation_fam}}">
                 <option value="Celibataire" {{ $agent->situation_fam == 'Célibataire' ? 'selected' : '' }}>عازب(ة)</option>
                 <option value="Marie" {{ $agent->situation_fam == 'Marié' ? 'selected' : '' }} >متزوج(ة)</option>
                 <option value="Divorce" {{ $agent->situation_fam == 'Divorcé' ? 'selected' : '' }}>مطلق(ة)</option>
@@ -183,8 +183,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-4 mt-3">
-                    <label for="aff_mutuelle">نوع الإحالة</label>
-                    <select name="aff_mutuelle" class="custom-select custom-select-lg mb-3 form-control">
+                    <label for="id_position">نوع الإحالة</label>
+                    <select name="id_position" class="custom-select custom-select-lg mb-3 form-control">
                         @foreach ($positions as $positions)
                         <option value="{{$positions->id_position}}" {{ $agent->id_position == $positions->id_position ? 'selected' : '' }}>{{$positions->nom_position_ar}}</option>
                         @endforeach

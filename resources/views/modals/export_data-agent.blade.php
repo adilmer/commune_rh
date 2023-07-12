@@ -3,156 +3,168 @@
      aria-hidden="true">
      <div class="modal-dialog modal-lg  modal-dialog-centered"  role="document">
          <div class="modal-content">
-             <form action="{{ route('agent.export') }}" method="get" enctype="multipart/form-data" >
-                 {{ csrf_field() }}
+             <form action="{{ route('agent.export') }}" method="get" >
+                @csrf
                  <div class="modal-header bg-primary">
-                     <h6 class="modal-title text-uppercase"><i class="la la-hospital-o"></i> Exporter les données </h6>
+                     <h6 class="modal-title text-uppercase text-white"><i class="la la-hospital-o"></i> تصدير البيانات بصيغة Excel </h6>
                      <button type="button" class="close btn btn-outline-light" data-bs-dismiss="modal" aria-bs-label="Close">
                          <span aria-bs-hidden="true">&times;</span>
                      </button>
                  </div>
                  <div class="modal-body">
-                     <div class="modal-body">
+                    <div class="modal-body">
                         <label class="form-chek-label m-2 btn btn-outline-light text-dark">
-                            <input class="form btn " type="checkbox" id="select_all" onclick="select_all(this)" >
-                            <span class="form-chck-sign">Tout sélectionner</span>
+                            <input class="form btn " type="checkbox" id="select_all" onclick="select_all(this)">
+                            <span class="form-chck-sign"> اختر الكل </span>
                         </label>
-                         <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.ppr as PPR">
-                                <span class="form-check-sign">PPR</span>
-                            </label>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.cin as CIN">
-                                <span class="form-check-sign">CIN</span>
-                            </label>
+                        <hr>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="mat as MAT" required>
+                            <span class="form-check-sign">MAT</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="ppr as PPR">
+                            <span class="form-check-sign">PPR</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="cin as رقم البطاقة الوطنية">
+                            <span class="form-check-sign">رقم البطاقة الوطنية</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_fr as الإسم الكامل بالفرنسية">
+                            <span class="form-check-sign">الإسم الكامل بالفرنسية</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_ar as الإسم الكامل بالعربية">
+                            <span class="form-check-sign">الإسم الكامل بالعربية</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="sexe as الجنس">
+                            <span class="form-check-sign">الجنس</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="date_naiss as تاريخ الإزدياد">
+                            <span class="form-check-sign">تاريخ الإزدياد</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="lieu_naiss as مكان الإزدياد">
+                            <span class="form-check-sign">مكان الإزدياد</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="situation_fam as الحالة العائلية">
+                            <span class="form-check-sign">الحالة العائلية</span>
+                        </label>
+                        {{-- <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="fonction_cj">
+                            <span class="form-check-sign">Fonction CJ</span>
+                        </label> --}}
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nbr_enfant as عدد الأبناء">
+                            <span class="form-check-sign">عدد الأبناء</span>
+                        </label>
+                        <hr>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="date_rec as تاريخ الترسيم">
+                            <span class="form-check-sign">تاريخ الترسيم</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_grade_ar as الدرجة">
+                            <span class="form-check-sign">الدرجة</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="date_grade as تاريخ التعيين في الدرجة">
+                            <span class="form-check-sign">تاريخ التعيين في الدرجة</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="echelle as السلم">
+                            <span class="form-check-sign">السلم</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="echellon as الرتبة">
+                            <span class="form-check-sign">الرتبة</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="date_echellon as تاريخ التعيين في الرتبة">
+                            <span class="form-check-sign">تاريخ التعيين في الرتبة</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="indice as الرقم الاستدلالي">
+                            <span class="form-check-sign">الرقم الاستدلالي</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_fonction_ar as المنصب الإداري">
+                            <span class="form-check-sign">المنصب الإداري</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_departement_ar as القسم">
+                            <span class="form-check-sign">القسم</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_service_ar as المصلحة">
+                            <span class="form-check-sign">المصلحة</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_bureau_ar as المكتب">
+                            <span class="form-check-sign">المكتب</span>
+                        </label>
+                        <hr>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="nom_position_ar as نوع الإحالة">
+                            <span class="form-check-sign">نوع الإحالة</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="date_position as تاريخ الإحالة">
+                            <span class="form-check-sign">تاريخ الإحالة</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="lieu_position as مكان الإحالة">
+                            <span class="form-check-sign">مكان الإحالة</span>
+                        </label>
+                        {{-- <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="aos">
+                            <span class="form-check-sign">AOS</span>
+                        </label> --}}
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="aff_mutuelle as نوع الإنخراط">
+                            <span class="form-check-sign">نوع الإنخراط</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="n_affilation as رقم التعاضدية ">
+                            <span class="form-check-sign">رقم التعاضدية </span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="aff_cmr as CMR رقم الإنخراط ">
+                            <span class="form-check-sign">CMR رقم الإنخراط </span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="rib as رقم الحساب البنكي ">
+                            <span class="form-check-sign">رقم الحساب البنكي </span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="agence as الوكالة البنكية">
+                            <span class="form-check-sign"> الوكالة البنكية</span>
+                        </label>
+                        <hr>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="tel as الهاتف">
+                            <span class="form-check-sign">الهاتف</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="adresse_fr as العنوان بالفرنسية">
+                            <span class="form-check-sign">العنوان بالفرنسية</span>
+                        </label>
+                        <label class="form-check-label m-2">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="adresse_ar as العنوان بالعربية">
+                            <span class="form-check-sign">العنوان بالعربية</span>
+                        </label>
 
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.sexe as Sexe">
-                                <span class="form-check-sign">Sexe</span>
-                            </label>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="provinces.nom as Province">
-                                <span class="form-check-sign">Province</span>
-                            </label>
-                            <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.nom_fr as Nom Fr">
-                                <span class="form-check-sign">Nom (Francais)</span>
-                            </label>
 
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.nom_ar as Nom Ar">
-                                <span class="form-check-sign">Nom (َArabic)</span>
-                            </label>
+                    </div>
 
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.prenom_fr as Prenom Fr">
-                                <span class="form-check-sign">Prenom (Francais)</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.prenom_ar as Prenom Ar">
-                                <span class="form-check-sign">Prenom (َArabic)</span>
-                            </label>
-
-                            <hr>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="specialites.nom as Specialite Fr">
-                                <span class="form-check-sign">Specialite (Francais)</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="specialites.nom_ar as Specialite Ar">
-                                <span class="form-check-sign">Specialite (َArabic)</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="grades.nom as Grades Fr">
-                                <span class="form-check-sign">Grades (Francais)</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="grades.nom_ar as Grades Ar">
-                                <span class="form-check-sign">Grades (َArabic)</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="corps.nom as Corps">
-                                <span class="form-check-sign">Corps</span>
-                            </label>
-                            <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.date_entree as Date de recrutement">
-                                <span class="form-check-sign">Date de recrutement</span>
-                            </label>
-                            <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="p1.nom as Formation Sanitaire Affectation Fr">
-                                <span class="form-check-sign">Formation Sanitaire Affectation (Francais)</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="p1.nom_ar as Formation Sanitaire Affectation Ar">
-                                <span class="form-check-sign">Formation Sanitaire Affectation (َArabic)</span>
-                            </label>
-                            <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="p2.nom as Formation Sanitaire Actuel Fr">
-                                <span class="form-check-sign">Formation Sanitaire Actuel (Francais)</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="p2.nom_ar as Formation Sanitaire Actuel Ar">
-                                <span class="form-check-sign">Formation Sanitaire Actuel (َArabic)</span>
-                            </label>
-
-
-                            <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.situation_fam as Situation familiale">
-                                <span class="form-check-sign">Situation Familiale</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.nbr_enfant as Nombre des enfants">
-                                <span class="form-check-sign">Nombre des enfants</span>
-                            </label>
-                            <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.tel_one as Telephone 1 ">
-                                <span class="form-check-sign">Telephone 1</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.tel_two as Telephone 2 ">
-                                <span class="form-check-sign">Telephone 2</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.email as Email ">
-                                <span class="form-check-sign">Email</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.adresse as Adresse ">
-                                <span class="form-check-sign">Adresse</span>
-                            </label>
-                            <hr>
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="pos.nom as Position ">
-                                <span class="form-check-sign">Position</span>
-                            </label>
-
-                            <label class="form-check-label m-2">
-                                <input class="form-check-input" type="checkbox" name="names[]" value="agents.description as Description ">
-                                <span class="form-check-sign">Description</span>
-                            </label>
                      </div>
                      <div class="modal-footer">
-                         <button type="submit" class="btn btn-success btn-round">Exporter</button>
-                         <button type="button" class="btn btn-danger btn-round" data-bs-dismiss="modal">Fermer</button>
+                         <button type="submit" class="btn btn-success btn-round">تحميل </button>
+                         <button type="button" class="btn btn-danger btn-round" data-bs-dismiss="modal">اغلاق</button>
                      </div>
 				 </div>
              </form>

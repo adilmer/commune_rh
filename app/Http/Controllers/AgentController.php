@@ -37,8 +37,25 @@ class AgentController extends Controller
         return view('pages.agents.index',compact('agents','positions'));
     }
 
-    public function export()
+    public function export(Request $request)
 {
+   // dd($request->names);
+$names = $request->names;
+$names1 = [];
+$names2 = [];
+
+foreach ($names as $value) {
+    $splitValues = explode(' as ', $value);
+
+    $names1[] =
+        trim($splitValues[0]);
+   // dd($names1);
+    $names2[] =
+        trim($splitValues[1]);
+}
+   session()->put('column_agents', $names1);
+   session()->put('header_agents', $names2);
+
    return Excel::download(new AgentsExport, 'agents.xlsx');
 }
 
@@ -69,6 +86,7 @@ class AgentController extends Controller
             $nom_position_ar = $agents->position->nom_position_ar;
             $nom_grade_ar = $agents->grade->nom_grade_ar;
             $photo_url=asset('photos_agents/'.$agents->photo);
+            $date_position = \Carbon\Carbon::parse($agents->date_position)->format('Y-m-d');
             $data .=
             "<tr>
             <td class='border-bottom-0'>
@@ -107,7 +125,7 @@ class AgentController extends Controller
               <p class='mb-0 fw-normal'>$nom_position_ar</p>
             </td>
             <td class='border-bottom-0'>
-              <p class='mb-0 fw-normal'>$agents->date_position</p>
+              <p class='mb-0 fw-normal'>$date_position</p>
             </td>
             <td class='border-bottom-0'>
               <p class='mb-0 fw-normal'>$agents->lieu_position</p>
@@ -150,6 +168,7 @@ class AgentController extends Controller
             $nom_position_ar = $agents->position->nom_position_ar;
             $nom_grade_ar = $agents->grade->nom_grade_ar;
             $photo_url=asset('photos_agents/'.$agents->photo);
+            $date_position = \Carbon\Carbon::parse($agents->date_position)->format('Y-m-d');
             $data .=
             "<tr>
             <td class='border-bottom-0'>
@@ -189,7 +208,7 @@ class AgentController extends Controller
 
 
             $data .= "<td class='border-bottom-0 pos'>
-              <p class='mb-0 fw-normal'>$agents->date_position</p>
+              <p class='mb-0 fw-normal'>$date_position</p>
             </td>
             <td class='border-bottom-0 pos'>
               <p class='mb-0 fw-normal'>$agents->lieu_position</p>

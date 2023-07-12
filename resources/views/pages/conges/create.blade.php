@@ -112,4 +112,45 @@ $("#combo_agents").on("change", function(){
     get_table_ajax_find($text,$url,"#table_history")
 
     });
+
+
+var nbrJoursInput = document.getElementById('nbr_jours');
+var dateDebutInput = document.getElementById('date_debut_conge');
+var dateFinInput = document.getElementById('date_fin_conge');
+var datePriseInput = document.getElementById('date_prise');
+
+nbrJoursInput.addEventListener('input', calculateDateFin);
+dateDebutInput.addEventListener('input', calculateDateFin);
+
+function calculateDateFin() {
+    var nbrJours = parseInt(nbrJoursInput.value);
+    var dateDebut = new Date(dateDebutInput.value);
+
+    if (nbrJours && dateDebut) {
+      var countDays = 1;
+      var countDays_prise = 0;
+      var dateIterator = new Date(dateDebut);
+      var dateIterator_prise = new Date(dateDebut);
+
+      while (countDays < nbrJours) {
+        dateIterator.setDate(dateIterator.getDate() + 1);
+        if (dateIterator.getDay() !== 0 && dateIterator.getDay() !== 6) {
+          countDays++;
+        }
+      }
+      while (countDays_prise < nbrJours) {
+        dateIterator_prise.setDate(dateIterator_prise.getDate() + 1);
+        if (dateIterator_prise.getDay() !== 0 && dateIterator_prise.getDay() !== 6) {
+          countDays_prise++;
+        }
+      }
+
+
+      var formattedDate = dateIterator.toISOString().split('T')[0];
+      var formattedDate_prise = dateIterator_prise.toISOString().split('T')[0];
+
+      dateFinInput.value = formattedDate;
+      datePriseInput.value = formattedDate_prise;
+    }
+  }
 @endsection

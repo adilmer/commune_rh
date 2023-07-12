@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Agent;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -14,7 +15,16 @@ class AgentsExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        return Agent::all();
+        $agents = DB::table('agents')
+        ->join('grades', 'grades.id_grade', '=', 'agents.id_grade')
+        ->join('fonctions', 'fonctions.id_fonction', '=', 'agents.id_fonction')
+        ->join('positions', 'positions.id_position', '=', 'agents.id_position')
+        ->join('bureaus', 'bureaus.id_bureau', '=', 'agents.id_bureau')
+        ->join('services', 'bureaus.id_service', '=', 'services.id_service')
+        ->join('departements', 'departements.id_departement', '=', 'services.id_departement')
+        ->select(session()->get('column_agents'))->get();
+       // dd($agents);
+        return $agents;
     }
 
     /* public function map($data): array
@@ -59,7 +69,8 @@ class AgentsExport implements FromCollection,WithHeadings
 
     public function headings(): array
     {
-        return [
+        return session()->get('header_agents');
+        /* return [
         'mat',
 		'ppr',
 		'cin',
@@ -94,6 +105,6 @@ class AgentsExport implements FromCollection,WithHeadings
 		'adresse_fr',
 		'adresse_ar',
 		'photo'
-        ];
+        ]; */
     }
 }
