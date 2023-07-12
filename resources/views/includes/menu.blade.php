@@ -4,7 +4,7 @@
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="./index.html" aria-expanded="false">
+          <a class="sidebar-link" href="{{route('home.index')}}" aria-expanded="false">
             <span>
               <i class="ti ti-layout-dashboard"></i>
             </span>
@@ -15,7 +15,7 @@
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="#" data-bs-toggle="dropdown" >
+          <a class="sidebar-link" href="{{route('agent.index')}}"   >
             <span>
               <i class="ti ti-users"></i>
             </span>
