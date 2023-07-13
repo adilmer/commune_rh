@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
+
+    #Home
+    Route::get('/','HomeController@index')->name('home.index');
+
     #Agents
 Route::prefix('agents')->group(function () {
     Route::get('/','AgentController@index')->name('agent.index');
@@ -31,6 +35,8 @@ Route::prefix('agents')->group(function () {
     Route::post("/uploadDocuments","AgentController@uploadDocuments")->name("agent.uploadDocuments");
     Route::get("/delete/{id_agent}","AgentController@destroy")->name("agent.delete");
 });
+
+    #Archives
 Route::prefix('archives')->group(function () {
     Route::get('/','ArchiveController@index')->name('archive.index');
     Route::get("/filter/{name?}","ArchiveController@filter")->name("archive.filter");
@@ -42,6 +48,7 @@ Route::prefix('archives')->group(function () {
     Route::get("/delete/{id_archive?}","ArchiveController@destroy")->name("archive.delete");
 });
 
+    #Formations
 Route::prefix('formations')->group(function () {
     Route::get('/','FormationController@index')->name('formation.index');
     Route::get('/create','FormationController@create')->name('formation.create');
@@ -53,6 +60,7 @@ Route::prefix('formations')->group(function () {
     Route::get("/delete/{id_formation}","FormationController@destroy")->name("formation.delete");
 });
 
+    #Stagiaires
 Route::prefix('stagiaires')->group(function () {
     Route::get('/','StagiaireController@index')->name('stagiaire.index');
     Route::get('/create','StagiaireController@create')->name('stagiaire.create');
@@ -65,6 +73,7 @@ Route::prefix('stagiaires')->group(function () {
     Route::get("/delete/{id_stagiaire}","StagiaireController@destroy")->name("stagiaire.delete");
 });
 
+    #Conges
 Route::prefix('conges')->group(function () {
     Route::get('/','CongeController@index')->name('conge.index');
     Route::get('/create','CongeController@create')->name('conge.create');
@@ -78,15 +87,16 @@ Route::prefix('conges')->group(function () {
     Route::get("/delete/{id_conge}","CongeController@destroy")->name("conge.delete");
 });
 
-
+    #Services
 Route::prefix('services')->group(function () {
     Route::get('/filter_departement','ServiceController@filter_departement')->name('service.filter_departement');
     Route::get('/filter_service','ServiceController@filter_service')->name('service.filter_service');
 });
-
-Route::prefix('')->group(function () {
-    Route::get('/','HomeController@index')->name('home.index');
+    #Exports
+Route::prefix('exports')->group(function () {
+    Route::get('/test','ExportController@test')->name('export.test');
 });
+
 
 
 
