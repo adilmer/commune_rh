@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
         
        $departements = [
             [
-                'nom_departement_fr' => 'dep1',
+                'nom_departement_fr' => 'Département des affaires administratives, financières et juridiques',
                 'nom_departement_ar' => 'قسم الشؤون الإدارية والمالية والقانونية',
             ],
             [
-                'nom_departement_fr' => 'dep2',
+                'nom_departement_fr' => 'Département de la construction, de l environnement, des travaux et de la propriété',
                 'nom_departement_ar' => 'قسم التعمير والبيئة والأشغال والممتلكات',
             ],
         ];
@@ -32,32 +32,32 @@ class DatabaseSeeder extends Seeder
         }
         $services = [
             [
-                'nom_service_fr' => 'serv1',
+                'nom_service_fr' => 'service des affaires financières',
                 'nom_service_ar' => 'مصلحة الشؤون المالية',
                 'id_departement' => 1,
             ],
             [
-                'nom_service_fr' => 'serv2',
+                'nom_service_fr' => 'service des affaires juridiques',
                 'nom_service_ar' => 'مصلحة الشؤون القانونية',
                 'id_departement' => 1,
             ],
             [
-                'nom_service_fr' => 'serv3',
+                'nom_service_fr' => 'service des affaires administratives',
                 'nom_service_ar' => 'مصلحة الشؤون الإدارية',
                 'id_departement' => 1,
             ],
             [
-                'nom_service_fr' => 'serv4',
+                'nom_service_fr' => 'Direction des Travaux, de l Entretien et du Patrimoine',
                 'nom_service_ar' => 'مصلحة الأشغال والصيانة والممتلكات',
                 'id_departement' => 2,
             ],
             [
-                'nom_service_fr' => 'serv5',
+                'nom_service_fr' => 'service de la planification et de la gestion sur le terrain et des affaires environnementales et sanitaires',
                 'nom_service_ar' => 'مصلحة التخطيط وتدبير المجال وشؤون البيئة والصحة',
                 'id_departement' => 2,
             ],
             [
-                'nom_service_fr' => 'serv6',
+                'nom_service_fr' => 'service des Etudes Techniques et du Suivi',
                 'nom_service_ar' => 'مصلحة الدراسات التقنية والمراقبة',
                 'id_departement' => 2,
             ],
