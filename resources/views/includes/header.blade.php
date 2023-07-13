@@ -1,7 +1,7 @@
 <header class="app-header">
 <nav class="navbar navbar-light bg-light">
       <div class="container">
-        <a href="./index.html" class="text-nowrap logo-img">
+        <a href="{{route('home.index')}}" class="text-nowrap logo-img">
           <img src="{{asset('assets/images/logos/dark-logo.svg')}}" width="180px" alt="" />
         </a>
         <form class="d-flex">

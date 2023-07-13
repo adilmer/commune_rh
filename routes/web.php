@@ -84,10 +84,9 @@ Route::prefix('services')->group(function () {
     Route::get('/filter_service','ServiceController@filter_service')->name('service.filter_service');
 });
 
-
-
-
-
+Route::prefix('')->group(function () {
+    Route::get('/','HomeController@index')->name('home.index');
+});
 
 
 
