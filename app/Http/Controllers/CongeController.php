@@ -30,7 +30,8 @@ class CongeController extends Controller
     public function create()
     {
         $agents = Agent::all();
-        return view('pages.conges.create',compact('agents'));
+        $agents2 = Agent::all();
+        return view('pages.conges.create',compact('agents','agents2'));
     }
 
     /**
@@ -179,7 +180,8 @@ class CongeController extends Controller
     {
         $conge = Conge::findOrFail($request->id_conge);
         $conges = Conge::where('id_agent', $conge->id_agent)->orderby('date_debut_conge')->get();
-       return view('pages.conges.edit', compact('conge','conges'));
+        $agents2 = Agent::all();
+       return view('pages.conges.edit', compact('conge','conges','agents2'));
     }
 
     /**

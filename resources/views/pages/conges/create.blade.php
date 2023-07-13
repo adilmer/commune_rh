@@ -13,16 +13,18 @@
             <div class="row">
               <div class="col-12 mt-4">
                 <label for="combo_agent" >الإسم الكامل   </label>
-                <select class="form-select" name="id_agent" id="combo_agents">
-                    <option value="" selected>اختيار الموظف ...</option>
-                    @foreach ($agents as $agents)
-                    <option value="{{$agents->id_agent}}">{{$agents->nom_ar}}</option>
-                    @endforeach
-                  </select>
+<input class="form-control" list="agents_list" id="list_agents"  placeholder="بحث...">
+<input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
+<datalist id="agents_list">
+    @foreach ($agents as $agents)
+    <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_ar}}" >
+    @endforeach
+</datalist>
+
               </div>
               <div class="col-6 mt-4">
                 <label for="type_conge" >نوع الرخصة</label>
-                <select class="form-select" name="type_conge" id="combo_agent" aria-label="Default select example">
+                <select class="form-select" name="type_conge" id="type_conge" aria-label="Default select example">
                   <option value="سنوية" selected>سنوية</option>
                   <option value="إستثنائية">إستثنائية</option>
                   <option value="الولادة">الولادة</option>
@@ -31,7 +33,7 @@
               </div>
               <div class="col-6 mt-4">
                 <label for="annee_conge" >برسم سنة </label>
-                <input type="number" class="form-control" id="annee_conge" name="annee_conge" placeholder="" value="2023">
+                <input type="number" class="form-control" id="annee_conge" name="annee_conge" placeholder="" value="{{date('Y')}}">
               </div>
               <div class="col-6 mt-4">
                 <label for="nbr_jours" >عدد الأيام</label>
@@ -51,7 +53,13 @@
               </div>
               <div class="col-6 mt-4">
                 <label for="remplacant" >  ينوب عنه </label>
-                <input type="text" class="form-control" id="remplacant" name="remplacant" placeholder="">
+                <input class="form-control" list="remplacants_list" id="list_remplacants"  placeholder="بحث...">
+                <input type="hidden" class="form-control" id="remplacant" name="remplacant" placeholder="" value="">
+                <datalist id="remplacants_list">
+                    @foreach ($agents2 as $agents2)
+                    <option value="{{$agents2->nom_ar}}" >
+                    @endforeach
+                </datalist>
               </div>
               <div class="col-6 mt-4">
                 <label for="adresse_conge" >العنوان خلال الإجازة   </label>
@@ -105,27 +113,68 @@
 @endsection
 
 @section('script')
-$("#combo_agents").on("change", function(){
-    $text = this.value
+function filterHistory(id_agent) {
+    $text = id_agent
     $url = "{{ route('conge.filterHistory') }}"
     $("#table_history").html("");
     get_table_ajax_find($text,$url,"#table_history")
+    };
 
-    });
+    list_agents.addEventListener('change', getIdAgent);
+    function getIdAgent() {
+        var input = document.getElementById("list_agents");
+        var selectedOption = document.querySelector("#agents_list option[value='" + input.value + "']");
+
+        if (selectedOption) {
+          var id_agent = selectedOption.getAttribute("data-id");
+          $("#id_agent").val(id_agent);
+          filterHistory(id_agent)
+        }
+      }
+      list_remplacants.addEventListener('change', getRemplacant);
+    function getRemplacant() {
+        var input = document.getElementById("list_remplacants");
+        var selectedOption = document.querySelector("#remplacants_list option[value='" + input.value + "']");
+
+        if (selectedOption) {
+          var remplacant = selectedOption.getAttribute("value");
+          $("#remplacant").val(remplacant);
+        }
+      }
 
 
 var nbrJoursInput = document.getElementById('nbr_jours');
 var dateDebutInput = document.getElementById('date_debut_conge');
 var dateFinInput = document.getElementById('date_fin_conge');
 var datePriseInput = document.getElementById('date_prise');
+var typeCongeInput = document.getElementById('type_conge');
+
 
 nbrJoursInput.addEventListener('input', calculateDateFin);
 dateDebutInput.addEventListener('input', calculateDateFin);
+typeCongeInput.addEventListener('change', calculateDateFin);
+typeCongeInput.addEventListener('change', initialiseNbrJours);
+
+function initialiseNbrJours() {
+    if($('#type_conge').val()=='الولادة'){
+        document.getElementById('nbr_jours').value = 98;
+    }
+    if($('#type_conge').val()=='الأبوة'){
+        document.getElementById('nbr_jours').value = 15;
+    }
+    if($('#type_conge').val()=='سنوية'){
+        document.getElementById('nbr_jours').value = 22;
+    }
+    if($('#type_conge').val()=='إستثنائية'){
+        document.getElementById('nbr_jours').value = 5;
+    }
+}
 
 function calculateDateFin() {
+
     var nbrJours = parseInt(nbrJoursInput.value);
     var dateDebut = new Date(dateDebutInput.value);
-
+    if($('#type_conge').val()=='سنوية' || $('#type_conge').val()=='إستثنائية'){
     if (nbrJours && dateDebut) {
       var countDays = 1;
       var countDays_prise = 0;
@@ -152,5 +201,23 @@ function calculateDateFin() {
       dateFinInput.value = formattedDate;
       datePriseInput.value = formattedDate_prise;
     }
+  }else{
+    if (nbrJours && dateDebut) {
+        var dateFin = new Date(dateDebut);
+        var datePrise = new Date(dateDebut);
+        dateFin.setDate(dateFin.getDate() + nbrJours -1);
+        datePrise.setDate(datePrise.getDate() + nbrJours);
+
+        var formattedDate = dateFin.toISOString().split('T')[0];
+        var formattedDate_prise = datePrise.toISOString().split('T')[0];
+
+
+        dateFinInput.value = formattedDate;
+        datePriseInput.value = formattedDate_prise;
+    }
+
+
+
   }
+}
 @endsection
