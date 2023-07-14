@@ -15,18 +15,17 @@
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{route('agent.index')}}"   >
-            <span>
-              <i class="ti ti-users"></i>
-            </span>
-            <span class="hide-menu">الموظفين</span>
-          </a>
-          <ul class="dropdown-menu text-end">
+            <a class="sidebar-link" href="#" data-bs-toggle="dropdown" >
+              <span>
+                <i class="ti ti-users"></i>
+              </span>
+              <span class="hide-menu">الموظفين</span>
+            </a>
+            <ul class="dropdown-menu text-end">
             <li> <a class="dropdown-item" href="{{route('agent.index')}}"> لائحة الموظفين </a></li>
+            <li> <a class="dropdown-item" href="{{route('absence.index')}}"> الحضور</a> </li>
             <li> <a class="dropdown-item" href="#"> الترقية</a> </li>
-            <li> <a class="dropdown-item" href="#"> الحضور</a> </li>
             <li> <a class="dropdown-item" href="#"> الكفاءة المهنية</a> </li>
-            <li> <a class="dropdown-item" href="{{route('agent.export')}}"> تحميل excel</a> </li>
           </ul>
         </li>
         <li class="sidebar-item">

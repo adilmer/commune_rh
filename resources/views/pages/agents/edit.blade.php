@@ -204,10 +204,10 @@
             </div>
     </div>
     <div class="btnsimple text-start m-4 ">
-      <button class="btn btn-primary">حفظ المعلومــات</button>
+      <button type="submit" class="btn btn-primary">حفظ المعلومــات</button>
     </div>
   </div>
-
+</form>
 
 </div>
 @endsection

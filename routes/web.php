@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
-
+   /*  Route::get('/abs', function () {
+        return view('pages.absences.index');
+    }); */
     #Home
     Route::get('/','HomeController@index')->name('home.index');
 
@@ -92,6 +94,13 @@ Route::prefix('services')->group(function () {
     Route::get('/filter_departement','ServiceController@filter_departement')->name('service.filter_departement');
     Route::get('/filter_service','ServiceController@filter_service')->name('service.filter_service');
 });
+
+#Absences
+Route::prefix('absences')->group(function () {
+    Route::get('/','AbsenceController@index')->name('absence.index');
+    Route::get('/filter','AbsenceController@filter')->name('absence.filter');
+});
+
     #Exports
 Route::prefix('exports')->group(function () {
     Route::get('/test','ExportController@test')->name('export.test');
