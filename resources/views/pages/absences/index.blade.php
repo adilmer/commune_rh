@@ -12,7 +12,7 @@
         </select>
       </div>
       <div class="col-sm-3 ">
-        <button class="btn btn-primary"><i class="ti ti-printer"></i> طباعة</button>
+        <a href="{{route('absence.generate')}}" class="btn btn-primary"><i class="ti ti-printer"></i> طباعة</a>
         <button class="btn btn-primary"><i class="ti ti-printer"></i> طباعة الكل</button>
       </div>
         <div class="row">

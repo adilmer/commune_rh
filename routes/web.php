@@ -99,6 +99,7 @@ Route::prefix('services')->group(function () {
 Route::prefix('absences')->group(function () {
     Route::get('/','AbsenceController@index')->name('absence.index');
     Route::get('/filter','AbsenceController@filter')->name('absence.filter');
+    Route::get('/pdf', 'AbsenceController@generatePdf')->name('absence.generate');
 });
 
     #Exports

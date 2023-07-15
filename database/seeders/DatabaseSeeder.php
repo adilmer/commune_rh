@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        
+
        $departements = [
             [
                 'nom_departement_fr' => 'Département des affaires administratives, financières et juridiques',
@@ -65,17 +65,27 @@ class DatabaseSeeder extends Seeder
 
         foreach ($services as $services) {
             DB::table('services')->insert($services);
-        } 
+        }
         $bureaus = [
             [
                 'nom_bureau_fr' => 'bureau1',
-                'nom_bureau_ar' => '',
+                'nom_bureau_ar' => 'المكتب 1',
                 'id_service' => 1,
             ],
             [
                 'nom_bureau_fr' => 'bureau2',
-                'nom_bureau_ar' => '',
+                'nom_bureau_ar' => 'المكتب 2',
                 'id_service' => 1,
+            ],
+            [
+                'nom_bureau_fr' => 'bureau1',
+                'nom_bureau_ar' => 'المكتب 3',
+                'id_service' => 2,
+            ],
+            [
+                'nom_bureau_fr' => 'bureau2',
+                'nom_bureau_ar' => 'المكتب 4',
+                'id_service' => 2,
             ],
         ];
 
@@ -85,33 +95,50 @@ class DatabaseSeeder extends Seeder
         $positions = [
             [
                 'nom_position_fr' => 'Sans',
-                'nom_position_ar' => 'لا شيئ', 
+                'nom_position_ar' => 'لا شيئ',
             ],
             [
                 'nom_position_fr' => 'Détachement',
-                'nom_position_ar' => 'الإلحاق', 
+                'nom_position_ar' => 'الإلحاق',
             ], [
                 'nom_position_fr' => 'Mise à la disposition',
-                'nom_position_ar' => 'رهن الإشارة', 
+                'nom_position_ar' => 'رهن الإشارة',
             ], [
                 'nom_position_fr' => 'Intégration',
-                'nom_position_ar' => 'الإدماج', 
+                'nom_position_ar' => 'الإدماج',
             ], [
                 'nom_position_fr' => 'retraites',
-                'nom_position_ar' => 'المتقاعدين', 
+                'nom_position_ar' => 'المتقاعدين',
             ],
         ];
-
         foreach ($positions as $positions) {
             DB::table('positions')->insert($positions);
         }
-        $categories = [
+
+        $fonctions = [
             [
-                'nom_categorie_ar' => 'الواردات', 
+                'nom_fonction_fr' => 'Sans',
+                'nom_fonction_ar' => 'لا شيئ',
             ],
             [
-                'nom_categorie_ar' => 'الصادرات', 
-            ], 
+                'nom_fonction_fr' => 'Chef de departement',
+                'nom_fonction_ar' => 'رئيس قسم',
+            ], [
+                'nom_fonction_fr' => 'Chef de service',
+                'nom_fonction_ar' => 'رئيس مصلحة',
+            ],
+        ];
+        foreach ($fonctions as $fonctions) {
+            DB::table('fonctions')->insert($fonctions);
+        }
+
+        $categories = [
+            [
+                'nom_categorie_ar' => 'الواردات',
+            ],
+            [
+                'nom_categorie_ar' => 'الصادرات',
+            ],
         ];
 
         foreach ($categories as $categories) {
@@ -215,7 +242,7 @@ class DatabaseSeeder extends Seeder
         foreach ($grades as $grades) {
             DB::table('grades')->insert($grades);
         }
- 
+
 
     }
 }

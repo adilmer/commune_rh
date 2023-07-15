@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Bureau;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -23,11 +26,37 @@ class AbsenceController extends Controller
          return view('pages.absences.index',compact('agents','bureaus'));
      }
 
+     public function generatePdf()
+     {
+
+        $bureaus = Bureau::with('agents')->get();
+
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+    $options->set('isRemoteEnabled', true);
+    $options->set('defaultFont', public_path('fonts/Droid-Naskh-Regular.ttf'));
+
+    $dompdf = new Dompdf($options);
+
+    $pdfContent = view('pdf.document', compact('bureaus'))->render();
+
+    $dompdf->loadHtml($pdfContent);
+    $dompdf->render();
+
+    $output = $dompdf->output();
+
+    $filePath = public_path('agents.pdf');
+    file_put_contents($filePath, $output);
+
+    return response()->download($filePath, 'agents.pdf');
+
+       // return $pdf->download('agents.pdf');
+     }
 
     public function filter(Request $request)
     {
         //dd($request->text);
-        $agents = Agent::where('id_position','<>',1);
+        $agents = Agent::where('id_position','=',1);
 
         if ($request->text != '') {
 
