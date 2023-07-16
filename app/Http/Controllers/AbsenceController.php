@@ -30,80 +30,31 @@ class AbsenceController extends Controller
 
 
 
-     public function generatePdf()
+     public function generatePdf(Request $request)
      {
+        if ($request->bureau!=0){
 
-        // Fetch the bureaus with agents
-    $bureaus = Bureau::with('agents')->get();
+            $bureaus = Bureau::with('agents')->where('id_bureau',$request->bureau)->get();
+            $nom_file = $bureaus->first()->nom_bureau_ar.'';
+        }
+        else{
+            $bureaus = Bureau::with('agents')->get();
+            $nom_file = 'جميع المكاتب';
+        }
 
-    // Create a new PHPWord instance
-  //  $phpWord = new PhpWord();
 
-    // Load the view and convert it to HTML
-   return view('pdf.document', compact('bureaus'));
 
-   /*  // Add the HTML content to the PHPWord object
-    $section = $phpWord->addSection();
-    \PhpOffice\PhpWord\Shared\Html::addHtml($section, $html, true,true, true);
+   return view('pdf.document', compact('bureaus','nom_file'));
 
-    // Save the Word document
-    $filename = 'document.docx';
-    $phpWord->save($filename, 'Word2007');
-
-    return response()->download($filename)->deleteFileAfterSend(true); */
-
-       // return $pdf->download('agents.pdf');
      }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*  public function generatePdf()
-     {
-
-        $bureaus = Bureau::with('agents')->get();
-
-    $options = new Options();
-    $options->set('isHtml5ParserEnabled', true);
-    $options->set('isRemoteEnabled', true);
-    $options->set('defaultFont', public_path('fonts/Droid-Naskh-Regular.ttf'));
-
-    $dompdf = new Dompdf($options);
-
-    $pdfContent = view('pdf.document', compact('bureaus'))->render();
-
-    $dompdf->loadHtml($pdfContent);
-    $dompdf->render();
-
-    $output = $dompdf->output();
-
-    $filePath = public_path('agents.pdf');
-    file_put_contents($filePath, $output);
-
-    return response()->download($filePath, 'agents.pdf');
-
-       // return $pdf->download('agents.pdf');
-     } */
     public function filter(Request $request)
     {
         //dd($request->text);
         $agents = Agent::where('id_position','=',1);
 
-        if ($request->text != '') {
+        if ($request->text != '0') {
 
             $agents = $agents
                 ->where('id_bureau',$request->text);

@@ -5,15 +5,14 @@
       <div class="col-sm-3 pl-0 mb-2">
         <select name="id_bureau" id="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
 
-            <option value="" selected>اختر ...</option>
+            <option value="0" selected>اختر ...</option>
             @foreach ($bureaus as $bureaus)
             <option value="{{$bureaus->id_bureau}}">{{$bureaus->nom_bureau_ar}}</option>
             @endforeach
         </select>
       </div>
       <div class="col-sm-3 ">
-        <a href="{{route('absence.generate')}}" class="btn btn-primary"><i class="ti ti-printer"></i> طباعة</a>
-        <button class="btn btn-primary"><i class="ti ti-printer"></i> طباعة الكل</button>
+        <a id="print_list" target="_blank" href="{{route('absence.generate')}}" class="btn btn-primary"><i class="ti ti-printer"></i> طباعة الكل</a>
       </div>
         <div class="row">
 
@@ -98,9 +97,18 @@
 @section('script')
 $("#id_bureau").on("change", function(){
     $id = this.value
+    if($id==0)
+        $("#print_list").html('<i class="ti ti-printer"></i> طباعة الكل');
+    else
+        $("#print_list").html('<i class="ti ti-printer"></i> طباعة ');
+
     $url = "{{ route('absence.filter') }}"
+    $url2 = "{{route('absence.generate')}}?bureau="+$id;
     $("#table_agents").html("");
+    $("#print_list").attr('href',$url2);
     get_table_ajax_find($id,$url,"#table_agents")
 
+
     });
+
 @endsection
