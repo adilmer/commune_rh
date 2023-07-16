@@ -9,6 +9,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use PhpOffice\PhpWord\PhpWord;
 
 class AbsenceController extends Controller
 {
@@ -26,7 +27,52 @@ class AbsenceController extends Controller
          return view('pages.absences.index',compact('agents','bureaus'));
      }
 
+
+
+
      public function generatePdf()
+     {
+
+        // Fetch the bureaus with agents
+    $bureaus = Bureau::with('agents')->get();
+
+    // Create a new PHPWord instance
+  //  $phpWord = new PhpWord();
+
+    // Load the view and convert it to HTML
+   return view('pdf.document', compact('bureaus'));
+
+   /*  // Add the HTML content to the PHPWord object
+    $section = $phpWord->addSection();
+    \PhpOffice\PhpWord\Shared\Html::addHtml($section, $html, true,true, true);
+
+    // Save the Word document
+    $filename = 'document.docx';
+    $phpWord->save($filename, 'Word2007');
+
+    return response()->download($filename)->deleteFileAfterSend(true); */
+
+       // return $pdf->download('agents.pdf');
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*  public function generatePdf()
      {
 
         $bureaus = Bureau::with('agents')->get();
@@ -51,8 +97,7 @@ class AbsenceController extends Controller
     return response()->download($filePath, 'agents.pdf');
 
        // return $pdf->download('agents.pdf');
-     }
-
+     } */
     public function filter(Request $request)
     {
         //dd($request->text);

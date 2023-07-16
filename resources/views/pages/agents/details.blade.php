@@ -54,7 +54,7 @@
                                     <span class="  mb-1"> عدد الأبناء: {{ $agent->nbr_enfant }} </span>
                                 </div>
                                 <div class="d">
-                                    <span class="  mb-1"> الجنس: {{ $agent->sexe }}</span>
+                                    <span class="  mb-1"> الجنس: {{ $agent->sexe=='Masculin' ? 'ذكر' : 'أنثى' }}</span>
                                 </div>
                                 <div class="d">
                                     <span class="  mb-1"> مكان الإزدياد: {{ $agent->lieu_naiss }}</span>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="infoagent text-center mt-5">
                             <table class="table       text-nowrap mb-0 align-middle">
                                 <thead class="text-dark fs-4 table-light">

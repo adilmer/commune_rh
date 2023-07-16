@@ -27,9 +27,9 @@
             <div class="col-4 mt-3">
               <label for="situation_fam">الحالة العائلية</label>
               <select name="situation_fam" class="custom-select custom-select-lg mb-3 form-control">
-                <option value="Celibataire" selected>عازب(ة)</option>
-                <option value="Marie" >متزوج(ة)</option>
-                <option value="Divorce">مطلق(ة)</option>
+                <option value="Célibataire" selected>عازب(ة)</option>
+                <option value="Marié" >متزوج(ة)</option>
+                <option value="Divorcé">مطلق(ة)</option>
                 <option value="Veuf">أرمل(ة)</option>
               </select>
             </div>

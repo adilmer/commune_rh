@@ -28,9 +28,9 @@
             <div class="col-4 mt-3">
               <label for="situation_fam">الحالة العائلية</label>
               <select name="situation_fam" class="custom-select custom-select-lg mb-3 form-control" value="{{$agent->situation_fam}}">
-                <option value="Celibataire" {{ $agent->situation_fam == 'Célibataire' ? 'selected' : '' }}>عازب(ة)</option>
-                <option value="Marie" {{ $agent->situation_fam == 'Marié' ? 'selected' : '' }} >متزوج(ة)</option>
-                <option value="Divorce" {{ $agent->situation_fam == 'Divorcé' ? 'selected' : '' }}>مطلق(ة)</option>
+                <option value="Célibataire" {{ $agent->situation_fam == 'Célibataire' ? 'selected' : '' }}>عازب(ة)</option>
+                <option value="Marié" {{ $agent->situation_fam == 'Marié' ? 'selected' : '' }} >متزوج(ة)</option>
+                <option value="Divorcé" {{ $agent->situation_fam == 'Divorcé' ? 'selected' : '' }}>مطلق(ة)</option>
                 <option value="Veuf" {{ $agent->situation_fam == 'Veuf' ? 'selected' : '' }}>أرمل(ة)</option>
               </select>
             </div>
