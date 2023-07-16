@@ -31,7 +31,7 @@
                           <h6 class="fw-semibold mb-0">PPR</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">الإسم الكامل</h6>
+                          <h6 class="fw-semibold mb-0"> الإسم الكامل </h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">الدرجة</h6>
