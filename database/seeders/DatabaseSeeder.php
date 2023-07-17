@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
         
        $departements = [
             [
-                'nom_departement_fr' => 'Département des affaires administratives, financières et juridiques',
+                'nom_departement_fr' => 'Division des affaires administratives, financières et juridiques',
                 'nom_departement_ar' => 'قسم الشؤون الإدارية والمالية والقانونية',
             ],
             [
-                'nom_departement_fr' => 'Département de la construction, de l environnement, des travaux et de la propriété',
+                'nom_departement_fr' => 'Division de la construction, de l environnement, des travaux et de la propriété',
                 'nom_departement_ar' => 'قسم التعمير والبيئة والأشغال والممتلكات',
             ],
         ];
@@ -215,7 +215,32 @@ class DatabaseSeeder extends Seeder
         foreach ($grades as $grades) {
             DB::table('grades')->insert($grades);
         }
- 
+        $fonctions = [
+            [
+                'nom_fonction_fr' => 'رئيس قسم',
+                'nom_fonction_ar' => 'chef du division ',  
+            ],
+            [
+                'nom_fonction_fr' => 'رئيس مصلحة',
+                'nom_fonction_ar' => 'chef de service ',  
+            ], 
+            [
+                'nom_fonction_fr' => 'رئيس مكتب',
+                'nom_fonction_ar' => 'chef de bureau ',  
+            ], 
+            [
+                'nom_fonction_fr' => ' مدير المصالح',
+                'nom_fonction_ar' => 'directeur des services ',  
+            ], 
+            [
+                'nom_fonction_fr' => '',
+                'nom_fonction_ar' => '',  
+            ], 
+        ];
+
+        foreach ($fonctions as $fonctions) {
+            DB::table('fonctions')->insert($fonctions);
+        }
 
     }
 }
