@@ -25,7 +25,7 @@ trait ExportTrait
                     $templateProcessor->setValue($key,$value);
                 }
             }
-            $path = 'word_documents/'.$file_name.'('.time().')'.'.docx';
+            $path = 'word_documents/'.$file_name.' ('.time().') '.'.docx';
             $templateProcessor->saveAs($path);
             return $path;
     }
