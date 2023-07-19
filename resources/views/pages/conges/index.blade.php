@@ -38,6 +38,9 @@
                           <h6 class="fw-semibold mb-0">برسم سنة </h6>
                         </th>
                         <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0"> وضعية الطلب </h6>
+                          </th>
+                        <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">إعدادات</h6>
                         </th>
                       </tr>
@@ -64,6 +67,11 @@
                         <td class="border-bottom-0">
                           <p class="mb-0 fw-normal">{{$conges->annee_conge}}</p>
                         </td>
+                        <td class="border-bottom-0">
+                            <div class="form-check form-switch text-center">
+                                <input class="form-check-input position-absolute" type="checkbox" name="{{$conges->id_conge}}" role="switch" id="checkbox_status" {{$conges->statut_conge==0 ? '' : 'checked disabled'}}>
+                            </div>
+                          </td>
                         <td class="border-bottom-0">
                           <div class="d-flex align-items-center gap-2">
                             <a href="{{route('conge.details',$conges->id_conge)}}" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></a>
@@ -98,4 +106,11 @@ $("#txt_cherch").on("input", function(){
     get_table_ajax_find($text,$url,"#table_conges")
 
     });
+$("#checkbox_status").on("change", function(){
+        $text = this.name;
+        $url = "{{ route('conge.change_statut') }}"
+        $("#table_conges").html("");
+        get_table_ajax_find($text,$url,"#table_conges")
+
+        });
 @endsection

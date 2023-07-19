@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
 use App\Models\Formation;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class FormationController extends Controller
      */
     public function create()
     {
-        return view('pages.formations.create');
+        $agents = Agent::all();
+        return view('pages.formations.create', compact('agents'));
     }
 
     /**

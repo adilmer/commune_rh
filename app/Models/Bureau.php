@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Bureau
- *
+ * 
  * @property int $id_bureau
  * @property string|null $nom_bureau_fr
  * @property string|null $nom_bureau_ar
  * @property int $id_service
- *
+ * 
  * @property Service $service
  * @property Collection|Agent[] $agents
  *
@@ -46,7 +46,5 @@ class Bureau extends Model
 	public function agents()
 	{
 		return $this->hasMany(Agent::class, 'id_bureau');
-
-
 	}
 }

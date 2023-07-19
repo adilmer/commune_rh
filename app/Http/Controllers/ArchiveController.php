@@ -48,7 +48,7 @@ class ArchiveController extends Controller
         }
          Archive::create($requestData);
 
-         return redirect()->route('archives.index');
+         return redirect()->route('archive.index');
     }
 
     public function storeCategorie(Request $request)
