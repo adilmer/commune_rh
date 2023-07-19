@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
+/*
        $departements = [
             [
                 'nom_departement_fr' => 'Division des affaires administratives, financières et juridiques',
@@ -65,33 +65,125 @@ class DatabaseSeeder extends Seeder
 
         foreach ($services as $services) {
             DB::table('services')->insert($services);
-        }
-        $bureaus = [
-            [
-                'nom_bureau_fr' => 'bureau1',
-                'nom_bureau_ar' => 'المكتب 1',
-                'id_service' => 1,
-            ],
-            [
-                'nom_bureau_fr' => 'bureau2',
-                'nom_bureau_ar' => 'المكتب 2',
-                'id_service' => 1,
-            ],
-            [
-                'nom_bureau_fr' => 'bureau1',
-                'nom_bureau_ar' => 'المكتب 3',
-                'id_service' => 2,
-            ],
-            [
-                'nom_bureau_fr' => 'bureau2',
-                'nom_bureau_ar' => 'المكتب 4',
-                'id_service' => 2,
-            ],
-        ];
-
+        } */
+        
+            $bureaus = [
+                [
+                    'nom_bureau_fr' => 'مكتب الشؤون الادارية',
+                    'nom_bureau_ar' => 'Bureau des affaires administratives',
+                    'id_service' => 1,
+                ],
+                [
+                    'nom_bureau_fr' => 'خلية الافتحاص',
+                    'nom_bureau_ar' => 'cellule de dépistage',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الحسابات',
+                    'nom_bureau_ar' => 'Bureau des comptes',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الصفقات',
+                    'nom_bureau_ar' => 'Bureau des offres',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب تنمية الموارد المالية',
+                    'nom_bureau_ar' => 'Bureau de développement des ressources financières',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الشرطة الادارية',
+                    'nom_bureau_ar' => 'Bureau de la police administrative',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'المكتب الرئيسي للحالة المدنية',
+                    'nom_bureau_ar' => 'Le bureau principal de l\'état civil',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'المكتب الفرعي الثاني',
+                    'nom_bureau_ar' => 'Deuxième succursale',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'المكتب الفرعي الشيخ عبداتي',
+                    'nom_bureau_ar' => 'Succursale Cheikh Abdati',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'المكتب الفرعي الحي الجديد',
+                    'nom_bureau_ar' => 'Nouvelle antenne de quartier',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب المساحات الخضراء',
+                    'nom_bureau_ar' => 'Bureau de verdure',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'المكتب الصحي',
+                    'nom_bureau_ar' => 'Bureau de santé',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الصيانة',
+                    'nom_bureau_ar' => 'bureau d\'entretien',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الممتلكات',
+                    'nom_bureau_ar' => 'bureau de la propriété',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الاشغال',
+                    'nom_bureau_ar' => 'Bureau des travaux',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الاشغال الكبرى',
+                    'nom_bureau_ar' => 'Bureau des Grands Travaux',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب العمل الاجتماعي',
+                    'nom_bureau_ar' => 'Bureau d\'action sociale',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب  الاقتصادي',
+                    'nom_bureau_ar' => 'Bureau économique',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب الإنارة العمومية',
+                    'nom_bureau_ar' => 'Bureau d\'éclairage public',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب النجارة والترصيص والصباغة والبناء',
+                    'nom_bureau_ar' => 'Bureau de menuiserie, plâtrage, teinturerie et bâtiment',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'مكتب  الموارد البشرية',
+                    'nom_bureau_ar' => 'Bureau des ressources humaines',
+                    'id_service'=>1,
+                ],
+                [
+                    'nom_bureau_fr' => 'الكتابة العامة',
+                    'nom_bureau_ar' => 'écriture général',
+                    'id_service'=>1,
+                ],
+            ];
         foreach ($bureaus as $bureaus) {
             DB::table('bureaus')->insert($bureaus);
         }
+
+            /*
         $positions = [
             [
                 'nom_position_fr' => 'Sans',
@@ -242,7 +334,7 @@ class DatabaseSeeder extends Seeder
         foreach ($grades as $grades) {
             DB::table('grades')->insert($grades);
         }
-<<<<<<< HEAD
+        
         $fonctions = [
             [
                 'nom_fonction_fr' => 'رئيس قسم',
@@ -259,19 +351,11 @@ class DatabaseSeeder extends Seeder
             [
                 'nom_fonction_fr' => ' مدير المصالح',
                 'nom_fonction_ar' => 'directeur des services ',  
-            ], 
-            [
-                'nom_fonction_fr' => '',
-                'nom_fonction_ar' => '',  
-            ], 
+            ]
         ];
 
         foreach ($fonctions as $fonctions) {
             DB::table('fonctions')->insert($fonctions);
-        }
-=======
-
->>>>>>> 79b76f9274608d3db79c5ea7ebbf8dcc1cd1d853
-
+        } */
     }
 }
