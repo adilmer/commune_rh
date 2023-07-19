@@ -82,6 +82,7 @@ Route::prefix('conges')->group(function () {
     Route::get('/edit/{id_conge}','CongeController@edit')->name('conge.edit');
     Route::get("/details/{id_conge}","CongeController@show")->name("conge.details");
     Route::get("/filter/{name?}","CongeController@filter")->name("conge.filter");
+    Route::get("/change_statut/{name?}","CongeController@change_statut")->name("conge.change_statut");
     Route::get("/filterHistory/{name?}","CongeController@filterHistory")->name("conge.filterHistory");
     Route::post("/save","CongeController@store")->name("conge.save");
     Route::post("/update","CongeController@update")->name("conge.update");

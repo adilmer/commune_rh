@@ -18,14 +18,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property Carbon $created_at
  *
  * @package App\Models
  */
 class User extends Model
 {
 	protected $table = 'users';
+	public $timestamps = false;
 
 	protected $casts = [
 		'email_verified_at' => 'datetime'

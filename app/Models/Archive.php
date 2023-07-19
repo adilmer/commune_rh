@@ -17,8 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_categorie
  * @property Carbon|null $date_archive
  * @property string|null $path_archive
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property Carbon|null $created_at
  * 
  * @property Category|null $category
  *
@@ -28,6 +27,7 @@ class Archive extends Model
 {
 	protected $table = 'archives';
 	protected $primaryKey = 'id_archive';
+	public $timestamps = false;
 
 	protected $casts = [
 		'id_categorie' => 'int',

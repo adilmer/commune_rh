@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $remplacant
  * @property string|null $adresse_conge
  * @property Carbon|null $date_prise
+ * @property int $statut_conge
  * 
  * @property Agent|null $agent
  *
@@ -39,7 +40,8 @@ class Conge extends Model
 		'nbr_jours' => 'int',
 		'annee_conge' => 'int',
 		'id_agent' => 'int',
-		'date_prise' => 'datetime'
+		'date_prise' => 'datetime',
+		'statut_conge' => 'int'
 	];
 
 	protected $fillable = [
@@ -51,7 +53,8 @@ class Conge extends Model
 		'id_agent',
 		'remplacant',
 		'adresse_conge',
-		'date_prise'
+		'date_prise',
+		'statut_conge'
 	];
 
 	public function agent()
