@@ -37,7 +37,7 @@
               </div>
               <div class="col-6 mt-4">
                 <label for="nbr_jours" >عدد الأيام</label>
-                <input type="number" class="form-control" id="nbr_jours" name="nbr_jours" placeholder="">
+                <input type="number" class="form-control" id="nbr_jours" name="nbr_jours" placeholder="" value="22">
               </div>
               <div class="col-6 mt-4">
                 <label for="date_debut_conge" >تاريخ بداية الرخصة </label>

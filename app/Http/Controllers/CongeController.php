@@ -77,7 +77,7 @@ class CongeController extends Controller
         }
        // dd($conges->getQuery());
 
-        $conges = $conges->orderby('date_debut_conge')->get();
+        $conges = $conges->orderby('statut_conge')->get();
         //dd($conges->first());
         $data = '';
 
