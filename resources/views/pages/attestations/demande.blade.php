@@ -16,7 +16,7 @@
       </div>
         <div class="row">
          
-          <div class="col-lg-12 d-flex align-items-stretch">
+          <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card w-100">
               <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">طلب وثيقة</h5>
@@ -62,7 +62,27 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <h5 class="card-title fw-semibold mb-4">التوقيعات : </h5>
+                <div class="row">
+                  <div class="col-1">
 
+                  </div>
+                  <div class="col-4">
+                        <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                        <option > </option>
+                        <option selected value="1"> رئيس المصلحة </option>
+                        <option value="2">رئيس القسم  </option>
+                      </select>
+                  </div>
+                  <div class="col-4">
+                    <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                      <option > </option>
+                      <option  value="1"> رئيس المصلحة </option>
+                      <option selected value="2">رئيس القسم  </option>
+                      <option  value="1">  مدير المصالح </option>
+                    </select>
+                  </div>
                 </div>
                 <div class="btnsucc m-4 text-start">
                   <button class="btn btn-success"><i class="ti ti-printer"></i> طباعة الطلب </button>
@@ -70,6 +90,21 @@
               </div>
             </div>
           </div>
+          
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">المعلومات الشخصية :</h5>
+                <div class="col-12">
+                  <h5>الإسم الكامل : </h5>
+                  <h5> رقم التأجير  : </h5>
+                  <h5> الدرجة : </h5>
+                  <h5> القسم أ المصلحة : </h5>
+                  
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
 
 

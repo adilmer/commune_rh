@@ -80,18 +80,41 @@
                           <p class="mb-0 fw-normal">{{$conge->adresse_conge}} </p>
                         </td>
                       </tr>
-                      <tr>
-                        <td class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">الوثائق  :</h6>
-                        </td>
-                          <td class="border-bottom-0">
-                            <button class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة الطلب  </button>
-                            <button class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة القرار</button>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
+                <h5 class="card-title fw-semibold mt-5 ">التوقيعات : </h5>
+              <div class="row">
+                <div class="col-4">
+                  <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                    <option value="1"> </option>
+                    <option selected value="2"> رئيس المكتب </option>
+                    <option  value="3"> رئيس المصلحة </option>
+                    <option value="4">رئيس القسم  </option>
+                  </select>
+                </div>
+                <div class="col-4">
+                      <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                        <option value="1" > </option>
+                        <option  value="2"> رئيس المكتب </option>
+                      <option selected value="3"> رئيس المصلحة </option>
+                      <option value="4">رئيس القسم  </option>
+                    </select>
+                </div>
+                <div class="col-4">
+                  <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                    <option value="1" > </option>
+                    <option  value="2"> رئيس المصلحة </option>
+                    <option selected value="3">رئيس القسم  </option>
+                    <option  value="4">  مدير المصالح </option>
+                    <option  value="5">  رئيس المجلس الجماعي  </option>
+                  </select>
+                </div>
+              </div>
+              <div class="btnsucc m-4 text-start">
+                <button class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة الطلب  </button>
+                <button class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة القرار</button>
+              </div>
 
               </div>
 
