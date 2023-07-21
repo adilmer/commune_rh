@@ -54,7 +54,7 @@
                   
                 </div>
                 <div class="btnsucc m-4 text-start">
-                  <button class="btn btn-success"><i class="ti ti-printer"></i> طبــاعـ ة  </button>
+                  <button class="btn btn-success"><i class="ti ti-printer"></i> طبــاعـة  </button>
                 </div>
               </div>
             </div>
