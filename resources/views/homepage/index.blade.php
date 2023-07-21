@@ -202,51 +202,17 @@
                       </tr>
                     </thead>
                     <tbody>
+                    @foreach ($listretraites as $listretraites)   
                       <tr> 
                         <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">وليد المرزوكي</h6>
-                            <span class="fw-normal">Oualid Elmerzougui</span>                          
+                            <h6 class="fw-semibold mb-1">{{$listretraites -> nom_ar}}</h6>
+                            <span class="fw-normal">{{$listretraites -> nom_fr}}</span>                          
                         </td>
                         <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
+                          <p class="mb-0 fw-normal">{{ date('Y/m/d', strtotime($listretraites->dateret)) }}</p>
                         </td>
                       </tr>    
-                      <tr> 
-                        <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">وليد المرزوكي</h6>
-                            <span class="fw-normal">Oualid Elmerzougui</span>                          
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
-                      </tr> 
-                      <tr> 
-                        <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">وليد المرزوكي</h6>
-                            <span class="fw-normal">Oualid Elmerzougui</span>                          
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
-                      </tr> 
-                      <tr> 
-                        <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">وليد المرزوكي</h6>
-                            <span class="fw-normal">Oualid Elmerzougui</span>                          
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
-                      </tr>  
-                      <tr> 
-                        <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">وليد المرزوكي</h6>
-                            <span class="fw-normal">Oualid Elmerzougui</span>                          
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
-                      </tr>       
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
