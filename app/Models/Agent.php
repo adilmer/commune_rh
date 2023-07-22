@@ -49,9 +49,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $adresse_ar
  * @property string|null $photo
  * 
- * @property Bureau $bureau
  * @property Grade|null $grade
  * @property Fonction $fonction
+ * @property Bureau $bureau
  * @property Position $position
  * @property Collection|Conge[] $conges
  * @property Collection|Document[] $documents
@@ -119,11 +119,6 @@ class Agent extends Model
 		'photo'
 	];
 
-	public function bureau()
-	{
-		return $this->belongsTo(Bureau::class, 'id_bureau');
-	}
-
 	public function grade()
 	{
 		return $this->belongsTo(Grade::class, 'id_grade');
@@ -132,6 +127,11 @@ class Agent extends Model
 	public function fonction()
 	{
 		return $this->belongsTo(Fonction::class, 'id_fonction');
+	}
+
+	public function bureau()
+	{
+		return $this->belongsTo(Bureau::class, 'id_bureau');
 	}
 
 	public function position()

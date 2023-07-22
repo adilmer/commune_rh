@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
-   /*  Route::get('/abs', function () {
-        return view('pages.absences.index');
-    }); */
+     Route::get('/abs', function () {
+        return view('pages.attestations.demande');
+    });
     #Home
     Route::get('/','HomeController@index')->name('home.index');
 
@@ -101,6 +101,13 @@ Route::prefix('absences')->group(function () {
     Route::get('/','AbsenceController@index')->name('absence.index');
     Route::get('/filter','AbsenceController@filter')->name('absence.filter');
     Route::get('/pdf', 'AbsenceController@generatePdf')->name('absence.generate');
+});
+
+#Attestations
+Route::prefix('attestations')->group(function () {
+    Route::get('/','AttestationController@index')->name('attestation.index');
+    Route::get('/find','AttestationController@find')->name('attestation.find');
+    Route::get('/export_word', 'AttestationController@export_word')->name('attestation.export_word');
 });
 
     #Exports
