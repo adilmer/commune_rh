@@ -88,6 +88,7 @@ Route::prefix('conges')->group(function () {
     Route::post("/update","CongeController@update")->name("conge.update");
     Route::post("/uploadDocuments","CongeController@uploadDocuments")->name("conge.uploadDocuments");
     Route::get("/delete/{id_conge}","CongeController@destroy")->name("conge.delete");
+    Route::get('/export_word_demandeConge', 'CongeController@export_word_demandeConge')->name('attestation.export_word_demandeConge');
 });
 
     #Services

@@ -125,7 +125,7 @@ class AttestationController extends Controller
         return view('pages.attestations.ordervirement', compact('agents'));
     }
 
-    public function export_word_ordervirement(Request $request)
+    public function export_word_demandeconge(Request $request)
     {
         $agent = Agent::findOrFail($request->id_agent);
         $data =[];
@@ -136,7 +136,9 @@ class AttestationController extends Controller
         $data['rib'] = $agent->rib;
         $data['ppr'] = $agent->ppr;
         $data['dateNow'] = date('d/m/Y');
-
+        $data['signature1'] = $request->signature[0] ?? '';
+        $data['signature2'] = $request->signature[1] ?? '';
+        $data['signature3'] = $request->signature[2] ?? '';
 
         $filename = $this->exportWord($data,'ordervirement','ORDRE DE VIREMENT IRREVOCABLE ');
 

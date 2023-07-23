@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Conge;
+use App\Traits\ExportTrait;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -11,6 +12,7 @@ use Illuminate\Routing\Controller;
 class CongeController extends Controller
 {
     use UploadTrait;
+    use ExportTrait;
     /**
      * Display a listing of the resource.
      *
@@ -277,4 +279,40 @@ class CongeController extends Controller
 
         return redirect(route('conge.index'));
     }
+
+    public function export_word_demandeConge(Request $request)
+    {
+        //dd($request);
+        $conge = Conge::findOrFail($request->id_conge);
+        $agent = Agent::findOrFail($conge->id_agent);
+        $data =[];
+
+           $data['nomar'] = $agent->nom_ar;
+           $data['echelle'] = $agent->echelle;
+           $data['echellon'] = $agent->echellon;
+           $data['grade'] = $agent->grade->nom_grade_ar;
+           $data['service'] = $agent->bureau->service->nom_service_ar;
+           $data['ppr'] = $agent->ppr;
+           $data['type'] = $conge->type_conge;
+           $data['annee'] = $conge->annee_conge;
+           $jours = $conge->nbr_jours<=10 ? 'أيام ' : 'يوم ';
+           $data['jours'] = $jours ;
+           $data['nbrjour'] = $conge->nbr_jours;
+           $data['datedebut'] = $conge->date_debut_conge->format('Y/m/d');
+           $data['datefin'] = $conge->date_fin_conge->format('Y/m/d');
+           $data['dateprise'] = $conge->date_prise->format('Y/m/d');
+           $data['lieuconge'] = $conge->adresse_conge;
+           $data['remplacant'] = $conge->remplacant;
+           $data['dateNow'] = date('Y/m/d');
+           $data['signature1'] = $request->signature[0] ?? '';
+           $data['signature2'] = $request->signature[1] ?? '';
+           $data['signature3'] = $request->signature[2] ?? '';
+
+            $name = $request->type=='conge' ? 'قرار الرخصة' : 'ﻁﻠﺏ ﺭﺧــﺻﺔ';
+        $filename = $this->exportWord($data,$request->type,$name);
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
+
 }
