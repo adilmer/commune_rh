@@ -37,7 +37,7 @@
           </a>
           <ul class="dropdown-menu text-end">
             <li> <a class="dropdown-item" href="{{route('attestation.index')}}"> طلب وتيقة</a></li>
-            <li> <a class="dropdown-item" href="ordervirement.html"> أمر بتحويل لا رجعة فيه</a> </li>
+            <li> <a class="dropdown-item" href="{{route('attestation.ordervirement')}}"> أمر بتحويل لا رجعة فيه</a> </li>
           </ul>
           </li>
         <li class="sidebar-item">

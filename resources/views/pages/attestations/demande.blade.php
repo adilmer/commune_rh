@@ -16,7 +16,7 @@
                     <div class="form-group row  my-3">
                         <label class="form-check-label  fs-5 pt-2 col-3" for="nom_agent" >المعني بالأمر :</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control col-5" list="agents_list" id="list_agents"  placeholder="تحديد المعني بالأمر" value="" required >
+                    <input type="text" class="form-control col-5" list="agents_list" id="list_agents"  autocomplete="off"  placeholder="تحديد المعني بالأمر" value="" required >
 
                         <datalist id="agents_list" >
                             @foreach ($agents as $agents)
@@ -24,8 +24,6 @@
                             @endforeach
                         </datalist>
                     </div>
-
-
                     </div>
                   <div class="form-check">
                     <input class="form-check-input fs-6" type="checkbox" value="c1" id="check1" name="attestation[]">
@@ -90,7 +88,7 @@
                   </div>
                 </div>
                 <div class="btnsucc m-4 text-start">
-                  <button type="submit" class="btn btn-success"><i class="ti ti-printer"></i> طباعة الطلب </button>
+                  <button id="btn_submit" type="submit" class="btn btn-success" style="display: none"><i class="ti ti-printer"></i> طباعة الطلب </button>
                 </div>
               </div>
             </form>
@@ -132,6 +130,8 @@ list_agents.addEventListener('change', getIdAgent);
         $url = "{{ route('attestation.find') }}"
         $("#info_agent").html("");
         get_table_ajax_find($text,$url,"#info_agent")
+        $("#list_agents").attr("disabled",'');
+        $("#btn_submit").show();
         }
       }
 

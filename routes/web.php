@@ -108,6 +108,9 @@ Route::prefix('attestations')->group(function () {
     Route::get('/','AttestationController@index')->name('attestation.index');
     Route::get('/find','AttestationController@find')->name('attestation.find');
     Route::get('/export_word', 'AttestationController@export_word')->name('attestation.export_word');
+    Route::get('/ordervirement','AttestationController@ordervirement')->name('attestation.ordervirement');
+    Route::get('/find_ordervirement','AttestationController@find_ordervirement')->name('attestation.find_ordervirement');
+    Route::get('/export_word_ordervirement', 'AttestationController@export_word_ordervirement')->name('attestation.export_word_ordervirement');
 });
 
     #Exports

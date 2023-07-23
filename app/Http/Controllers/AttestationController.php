@@ -6,6 +6,7 @@ use App\Models\Agent;
 use App\Traits\ExportTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 
 class AttestationController extends Controller
 {
@@ -42,6 +43,40 @@ class AttestationController extends Controller
         return Response(['data' => $data]);
     }
 
+    public function find_ordervirement(Request $request)
+    {
+        $agent = Agent::findOrFail($request->text);
+
+        $agents = $agent->get();
+
+        $data ="
+        <tr>
+                          <td class='border-bottom-0'>
+                            <h6 class='fw-semibold mb-0'>الإسم الكامل  :</h6>
+                          </td>
+                          <td class='border-bottom-0'>
+                            <p class='mb-0 fw-normal'> $agent->nom_ar</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class='border-bottom-0'>
+                            <h6 class='fw-semibold mb-0'>إسم البنك :</h6>
+                          </td>
+                          <td class='border-bottom-0'>
+                            <p class='mb-0 fw-normal text-uppercase'>$agent->agence</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class='border-bottom-0'>
+                            <h6 class='fw-semibold mb-0'>  رقم الحساب البنكي  : </h6>
+                          </td>
+                          <td class='border-bottom-0'>
+                            <p class='mb-0 fw-normal'>$agent->rib</p>
+                          </td>
+                        </tr>";
+        return Response(['data' => $data]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -75,6 +110,7 @@ class AttestationController extends Controller
 
         return response()->download($filename)->deleteFileAfterSend(true);
         }
+        return redirect(route('attestation.export_word'));
     }
 
     /**
@@ -83,22 +119,31 @@ class AttestationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function ordervirement()
     {
-        //
+        $agents = Agent::all();
+        return view('pages.attestations.ordervirement', compact('agents'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function export_word_ordervirement(Request $request)
     {
-        //
-    }
+        $agent = Agent::findOrFail($request->id_agent);
+        $data =[];
+        if($agent){
+           // dd($request);
+        $data['nomfr'] = Str::upper($agent->nom_fr);
+        $data['agence'] = Str::upper($agent->agence);
+        $data['rib'] = $agent->rib;
+        $data['ppr'] = $agent->ppr;
+        $data['dateNow'] = date('d/m/Y');
 
+
+        $filename = $this->exportWord($data,'ordervirement','ORDRE DE VIREMENT IRREVOCABLE ');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+        }
+        return redirect(route('attestation.export_word_ordervirement'));
+    }
     /**
      * Update the specified resource in storage.
      *
