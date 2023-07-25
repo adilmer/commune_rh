@@ -91,7 +91,7 @@
                       <td class="border-bottom-0">
                         <div class="img" >
                             @if (isset($agents->photo))
-                            <img class="rounded-circle " width="50px" height="50px" src="{{asset('photos_agents/'.$agents->photo)}}" alt="" srcset="">
+                            <img class="rounded-circle " width="50px" height="50px" onerror="this.onerror=null; this.src='{{asset('photos_agents/user-1.jpg')}}'" src="{{asset('photos_agents/'.$agents->photo)}}" alt="" srcset="">
                             @else
                             <img class="rounded-circle" width="50px" height="50px" src="../assets/images/profile/user-1.jpg" alt="" srcset="">
                             @endif
