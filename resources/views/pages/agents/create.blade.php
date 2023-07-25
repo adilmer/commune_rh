@@ -95,7 +95,7 @@
               </div>
               <div class="col-3 mt-3">
                 <label for="echelle" >السلم</label>
-                <input name="echelle" type="number" class="form-control" id="echelle" placeholder="">
+                <input name="echelle" type="text" class="form-control" id="echelle" placeholder="">
               </div>
               {{-- <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في السلم</label>

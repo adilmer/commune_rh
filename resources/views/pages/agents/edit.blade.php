@@ -96,7 +96,7 @@
               </div>
               <div class="col-3 mt-3">
                 <label for="echelle" >السلم</label>
-                <input value="{{$agent->echelle}}" name="echelle" type="number" class="form-control" id="echelle" placeholder="">
+                <input value="{{$agent->echelle}}" name="echelle" type="text" class="form-control" id="echelle" placeholder="">
               </div>
               {{-- <div class="col-3 mt-3">
                 <label for="date_grade" >تاريخ التعيين في السلم</label>
@@ -193,7 +193,7 @@
                   </div>
                   <div class="col-4 mt-3">
                       <label for="date_position" >تاريخ الإحالة</label>
-                      <input name="date_position" type="date" value="{{ \Carbon\Carbon::parse($agent->date_position)->format('Y-m-d') }}"  class="form-control" id="date_position" placeholder="">
+                      <input name="date_position" type="date" value="{{ $agent->date_position!=null ? \Carbon\Carbon::parse($agent->date_position)->format('Y-m-d') : '' }}"  class="form-control" id="date_position" placeholder="">
                     </div>
                     <div class="col-4 mt-3">
                       <label for="lieu_position">مكان الإحالة</label>

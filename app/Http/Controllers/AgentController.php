@@ -86,7 +86,7 @@ foreach ($names as $value) {
             $nom_position_ar = $agents->position->nom_position_ar;
             $nom_grade_ar = $agents->grade->nom_grade_ar;
             $photo_url=asset('photos_agents/'.$agents->photo);
-            $date_position = \Carbon\Carbon::parse($agents->date_position)->format('Y-m-d');
+            $date_position = $agents->date_position!=null ? \Carbon\Carbon::parse($agents->date_position)->format('Y-m-d') : '';
             $data .=
             "<tr>
             <td class='border-bottom-0'>
@@ -168,7 +168,7 @@ foreach ($names as $value) {
             $nom_position_ar = $agents->position->nom_position_ar;
             $nom_grade_ar = $agents->grade->nom_grade_ar;
             $photo_url=asset('photos_agents/'.$agents->photo);
-            $date_position = \Carbon\Carbon::parse($agents->date_position)->format('Y-m-d');
+            $date_position = $agents->date_position!=null ? \Carbon\Carbon::parse($agents->date_position)->format('Y-m-d') : '';
             $data .=
             "<tr>
             <td class='border-bottom-0'>
@@ -320,13 +320,14 @@ foreach ($names as $value) {
      */
     public function update(Request $request)
     {
-      // dd($request->all());
+      //dd($request->all());
         $agent = Agent::findOrFail($request->id_agent);
         //dd($agent);
         $requestData = $request->all();
         if ($request->photo!=null){
             $requestData['photo'] = $this->saveAs($request->photo,$request->ppr,"photos_agents");
         }
+
 
 		$agent->update($requestData);
 
