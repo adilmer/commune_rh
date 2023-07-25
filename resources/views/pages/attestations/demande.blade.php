@@ -95,20 +95,54 @@
             </div>
           </div>
 
-          <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="card w-100">
-              <div class="card-body p-4">
-                <h5 class="card-title fw-semibold mb-4">المعلومات الشخصية :</h5>
-                <div class="col-12" id="info_agent">
-                  <h5>الإسم الكامل :  <span class="text-bold" id="nom_ag"></span></h5>
-                  <h5> رقم التأجير  : <span class="text-bold"></span></h5>
-                  <h5> الدرجة : <span class="text-bold"></span></h5>
-                  <h5> المكتب : <span class="text-bold"></span></h5>
-                  <h5>  المصلحة : <span class="text-bold"></span></h5>
-                  <h5>  القسم : <span class="text-bold"></span></h5>
+
+<div class="col-4  bg-light p-3">
+            <div class="col-12">
+              <h5 class="card-title fw-semibold  mb-4">المعلومات الشخصية :</h5>
+            </div>
+            <div class="col-12">
+              <div class="table-responsive" id="info_agent">
+                <table class="table table-striped text-nowrap mb-0 align-middle">
+                  <tbody id="table_history">
+                    <tr>
+                      <td colspan="4" class="border-bottom-0">
+                      <h5>الإسم الكامل :  <span class="text-bold" id="nom_ag"></span></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" class="border-bottom-0">
+                      <h5> رقم التأجير  : <span class="text-bold"></span></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" class="border-bottom-0">
+                      <h5> الدرجة : <span class="text-bold"></span></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" class="border-bottom-0">
+                      <h5> المكتب : <span class="text-bold"></span></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" class="border-bottom-0">
+                      <h5>  المصلحة : <span class="text-bold"></span></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" class="border-bottom-0">
+                      <h5>  القسم : <span class="text-bold"></span></h5>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
+
+
+
+
         </div>
         </div>
 

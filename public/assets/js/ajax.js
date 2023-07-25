@@ -37,8 +37,7 @@ function get_table_ajax(id,url,adress) {
        url: url,
       data: {'text':text},
       success: function (data) {
-      $(adress).html(data.data);
-
+      $(adress).html(data.data); 
       }, error: function (reject) {
 
 

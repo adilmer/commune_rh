@@ -34,12 +34,40 @@ class AttestationController extends Controller
         $agents = $agent->get();
 
         $data ="
-        <h5>الإسم الكامل :  <span class='text-bold'  id='nom_ag'>$agent->nom_ar</span></h5>
-        <h5> رقم التأجير  : <span class='text-bold'>$agent->ppr</span></h5>
-        <h5> الدرجة : <span class='text-bold'>{$agent->grade->nom_grade_ar}</span></h5>
-        <h5> المكتب : <span class='text-bold'>{$agent->bureau->nom_bureau_ar}</span></h5>
-        <h5>  المصلحة : <span class='text-bold'>{$agent->bureau->service->nom_service_ar}</span></h5>
-        <h5>  القسم : <span class='text-bold'>{$agent->bureau->service->departement->nom_departement_ar}</span></h5>";
+        <table class='table table-striped text-nowrap mb-0 align-middle'>
+        <tbody id='table_history'>
+          <tr>
+            <td colspan='4' class='border-bottom-0'>
+            <h5>الإسم الكامل :  <span class='text-bold' id='nom_ag'>$agent->nom_ar</span></h5>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='4' class='border-bottom-0'>
+            <h5> رقم التأجير  : <span class='text-bold'>$agent->ppr</span></h5>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='4' class='border-bottom-0'>
+            <h5> الدرجة : <span class='text-bold'>{$agent->grade->nom_grade_ar}</span></h5>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='4' class='border-bottom-0'>
+            <h5> المكتب : <span class='text-bold'>{$agent->bureau->nom_bureau_ar}</span></h5>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='4' class='border-bottom-0'>
+            <h5>  المصلحة : <span class='text-bold'>{$agent->bureau->service->nom_service_ar}</span></h5>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='4' class='border-bottom-0'>
+            <h5>  القسم : <span class='text-bold'>{$agent->bureau->service->departement->nom_departement_ar}</span></h5>
+            </td>
+          </tr>
+        </tbody>
+      </table>";
         return Response(['data' => $data]);
     }
 
