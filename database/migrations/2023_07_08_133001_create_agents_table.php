@@ -23,7 +23,7 @@ class CreateAgentsTable extends Migration {
 			$table->string('nom_ar', 50)->nullable();
 			$table->string('sexe', 10)->nullable();
 			$table->date('date_naiss')->nullable();
-			$table->string('lieu_naiss', 20)->nullable();
+			$table->string('lieu_naiss', 100)->nullable();
 			$table->date('date_rec')->nullable();
 			$table->integer('id_grade')->nullable()->index('id_grade');
 			$table->date('date_grade')->nullable();
@@ -36,7 +36,7 @@ class CreateAgentsTable extends Migration {
 			$table->integer('id_fonction')->index('id_fonction');
 			$table->integer('id_bureau')->index('id_bureau');
 			$table->integer('id_position')->default(1)->index('id_position');
-			$table->string('situation_fam', 10)->nullable();
+			$table->string('situation_fam', 20)->nullable();
 			$table->string('fonction_cj', 50)->nullable();
 			$table->integer('nbr_enfant')->nullable();
 			$table->string('aos', 10)->nullable();

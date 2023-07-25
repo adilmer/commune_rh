@@ -16,8 +16,8 @@ class CreateFonctionsTable extends Migration {
 		Schema::create('fonctions', function(Blueprint $table)
 		{
 			$table->integer('id_fonction', true);
-			$table->string('nom_fonction_fr', 20)->nullable();
-			$table->string('nom_fonction_ar', 20)->nullable();
+			$table->string('nom_fonction_fr', 70)->nullable();
+			$table->string('nom_fonction_ar', 70)->nullable();
 		});
 	}
 
