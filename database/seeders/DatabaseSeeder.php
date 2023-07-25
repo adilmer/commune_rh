@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
 
        $departements = [
             [
-                'nom_departement_fr' => 'Division des affaires administratives, financières et juridiques',
+                'nom_departement_fr' => 'Division des affaires administratives financières et juridiques',
                 'nom_departement_ar' => 'قسم الشؤون الإدارية والمالية والقانونية',
             ],
             [
                 'nom_departement_fr' => 'Division de la construction, de l environnement, des travaux et de la propriété',
                 'nom_departement_ar' => 'قسم التعمير والبيئة والأشغال والممتلكات',
-            ],
+            ]
         ];
 
         foreach ($departements as $departements) {
@@ -207,22 +207,7 @@ class DatabaseSeeder extends Seeder
             DB::table('positions')->insert($positions);
         }
 
-        $fonctions = [
-            [
-                'nom_fonction_fr' => 'Sans',
-                'nom_fonction_ar' => 'لا شيئ',
-            ],
-            [
-                'nom_fonction_fr' => 'Chef de departement',
-                'nom_fonction_ar' => 'رئيس قسم',
-            ], [
-                'nom_fonction_fr' => 'Chef de service',
-                'nom_fonction_ar' => 'رئيس مصلحة',
-            ],
-        ];
-        foreach ($fonctions as $fonctions) {
-            DB::table('fonctions')->insert($fonctions);
-        }
+      
 
         $categories = [
             [
@@ -274,6 +259,7 @@ class DatabaseSeeder extends Seeder
                 'nom_grade_ar' => 'مساعد تقني الدرجة الأولى',
             ],
             [
+
                 'nom_grade_fr' => 'ADJOINT TECHNIQUE 2° GRADE',
                 'nom_grade_ar' => 'مساعد تقني الدرجة الثانية',
             ],
@@ -329,6 +315,14 @@ class DatabaseSeeder extends Seeder
                 'nom_grade_fr' => 'REDACTEUR 4° GRADE',
                 'nom_grade_ar' => 'محرر من الدرجة الرابعة',
             ],
+            [
+                'nom_grade_fr' => 'INFERMIERE 1° GRADE ',
+                'nom_grade_ar' => 'ممرض من الدرجة الأولى',
+            ],
+            [
+                'nom_grade_fr' => 'INGENIEUR EN CHEF',
+                'nom_grade_ar' => 'مهندس',
+            ],
         ];
 
         foreach ($grades as $grades) {
@@ -336,26 +330,33 @@ class DatabaseSeeder extends Seeder
         }
         
         $fonctions = [
+            
             [
-                'nom_fonction_fr' => 'رئيس قسم',
-                'nom_fonction_ar' => 'chef du division ',  
+                'nom_fonction_ar' => 'موظف',
+                'nom_fonction_fr' => 'Fonctionnaire',  
             ],
             [
-                'nom_fonction_fr' => 'رئيس مصلحة',
-                'nom_fonction_ar' => 'chef de service ',  
+                'nom_fonction_ar' => 'رئيس قسم',
+                'nom_fonction_fr' => 'chef du division ',  
+            ],
+            [
+                'nom_fonction_ar' => 'رئيس مصلحة',
+                'nom_fonction_fr' => 'chef de service ',  
             ], 
             [
-                'nom_fonction_fr' => 'رئيس مكتب',
-                'nom_fonction_ar' => 'chef de bureau ',  
+                'nom_fonction_ar' => 'رئيس مكتب',
+                'nom_fonction_fr' => 'chef de bureau ',  
             ], 
             [
-                'nom_fonction_fr' => ' مدير المصالح',
-                'nom_fonction_ar' => 'directeur des services ',  
+                'nom_fonction_ar' => ' مدير المصالح',
+                'nom_fonction_fr' => 'directeur des services ',  
             ]
         ];
 
         foreach ($fonctions as $fonctions) {
             DB::table('fonctions')->insert($fonctions);
         } 
+
+       
     }
 }

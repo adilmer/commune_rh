@@ -40,7 +40,7 @@
               </div>
 
               <div class="table ">
-                <table class="table p-4 text-nowrap mb-0 align-middle">
+                <table class="table  mb-0 align-middle">
                   <thead class="text-dark fs-4 ">
                     <tr>
                       <th class="border-bottom-0">
