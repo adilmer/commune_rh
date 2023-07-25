@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 }); */
 Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
      Route::get('/abs', function () {
-        return view('pages.attestations.demande');
+        return view('pages.attestations.decisionretraite');
     });
     #Home
     Route::get('/','HomeController@index')->name('home.index');
@@ -112,6 +112,9 @@ Route::prefix('attestations')->group(function () {
     Route::get('/ordervirement','AttestationController@ordervirement')->name('attestation.ordervirement');
     Route::get('/find_ordervirement','AttestationController@find_ordervirement')->name('attestation.find_ordervirement');
     Route::get('/export_word_ordervirement', 'AttestationController@export_word_ordervirement')->name('attestation.export_word_ordervirement');
+    Route::get('/decisionretraite','AttestationController@decisionretraite')->name('attestation.decisionretraite');
+    Route::get('/find_decisionretraite','AttestationController@find_decisionretraite')->name('attestation.find_decisionretraite');
+    Route::get('/export_word_decisionretraite', 'AttestationController@export_word_decisionretraite')->name('attestation.export_word_decisionretraite');
 });
 
     #Exports

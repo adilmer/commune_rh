@@ -86,7 +86,7 @@
             <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الإدماج </a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الوضع رهن إشارة  </a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الوضع رهن إشارة  </a> </li>
-            <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الحذف </a> </li>
+            <li> <a href="{{route('attestation.decisionretraite')}}" class="dropdown-item" href="createstagiaire.html"> قرار الحذف </a> </li>
           </ul>
         </li>
       </ul>

@@ -125,6 +125,7 @@ class AttestationController extends Controller
         return view('pages.attestations.ordervirement', compact('agents'));
     }
 
+
     public function export_word_demandeconge(Request $request)
     {
         $agent = Agent::findOrFail($request->id_agent);
@@ -146,26 +147,64 @@ class AttestationController extends Controller
         }
         return redirect(route('attestation.export_word_ordervirement'));
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+
+    public function decisionretraite()
     {
-        //
+        $agents = Agent::all();
+        return view('pages.attestations.decisionretraite', compact('agents'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function find_decisionretraite(Request $request)
     {
-        //
+        $agent = Agent::findOrFail($request->text);
+
+        $agents = $agent->get();
+
+        $data =" <p> الإسم الكامل :  <span class='text-bold mx-2  px-1' id='nom_ag'> $agent->nom_ar </span> رقم التأجير  : <span class='text-bold mx-2  px-1'> $agent->ppr </span> رقم التسجيل  : <span class='text-bold mx-2  px-1'> $agent->mat </span></p>";
+        return Response(['data' => $data]);
+    }
+    public function export_word_decisionretraite(Request $request)
+    {
+        $agent = Agent::findOrFail($request->id_agent);
+        $data =[];
+        //dd($request);
+        $data['nomfr'] = Str::upper($agent->nom_fr);
+        $data['agence'] = Str::upper($agent->agence);
+        $data['cin'] = Str::upper($agent->cin);
+        $data['nomar'] = $agent->nom_ar;
+        $data['datenaiss'] = $agent->date_naiss->format('Y/m/d');
+        $data['lieunaiss'] = $agent->lieu_naiss;
+        $data['aff_mutuelle'] = $agent->aff_mutuelle;
+        $data['n_affilation'] = $agent->n_affilation;
+        $data['aff_cmr'] = $agent->aff_cmr;
+        $data['situation'] = $agent->situation_fam;
+        $data['dateretrait'] = $agent->date_position->format('Y/m/d');
+        $data['grade'] = $agent->grade->nom_grade_ar;
+        $data['ech'] = $agent->echelle;
+        $data['echl'] = $agent->echellon;
+        $data['ind'] = $agent->indice;
+        $data['daterec'] = $agent->date_rec->format('Y/m/d');
+        $data['dategrade'] = $agent->date_grade->format('Y/m/d');
+        $data['rib'] = $agent->rib;
+        $data['ppr'] = $agent->ppr;
+        $data['nomperear'] = $request->nomperear;
+        $data['nommerear'] = $request->nommerear;
+        $data['nomperefr'] = Str::upper($request->nomperefr);
+        $data['nommerefr'] = Str::upper($request->nommerefr);
+        $data['nomfemme'] = $request->nomfemme;
+        $data['journaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('d');
+        $data['moinnaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('m');
+        $data['anneenaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('Y');
+        $data['jourmar'] = \Carbon\Carbon::parse($request->date_mar)->format('d');
+        $data['moismar'] = \Carbon\Carbon::parse($request->date_mar)->format('m');
+        $data['anneermar'] = \Carbon\Carbon::parse($request->date_mar)->format('Y');
+        $data['fonct_cj'] = $request->fonct_cj;
+        $data['dateNow'] = date('Y/m/d');
+
+        $filename = $this->exportWord($data,'decisionretraite','الوثائق الخاصة بملف التقاعد');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
     }
 }
