@@ -173,7 +173,7 @@ class AttestationController extends Controller
         $data['agence'] = Str::upper($agent->agence);
         $data['cin'] = Str::upper($agent->cin);
         $data['nomar'] = $agent->nom_ar;
-        $data['datenaiss'] = $agent->date_naiss->format('Y/m/d');
+        $data['datenaiss'] = \Carbon\Carbon::parse($agent->date_naiss)->format('Y/m/d');
         $data['lieunaiss'] = $agent->lieu_naiss;
         $data['aff_mutuelle'] = $agent->aff_mutuelle;
         $data['n_affilation'] = $agent->n_affilation;
