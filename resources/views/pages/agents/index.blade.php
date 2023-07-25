@@ -68,7 +68,7 @@
                         <h6 class="fw-semibold mb-0">المصلحة</h6>
                       </th>
 
-                      <th class="border-bottom-0">
+                      <th class="border-bottom-0 col-sm-1">
                         <h6 class="fw-semibold mb-0">نوع الإحالة</h6>
                       </th>
 
@@ -124,7 +124,7 @@
                         <p class="mb-0 fw-normal">{{$agents->position->nom_position_ar}}</p>
                       </td>
 
-                      <td class="border-bottom-0 pos">
+                      <td class="border-bottom-0 pos col-sm-1">
                         <p class="mb-0 fw-normal">{{\Carbon\Carbon::parse($agents->date_position)->format('Y-m-d')}}</p>
                       </td>
                       <td class="border-bottom-0 pos">

@@ -18,7 +18,7 @@
                             <div class="col-4">
                                 <div class="img">
                                     @if (isset($agent->photo))
-                                        <img src="{{ asset('photos_agents/' . $agent->photo) }}" class="rounded-circle"
+                                        <img src="{{ asset('photos_agents/' . $agent->photo) }}"  onerror="this.onerror=null; this.src='{{asset('photos_agents/user-1.jpg')}}'"  class="rounded-circle"
                                             width="140px" height="140px">
                                     @else
                                         <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle"

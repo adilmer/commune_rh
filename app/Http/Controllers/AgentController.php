@@ -92,7 +92,7 @@ foreach ($names as $value) {
             <td class='border-bottom-0'>
               <div class='img' >";
                   if ($agents->photo!=null)
-                  $data .="<img class='rounded-circle ' width='50px' height='50px' src='$photo_url' alt='' srcset=''>";
+                  $data .="<img class='rounded-circle ' width='50px' height='50px'  onerror='this.onerror=null; this.src=`../assets/images/profile/user-1.jpg`'  src='$photo_url' alt='' srcset=''>";
                   else
                   $data .="<img class='rounded-circle' width='50px' height='50px' src='../assets/images/profile/user-1.jpg' alt='' srcset=''>";
 
@@ -124,7 +124,7 @@ foreach ($names as $value) {
             $data .= "<td class='border-bottom-0'>
               <p class='mb-0 fw-normal'>$nom_position_ar</p>
             </td>
-            <td class='border-bottom-0'>
+            <td class='border-bottom-0  col-sm-1'>
               <p class='mb-0 fw-normal'>$date_position</p>
             </td>
             <td class='border-bottom-0'>
@@ -174,7 +174,7 @@ foreach ($names as $value) {
             <td class='border-bottom-0'>
               <div class='img' >";
                   if ($agents->photo!=null)
-                  $data .="<img class='rounded-circle ' width='50px' height='50px' src='$photo_url' alt='' srcset=''>";
+                  $data .="<img class='rounded-circle ' width='50px' height='50px'   onerror='this.onerror=null; this.src=`../assets/images/profile/user-1.jpg`'  src='$photo_url' alt='' srcset=''>";
                   else
                   $data .="<img class='rounded-circle' width='50px' height='50px' src='../assets/images/profile/user-1.jpg' alt='' srcset=''>";
 
@@ -207,7 +207,7 @@ foreach ($names as $value) {
             </td>";
 
 
-            $data .= "<td class='border-bottom-0 pos'>
+            $data .= "<td class='border-bottom-0 pos col-sm-1'>
               <p class='mb-0 fw-normal'>$date_position</p>
             </td>
             <td class='border-bottom-0 pos'>
