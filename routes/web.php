@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
-   /*  Route::get('/abs', function () {
-        return view('pages.absences.index');
-    }); */
+     Route::get('/abs', function () {
+        return view('pages.attestations.decisionretraite');
+    });
     #Home
     Route::get('/','HomeController@index')->name('home.index');
 
@@ -88,6 +88,7 @@ Route::prefix('conges')->group(function () {
     Route::post("/update","CongeController@update")->name("conge.update");
     Route::post("/uploadDocuments","CongeController@uploadDocuments")->name("conge.uploadDocuments");
     Route::get("/delete/{id_conge}","CongeController@destroy")->name("conge.delete");
+    Route::get('/export_word_demandeConge', 'CongeController@export_word_demandeConge')->name('attestation.export_word_demandeConge');
 });
 
     #Services
@@ -101,6 +102,19 @@ Route::prefix('absences')->group(function () {
     Route::get('/','AbsenceController@index')->name('absence.index');
     Route::get('/filter','AbsenceController@filter')->name('absence.filter');
     Route::get('/pdf', 'AbsenceController@generatePdf')->name('absence.generate');
+});
+
+#Attestations
+Route::prefix('attestations')->group(function () {
+    Route::get('/','AttestationController@index')->name('attestation.index');
+    Route::get('/find','AttestationController@find')->name('attestation.find');
+    Route::get('/export_word', 'AttestationController@export_word')->name('attestation.export_word');
+    Route::get('/ordervirement','AttestationController@ordervirement')->name('attestation.ordervirement');
+    Route::get('/find_ordervirement','AttestationController@find_ordervirement')->name('attestation.find_ordervirement');
+    Route::get('/export_word_ordervirement', 'AttestationController@export_word_ordervirement')->name('attestation.export_word_ordervirement');
+    Route::get('/decisionretraite','AttestationController@decisionretraite')->name('attestation.decisionretraite');
+    Route::get('/find_decisionretraite','AttestationController@find_decisionretraite')->name('attestation.find_decisionretraite');
+    Route::get('/export_word_decisionretraite', 'AttestationController@export_word_decisionretraite')->name('attestation.export_word_decisionretraite');
 });
 
     #Exports

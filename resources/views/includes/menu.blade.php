@@ -36,8 +36,8 @@
             <span class="hide-menu">الشواهد الادارية</span>
           </a>
           <ul class="dropdown-menu text-end">
-            <li> <a class="dropdown-item" href="createdemande.html"> طلب وتيقة</a></li>
-            <li> <a class="dropdown-item" href="ordervirement.html"> أمر بتحويل لا رجعة فيه</a> </li>
+            <li> <a class="dropdown-item" href="{{route('attestation.index')}}"> طلب وتيقة</a></li>
+            <li> <a class="dropdown-item" href="{{route('attestation.ordervirement')}}"> أمر بتحويل لا رجعة فيه</a> </li>
           </ul>
           </li>
         <li class="sidebar-item">
@@ -86,7 +86,7 @@
             <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الإدماج </a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الوضع رهن إشارة  </a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الوضع رهن إشارة  </a> </li>
-            <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الحذف </a> </li>
+            <li> <a href="{{route('attestation.decisionretraite')}}" class="dropdown-item" href="createstagiaire.html"> قرار الحذف </a> </li>
           </ul>
         </li>
       </ul>

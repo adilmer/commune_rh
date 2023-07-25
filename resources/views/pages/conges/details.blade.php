@@ -83,39 +83,42 @@
                     </tbody>
                   </table>
                 </div>
+                <form action="{{route('attestation.export_word_demandeConge')}}" method="get">
+                    @csrf
                 <h5 class="card-title fw-semibold mt-5 ">التوقيعات : </h5>
+                <input type="hidden" name="id_conge" value="{{$conge->id_conge}}">
               <div class="row">
                 <div class="col-4">
-                  <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
-                    <option value="1"> </option>
-                    <option selected value="2"> رئيس المكتب </option>
-                    <option  value="3"> رئيس المصلحة </option>
-                    <option value="4">رئيس القسم  </option>
+                  <select name="signature[]" class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                    <option value=""> </option>
+                    <option selected value="رئيس المكتب "> رئيس المكتب </option>
+                    <option  value="رئيس المصلحة "> رئيس المصلحة </option>
+                    <option value="رئيس القسم ">رئيس القسم  </option>
                   </select>
                 </div>
                 <div class="col-4">
-                      <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
-                        <option value="1" > </option>
-                        <option  value="2"> رئيس المكتب </option>
-                      <option selected value="3"> رئيس المصلحة </option>
-                      <option value="4">رئيس القسم  </option>
+                      <select name="signature[]"  class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                        <option value="" > </option>
+                        <option  value="رئيس المكتب "> رئيس المكتب </option>
+                        <option selected value="رئيس المصلحة "> رئيس المصلحة </option>
+                        <option value="رئيس القسم ">رئيس القسم  </option>
                     </select>
                 </div>
                 <div class="col-4">
-                  <select class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
-                    <option value="1" > </option>
-                    <option  value="2"> رئيس المصلحة </option>
-                    <option selected value="3">رئيس القسم  </option>
-                    <option  value="4">  مدير المصالح </option>
-                    <option  value="5">  رئيس المجلس الجماعي  </option>
+                  <select name="signature[]" class="custom-select custom-select-lg mb-3 form-control" aria-label=".form-select-lg example">
+                    <option value="" > </option>
+                    <option  value="رئيس المصلحة "> رئيس المصلحة </option>
+                    <option value="رئيس القسم ">رئيس القسم  </option>
+                    <option  value=" مدير المصالح ">  مدير المصالح </option>
+                    <option  value="رئيس المجلس الجماعي ">  رئيس المجلس الجماعي  </option>
                   </select>
                 </div>
               </div>
               <div class="btnsucc m-4 text-start">
-                <button class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة الطلب  </button>
-                <button class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة القرار</button>
+                <button type="submit" name="type" value="demandeconge" class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة الطلب  </button>
+                <button type="submit" name="type" value="conge" class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة القرار</button>
               </div>
-
+            </form>
               </div>
 
             </div>
