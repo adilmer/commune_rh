@@ -207,7 +207,7 @@ class AttestationController extends Controller
         $data['n_affilation'] = $agent->n_affilation;
         $data['aff_cmr'] = $agent->aff_cmr;
         $data['situation'] = $agent->situation_fam;
-        $data['dateretrait'] = $agent->date_position->format('Y/m/d');
+        $data['dateretrait'] = \Carbon\Carbon::parse($agent->date_position)->format('Y/m/d');
         $data['grade'] = $agent->grade->nom_grade_ar;
         $data['ech'] = $agent->echelle;
         $data['echl'] = $agent->echellon;
