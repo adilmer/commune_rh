@@ -201,7 +201,7 @@ class AttestationController extends Controller
         $data['agence'] = Str::upper($agent->agence);
         $data['cin'] = Str::upper($agent->cin);
         $data['nomar'] = $agent->nom_ar;
-        $data['datenaiss'] = $agent->date_naiss->format('Y/m/d');
+        $data['datenaiss'] = \Carbon\Carbon::parse($agent->date_naiss)->format('Y/m/d');
         $data['lieunaiss'] = $agent->lieu_naiss;
         $data['aff_mutuelle'] = $agent->aff_mutuelle;
         $data['n_affilation'] = $agent->n_affilation;
@@ -212,8 +212,8 @@ class AttestationController extends Controller
         $data['ech'] = $agent->echelle;
         $data['echl'] = $agent->echellon;
         $data['ind'] = $agent->indice;
-        $data['daterec'] = $agent->date_rec->format('Y/m/d');
-        $data['dategrade'] = $agent->date_grade->format('Y/m/d');
+        $data['daterec'] = \Carbon\Carbon::parse($agent->date_rec->format('Y/m/d'));
+        $data['dategrade'] = \Carbon\Carbon::parse($agent->date_grade->format('Y/m/d'));
         $data['rib'] = $agent->rib;
         $data['ppr'] = $agent->ppr;
         $data['nomperear'] = $request->nomperear;
