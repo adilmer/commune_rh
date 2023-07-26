@@ -83,10 +83,10 @@
             <li> <a class="dropdown-item" href="stagiaire.html">قرار الإلحاق</a></li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الإلحاق</a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الإدماج </a> </li>
-            <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الإدماج </a> </li>
+            <li> <a class="dropdown-item" href="createstagiaire.html">Allocation familiale </a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الوضع رهن إشارة  </a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الوضع رهن إشارة  </a> </li>
-            <li> <a href="{{route('attestation.decisionretraite')}}" class="dropdown-item" href="createstagiaire.html"> قرار الحذف </a> </li>
+            <li> <a href="{{route('attestation.decisionretraite')}}" class="dropdown-item" href="createstagiaire.html"> وثائق الإحالة على التقاعد</a> </li>
           </ul>
         </li>
       </ul>
