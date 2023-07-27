@@ -70,41 +70,6 @@ class AgentsExport implements FromCollection,WithHeadings
     public function headings(): array
     {
         return session()->get('header_agents');
-        /* return [
-        'mat',
-		'ppr',
-		'cin',
-		'nom_fr',
-		'nom_ar',
-		'sexe',
-		'date_naiss',
-		'lieu_naiss',
-		'date_rec',
-		'id_grade',
-		'date_grade',
-		'echelle',
-		'echellon',
-		'date_echellon',
-		'indice',
-		'date_position',
-		'lieu_position',
-		'id_fonction',
-		'id_bureau',
-		'id_position',
-		'situation_fam',
-		'fonction_cj',
-		'nbr_enfant',
-		'aos',
-		'aff_mutuelle',
-		'immatriculation',
-		'n_affilation',
-		'aff_cmr',
-		'rib',
-		'agence',
-		'tel',
-		'adresse_fr',
-		'adresse_ar',
-		'photo'
-        ]; */
+        
     }
 }

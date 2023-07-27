@@ -328,7 +328,6 @@ foreach ($names as $value) {
             $requestData['photo'] = $this->saveAs($request->photo,$request->ppr,"photos_agents");
         }
 
-
 		$agent->update($requestData);
 
         return redirect(route('agent.index'));

@@ -235,4 +235,40 @@ class AttestationController extends Controller
         return response()->download($filename)->deleteFileAfterSend(true);
 
     }
+
+
+    public function allocationfamilial()
+    {
+        $agents = Agent::all();
+        return view('pages.attestations.allocationfamilial', compact('agents'));
+    }
+
+    public function find_allocationfamilial(Request $request)
+    {
+        $agent = Agent::findOrFail($request->text);
+
+        $agents = $agent->get();
+
+        $data =" <p>  Nom et prénom :  <span class='text-bold mx-2  px-1' id='nom_ag'> $agent->nom_fr </span> PPR : <span class='text-bold mx-2  px-1'> $agent->ppr </span> MAT : <span class='text-bold mx-2  px-1'> $agent->mat </span></p>";
+
+        return Response(['data' => $data]);
+    }
+    public function export_word_allocationfamilial(Request $request)
+    {
+        $agent = Agent::findOrFail($request->id_agent);
+        $data =[];
+        //dd($request);
+        $data['nomfr'] = Str::upper($agent->nom_fr);
+        $data['n_acte_naiss'] = $request->n_acte_naiss;
+        $data['date_naiss_fils'] = \Carbon\Carbon::parse($request->date_naiss_fils)->format('d/m/Y');
+        $data['lieu_naiss_fils'] = Str::upper($request->lieu_naiss_fils);
+        $data['nom_fils'] = Str::upper($request->nom_fils);
+        $data['date_compter'] = \Carbon\Carbon::parse($request->date_naiss_fils)->firstOfMonth()->addMonth()->format('d/m/Y');
+        $data['dateNow'] = date('d/m/Y');
+
+        $filename = $this->exportWord($data,'allocationfamiliale','Décision Allocation familiale');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
 }
