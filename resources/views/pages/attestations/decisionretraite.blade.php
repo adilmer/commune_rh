@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-sm-5   p-1 m-auto d-flex align-items-stretch" id="info_agent">
 
-                </div>
+                </div> 
                 </div>
               <div class="col-6 ">
                 <label for="nomperear" >إسم الأب بالعربية </label>

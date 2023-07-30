@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 }); */
 Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
      Route::get('/abs', function () {
-        return view('pages.attestations.decisionretraite');
+        return view('pages.attestations.allocationfamiliale');
     });
     #Home
     Route::get('/','HomeController@index')->name('home.index');
@@ -115,6 +115,9 @@ Route::prefix('attestations')->group(function () {
     Route::get('/decisionretraite','AttestationController@decisionretraite')->name('attestation.decisionretraite');
     Route::get('/find_decisionretraite','AttestationController@find_decisionretraite')->name('attestation.find_decisionretraite');
     Route::get('/export_word_decisionretraite', 'AttestationController@export_word_decisionretraite')->name('attestation.export_word_decisionretraite');
+    Route::get('/allocationfamilial','AttestationController@allocationfamilial')->name('attestation.allocationfamilial');
+    Route::get('/find_allocationfamilial','AttestationController@find_allocationfamilial')->name('attestation.find_allocationfamilial');
+    Route::get('/export_word_allocationfamilial', 'AttestationController@export_word_allocationfamilial')->name('attestation.export_word_allocationfamilial');
 });
 
     #Exports
