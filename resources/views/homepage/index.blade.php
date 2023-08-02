@@ -89,7 +89,7 @@
 
         <!--  Row 1 -->
         <div class="row ">
-          <div class="col-lg-5 d-flex align-items-strech ">
+          <div class="col-lg-4 d-flex align-items-strech ">
             <div class="card w-100 align-items-center">
               <div class="card-body">
                 <div class="wrapper">
@@ -117,23 +117,92 @@
           </div>
 
 
-          <div class="col-lg-3">
+          <div class="col-lg-4">
                 <div class="card">
                   <div class="card-body">
                     <div class="mb-3 mb-sm-0">
-                      <h5 class="card-title fw-semibold">قائمة الأعياد</h5>
+                      <h5 class="card-title fw-semibold">قائمة الأعياد الوطنية لسنة {{date('Y')}}</h5>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table">
                       <table class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4 table-primary">
                         </thead>
                         <tbody>
                           <tr>
                             <td class="border-bottom-0">
-                                <h6 class="fw-semibold mb-1">عيد المولد النبوي</h6>
+                                <h6 class="fw-semibold mb-1">رأس السنة الميلادية</h6>
                             </td>
                             <td class="border-bottom-0">
-                              <p class="mb-0 fw-normal">14/02/2023</p>
+                              <p class="mb-0 fw-normal">01/01/{{date('Y')}}</p>
+                            </td>
+                            <td class="border-bottom-0">
+                                <p class="mb-0 fw-normal">يوم واحد</p>
+                              </td>
+                          </tr>
+                          <tr>
+                            <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">تقديم وثيقة الاستقلال</h6>
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">11/01/{{date('Y')}}</p>
+                        </td>
+                        <td class="border-bottom-0">
+                            <p class="mb-0 fw-normal">يوم واحد</p>
+                          </td>
+                          </tr>
+                          <tr>
+                            <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">عيد الشغل</h6>
+                        </td>
+                        <td class="border-bottom-0">
+                            <p class="mb-0 fw-normal">01/05/{{date('Y')}}</p>
+                          </td>
+                          <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">يوم واحد</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">عيد العرش</h6>
+                        </td>
+                        <td class="border-bottom-0">
+                            <p class="mb-0 fw-normal">30/07/{{date('Y')}}</p>
+                          </td>
+                          <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">يوم واحد</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">ذكرى استرجاع وادي الذهب</h6>
+                        </td>
+                        <td class="border-bottom-0">
+                            <p class="mb-0 fw-normal">14/08/{{date('Y')}}</p>
+                          </td>
+                          <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">يوم واحد</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">ذكرى ثورة الملك والشعب</h6>
+                        </td>
+                        <td class="border-bottom-0">
+                            <p class="mb-0 fw-normal">20/08/{{date('Y')}}</p>
+                          </td>
+                          <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">يوم واحد</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">عيد الشباب</h6>
+                        </td>
+                        <td class="border-bottom-0">
+                            <p class="mb-0 fw-normal">21/08/{{date('Y')}}</p>
+                          </td>
+                          <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">يوم واحد</p>
                             </td>
                           </tr>
                           <tr>
@@ -141,40 +210,22 @@
                             <h6 class="fw-semibold mb-1">ذكرى المسيرة الخضراء</h6>
                         </td>
                         <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
+                            <p class="mb-0 fw-normal">06/11/{{date('Y')}}</p>
+                          </td>
+                          <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">يوم واحد</p>
+                            </td>
                           </tr>
                           <tr>
                             <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1">عيد الاستقلال</h6>
                         </td>
                         <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
-                          </tr>
-                          <tr>
-                            <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1"> رأس السنة الجديدة</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
-                          </tr>
-                          <tr>
-                            <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">تقديم وثيقة الاستقلال</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
-                          </tr>
-                          <tr>
-                            <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">عيد الشغل</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">14/02/2023</p>
-                        </td>
+                            <p class="mb-0 fw-normal">18/11/{{date('Y')}}</p>
+                          </td>
+                          <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">يوم واحد</p>
+                            </td>
                           </tr>
                         </tbody>
                       </table>

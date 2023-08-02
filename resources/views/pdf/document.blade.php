@@ -52,7 +52,7 @@
             generatePDF();
             setTimeout(function() {
                 window.open(window.location, '_self').close();
-            }, 1000);
+            }, 2000);
         };
     </script>
 </head>
