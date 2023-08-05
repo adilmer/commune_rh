@@ -7,7 +7,7 @@
           <div class="row alig n-items-start">
             <div class="col-10">
               <h5 class="card-title mb-9 fw-semibold"> الموظفين الملحقين </h5>
-                 <h4 class="fw-semibold mb-3">{{ $detachement[0]->n1  }}</h4>
+                 <h4 class="fw-semibold mb-3">{{ $detachement }}</h4>
             </div>
             <div class="col-2">
               <div class="d-flex justify-content-end">
@@ -27,7 +27,7 @@
           <div class="row alig n-items-start">
             <div class="col-10">
               <h5 class="card-title mb-9 fw-semibold"> الموظفين رهن إشارة </h5>
-              <h4 class="fw-semibold mb-3">{{$misedisposition[0]->n2 }}</h4>
+              <h4 class="fw-semibold mb-3">{{$misedisposition }}</h4>
             </div>
             <div class="col-2">
               <div class="d-flex justify-content-end">
@@ -48,7 +48,7 @@
           <div class="row alig n-items-start">
             <div class="col-10">
               <h5 class="card-title mb-9 fw-semibold"> الموظفين المدمجين </h5>
-              <h4 class="fw-semibold mb-3">{{$integration[0]->n3 }}</h4>
+              <h4 class="fw-semibold mb-3">{{$integration}}</h4>
             </div>
             <div class="col-2">
               <div class="d-flex justify-content-end">
@@ -69,7 +69,7 @@
           <div class="row alig n-items-start">
             <div class="col-10">
               <h5 class="card-title mb-9 fw-semibold"> الموظفين المتقاعدين </h5>
-              <h4 class="fw-semibold mb-3">{{$retraites[0]->n4 }}</h4>
+              <h4 class="fw-semibold mb-3">{{$retraites}}</h4>
             </div>
             <div class="col-2">
               <div class="d-flex justify-content-end">
