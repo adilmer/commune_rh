@@ -258,8 +258,9 @@ class AttestationController extends Controller
         $agent = Agent::findOrFail($request->id_agent);
         $data =[];
         //dd($request);
-        $data['nomfr'] = Str::upper($agent->nom_fr);
+        $data['nom_fr'] = Str::upper($agent->nom_fr);
         $data['n_acte_naiss'] = $request->n_acte_naiss;
+        $data['classement'] = $request->class_fils;
         $data['date_naiss_fils'] = \Carbon\Carbon::parse($request->date_naiss_fils)->format('d/m/Y');
         $data['lieu_naiss_fils'] = Str::upper($request->lieu_naiss_fils);
         $data['nom_fils'] = Str::upper($request->nom_fils);
