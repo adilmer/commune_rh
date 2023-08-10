@@ -216,6 +216,15 @@ class DatabaseSeeder extends Seeder
             [
                 'nom_categorie_ar' => 'الصادرات',
             ],
+            [
+                'nom_categorie_ar' => 'الكفاءة المهنية',
+            ],
+            [
+                'nom_categorie_ar' => 'إمتحانات التوظيف',
+            ],
+            [
+                'nom_categorie_ar' => 'القرارات',
+            ]
         ];
 
         foreach ($categories as $categories) {

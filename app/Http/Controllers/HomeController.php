@@ -47,7 +47,19 @@ class HomeController extends Controller
         ->where('id_position', 5)
         ->count();
 
-        return view ('homepage.index',['detachement'=>$detachement,'misedisposition'=>$misedisposition,'integration'=>$integration,'retraites'=>$retraites,'listretraites'=>$listretraites]);
+
+        $listconge = DB::table('conges')
+        ->join('agents', 'agents.id_agent', '=', 'conges.id_agent')
+        ->select('type_conge', 'date_debut_conge', 'date_fin_conge', 'nbr_jours', 'remplacant', 'nom_ar')
+        ->whereDate('date_debut_conge', '<=', now())
+        ->whereDate('date_fin_conge', '>=', now())
+        ->get();
+
+        
+
+
+
+        return view ('homepage.index',['detachement'=>$detachement,'misedisposition'=>$misedisposition,'integration'=>$integration,'retraites'=>$retraites,'listretraites'=>$listretraites,'listconge'=>$listconge]);
 
     }
 
