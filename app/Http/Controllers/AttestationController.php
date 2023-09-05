@@ -272,4 +272,19 @@ class AttestationController extends Controller
         return response()->download($filename)->deleteFileAfterSend(true);
 
     }
+    public function bordereau_ar()
+    {
+        $agents = Agent::all();
+        return view('pages.attestations.bordereau_ar');
+    }
+    public function bordereau_fr()
+    {
+        $agents = Agent::all();
+        return view('pages.attestations.bordereau_fr');
+    }
+    public function message()
+    {
+        $agents = Agent::all();
+        return view('pages.attestations.message');
+    }
 }

@@ -84,8 +84,9 @@
             <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الإلحاق</a> </li>
             <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الإدماج </a> </li>
             <li> <a class="dropdown-item" href="{{route('attestation.allocationfamilial')}}">Allocation familiale </a> </li>
-            <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الوضع رهن إشارة  </a> </li>
-            <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الوضع رهن إشارة  </a> </li>
+            <li> <a class="dropdown-item" href="{{route('attestation.bordereau_ar')}}"> ورقة الإرسال </a> </li>
+            <li> <a class="dropdown-item" href="{{route('attestation.bordereau_fr')}}"> Bordereau  </a> </li>
+            <li> <a class="dropdown-item" href="{{route('attestation.message')}}"> مراسلة  </a> </li>
             <li> <a href="{{route('attestation.decisionretraite')}}" class="dropdown-item" href="createstagiaire.html"> وثائق الإحالة على التقاعد</a> </li>
           </ul>
         </li>
