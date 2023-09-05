@@ -22,6 +22,9 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
     });
     #Home
     Route::get('/','HomeController@index')->name('home.index');
+    Route::get('/listretraites','HomeController@listretraites')->name('home.listretraites');
+    Route::get('/vacances','HomeController@vacances')->name('home.vacances');
+    Route::get('/listconge','HomeController@listconge')->name('home.listconge');
 
     #Agents
 Route::prefix('agents')->group(function () {

@@ -89,7 +89,8 @@
 
         <!--  Row 1 -->
         <div class="row ">
-          <div class="col-lg-5 d-flex align-items-strech ">
+      <!--
+            <div class="col-lg-5 d-flex align-items-strech ">
             <div class="card w-100 align-items-center">
               <div class="card-body">
                 <div class="wrapper">
@@ -115,7 +116,7 @@
               </div>
             </div>
           </div>
-
+-->
 
           <div class="col-lg-4">
                 <div class="card">
@@ -131,15 +132,13 @@
                           <h6 class="fw-semibold mb-0">إسم الموظف</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">تاريخ نهاية الرخصة </h6>
+                          <h6 class="fw-semibold mb-0">نهاية الرخصة</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">ينوب عنه</h6>
                         </th>
                       </tr>
                     </thead>
-                        <thead class="text-dark fs-4 table-primary">
-                        </thead>
                         <tbody>
                         @foreach ($listconge as $listconge)
                         <tr>
@@ -152,16 +151,19 @@
                             <td class="border-bottom-0">
                                 <p class="mb-0 fw-normal">{{$listconge -> remplacant}}</p>
                               </td>
-                          </tr>
+                          </tr> 
                           @endforeach
                         </tbody>
                       </table>
+                      <div class="text-start">
+                        <a href="{{route('home.listconge')}}">مشاهدة الكل  </a> 
+                      </div>
                     </div>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-3">
+          <div class="col-lg-4">
                 <div class="card">
                   <div class="card-body">
                     <div class="mb-3 mb-sm-0">
@@ -170,11 +172,21 @@
                     <div class="table">
                       <table class="table mb-0 align-middle">
                         <thead class="text-dark fs-4 table-primary">
+
+                          <tr>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">نوع العطلة</h6>
+                          </th>
+                          <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">تاريخها  </h6>
+                          </th>
+                        </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td class="border-bottom-0">
                                 <h6 class="fw-semibold mb-1">رأس السنة الميلادية</h6>
+                                <span class="fw-normal">يوم واحد</span>
                             </td>
                             <td class="border-bottom-0">
                               <p class="mb-0 fw-normal">01/01/{{date('Y')}}</p>
@@ -183,74 +195,59 @@
                           <tr>
                             <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1">تقديم وثيقة الاستقلال</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">11/01/{{date('Y')}}</p>
-                        </tdr>
+                            <span class="fw-normal">يوم واحد</span>
+                            </td>
+                            <td class="border-bottom-0">
+                             <p class="mb-0 fw-normal">11/01/{{date('Y')}}</p>
+                            </td>
+                        </tr>
                           <tr>
                             <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1">عيد الشغل</h6>
-                        </td>
-                        <td class="border-bottom-0">
+                            <span class="fw-normal">يوم واحد</span>
+                            </td>
+                            <td class="border-bottom-0">
                             <p class="mb-0 fw-normal">01/05/{{date('Y')}}</p>
-                          </td>
+                             </td>
+                          </tr>
+
                           <tr>
                             <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1">عيد العرش</h6>
-                        </td>
-                        <td class="border-bottom-0">
+                            <span class="fw-normal">يوم واحد</span>
+                            </td>
+                            <td class="border-bottom-0">
                             <p class="mb-0 fw-normal">30/07/{{date('Y')}}</p>
-                          </td>
+                            </td>
+                          </tr>
+
                           <tr>
                             <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1">ذكرى استرجاع وادي الذهب</h6>
-                        </td>
-                        <td class="border-bottom-0">
+                            <span class="fw-normal">يوم واحد</span>
+                            </td>
+                            <td class="border-bottom-0">
                             <p class="mb-0 fw-normal">14/08/{{date('Y')}}</p>
-                          </td>
-                          <tr>
-                            <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">ذكرى ثورة الملك والشعب</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                            <p class="mb-0 fw-normal">20/08/{{date('Y')}}</p>
-                          </td>
-                          <tr>
-                            <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">عيد الشباب</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                            <p class="mb-0 fw-normal">21/08/{{date('Y')}}</p>
-                          </td>
-                          <tr>
-                            <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">ذكرى المسيرة الخضراء</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                            <p class="mb-0 fw-normal">06/11/{{date('Y')}}</p>
-                          </td>
-                          <tr>
-                            <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">عيد الاستقلال</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                            <p class="mb-0 fw-normal">18/11/{{date('Y')}}</p>
-                          </td>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
+                      <div class="text-start">
+                    <a href="{{route('home.vacances')}}">مشاهدة الكل</a>
+                  </div>
                     </div>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4">
-            <div class="card">
+            <div class="card pb-3">
               <div class="card-body">
                 <div class="mb-3 mb-sm-0">
                   <h5 class="card-title fw-semibold">الموظفين المحالين على التقاعد </h5>
                 </div>
                 <div class="table-responsive">
-                  <table class="table text-nowrap mb-0 align-middle">
+                  <table class="table  mb-0 align-middle">
                     <thead class="text-dark fs-4 table-primary">
                       <tr>
                         <th class="border-bottom-0">
@@ -264,17 +261,20 @@
                     <tbody>
                     @foreach ($listretraites as $listretraites)
                       <tr>
-                        <td class="border-bottom-0">
+                        <td class="border-bottom-1">
                             <h6 class="fw-semibold mb-1">{{$listretraites -> nom_ar}}</h6>
                             <span class="fw-normal">{{$listretraites -> nom_fr}}</span>
                         </td>
-                        <td class="border-bottom-0">
+                        <td class="border-bottom-1">
                           <p class="mb-0 fw-normal">{{ date('Y/m/d', strtotime($listretraites->dateret)) }}</p>
                         </td>
                       </tr>
                       @endforeach
                     </tbody>
                   </table>
+                  <div class="text-start">
+                    <a href="{{route('home.listretraites')}}">مشاهدة الكل</a>
+                  </div>
                 </div>
           </div>
         </div>
