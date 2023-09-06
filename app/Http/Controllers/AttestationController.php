@@ -287,4 +287,34 @@ class AttestationController extends Controller
         $agents = Agent::all();
         return view('pages.attestations.message');
     }
+
+
+    public function export_word_bordereau_fr(Request $request)
+    {
+        $data =[];
+        //dd($request);
+        $data['destinataire'] = $request->destinataire;
+       // $data['dateNow'] = date('d/m/Y');
+
+        $filename = $this->exportWord($data,'bordereau_fr','bordereau francais');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
+    public function export_word_message(Request $request)
+    {
+        $data =[];
+        //dd($request);
+        $data['destinataire'] = $request->destinataire;
+        $data['ref'] = $request->ref;
+        $data['object'] = $request->object;
+        $data['message'] = $request->message;
+       // $data['dateNow'] = date('d/m/Y');
+
+        $filename = $this->exportWord($data,'message','message arabic');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
+
 }

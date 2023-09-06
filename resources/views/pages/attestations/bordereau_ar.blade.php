@@ -1,5 +1,7 @@
 @extends('templates.site')
 @section('content')
+<form action="{{route('attestation.export_word_bordereau_ar')}}" method="get">
+    @csrf
     <div class="row mt-5" style="justify-content: flex-end">
         <div class="row">
           <div class="col-lg-12 d-flex align-items-stretch">
@@ -10,7 +12,7 @@
                     <div class="form-group row  my-3">
                         <label class="form-check-label  fs-5 pt-2 col-3" for="nom_agent" > المرسل إليه :</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control col-5" list="agents_list"  placeholder="تحديد المعني بالأمر"  >
+                    <input type="text" class="form-control col-5" id="destinataire" name="destinataire" list="agents_list"  placeholder="تحديد المعني بالأمر"  >
                     </div>
                     </div>
               </div>
@@ -24,4 +26,5 @@
 
       </div>
 </div>
+</form>
 @endsection

@@ -1,5 +1,7 @@
 @extends('templates.site')
 @section('content')
+<form action="{{route('attestation.export_word_message')}}" method="get">
+    @csrf
 <div>
     <div class="row mt-5" style="justify-content: flex-end">
         <div class="row">
@@ -9,27 +11,27 @@
                 <h5 class="card-title fw-semibold mb-4">معلومات ورقة الإرسال</h5>
                 <div class="col-10">
                     <div class="form-group row  my-3">
-                        <label class="form-check-label  fs-5 pt-2 col-3" for="nom_agent" > المرسل إليه :</label>
+                        <label class="form-check-label  fs-5 pt-2 col-3"id="destinataire" name="destinataire" for="nom_agent" > المرسل إليه :</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control col-5" list="agents_list"  placeholder="تحديد المعني بالأمر"  >
+                    <input type="text" id="destinataire" name="destinataire" class="form-control col-5" list="agents_list"  placeholder="تحديد المعني بالأمر"  >
                     </div>
                     </div>
                     <div class="form-group row  my-3">
-                        <label class="form-check-label  fs-5 pt-2 col-3" for="nom_agent" > الموضوع  :</label>
+                        <label class="form-check-label  fs-5 pt-2 col-3" id="object" name="object" for="nom_agent" > الموضوع  :</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control col-5" list="agents_list"  placeholder="موضوع المراسلة  "  >
+                    <input type="text" id="object" name="object" class="form-control col-5" list="agents_list"  placeholder="موضوع المراسلة  "  >
                     </div>
                     </div>
                     <div class="form-group row  my-3">
-                        <label class="form-check-label  fs-5 pt-2 col-3" for="nom_agent" > المرجع  :</label>
+                        <label class="form-check-label  fs-5 pt-2 col-3" id="ref" name="ref" for="nom_agent" > المرجع  :</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control col-5" list="agents_list"  placeholder="مرجع المراسلة  "  >
+                    <input type="text" id="ref" name="ref" class="form-control col-5" list="agents_list"  placeholder="مرجع المراسلة  "  >
                     </div>
                     </div>
                     <div class="form-group row  my-3">
-                        <label class="form-check-label  fs-5 pt-2 col-3" for="nom_agent" > نص المراسلة  :</label>
+                        <label class="form-check-label  fs-5 pt-2 col-3" id="message" name="message" for="nom_agent" > نص المراسلة  :</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control"id="participantes" name="participantes"  rows="4"></textarea>
+                        <textarea  class="form-control"id="message" name="message"  rows="4"></textarea>
                     </div>
                     </div>
               </div>
@@ -44,4 +46,5 @@
       </div>
 </div>
 </div>
+</form>
 @endsection
