@@ -25,6 +25,7 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
     Route::get('/listretraites','HomeController@listretraites')->name('home.listretraites');
     Route::get('/vacances','HomeController@vacances')->name('home.vacances');
     Route::get('/listconge','HomeController@listconge')->name('home.listconge');
+    Route::get('/listdocument','HomeController@listdocument')->name('home.listdocument');
 
     #Agents
 Route::prefix('agents')->group(function () {

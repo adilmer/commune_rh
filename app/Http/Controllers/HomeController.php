@@ -21,7 +21,7 @@ class HomeController extends Controller
                 'nom_ar',
                 'nom_fr',
                 DB::raw("
-                    CASE 
+                    CASE
                         WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
                         WHEN YEAR(date_naiss) = 1958 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 61 YEAR))
                         WHEN YEAR(date_naiss) = 1959 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 61 YEAR), INTERVAL 6 MONTH))
@@ -36,7 +36,7 @@ class HomeController extends Controller
             ->limit(5)
             ->get();
 
-   
+
 
        //$detachement= DB::select(DB::raw('SELECT COUNT(*) as n1 FROM `agents` WHERE id_position=2'));
         $detachement = DB::table('agents')
@@ -61,13 +61,13 @@ class HomeController extends Controller
 
         $listconge = DB::table('conges')
         ->join('agents', 'agents.id_agent', '=', 'conges.id_agent')
-        ->select('type_conge', 'date_debut_conge', 'date_fin_conge', 'nbr_jours', 'remplacant', 'nom_ar')
+        ->select('type_conge', 'date_debut_conge', 'date_prise', 'nbr_jours', 'remplacant', 'nom_ar')
         ->whereDate('date_debut_conge', '<=', now())
-        ->whereDate('date_fin_conge', '>=', now())
+        ->whereDate('date_prise', '>=', now())
         ->limit(5)
         ->get();
 
-        
+
 
 
 
@@ -83,7 +83,7 @@ class HomeController extends Controller
             'nom_ar',
             'nom_fr',
             DB::raw("
-                CASE 
+                CASE
                     WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
                     WHEN YEAR(date_naiss) = 1958 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 61 YEAR))
                     WHEN YEAR(date_naiss) = 1959 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 61 YEAR), INTERVAL 6 MONTH))
@@ -97,7 +97,7 @@ class HomeController extends Controller
         ->orderBy('dateret', 'ASC')
         ->get();
 
-          
+
                 // return view ('homepage.listretraites'['listretraites'=>$listretraites]);
         return view('homepage.listretraites',compact(['listretraites2']));
 
@@ -109,17 +109,24 @@ class HomeController extends Controller
     }
 
 
-    
+
     public function listconge()
     {
        $listconge = DB::table('conges')
         ->join('agents', 'agents.id_agent', '=', 'conges.id_agent')
-        ->select('type_conge', 'date_debut_conge', 'date_fin_conge', 'nbr_jours', 'remplacant', 'nom_ar')
+        ->select('type_conge', 'date_debut_conge', 'date_prise', 'nbr_jours', 'remplacant', 'nom_ar')
         ->whereDate('date_debut_conge', '<=', now())
-        ->whereDate('date_fin_conge', '>=', now())
+        ->whereDate('date_prise', '>=', now())
         ->get();
 
-         
+
         return view('homepage.listconge',['listconge'=>$listconge]);
+    }
+
+
+    public function listdocument()
+    {
+
+        return view('homepage.listdocument');
     }
 }

@@ -132,7 +132,7 @@
                           <h6 class="fw-semibold mb-0">إسم الموظف</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">نهاية الرخصة</h6>
+                          <h6 class="fw-semibold mb-0"> </h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">ينوب عنه</h6>
@@ -146,17 +146,17 @@
                                 <h6 class="fw-semibold mb-1">{{$listconge -> nom_ar}}</h6>
                             </td>
                             <td class="border-bottom-0">
-                              <p class="mb-0 fw-normal">{{$listconge -> date_fin_conge}}</p>
+                              <p class="mb-0 fw-normal">{{$listconge -> date_prise}}</p>
                             </td>
                             <td class="border-bottom-0">
                                 <p class="mb-0 fw-normal">{{$listconge -> remplacant}}</p>
                               </td>
-                          </tr> 
+                          </tr>
                           @endforeach
                         </tbody>
                       </table>
                       <div class="text-start">
-                        <a href="{{route('home.listconge')}}">مشاهدة الكل  </a> 
+                        <a href="{{route('home.listconge')}}">مشاهدة الكل  </a>
                       </div>
                     </div>
               </div>
