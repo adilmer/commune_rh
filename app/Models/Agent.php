@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $date_naiss
  * @property string|null $lieu_naiss
  * @property Carbon|null $date_rec
+ * @property Carbon|null $date_tuto
  * @property int|null $id_grade
  * @property Carbon|null $date_grade
  * @property string|null $echelle
@@ -69,6 +70,7 @@ class Agent extends Model
 		'ppr' => 'int',
 		'date_naiss' => 'datetime',
 		'date_rec' => 'datetime',
+		'date_tuto' => 'datetime',
 		'id_grade' => 'int',
 		'date_grade' => 'datetime',
 		'echellon' => 'int',
@@ -91,6 +93,7 @@ class Agent extends Model
 		'date_naiss',
 		'lieu_naiss',
 		'date_rec',
+		'date_tuto',
 		'id_grade',
 		'date_grade',
 		'echelle',

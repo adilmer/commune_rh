@@ -123,6 +123,14 @@ Route::prefix('attestations')->group(function () {
     Route::get('/find_allocationfamilial','AttestationController@find_allocationfamilial')->name('attestation.find_allocationfamilial');
     Route::get('/export_word_allocationfamilial', 'AttestationController@export_word_allocationfamilial')->name('attestation.export_word_allocationfamilial');
 
+    Route::get('/tps','AttestationController@tps')->name('attestation.tps');
+    Route::get('/find_tps','AttestationController@find_tps')->name('attestation.find_tps');
+    Route::get('/export_word_tps', 'AttestationController@export_word_tps')->name('attestation.export_word_tps');
+
+    Route::get('/annulationtps','AttestationController@annulationtps')->name('attestation.annulationtps');
+    Route::get('/find_annulationtps','AttestationController@find_annulationtps')->name('attestation.find_annulationtps');
+    Route::get('/export_word_annulationtps', 'AttestationController@export_word_annulationtps')->name('attestation.export_word_annulationtps');
+
 
 
     Route::get('/export_word_bordereau_ar', 'AttestationController@export_word_bordereau_ar')->name('attestation.export_word_bordereau_ar');

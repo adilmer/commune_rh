@@ -132,7 +132,8 @@
                           <h6 class="fw-semibold mb-0">إسم الموظف</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0"> </h6>
+                          <h6 class="fw-semibold mb-0">
+                            تاريخ إستئناف العمل</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">ينوب عنه</h6>

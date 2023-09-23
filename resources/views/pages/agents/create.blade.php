@@ -132,17 +132,20 @@
                 </select>
               </div>
 
-              <div class="col-6 mt-3">
+              <div class="col-4 mt-3">
                 <label for="id_bureau">المكتب</label>
                 <select id="id_bureau" name="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
 
                 </select>
               </div>
-              <div class="col-6 mt-3">
-                <label for="date_rec">تاريخ الترسيم</label>
+              <div class="col-4 mt-3">
+                <label for="date_rec">تاريخ التوظيف</label>
                 <input name="date_rec" type="date" class="form-control" id="date_rec" placeholder="">
               </div>
-
+              <div class="col-4 mt-3">
+                <label for="date_tuto">تاريخ الترسيم</label>
+                <input name="date_tuto" type="date" class="form-control" id="date_tuto" placeholder="">
+              </div>
               <div class="col-8 mt-3">
                 <label for="rib">رقم الحساب البنكي </label>
                 <input name="rib" type="text" class="form-control" id="rib" placeholder="">

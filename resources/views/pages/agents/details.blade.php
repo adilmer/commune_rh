@@ -181,7 +181,7 @@
                                 <thead class="text-dark fs-4 table-light">
                                     <tr>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">تاريخ الإحالة على التقاعد</h6>
+                                            <h6 class="fw-semibold mb-0">تاريخ  التوظيف </h6>
                                         </th>
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">تاريخ الترسيم</h6>
@@ -201,10 +201,10 @@
                                             $dateTutularisation = $dateTutularisation->addYears(1);
                                         @endphp
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"> {{ $dateRetrait?->format('Y-m-d') }}</p>
+                                            <p class="mb-0 fw-normal">{{ $agent->date_rec?->format('Y-m-d') }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $dateTutularisation?->format('Y-m-d') }}</p>
+                                            <p class="mb-0 fw-normal">{{ $agent->date_tuto?->format('Y-m-d') }}</p>
                                         </td>
                                         <td class="border-bottom-0">
                                             <p class="mb-0 fw-normal">{{ $agent->date_naiss?->format('Y-m-d') }}</p>
@@ -246,7 +246,7 @@
                                             <h6 class="fw-semibold mb-0"> رقم الحساب</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0"></h6>
+                                            <h6 class="fw-semibold mb-0">تاريخ الإحالة على القاعد</h6>
                                         </th>
                                     </tr>
                                 </thead>
@@ -259,7 +259,7 @@
                                             <p class="mb-0 fw-normal">{{ $agent->rib }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"></p>
+                                            <p class="mb-0 fw-normal"> {{ $dateRetrait?->format('Y-m-d') }} </p>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -288,6 +288,18 @@ class AttestationController extends Controller
         return view('pages.attestations.message');
     }
 
+    public function export_word_bordereau_ar(Request $request)
+    {
+        $data =[];
+        //dd($request);
+        $data['destinataire'] = $request->destinataire;
+       // $data['dateNow'] = date('d/m/Y');
+
+        $filename = $this->exportWord($data,'bordereau_ar','bordereau arabic');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
 
     public function export_word_bordereau_fr(Request $request)
     {
@@ -317,4 +329,131 @@ class AttestationController extends Controller
 
     }
 
+    public function tps()
+    {
+        $agents = Agent::all();
+        return view('pages.attestations.tps', compact('agents'));
+    }
+
+    public function find_tps(Request $request)
+    {
+        $agent = Agent::findOrFail($request->text);
+
+        $agents = $agent->get();
+
+        $data =" <p> الإسم الكامل :  <span class='text-bold mx-2  px-1' id='nom_ag'> $agent->nom_ar </span> رقم التأجير  : <span class='text-bold mx-2  px-1'> $agent->ppr </span> رقم التسجيل  : <span class='text-bold mx-2  px-1'> $agent->mat </span></p>";
+        return Response(['data' => $data]);
+    }
+    public function export_word_tps(Request $request)
+    {
+        $agent = Agent::findOrFail($request->id_agent);
+        $data =[];
+        //dd($request);
+        $data['nomfr'] = Str::upper($agent->nom_fr);
+        $data['agence'] = Str::upper($agent->agence);
+        $data['cin'] = Str::upper($agent->cin);
+        $data['nomar'] = $agent->nom_ar;
+        $data['datenaiss'] = \Carbon\Carbon::parse($agent->date_naiss)->format('Y/m/d');
+        $data['lieunaiss'] = $agent->lieu_naiss;
+        $data['aff_mutuelle'] = $agent->aff_mutuelle;
+        $data['n_affilation'] = $agent->n_affilation;
+        $data['aff_cmr'] = $agent->aff_cmr;
+        $data['situation'] = $agent->situation_fam;
+        $data['dateretrait'] = \Carbon\Carbon::parse($agent->date_position)->format('Y/m/d');
+        $data['grade'] = $agent->grade->nom_grade_ar;
+        $data['ech'] = $agent->echelle;
+        $data['echl'] = $agent->echellon;
+        $data['ind'] = $agent->indice;
+        $data['daterec'] = \Carbon\Carbon::parse($agent->date_rec->format('Y/m/d'));
+        $data['dategrade'] = \Carbon\Carbon::parse($agent->date_grade->format('Y/m/d'));
+        $data['rib'] = $agent->rib;
+        $data['ppr'] = $agent->ppr;
+        $data['nomperear'] = $request->nomperear;
+        $data['nommerear'] = $request->nommerear;
+        $data['nomperefr'] = Str::upper($request->nomperefr);
+        $data['nommerefr'] = Str::upper($request->nommerefr);
+        $data['nomfemme'] = $request->nomfemme;
+        $data['journaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('d');
+        $data['moinnaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('m');
+        $data['anneenaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('Y');
+        $data['jourmar'] = \Carbon\Carbon::parse($request->date_mar)->format('d');
+        $data['moismar'] = \Carbon\Carbon::parse($request->date_mar)->format('m');
+        $data['anneermar'] = \Carbon\Carbon::parse($request->date_mar)->format('Y');
+        $data['fonct_cj'] = $request->fonct_cj;
+        $data['dateNow'] = date('Y/m/d');
+
+
+        $data['datex'] = $request->datex;
+        $data['typeachgal'] = $request->typeachgal;
+
+
+        $filename = $this->exportWord($data,'tps','ملف التعويضات tps ');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
+
+    public function annulationtps()
+    {
+        $agents = Agent::all();
+        return view('pages.attestations.annulationtps', compact('agents'));
+    }
+
+    public function find_annulationtps(Request $request)
+    {
+        $agent = Agent::findOrFail($request->text);
+
+        $agents = $agent->get();
+
+        $data =" <p> الإسم الكامل :  <span class='text-bold mx-2  px-1' id='nom_ag'> $agent->nom_ar </span> رقم التأجير  : <span class='text-bold mx-2  px-1'> $agent->ppr </span> رقم التسجيل  : <span class='text-bold mx-2  px-1'> $agent->mat </span></p>";
+        return Response(['data' => $data]);
+    }
+    public function export_word_annulationtps(Request $request)
+    {
+        $agent = Agent::findOrFail($request->id_agent);
+        $data =[];
+        //dd($request);
+        $data['nomfr'] = Str::upper($agent->nom_fr);
+        $data['agence'] = Str::upper($agent->agence);
+        $data['cin'] = Str::upper($agent->cin);
+        $data['nomar'] = $agent->nom_ar;
+        $data['datenaiss'] = \Carbon\Carbon::parse($agent->date_naiss)->format('Y/m/d');
+        $data['lieunaiss'] = $agent->lieu_naiss;
+        $data['aff_mutuelle'] = $agent->aff_mutuelle;
+        $data['n_affilation'] = $agent->n_affilation;
+        $data['aff_cmr'] = $agent->aff_cmr;
+        $data['situation'] = $agent->situation_fam;
+        $data['dateretrait'] = \Carbon\Carbon::parse($agent->date_position)->format('Y/m/d');
+        $data['grade'] = $agent->grade->nom_grade_ar;
+        $data['ech'] = $agent->echelle;
+        $data['echl'] = $agent->echellon;
+        $data['ind'] = $agent->indice;
+        $data['daterec'] = \Carbon\Carbon::parse($agent->date_rec->format('Y/m/d'));
+        $data['dategrade'] = \Carbon\Carbon::parse($agent->date_grade->format('Y/m/d'));
+        $data['rib'] = $agent->rib;
+        $data['ppr'] = $agent->ppr;
+        $data['nomperear'] = $request->nomperear;
+        $data['nommerear'] = $request->nommerear;
+        $data['nomperefr'] = Str::upper($request->nomperefr);
+        $data['nommerefr'] = Str::upper($request->nommerefr);
+        $data['nomfemme'] = $request->nomfemme;
+        $data['journaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('d');
+        $data['moinnaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('m');
+        $data['anneenaissfemme'] = \Carbon\Carbon::parse($request->naissfemme)->format('Y');
+        $data['jourmar'] = \Carbon\Carbon::parse($request->date_mar)->format('d');
+        $data['moismar'] = \Carbon\Carbon::parse($request->date_mar)->format('m');
+        $data['anneermar'] = \Carbon\Carbon::parse($request->date_mar)->format('Y');
+        $data['fonct_cj'] = $request->fonct_cj;
+        $data['dateNow'] = date('Y/m/d');
+
+
+        $data['datex'] = $request->datex;
+        $data['typeachgal'] = $request->typeachgal;
+
+
+        $filename = $this->exportWord($data,'annulationtps','ملف إلغاء تعويضات tps ');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
 }
