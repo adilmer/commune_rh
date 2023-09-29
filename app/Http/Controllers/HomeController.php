@@ -129,4 +129,9 @@ class HomeController extends Controller
 
         return view('homepage.listdocument');
     }
+    public function test()
+    {
+
+        return view('homepage.test');
+    }
 }

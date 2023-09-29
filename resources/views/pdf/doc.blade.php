@@ -7,12 +7,23 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
     <style>
         .page-break {
             page-break-before: always;
         }
 
-
+        @font-face {
+            font-family: 'arabweb1';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/arabweb1.ttf') }}') format('truetype');
+        }
 
         @media print {
             body {
@@ -37,7 +48,7 @@
                 .save(filename + ".pdf")
         }
 
-     /*   window.onload = function() {
+      /*  window.onload = function() {
             generatePDF();
             setTimeout(function() {
                 window.open(window.location, '_self').close();
@@ -60,48 +71,50 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6 px-5">
-                            <h2><b>لائحة الموظفين المستوفون لشروط إجتياز مباراة الكفاءة المهنية برسم سنة 2023 لولوج درجة تقني من الدرجة التانية إلى غاية 19 نونبر 2023 تاريخ أول إختبار</b></h2>
-                        </div>
-                        <div class="col-3"></div>
-                    </div>
-                    <br><br>
+                    <h5>{{ $bureau->service->departement->nom_departement_ar }}</h5>
+                    <h6>{{ $bureau->service->nom_service_ar }}</h6>
+                    <p class="">{{ $bureau->nom_bureau_ar }}</p>
                     <div class="table ">
                         <table class="table table-bordered border-1 border-dark-light text-nowrap mb-0 align-middle float-right">
                             <thead class="text-dark fs-4">
                                 <tr>
                                     <th class="border-bottom-0 col-1">
-                                        <h4 class="fw-semibold mb-0">ر.ت</h4>
+                                        <h6 class="fw-semibold mb-0">MAT</h6>
                                     </th>
                                     <th class="border-bottom-0 col-1">
-                                        <h4 class="fw-semibold mb-0">رقم التأجير</h4>
+                                        <h6 class="fw-semibold mb-0">رقم التأجير</h6>
                                     </th>
                                     <th class="border-bottom-0 col-2">
-                                        <h4 class="fw-semibold mb-0"> الإسم الكامل </h4>
+                                        <h6 class="fw-semibold mb-0"> الإسم الكامل </h6>
                                     </th>
                                     <th class="border-bottom-0 col-2">
-                                        <h4 class="fw-semibold mb-0">تاريخ إستيفاء الشروط</h4>
+                                        <h6 class="fw-semibold mb-0">الدرجة</h6>
                                     </th>
-
+                                    <th class="border-bottom-0 col-5">
+                                        <h6 class="fw-semibold mb-0">التوقيع</h6>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="table_agents">
                                 @foreach ($bureau->agents as $agents)
                                     <tr style="height: 80px">
                                         <td class="border-bottom-0 col-1">
-                                            <h4 class="fw-semibold mb-0">{{ $agents->mat }}</h4>
+                                            <h6 class="fw-semibold mb-0">{{ $agents->mat }}</h6>
                                         </td>
                                         <td class="border-bottom-0 col-2">
                                             <p class="mb-0 fw-normal">{{ $agents->ppr }}</p>
                                         </td>
                                         <td class="border-bottom-0 col-3">
-                                            <h4 class="fw-semibold mb-1">{{ $agents->nom_ar }}</h4>
+                                            <h6 class="fw-semibold mb-1">{{ $agents->nom_ar }}</h6>
                                             <span class="fw-normal">{{ $agents->nom_fr }}</span>
                                         </td>
                                         <td class="border-bottom-0 col-3">
-                                            <h4 class="mb-0 fw-normal">{{ $agents->grade->nom_grade_ar }}</h4>
+                                            <p class="mb-0 fw-normal">{{ $agents->grade->nom_grade_ar }}</p>
+                                        </td>
+                                        <td class="border-bottom-0 col-5">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- Signature section -->
+                                            </div>
                                         </td>
                                     </tr>
                                     @if ($loop->iteration % 9 === 0)
@@ -112,16 +125,19 @@
                                         <thead class="text-dark fs-4">
                                             <tr>
                                                 <th class="border-bottom-0 col-1">
-                                                    <h4 class="fw-semibold mb-0">ر.ت</h4>
+                                                    <h6 class="fw-semibold mb-0">MAT</h6>
                                                 </th>
                                                 <th class="border-bottom-0 col-1">
-                                                    <h4 class="fw-semibold mb-0">رقم التأجير</h4>
+                                                    <h6 class="fw-semibold mb-0">رقم التأجير</h6>
                                                 </th>
                                                 <th class="border-bottom-0 col-2">
-                                                    <h4 class="fw-semibold mb-0"> الإسم الكامل</h4>
+                                                    <h6 class="fw-semibold mb-0"> الإسم الكامل </h6>
                                                 </th>
                                                 <th class="border-bottom-0 col-2">
-                                                    <h4 class="fw-semibold mb-0">تاريخ إستيفاء الشروط</h4>
+                                                    <h6 class="fw-semibold mb-0">الدرجة</h6>
+                                                </th>
+                                                <th class="border-bottom-0 col-5">
+                                                    <h6 class="fw-semibold mb-0">التوقيع</h6>
                                                 </th>
                                             </tr>
                                         </thead>

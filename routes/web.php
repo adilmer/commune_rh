@@ -17,15 +17,56 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
-     Route::get('/abs', function () {
-        return view('pages.attestations.allocationfamiliale');
+     Route::get('/notation', function () {
+        return view('homepage.notation');
     });
+    Route::get('/aptitudeprofessionnelle', function () {
+        return view('aptitudeprofessionnelle.index');
+    });
+    Route::get('/aptitudeprofessionnelle/create', function () {
+        return view('aptitudeprofessionnelle.create');
+    });
+    Route::get('/aptitudeprofessionnelle/details', function () {
+        return view('aptitudeprofessionnelle.details');
+    });
+
+    Route::get('/aptitudeprofessionnelle/accepte', function () {
+        return view('aptitudeprofessionnelle.accepte');
+    });
+    Route::get('/aptitudeprofessionnelle/listeexamenecrit', function () {
+        return view('aptitudeprofessionnelle.listeexamenecrit');
+    });
+    Route::get('/aptitudeprofessionnelle/listeexamenoral', function () {
+        return view('aptitudeprofessionnelle.listeexamenoral');
+    });
+
+    Route::get('/aptitudeprofessionnelle/comiteexamen', function () {
+        return view('aptitudeprofessionnelle.comiteexamen');
+    });
+    Route::get('/aptitudeprofessionnelle/comitegardiens', function () {
+        return view('aptitudeprofessionnelle.comitegardiens');
+    });
+
+    Route::get('/aptitudeprofessionnelle/notationexamenecrit', function () {
+        return view('aptitudeprofessionnelle.notationexamenecrit');
+    });
+
+    Route::get('/aptitudeprofessionnelle/notationexamenoral', function () {
+        return view('aptitudeprofessionnelle.notationexamenoral');
+    });
+
+
+
+
+
+
     #Home
     Route::get('/','HomeController@index')->name('home.index');
     Route::get('/listretraites','HomeController@listretraites')->name('home.listretraites');
     Route::get('/vacances','HomeController@vacances')->name('home.vacances');
     Route::get('/listconge','HomeController@listconge')->name('home.listconge');
     Route::get('/listdocument','HomeController@listdocument')->name('home.listdocument');
+    Route::get('/test','HomeController@test')->name('home.test');
 
     #Agents
 Route::prefix('agents')->group(function () {
