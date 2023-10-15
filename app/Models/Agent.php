@@ -120,34 +120,4 @@ class Agent extends Model
 		'adresse_ar',
 		'photo'
 	];
-
-	public function grade()
-	{
-		return $this->belongsTo(Grade::class, 'id_grade');
-	}
-
-	public function fonction()
-	{
-		return $this->belongsTo(Fonction::class, 'id_fonction');
-	}
-
-	public function bureau()
-	{
-		return $this->belongsTo(Bureau::class, 'id_bureau');
-	}
-
-	public function position()
-	{
-		return $this->belongsTo(Position::class, 'id_position');
-	}
-
-	public function conges()
-	{
-		return $this->hasMany(Conge::class, 'id_agent');
-	}
-
-	public function documents()
-	{
-		return $this->hasMany(Document::class, 'id_agent');
-	}
 }
