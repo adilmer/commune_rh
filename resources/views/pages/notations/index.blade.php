@@ -13,12 +13,14 @@
                 <h5 class="card-title fw-semibold mb-4"> التنقيط الفردي لموظف</h5>
                     @php
                         $agents = App\Models\Agent::all();
+                        $agent = App\Models\Agent::where('id_agent',request()->query('id_agent'))->first();
+                        $services = App\Models\Service::all();
                     @endphp
-                <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
+                <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="{{ $agent->id_agent ?? ''}}" required>
                 <div class="form-group row  my-3">
                     <label class="form-check-label p-2 col-1" for="nom_agent" >المعني بالأمر :</label>
                 <div class="col-sm-5">
-                <input type="text" class="form-control" list="agents_list" id="list_agents"  autocomplete="off"  placeholder="تحديد المعني بالأمر" value="" required >
+                <input type="text" class="form-control" list="agents_list" id="list_agents" value="{{ $agent->nom_ar ?? ''}} {{ $agent->prenom_ar ?? ''}}"  autocomplete="off"  placeholder="تحديد المعني بالأمر" value="" required >
 
                     <datalist id="agents_list" >
                         @foreach ($agents as $agents)
@@ -26,39 +28,63 @@
                         @endforeach
                     </datalist>
                 </div>
+
                 <div class="col-sm-5   p-1 m-auto d-flex align-items-stretch" id="info_agent">
+                    @if (request()->query('id_agent'))
+                    <p> الإسم الكامل :  <span class='text-bold mx-2  px-1' id='nom_ag'>{{ $agent->nom_ar ?? ''}} </span>
+                        رقم التأجير  : <span class='text-bold mx-2  px-1'> {{$agent->ppr ?? ''}} </span>
+                         رقم التسجيل  : <span class='text-bold mx-2  px-1'> {{$agent->mat ?? ''}} </span></p>
+                    @endif
 
                 </div>
                 </div>
                   <div class="col-2">
+                    @php
+                        $note =  App\Models\Notation::where('id_agent',request()->query('id_agent'))->where('annee_notation',date('Y'))->first()->note ?? '';
+                    @endphp
                     <label for="nomperear" >نقطة سنة {{date('Y')}}</label>
                     <input type="hidden" class="form-control" id="nomperear" name="annee_notation[]" value="{{date('Y')}}">
-                    <input type="number" class="form-control" id="nomperear" name="note[]" placeholder="">
+                    <input type="number" class="form-control" id="nomperear" name="note[]" step="0.01" value="{{$note}}" >
                   </div>
                   <div class="col-2">
+                    @php
+                        $note =  App\Models\Notation::where('id_agent',request()->query('id_agent'))->where('annee_notation',date('Y')-1)->first()->note ?? '';
+                    @endphp
                     <label for="nomperefr"> نقطة سنة {{date('Y')-1}}</label>
                     <input name="annee_notation[]" type="hidden" class="form-control" id="nomperefr" value="{{date('Y')-1}}">
-                    <input name="note[]" type="number" class="form-control" id="nomperefr" placeholder="">
+                    <input name="note[]" type="number" class="form-control" id="nomperefr" step="0.01" value="{{$note}}">
                   </div>
                   <div class="col-2">
+                    @php
+                        $note =  App\Models\Notation::where('id_agent',request()->query('id_agent'))->where('annee_notation',date('Y')-2)->first()->note ?? '';
+                    @endphp
                     <label for="nomperear" >نقطة سنة {{date('Y')-2}}</label>
                     <input type="hidden" class="form-control" id="nomperear" name="annee_notation[]" value="{{date('Y')-2}}">
-                    <input type="number" class="form-control" id="nomperear" name="note[]" placeholder="">
+                    <input type="number" class="form-control" id="nomperear" name="note[]" step="0.01" value="{{$note}}">
                   </div>
                   <div class="col-2">
+                    @php
+                        $note =  App\Models\Notation::where('id_agent',request()->query('id_agent'))->where('annee_notation',date('Y')-3)->first()->note ?? '';
+                    @endphp
                     <label for="nomperear" >نقطة سنة {{date('Y')-3}}</label>
                     <input type="hidden" class="form-control" id="nomperear" name="annee_notation[]" value="{{date('Y')-3}}">
-                    <input type="number" class="form-control" id="nomperear" name="note[]" placeholder="">
+                    <input type="number" class="form-control" id="nomperear" name="note[]" step="0.01" value="{{$note}}">
                   </div>
                   <div class="col-2">
+                    @php
+                        $note =  App\Models\Notation::where('id_agent',request()->query('id_agent'))->where('annee_notation',date('Y')-4)->first()->note ?? '';
+                    @endphp
                     <label for="nomperear" >نقطة سنة {{date('Y')-4}}</label>
                     <input type="hidden" class="form-control" id="nomperear" name="annee_notation[]" value="{{date('Y')-4}}">
-                    <input type="number" class="form-control" id="nomperear" name="note[]" placeholder="">
+                    <input type="number" class="form-control" id="nomperear" name="note[]" step="0.01" value="{{$note}}">
                   </div>
                   <div class="col-2">
+                    @php
+                        $note =  App\Models\Notation::where('id_agent',request()->query('id_agent'))->where('annee_notation',date('Y')-5)->first()->note ?? '';
+                    @endphp
                     <label for="nomperear" >نقطة سنة {{date('Y')-5}}</label>
                     <input type="hidden" class="form-control" id="nomperear" name="annee_notation[]" value="{{date('Y')-5}}">
-                    <input type="number" class="form-control" id="nomperear" name="note[]" placeholder="">
+                    <input type="number" class="form-control"  id="nomperear" name="note[]" step="0.01" value="{{$note}}">
                   </div>
                 </div>
 
@@ -74,11 +100,13 @@
                         <select name="id_bureau" id="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
 
                             <option value="0" selected>اختر ...</option>
-
+                                @foreach ($services as $service)
+                                <option value="{{$service->id_service}}" >{{$service->nom_service_ar}}</option>
+                                @endforeach
                         </select>
                       </div>
                       <div class="col-sm-2 pl-0 mb-2">
-                    <input type="text" class="form-control" value="{{date('Y')}}" id="nomperear" name="annee_notation[]" value="{{date('Y')-1}}">
+                    <input type="text" class="form-control" value="{{date('Y')}}" id="nomperear" name="session_notation" value="{{date('Y')-1}}">
                       </div>
                       <div class="col-sm-3 ">
                         <a id="print_list" target="_blank"  href="{{route('absence.generate')}}" class="btn btn-primary"><i class="ti ti-printer"></i> طباعة الكل</a>
@@ -143,12 +171,19 @@ list_agents.addEventListener('change', getIdAgent);
           var id_agent = selectedOption.getAttribute("data-id");
           $("#id_agent").val(id_agent);
         $text = id_agent
-        $url = "{{ route('attestation.find_tps') }}"
+        var newQueryString = '?id_agent='+id_agent;
+        var newUrl = window.location.href.split('?')[0] + newQueryString;
+        window.location.href = newUrl;
+        {{-- $url = "{{ route('attestation.find_tps') }}"
         $("#info_agent").html("");
-        get_table_ajax_find($text,$url,"#info_agent")
+        get_table_ajax_find($text,$url,"#info_agent") --}}
 
-        $("#btn_submit").show();
-        }
-      }
 
+      }}
+
+      $(".btn_filter_status").on("click", function(){
+        var newQueryString = '?description_status='+this.id;
+        var newUrl = window.location.href.split('?')[0] + newQueryString;
+        window.location.href = newUrl;
+    });
 @endsection

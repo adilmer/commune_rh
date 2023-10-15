@@ -20,46 +20,91 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
      Route::get('/notation', function () {
         return view('homepage.notation');
     });
-    Route::get('/aptitudeprofessionnelle', function () {
-        return view('aptitudeprofessionnelle.index');
-    });
-    Route::get('/aptitudeprofessionnelle/create', function () {
-        return view('aptitudeprofessionnelle.create');
-    });
-    Route::get('/aptitudeprofessionnelle/details', function () {
-        return view('aptitudeprofessionnelle.details');
-    });
 
-    Route::get('/aptitudeprofessionnelle/accepte', function () {
-        return view('aptitudeprofessionnelle.accepte');
+    #aptitudeprofessionnelle
+    Route::prefix('aptitudeprofessionnelle')->group(function () {
+        /* Route::get('/', function () {
+            return view('pages.aptitudes.index');
+        });
+        Route::get('/create', function () {
+            return view('pages.aptitudes.create');
+        });
+        Route::get('/details', function () {
+            return view('pages.aptitudes.details');
+        });
+
+        Route::get('/accepte', function () {
+            return view('pages.aptitudes.accepte');
+        });
+
+        Route::get('/listeexamenoral', function () {
+            return view('pages.aptitudes.listeexamenoral');
+        });
+
+        Route::get('/comiteexamen', function () {
+            return view('pages.aptitudes.comiteexamen');
+        });
+        Route::get('/comitegardiens', function () {
+            return view('pages.aptitudes.comitegardiens');
+        });
+
+        Route::get('/notationexamenecrit', function () {
+            return view('pages.aptitudes.notationexamenecrit');
+        });
+         Route::get('/listeexamenecrit', function () {
+            return view('pages.aptitudes.listeexamenecrit');
+        });
+ Route::get('/listeexamenoral', function () {
+            return view('pages.aptitudes.listeexamenoral');
+        });
+        Route::get('/notationexamenoral', function () {
+            return view('pages.aptitudes.notationexamenoral');
+        });
+ */
+        Route::get('/','AptitudeController@index')->name('aptitude.index');
+        Route::get('/create','AptitudeController@create')->name('aptitude.create');
+        Route::get('/edit/{id_aptitude}','AptitudeController@edit')->name('aptitude.edit');
+        Route::get("/details/{id_aptitude}","AptitudeController@show")->name("aptitude.details");
+        Route::get("/filter/{name?}","AptitudeController@filter")->name("aptitude.filter");
+        Route::post("/save","AptitudeController@store")->name("aptitude.save");
+        Route::post("/update","AptitudeController@update")->name("aptitude.update");
+        Route::get("/delete/{id_aptitude}","AptitudeController@destroy")->name("aptitude.delete");
+
+
+        Route::get('/accepte/{id_aptitude}','AptitudeController@accepte')->name('aptitude.accepte');
+        Route::any('/accepte_save','AptitudeController@accepte_save')->name('aptitude.accepte_save');
+        Route::any('/accepte_remove/{id_liste_aptitude}','AptitudeController@accepte_remove')->name('aptitude.accepte_remove');
+
+        Route::get('/ecrit/{id_aptitude}','AptitudeController@ecrit')->name('aptitude.ecrit');
+        Route::any('/ecrit_save','AptitudeController@ecrit_save')->name('aptitude.ecrit_save');
+        Route::any('/ecrit_saveAll/{id_aptitude}','AptitudeController@ecrit_saveAll')->name('aptitude.ecrit_saveAll');
+        Route::any('/ecrit_remove/{id_liste_aptitude}','AptitudeController@ecrit_remove')->name('aptitude.ecrit_remove');
+
+        Route::get('/orale/{id_aptitude}','AptitudeController@orale')->name('aptitude.orale');
+        Route::any('/orale_save','AptitudeController@orale_save')->name('aptitude.orale_save');
+        Route::any('/orale_saveAll/{id_aptitude}','AptitudeController@orale_saveAll')->name('aptitude.orale_saveAll');
+        Route::any('/orale_remove/{id_liste_aptitude}','AptitudeController@orale_remove')->name('aptitude.orale_remove');
+
+        Route::get('/comiteExamen/{id_aptitude}','AptitudeController@comiteExamen')->name('aptitude.comiteExamen');
+        Route::any('/comiteExamen_save','AptitudeController@comiteExamen_save')->name('aptitude.comiteExamen_save');
+        Route::any('/comiteExamen_remove/{id_liste_aptitude}','AptitudeController@comiteExamen_remove')->name('aptitude.comiteExamen_remove');
+
+        Route::get('/comiteSurve/{id_aptitude}','AptitudeController@comiteSurve')->name('aptitude.comiteSurve');
+        Route::any('/comiteSurve_save','AptitudeController@comiteSurve_save')->name('aptitude.comiteSurve_save');
+        Route::any('/comiteSurve_remove/{id_liste_aptitude}','AptitudeController@comiteSurve_remove')->name('aptitude.comiteSurve_remove');
+
+        Route::get('/notationEcrit/{id_aptitude}','AptitudeController@notationEcrit')->name('aptitude.notationEcrit');
+        Route::any('/notationEcrit_save','AptitudeController@notationEcrit_save')->name('aptitude.notationEcrit_save');
+        Route::any('/notationEcrit_saveAll/{id_aptitude}','AptitudeController@notationEcrit_saveAll')->name('aptitude.notationEcrit_saveAll');
+        Route::any('/notationEcrit_remove/{id_liste_aptitude}','AptitudeController@notationEcrit_remove')->name('aptitude.notationEcrit_remove');
+
+        Route::get('/notationOrale/{id_aptitude}','AptitudeController@notationOrale')->name('aptitude.notationOrale');
+        Route::any('/notationOrale_save','AptitudeController@notationOrale_save')->name('aptitude.notationOrale_save');
+        Route::any('/notationOrale_saveAll/{id_aptitude}','AptitudeController@notationOrale_saveAll')->name('aptitude.notationOrale_saveAll');
+        Route::any('/notationOrale_remove/{id_liste_aptitude}','AptitudeController@notationOrale_remove')->name('aptitude.notationOrale_remove');
+
+
     });
-    Route::get('/aptitudeprofessionnelle/listeexamenecrit', function () {
-        return view('aptitudeprofessionnelle.listeexamenecrit');
-    });
-    Route::get('/aptitudeprofessionnelle/listeexamenoral', function () {
-        return view('aptitudeprofessionnelle.listeexamenoral');
-    });
-
-    Route::get('/aptitudeprofessionnelle/comiteexamen', function () {
-        return view('aptitudeprofessionnelle.comiteexamen');
-    });
-    Route::get('/aptitudeprofessionnelle/comitegardiens', function () {
-        return view('aptitudeprofessionnelle.comitegardiens');
-    });
-
-    Route::get('/aptitudeprofessionnelle/notationexamenecrit', function () {
-        return view('aptitudeprofessionnelle.notationexamenecrit');
-    });
-
-    Route::get('/aptitudeprofessionnelle/notationexamenoral', function () {
-        return view('aptitudeprofessionnelle.notationexamenoral');
-    });
-
-
-
-
-
-
     #Home
     Route::get('/','HomeController@index')->name('home.index');
     Route::get('/listretraites','HomeController@listretraites')->name('home.listretraites');
@@ -105,6 +150,18 @@ Route::prefix('formations')->group(function () {
     Route::post("/save","FormationController@store")->name("formation.save");
     Route::post("/update","FormationController@update")->name("formation.update");
     Route::get("/delete/{id_formation}","FormationController@destroy")->name("formation.delete");
+});
+
+#notation
+Route::prefix('notation')->group(function () {
+    Route::get('/','NotationController@index')->name('notation.index');
+    Route::get('/create','NotationController@create')->name('notation.create');
+    Route::get('/edit/{id_notation}','NotationController@edit')->name('notation.edit');
+    Route::get("/details/{id_notation}","NotationController@show")->name("notation.details");
+    Route::get("/filter/{name?}","NotationController@filter")->name("notation.filter");
+    Route::any("/save","NotationController@store")->name("notation.save");
+    Route::post("/update","NotationController@update")->name("notation.update");
+    Route::get("/delete/{id_notation}","NotationController@destroy")->name("notation.delete");
 });
 
     #Stagiaires
