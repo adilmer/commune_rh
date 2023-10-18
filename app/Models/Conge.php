@@ -6,12 +6,13 @@
 
 namespace App\Models;
 
+use App\Models\Agent;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Conge
- * 
+ *
  * @property int $id_conge
  * @property string|null $type_conge
  * @property Carbon|null $date_debut_conge
@@ -54,4 +55,9 @@ class Conge extends Model
 		'date_prise',
 		'statut_conge'
 	];
+
+    public function agent()
+	{
+		return $this->belongsTo(Agent::class, 'id_agent');
+	}
 }

@@ -6,11 +6,12 @@
 
 namespace App\Models;
 
+use App\Models\Departement;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Service
- * 
+ *
  * @property int $id_service
  * @property string|null $nom_service_fr
  * @property string|null $nom_service_ar
@@ -33,4 +34,12 @@ class Service extends Model
 		'nom_service_ar',
 		'id_departement'
 	];
+
+
+    public function departement()
+	{
+		return $this->belongsTo(Departement::class, 'id_departement');
+	}
+
+
 }

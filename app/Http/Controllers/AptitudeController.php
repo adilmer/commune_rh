@@ -387,8 +387,6 @@ class AptitudeController extends Controller
     }
 
 
-
-
     public function notationOrale(Request $request)
     {
 

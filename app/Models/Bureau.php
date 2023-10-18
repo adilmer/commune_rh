@@ -6,11 +6,12 @@
 
 namespace App\Models;
 
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Bureau
- * 
+ *
  * @property int $id_bureau
  * @property string|null $nom_bureau_fr
  * @property string|null $nom_bureau_ar
@@ -33,4 +34,11 @@ class Bureau extends Model
 		'nom_bureau_ar',
 		'id_service'
 	];
+
+    public function service()
+	{
+		return $this->belongsTo(Service::class, 'id_service');
+	}
+
+
 }
