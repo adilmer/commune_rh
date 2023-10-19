@@ -203,6 +203,10 @@ Route::prefix('absences')->group(function () {
     Route::get('/filter','AbsenceController@filter')->name('absence.filter');
     Route::get('/pdf', 'AbsenceController@generatePdf')->name('absence.generate');
 });
+#Avancements
+Route::prefix('avancements')->group(function () {
+    Route::get('/','AvancementController@index')->name('avancement.index');
+});
 
 #Attestations
 Route::prefix('attestations')->group(function () {
@@ -257,6 +261,8 @@ Route::prefix('exports')->group(function () {
 Route::prefix('avancement')->group(function () {
     Route::get('/','AvancementController@index')->name('avancement.index');
 });
+
+
 
 
 
