@@ -56,11 +56,9 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
         });
  Route::get('/listeexamenoral', function () {
             return view('pages.aptitudes.listeexamenoral');
-        });
-        Route::get('/notationexamenoral', function () {
-            return view('pages.aptitudes.notationexamenoral');
-        });
- */
+        });*/
+
+
         Route::get('/','AptitudeController@index')->name('aptitude.index');
         Route::get('/create','AptitudeController@create')->name('aptitude.create');
         Route::get('/edit/{id_aptitude}','AptitudeController@edit')->name('aptitude.edit');
@@ -255,7 +253,10 @@ Route::prefix('exports')->group(function () {
 
 
 
-
+#Absences
+Route::prefix('avancement')->group(function () {
+    Route::get('/','AvancementController@index')->name('avancement.index');
+});
 
 
 
