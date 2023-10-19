@@ -22,26 +22,27 @@ class AvancementController extends Controller
 
         $table_agents = $agents;
         foreach ($agents as $key => $agent) {
+
             $echellon = $agent->echellon;
             $date_echellon = $agent->date_echellon;
             $date_diff = Carbon::parse($date_echellon)->age;
 
            // dd($date_echellon,$date_diff);
             $table_echellon = DB::table('table_echellons')->where('echellon',$echellon)->first();
-            
+
             $anciente = $table_echellon->anciente + $date_diff;
             $table_echellon = DB::table('table_echellons')->where('anciente',$anciente)->first();
 
-            if(!$table_echellon)
+            if($anciente>21)
             $table_agents[$key]["nouveau_echellon"] = 10;
             else
             $table_agents[$key]["nouveau_echellon"] = $table_echellon->echellon;
             $table_agents[$key]["nouveau_date_echellon"] = Carbon::parse($date_echellon)->addYears($date_diff)->format('Y-m-d');
 
-
+            
 
         }
-        //dd($table_agents[$key]);
+       // dd($table_agents[239]);
         return view('avancement.index', compact('table_agents'));
 
     }
