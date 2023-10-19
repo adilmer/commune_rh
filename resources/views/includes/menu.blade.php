@@ -24,7 +24,7 @@
             <ul class="dropdown-menu text-end">
             <li> <a class="dropdown-item" href="{{route('agent.index')}}"> لائحة الموظفين </a></li>
             <li> <a class="dropdown-item" href="{{route('absence.index')}}"> الحضور</a> </li>
-            <li> <a class="dropdown-item" href="#"> الترقية</a> </li>
+            <li> <a class="dropdown-item" href="{{route('avancement.index')}}"> الترقية</a> </li>
             <li> <a class="dropdown-item" href="/aptitudeprofessionnelle"> الكفاءة المهنية</a> </li>
             <li> <a class="dropdown-item" href="/notation"> تنقيط الموظفين </a> </li>
           </ul>

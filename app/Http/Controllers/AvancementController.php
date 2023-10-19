@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Else_;
 
 class AvancementController extends Controller
 {
@@ -27,13 +28,22 @@ class AvancementController extends Controller
 
            // dd($date_echellon,$date_diff);
             $table_echellon = DB::table('table_echellons')->where('echellon',$echellon)->first();
+            
             $anciente = $table_echellon->anciente + $date_diff;
             $table_echellon = DB::table('table_echellons')->where('anciente',$anciente)->first();
 
+            if(!$table_echellon)
+            $table_agents[$key]["nouveau_echellon"] = 10;
+            else
             $table_agents[$key]["nouveau_echellon"] = $table_echellon->echellon;
             $table_agents[$key]["nouveau_date_echellon"] = Carbon::parse($date_echellon)->addYears($date_diff)->format('Y-m-d');
-            dd($table_agents[$key]);
+
+
+
         }
+        //dd($table_agents[$key]);
+        return view('avancement.index', compact('table_agents'));
+
     }
 
     /**
