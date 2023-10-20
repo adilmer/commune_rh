@@ -4,8 +4,12 @@
 <div class="inputsearch row" style="justify-content: flex-end;">
 
   <div class="col-sm-6 pl-0 mb-2  ">
-    <input class="form-control" list="agents_list" id="list_agents"  placeholder="بحث...">
-<input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
+    @php
+    $agents = App\Models\Agent::all();
+    $agent_now = App\Models\Agent::where('id_agent', request()->query('id_agent'))->first() ?? null;
+@endphp
+    <input class="form-control" list="agents_list" id="list_agents" value="{{$agent_now->nom_ar ?? ''}}"  placeholder="بحث...">
+<input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="{{request()->query('id_agent')}}" required>
 <datalist id="agents_list">
     @php
         $agents = App\Models\Agent::all();
@@ -201,5 +205,8 @@
         + newQueryString;
         window.location.href = newUrl;
         }
+
       }
+
+
 @endsection
