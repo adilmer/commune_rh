@@ -39,7 +39,7 @@ class AvancementController extends Controller
             $table_agents[$key]["nouveau_echellon"] = $table_echellon->echellon;
             $table_agents[$key]["nouveau_date_echellon"] = Carbon::parse($date_echellon)->addYears($date_diff)->format('Y-m-d');
 
-            
+
 
         }
        // dd($table_agents[239]);

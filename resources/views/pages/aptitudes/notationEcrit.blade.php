@@ -74,7 +74,6 @@
                         if($agent==null){
                             $agent = App\Models\Agent::where('id_agent',$aptitude->id_agent)->first();
                         }
-
                         //dd($agent,request()->query('id_grade'));
                         @endphp
                         @if ($agent->id_grade == request()->query('id_grade'))

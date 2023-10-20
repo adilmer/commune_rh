@@ -4,7 +4,16 @@
 <div class="inputsearch row" style="justify-content: flex-end;">
 
   <div class="col-sm-6 pl-0 mb-2  ">
-    <input type="text" class="form-control " id="txt_cherch" placeholder="بحث ..." aria-label="Recipient's username" aria-describedby="button-addon2">
+    <input class="form-control" list="agents_list" id="list_agents"  placeholder="بحث...">
+<input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
+<datalist id="agents_list">
+    @php
+        $agents = App\Models\Agent::all();
+    @endphp
+    @foreach ($agents as $agents)
+    <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_ar}}" >
+    @endforeach
+</datalist>
   </div>
   <div class="col-sm-3 pl-0 mb-2  ">
 
@@ -75,6 +84,15 @@
                   <tbody id="table_agents">
                       {{-- liste agents --}}
                       @foreach ($table_agents as $table_agents)
+                        @php
+                        $agent = App\Models\Agent::where('id_agent',request()->query('id_agent'))->first();
+                        if($agent==null){
+                            $agent = App\Models\Agent::where('id_agent',$table_agents->id_agent)->first();
+                        }
+                        //dd($agent,request()->query('id_grade'));
+                        @endphp
+                        @if ($table_agents->id_agent == request()->query('id_agent'))
+
                     <tr>
                       <td class="border-bottom-0">
                         <div class="img" >
@@ -112,6 +130,46 @@
                         <p class="mb-0 fw-normal">{{$table_agents->nouveau_date_echellon}}</p>
                       </td>
                     </tr>
+                    @endif
+                    @if (request()->query('id_agent')==null)
+                    <tr>
+                        <td class="border-bottom-0">
+                          <div class="img" >
+
+                          </div>
+                        </td>
+                        <td class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">{{$table_agents->mat}}</h6>
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">{{$table_agents->ppr}}</p>
+                        </td>
+                        <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">{{$table_agents->nom_ar}}</h6>
+                            <span class="fw-normal">{{$table_agents->nom_fr}}</span>
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">{{$table_agents->grade->nom_grade_ar}}</p>
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">{{$table_agents->echelle}}</p>
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">{{$table_agents->echellon}}</p>
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">{{$table_agents->bureau->service->nom_service_ar}}</p>
+                        </td>
+
+                        <td class="border-bottom-0 pos">
+                          <p class="mb-0 fw-normal">{{$table_agents->nouveau_echellon}}</p>
+                        </td>
+
+                        <td class="border-bottom-0 pos col-sm-1">
+                          <p class="mb-0 fw-normal">{{$table_agents->nouveau_date_echellon}}</p>
+                        </td>
+                      </tr>
+                      @endif
                     @endforeach
 
                   </tbody>
@@ -126,18 +184,22 @@
 
 @endsection
 @section('script')
-$("#txt_cherch").on("input", function(){
-    $text = this.value
-    $url = "{{ route('agent.filter') }}"
-    $("#table_agents").html("");
-    get_table_ajax_find($text,$url,"#table_agents")
 
-    });
-    $("#id_position").on("change", function(){
-        $id = this.value
-        $url = "{{ route('agent.filterByPosition') }}"
-        $("#table_agents").html("");
-        get_table_ajax_find($id,$url,"#table_agents")
 
-        });
+
+        list_agents.addEventListener('change', getIdAgent);
+    function getIdAgent() {
+        var input = document.getElementById("list_agents");
+        var selectedOption = document.querySelector("#agents_list option[value='" + input.value + "']");
+
+        if (selectedOption) {
+          var id_agent = selectedOption.getAttribute("data-id");
+          $("#id_agent").val(id_agent);
+          var newQueryString =
+        '?id_agent='+id_agent;
+            var newUrl = window.location.href.split('?')[0]
+        + newQueryString;
+        window.location.href = newUrl;
+        }
+      }
 @endsection
