@@ -93,6 +93,20 @@
             <li> <a href="{{route('attestation.decisionretraite')}}" class="dropdown-item" href="createstagiaire.html"> وثائق الإحالة على التقاعد</a> </li>
           </ul>
         </li>
+
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="#" data-bs-toggle="dropdown" >
+              <span>
+                <i class="ti ti-cards"></i>
+              </span>
+              <span class="hide-menu"> الإعدادات</span>
+            </a>
+            <ul class="dropdown-menu text-end">
+              <li> <a class="dropdown-item" href="{{route('grade.index')}}"> اعدادات الترقية </a></li>
+            </ul>
+            </li>
       </ul>
+
+
     </nav>
 

@@ -12,6 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
+<style>
+    @yield('style');
+</style>
 </head>
 
 <body>
@@ -28,7 +31,7 @@
     @include('includes.menu')
 <!-- End Sidebar navigation -->
  <!--  Header End -->
-    <div class="container">
+    <div class="containe col-11 mx-auto">
 
         @yield('content')
 

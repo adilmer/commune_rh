@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Indemnite;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -14,7 +15,7 @@ class GradeController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.grades.index');
     }
 
     /**
@@ -35,7 +36,43 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     //  dd($request->all());
+       $data = $request->all();
+       $id_grade = $request->id_grade;
+       $echellons= $request->echellon;
+       foreach ($echellons as $key => $value) {
+           $indemnite = Indemnite::where('id_grade', $id_grade)->where('echellon', $value)->first();
+           if($indemnite){
+            $indemnite->update([
+                "indice"=>$request->indice[$key],
+                "fonction"=>$request->fonction[$key],
+                "hierarchique"=>$request->hierarchique[$key],
+                "sujection"=>$request->sujection[$key],
+                "encadrement"=>$request->encadrement[$key],
+                "technicite"=>$request->technicite[$key],
+                "speciale"=>$request->speciale[$key],
+                "administrative"=>$request->administrative[$key],
+            ]);
+           }
+
+           else{
+            Indemnite::create([
+                "id_grade"=>$id_grade,
+                "echellon"=>$request->echellon[$key],
+                "indice"=>$request->indice[$key],
+                "fonction"=>$request->fonction[$key],
+                "hierarchique"=>$request->hierarchique[$key],
+                "sujection"=>$request->sujection[$key],
+                "encadrement"=>$request->encadrement[$key],
+                "technicite"=>$request->technicite[$key],
+                "speciale"=>$request->speciale[$key],
+                "administrative"=>$request->administrative[$key],
+            ]);
+           }
+       }
+
+       return redirect(route('grade.index')."?id_grade=".$id_grade);
+
     }
 
     /**

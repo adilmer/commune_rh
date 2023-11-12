@@ -162,6 +162,18 @@ Route::prefix('notation')->group(function () {
     Route::get("/delete/{id_notation}","NotationController@destroy")->name("notation.delete");
 });
 
+#grade
+Route::prefix('grade')->group(function () {
+    Route::get('/','GradeController@index')->name('grade.index');
+    Route::get('/create','GradeController@create')->name('grade.create');
+    Route::get('/edit/{id_grade}','GradeController@edit')->name('grade.edit');
+    Route::get("/details/{id_grade}","GradeController@show")->name("grade.details");
+    Route::get("/filter/{name?}","GradeController@filter")->name("grade.filter");
+    Route::any("/save","GradeController@store")->name("grade.save");
+    Route::post("/update","GradeController@update")->name("grade.update");
+    Route::get("/delete/{id_grade}","GradeController@destroy")->name("grade.delete");
+});
+
     #Stagiaires
 Route::prefix('stagiaires')->group(function () {
     Route::get('/','StagiaireController@index')->name('stagiaire.index');
