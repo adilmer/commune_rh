@@ -173,7 +173,7 @@ class AvancementController extends Controller
             //$history_echellons = $history_echellon;
             foreach ($history_echellon as $key => $value) {
 
-                if ($key < count($history_echellon) - 1 ) {
+                if ($key < count($history_echellon) - 2 ) {
                     $month_Diff = $history_echellon[$key+1]->date_echellon->diffInMonths($history_echellon[$key]->date_echellon);
 
 
@@ -205,11 +205,8 @@ class AvancementController extends Controller
 
                 }
 
-
-
-
         }
-        //dd($history_echellon);
+
         return $history_echellon;
         }
 }
