@@ -73,7 +73,7 @@
                         <h6 class="fw-semibold mb-0">الرتبة</h6>
                       </th>
                       <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">المصلحة</h6>
+                        <h6 class="fw-semibold mb-0">الأقدمية الحالية</h6>
                       </th>
 
                       <th class="border-bottom-0 col-sm-1">
@@ -81,7 +81,7 @@
                       </th>
 
                       <th class="border-bottom-0 pos">
-                        <h6 class="fw-semibold mb-0">تاريخ الرتبة المستحقة</h6>
+                        <h6 class="fw-semibold mb-0">الأقدمية المستحقة</h6>
                       </th>
                     </tr>
                   </thead>
@@ -162,7 +162,7 @@
                           <p class="mb-0 fw-normal">{{$table_agents->echellon}}</p>
                         </td>
                         <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">{{$table_agents->bureau->service->nom_service_ar}}</p>
+                          <p class="mb-0 fw-normal">{{$table_agents->date_echellon?->format('Y-m-d')}}</p>
                         </td>
 
                         <td class="border-bottom-0 pos">

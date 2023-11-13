@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Archive
- * 
+ *
  * @property int $id_archive
  * @property string $nom_archive_ar
  * @property int|null $id_categorie
@@ -21,6 +21,12 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
+
+
+ namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
+
 class Archive extends Model
 {
 	protected $table = 'archives';
@@ -38,4 +44,8 @@ class Archive extends Model
 		'date_archive',
 		'path_archive'
 	];
+    public function category()
+	{
+		return $this->belongsTo(Category::class, 'id_categorie');
+	}
 }
