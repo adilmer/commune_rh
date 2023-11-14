@@ -1,6 +1,8 @@
 @extends('templates.site')
 @section('content')
-
+    @php
+        set_time_limit(0);
+    @endphp
 <div class="inputsearch row " style="justify-content: flex-end;">
 
   <div class="col-sm-6 pl-0 mb-2  ">

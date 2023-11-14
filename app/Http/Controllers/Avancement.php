@@ -22,12 +22,14 @@ class Avancement
     var $echellon;
     public function __construct($agent,$dateD=null) {
         $this->agent = $agent;
+
         if($dateD==null)
         $this->dateD = $agent->date_echellon->format('Y-m-d');
         else
         $this->dateD = $dateD;
         $this->id_grade = $agent->id_grade ;
         $this->indice = $agent->indice ;
+
         $this->echellon = $agent->echellon ;
         $this->nombre_enfants = $agent->nbr_enfant ;
         $this->is_omfam = $agent->aff_mutuelle == 'OMFAM' ? 1 : 0 ;
@@ -163,8 +165,8 @@ public function Base_indemnite_status($indice = null, $id_grade = null)
 {
 
 
-
     $indice = $indice ?? $this->indice;
+
     $id_grade = $id_grade ?? $this->id_grade;
 
     $indemnite = Indemnite::where('id_grade', $id_grade)->where('indice', $indice)->first();
@@ -173,6 +175,7 @@ public function Base_indemnite_status($indice = null, $id_grade = null)
                     $indemnite->hierarchique + $indemnite->speciale + $indemnite->sujection + $indemnite->technicite;
 
     return $indim_status;
+
 
 
 

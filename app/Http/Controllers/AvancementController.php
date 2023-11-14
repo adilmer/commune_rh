@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+set_time_limit(0);
 use App\Models\Agent;
 use App\Models\Indemnite;
 use Illuminate\Http\Request;
@@ -52,8 +52,9 @@ class AvancementController extends Controller
         $new_agent = Agent::where('id_agent',$agent->id_agent)->first();
         $new_agent->echellon = $new_echellon;
         $new_agent->id_grade = $new_grade;
+        $table_echellon0 = DB::table('table_echellons')->where('echellon',$agent->echellon)->first();
         $table_echellon = DB::table('table_echellons')->where('echellon',$new_echellon)->first();
-        $anciente = $table_echellon->anciente;
+        $anciente = $table_echellon->anciente - $table_echellon0->anciente;
         $new_agent->date_echellon = $new_agent->date_echellon->addYear($anciente)->format('Y-m-d');;
 
         $avancement = new Avancement($new_agent);
@@ -75,11 +76,18 @@ class AvancementController extends Controller
         $total_montant = null;
       //  session()->put(date('Y'), ["fff"=>123,"ccc"=>456]);
        //dd(session()->has(date('Y')));
-
+       //dd( $agents[73]);
       //  if(!session()->has(date('Y'))){
+        $i=0;
+        try {
+            //code...
+
        foreach ($agents as $key => $agent) {
+            if($key>=0){
+
 
             $table_agents[$key] = $this->get_Montant($this->next_echellon($agent));
+           // dd($table_agents);
                 if(isset($table_agents[$key][count($table_agents[$key])-2]->montant["Brut"])){
             $totalBrut = $totalBrut + $table_agents[$key][count($table_agents[$key])-2]->montant["total_brut"];
             $totalCmr = $totalCmr + $table_agents[$key][count($table_agents[$key])-2]->montant["total_cmr"];
@@ -87,15 +95,18 @@ class AvancementController extends Controller
             $total = $total + $table_agents[$key][count($table_agents[$key])-2]->montant["total"];
             $total_montant = ["total_brut"=>$totalBrut,"total_cmr"=>$totalCmr,"total_amo"=>$totalAmo,"total"=>$total];
 
-
-           // dd( $table_agents[$key]);
+        }
+       /* if($agent->id_agent == 3){
+            dd($table_agents);
+        } */
+    }
         }
 
-
-
-
-        }
-
+    } catch (\Throwable $th) {
+       dd($th,$i);
+    }
+       //dd( $table_agents);
+ /// dd( $table_agents[76]);
        // dd( session(date('Y'))[0]);
     /* }
     else{
@@ -113,51 +124,44 @@ class AvancementController extends Controller
     }
 
     public function next_echellon($agent){
-        try {
 
-
-        $Nagent = Agent::where('id_agent',$agent->id_agent)->first();
-        $key=0;
+       // $agent =Agent::findOrFail(74);
+        $table_echellon = ["1"=>0,"2"=>1,"3"=>1,"4"=>2,"5"=>2,"6"=>3,"7"=>3,"8"=>3,"9"=>4,"10"=>4];
         $echellon = $agent->echellon;
-        $indice = $agent->indice;
-        $date_echellon = $agent->date_echellon;
-        $date_diff = Carbon::parse($date_echellon)->age;
         $history_echellon = null;
-        $history_echellon[$key] = $agent;
+        $date_echellon = $agent->date_echellon;
 
-        while (DB::table('table_echellons')->where('echellon',$echellon + 1)->first()->anciente  <= $date_diff) {
-            $key++;
-            $indemnite = Indemnite::where('id_grade', $agent->id_grade)->where('echellon', $echellon + 1)->first();
-            if($indemnite->indice ?? 0 !=0){
-                $echellon = $echellon + 1;
-                $ag = $this->newAgent($agent, null, $echellon);
-                $history_echellon[$key] = $ag;
-            }
-
-            else{
-                break;
-            }
-
-        }
-        $ags = $this->newAgent($agent, null, $echellon);
-        $ags->date_echellon = date('Y').'-12-31';
-        $history_echellon[$key+1] = $ags;
         $Nagent = $this->newAgent($agent, null, $echellon);
-        //$dateDiff = $history_echellon[1]->date_echellon->diffInMonths($history_echellon[0]->date_echellon);
+        $history_echellon[0] = $agent;
 
+        $key=1;
+        while($echellon + $key <= 10 ) {
+            $Nagent = $this->newAgent($Nagent, null, $echellon + $key);
+            $date_echellon = Carbon::parse($Nagent->date_echellon);
 
-//dd($history_echellon);
+                if($date_echellon->format('Y') <= date('Y')){
 
-            return $history_echellon;
-        } catch (\Throwable $th) {
-            //dd($agent);
-            $history_echellon[0] = $agent;
-            $history_echellon[1] = $agent;
-            $history_echellon[2] = $agent;
-           // dd($history_echellon);
-            return $history_echellon;
+                $currentDate = Carbon::now();
+                $date_diff = $date_echellon->diffInYears($currentDate);
+              //  dd($date_diff);
+                $indemnite = Indemnite::where('id_grade', $Nagent->id_grade)->where('echellon', $echellon + $key)->first();
+                if($table_echellon[$echellon + $key - 1]<=$date_diff && $indemnite!=null) {
+                    $history_echellon[$key] = $Nagent;
+                }
+             //   dd($agent->date_echellon,$date_echellon->format('Y'));
+            }
+
+                $key++;
         }
+
+        $ags = $this->newAgent($history_echellon[count($history_echellon)-1], null, null);
+        $ags->date_echellon = (date('Y')+1).'-01-01';
+        $history_echellon[count($history_echellon)] = $ags;
+        //dd($history_echellon);
+            return $history_echellon;
     }
+
+
 
 
 
@@ -173,7 +177,7 @@ class AvancementController extends Controller
             //$history_echellons = $history_echellon;
             foreach ($history_echellon as $key => $value) {
 
-                if ($key < count($history_echellon) - 2 ) {
+                if ($key < count($history_echellon)-1 ) {
                     $month_Diff = $history_echellon[$key+1]->date_echellon->diffInMonths($history_echellon[$key]->date_echellon);
 
 
@@ -182,7 +186,7 @@ class AvancementController extends Controller
                    // $avancement[$key] = new Avancement($history_echellon[$key]);
 
                     $avancement[$key+1] = new Avancement($history_echellon[$key+1]);
-                       // dd($avancement);
+                       //dd($avancement);
                     $brut1 = $avancement[0]->total_montant()/12;
                     $brut2 = $avancement[$key+1]->total_montant()/12;
                     $t_brut = ($brut2 - $brut1) * $month_Diff;
@@ -201,11 +205,12 @@ class AvancementController extends Controller
                     $total = $total + $total_brut + $total_cmr + $total_amo;
 
                     $history_echellon[$key+1]["montant"] = ["Brut"=>$t_brut,"CMR"=>$t_cmr,"AMO"=>$t_amo,"total_brut"=>$total_brut,"total_cmr"=>$total_cmr,"total_amo"=>$total_amo,"total"=>$total];
-                    //dd($history_echellon);
+
 
                 }
 
         }
+
 
         return $history_echellon;
         }
