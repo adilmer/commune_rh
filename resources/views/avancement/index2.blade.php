@@ -78,19 +78,19 @@
                       </th>
                       <th class="border-bottom-0 col-1">
                         <h6 class="fw-semibold mb-0">Brut</h6>
-                        <span>{{number_format($total_montant["total_brut"] , 2, '.', ' ') }}</span>
+                        <span>{{number_format($total_montant["total_brut"] , 2, ',', '') }}</span>
                       </th>
                       <th class="border-bottom-0 col-1">
                         <h6 class="fw-semibold mb-0">CMR</h6>
-                        <span>{{number_format($total_montant["total_cmr"] , 2, '.', ' ') }}</span>
+                        <span>{{number_format($total_montant["total_cmr"] , 2, ',', '') }}</span>
                       </th>
                       <th class="border-bottom-0 col-1">
                         <h6 class="fw-semibold mb-0">AMO</h6>
-                        <span>{{number_format($total_montant["total_amo"] , 2, '.', ' ') }}</span>
+                        <span>{{number_format($total_montant["total_amo"] , 2, ',', '') }}</span>
                       </th>
                       <th class="border-bottom-0 col-1">
                         <h6 class="fw-semibold mb-0">Total</h6>
-                        <span>{{number_format($total_montant["total"] , 2, '.', ' ') }}</span>
+                        <span>{{number_format($total_montant["total"] , 2, ',', '') }}</span>
                       </th>
                       <th class="border-bottom-0 col-1">
                         <h6 class="fw-semibold mb-0">Détails</h6>
@@ -145,16 +145,16 @@
                         <p class="mb-0 fw-normal">{{$table_agent[count($table_agent)-2]->date_echellon->format('Y-m-d')}}</p>
                       </td>
                       <td class="border-bottom-0 pos">
-                        <p class="mb-0 fw-normal">{{ number_format($table_agent[count($table_agent)-2]->montant['total_brut'] ?? 0, 2, '.', ' ') }}</p>
+                        <p class="mb-0 fw-normal">{{ number_format($table_agent[count($table_agent)-2]->montant['total_brut'] ?? 0, 2, ',', '') }}</p>
                       </td>
                       <td class="border-bottom-0 pos">
-                        <p class="mb-0 fw-normal">{{number_format($table_agent[count($table_agent)-2]->montant['total_cmr'] ?? 0, 2, '.', ' ') }}</p>
+                        <p class="mb-0 fw-normal">{{number_format($table_agent[count($table_agent)-2]->montant['total_cmr'] ?? 0, 2, ',', '') }}</p>
                       </td>
                       <td class="border-bottom-0 pos">
-                        <p class="mb-0 fw-normal">{{number_format($table_agent[count($table_agent)-2]->montant['total_amo'] ?? 0, 2, '.', ' ') }}</p>
+                        <p class="mb-0 fw-normal">{{number_format($table_agent[count($table_agent)-2]->montant['total_amo'] ?? 0, 2, ',', '') }}</p>
                       </td>
                       <td class="border-bottom-0 pos">
-                        <p class="mb-0 fw-normal">{{number_format($table_agent[count($table_agent)-2]->montant['total'] ?? 0, 2, '.', ' ') }}</p>
+                        <p class="mb-0 fw-normal">{{number_format($table_agent[count($table_agent)-2]->montant['total'] ?? 0, 2, ',', '') }}</p>
                       </td>
                       <td class="border-bottom-0 pos">
                         <p class="mb-0 fw-normal"><button class="btn btn-sm btn-info"><i class="ti ti-eye"></i></button></p>

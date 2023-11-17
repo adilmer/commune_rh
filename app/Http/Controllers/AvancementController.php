@@ -55,7 +55,10 @@ class AvancementController extends Controller
         $table_echellon0 = DB::table('table_echellons')->where('echellon',$agent->echellon)->first();
         $table_echellon = DB::table('table_echellons')->where('echellon',$new_echellon)->first();
         $anciente = $table_echellon->anciente - $table_echellon0->anciente;
-        $new_agent->date_echellon = $new_agent->date_echellon->addYear($anciente)->format('Y-m-d');;
+        if($agent->echelle=="H*E")
+        $new_agent->date_echellon = $new_agent->date_echellon->addYear($anciente+1)->format('Y-m-d');
+        else
+        $new_agent->date_echellon = $new_agent->date_echellon->addYear($anciente)->format('Y-m-d');
 
         $avancement = new Avancement($new_agent);
 
@@ -129,8 +132,12 @@ class AvancementController extends Controller
 
     public function next_echellon($agent){
 
-       // $agent =Agent::findOrFail(219);
-        $table_echellon = ["1"=>0,"2"=>1,"3"=>1,"4"=>2,"5"=>2,"6"=>3,"7"=>3,"8"=>3,"9"=>4,"10"=>4];
+       // $agent =Agent::findOrFail(1);
+       if($agent->echelle=="H*E")
+        $table_echellon = ["1"=>0,"2"=>3,"3"=>3,"4"=>3,"5"=>3,"6"=>3];
+        else
+        $table_echellon = ["1"=>0,"2"=>1,"3"=>1,"4"=>2,"5"=>2,"6"=>3,"7"=>3,"8"=>3,"9"=>4,"10"=>4];  
+       // dd($agent->echelle,count($table_echellon));
         //$table_echellon = ["1"=>1,"2"=>1,"3"=>2,"4"=>2,"5"=>3,"6"=>3,"7"=>3,"8"=>4,"9"=>4,"10"=>4];
         $echellon = $agent->echellon;
         $history_echellon = null;
@@ -140,7 +147,7 @@ class AvancementController extends Controller
         $history_echellon[0] = $agent;
 
         $key=1;
-        while($echellon + $key <= 10 ) {
+        while($echellon + $key <= count($table_echellon) ) {
             $Nagent = $this->newAgent($agent, null, $echellon + $key);
 
 
@@ -188,7 +195,10 @@ class AvancementController extends Controller
 
                 if ($key < count($history_echellon)-1 ) {
                     $currentDate = Carbon::parse((date('Y')+1)."-01-01");
-                    $month_Diff = $history_echellon[$key+1]->date_echellon->diffInMonths($currentDate);
+                    
+                        $month_Diff = $history_echellon[$key+1]->date_echellon->diffInMonths($currentDate);
+                
+                    
 
                    // dd($month_Diff,$history_echellon[$key+1]->date_echellon,$currentDate);
                     $avancement[$key] = new Avancement($history_echellon[$key],$history_echellon[$key+1]["date_echellon"]->format('Y-m-d'));
