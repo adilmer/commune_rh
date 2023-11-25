@@ -21,6 +21,7 @@ class AbsenceController extends Controller
 
      public function index()
      {
+        //dd
          $agents = $agents = Agent::where('id_position','=',1)->get();
          $bureaus = Bureau::all();
 
