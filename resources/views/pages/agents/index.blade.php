@@ -21,10 +21,6 @@
 
 
 
-
-
-
-
       <div class="row" >
         <div class="col-lg-12 d-flex align-items-stretch">
           <div class="card w-100">
@@ -34,6 +30,11 @@
                       data-bs-target="#modal-export_agent">
                       <i class="la la-download"></i>تحميل Excel
                   </button>
+                  <button type="button" style="float:left"
+                            class="btn btn-sm btn-outline-muted text-capitalize float-left btn-round mx-1"
+                            data-bs-toggle="modal" data-bs-target="#modal-import_eleve">
+                            <i class="ti ti-upload"></i> استيراد وتحيين لوائح الموظفين
+                        </button>
               <h5 class="card-title  fw-semibold mb-4">لائحة الموظفين</h5>
 
 
@@ -117,7 +118,7 @@
                         <p class="mb-0 fw-normal">{{$agents->echellon}}</p>
                       </td>
                       <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">{{$agents->bureau->service->nom_service_ar}}</p>
+                        <p class="mb-0 fw-normal">{{$agents->bureau->service->nom_service_ar ?? 'بدون'}}</p>
                       </td>
 
                       <td class="border-bottom-0 pos">
@@ -149,7 +150,30 @@
           </div>
         </div>
       </div>
+ <!-- modal import_eleve-->
 
+ <div class="modal fade" id="modal-import_eleve" tabindex="-1" aria-labelledby="modal-import_eleve" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('import.importData') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id=""> استيراد وتحيين لوائح الموظفين من اندماج</h5>
+                </div>
+                <div class="modal-body">
+                    <label for="fileCsv"> رفع الملف بصيغة Excel </label>
+                    <input type="file" name="fileCsv" class="form-control"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                        id="fileCsv">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                    <button type="submit" class="btn btn-primary">تأكيد</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 @endsection

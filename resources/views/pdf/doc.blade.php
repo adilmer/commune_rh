@@ -40,20 +40,12 @@
         }
     </style>
     <script>
-        function generatePDF() {
-            const element = document.getElementById('pdf-content');
-            let filename = "لائحة الحضور الخاصة ب" + document.getElementById('nom_bureau').value + ' (' + Date.now() + ') ';
-            html2pdf()
-                .from(element)
-                .save(filename + ".pdf")
-        }
 
-      /*  window.onload = function() {
-            generatePDF();
-            setTimeout(function() {
-                window.open(window.location, '_self').close();
-            },5000);
-        };*/
+window.print();
+
+window.addEventListener('afterprint', function() {
+history.back();
+});
     </script>
 </head>
 <body style="direction: rtl">

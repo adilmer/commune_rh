@@ -168,13 +168,13 @@
                                     <tr>
                                         <td class="border-bottom-0">
                                             <p class="mb-0 fw-normal">
-                                                {{ $agent->bureau->service->departement->nom_departement_ar }}</p>
+                                                {{ $agent->bureau->service->departement->nom_departement_ar ?? 'بدون' }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $agent->bureau->service->nom_service_ar }}</p>
+                                            <p class="mb-0 fw-normal">{{ $agent->bureau->service->nom_service_ar ?? 'بدون' }}</p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $agent->bureau->nom_bureau_ar }}</p>
+                                            <p class="mb-0 fw-normal">{{ $agent->bureau->nom_bureau_ar ?? 'بدون' }}</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -261,6 +261,30 @@
                                         <td class="border-bottom-0">
                                             <p class="mb-0 fw-normal"> {{ $dateRetrait?->format('Y-m-d') }} </p>
                                         </td>
+                                    </tr>
+                                </tbody>
+                                <thead class="text-dark fs-4 table-light">
+                                    <tr>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0"> نوع المنصب</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0"> تاريخ التعيين في المنصب</h6>
+                                        </th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">{{ $agent->fonction->nom_fonction_ar }}</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">{{ $agent->date_fonction }}</p>
+                                        </td>
+
+
                                     </tr>
                                 </tbody>
                                 <thead class="text-dark fs-4 table-light">

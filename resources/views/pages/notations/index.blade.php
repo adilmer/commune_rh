@@ -6,9 +6,10 @@
             <div class="card row">
 
 
+
+                <h5 class="card-title fw-semibold mb-4">تنقيط الموظفين</h5>
                 <form action="{{route('notation.save')}}" method="get">
                     @csrf
-                <h5 class="card-title fw-semibold mb-4">تنقيط الموظفين</h5>
                 <div class="row">
                 <h5 class="card-title fw-semibold mb-4"> التنقيط الفردي لموظف</h5>
                     @php
@@ -87,36 +88,34 @@
                     <input type="number" class="form-control"  id="nomperear" name="note[]" step="0.01" value="{{$note}}">
                   </div>
                 </div>
-
+            </form>
                 <div class="btnsucc m-4 text-start">
                   <button id="btn_submit"  type="submit" class="btn btn-primary"><i class="ti ti-printer"></i> حفظ التعديلات   </button>
-                  <button id="btn_submit"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="ti ti-printer" ></i> تحميل بطائق التنقيط  </button>
+                  <button id="btn_submit"  type="button" class="btn btn-success" {{request()->query('id_agent')!=null ? '' : 'disabled'}} data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="ti ti-printer" ></i> تحميل بطائق التنقيط  </button>
                 </div>
                 <h5 class="card-title fw-semibold mb-4"> التنقيط حسب المصلحة </h5>
 
-
+                <form action="{{route('notation.fiche_notation')}}" method="get">
                 <div class="row">
                     <div class="col-sm-7 pl-0 mb-2">
-                        <select name="id_bureau" id="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
-
-                            <option value="0" selected>اختر ...</option>
+                        <select name="id_service" id="id_service" class="custom-select custom-select-lg mb-3 form-control">
                                 @foreach ($services as $service)
                                 <option value="{{$service->id_service}}" >{{$service->nom_service_ar}}</option>
                                 @endforeach
                         </select>
                       </div>
                       <div class="col-sm-2 pl-0 mb-2">
-                    <input type="text" class="form-control" value="{{date('Y')}}" id="nomperear" name="session_notation" value="{{date('Y')-1}}">
+                    <input type="text" class="form-control" value="{{date('Y')}}" id="nomperear" name="anneeD">
                       </div>
                       <div class="col-sm-3 ">
-                        <a id="print_list" target="_blank"  href="{{route('absence.generate')}}" class="btn btn-primary"><i class="ti ti-printer"></i> طباعة الكل</a>
+                        <button id="print_list" target="_blank" class="btn btn-primary"><i class="ti ti-printer"></i> طباعة الكل</button>
                       </div>
                 </div>
-
-
-
-
             </form>
+
+
+
+
 
               </div>
 
@@ -127,20 +126,21 @@
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <form action="{{route('notation.fiche_notation')}}" method="get">
             <div class="modal-header">
               <h5 class="modal-title" >تحميل بطائق التنقيط </h5>
 
             </div>
             <div class="modal-body">
 <div class="row">
-
+        <input type="hidden" name="id_agent" value="{{request()->query('id_agent')}}">
     <div class="col-4 ">
         <label for="nomperear" > من سنة </label>
-        <input type="text" value="{{date('Y')}}" class="form-control" id="nomperear" name="annee_notation[]" value="{{date('Y')-1}}">
+        <input type="text" value="{{date('Y')}}" class="form-control" id="nomperear" name="anneeD" >
     </div>
     <div class="col-4 ">
         <label for="nomperear" > الى</label>
-        <input type="text" class="form-control" value="{{date('Y')-1}}" id="nomperear" name="annee_notation[]" value="{{date('Y')-1}}">
+        <input type="text" class="form-control" value="{{date('Y')}}" id="nomperear" name="anneeF">
       </div>
 </div>
 
@@ -150,7 +150,9 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
                 <button type="submit" class="btn btn-primary">حفط الملف</button>
             </div>
+        </form>
         </div>
+
  </div>
 
 </div>

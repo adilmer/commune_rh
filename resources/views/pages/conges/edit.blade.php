@@ -20,10 +20,10 @@
               <div class="col-6 mt-4">
                 <label for="type_conge" >نوع الرخصة</label>
                 <select class="form-select"  value="{{$conge->type_conge}}" name="type_conge" id="type_conge"   aria-label="Default select example">
-                  <option value="سنوية" selected>سنوية</option>
-                  <option value="إستثنائية">إستثنائية</option>
-                  <option value="الولادة">الولادة</option>
-                  <option value="الأبوة">الأبوة</option>
+                  <option {{$conge->type_conge=='سنوية' ? 'selected' : ''}} >سنوية</option>
+                  <option {{$conge->type_conge=='إستثنائية' ? 'selected' : ''}}>إستثنائية</option>
+                  <option {{$conge->type_conge=='الولادة' ? 'selected' : ''}}>الولادة</option>
+                  <option {{$conge->type_conge=='الأبوة' ? 'selected' : ''}}>الأبوة</option>
                 </select>
               </div>
               <div class="col-6 mt-4">

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
+use App\Models\Bureau;
 use App\Models\Notation;
+use App\Models\Service;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -145,6 +148,51 @@ class NotationController extends Controller
         $notation = Notation::findOrFail($request->id_notation);
         $notation->update($request->all());
        return redirect()->route('notation.index');
+    }
+
+    public function fiche_notation(Request $request){
+        $request = $request->all();
+        $service = null;
+        $agent = null;
+        $agents = null;
+
+        if(isset($request["id_service"])){
+            $id_service = $request["id_service"];
+            $anneeD = $request["anneeD"];
+            $service = Service::findOrFail($id_service);
+            if($service){
+                $bureaus = Bureau::where('id_service',$service->id_service)->get();
+                foreach($bureaus as $key=> $bureau){
+                    $agent[]=[$anneeD=>Agent::where('id_bureau',$bureau->id_bureau)->get()];
+                    if(count($agent[$key][$anneeD])>0){
+                        $agents = $agent;
+                    }
+                }
+
+
+                $agents = $agents[0];
+            }
+        }
+        if(isset($request["id_agent"])){
+            $id_agent = $request["id_agent"];
+            $agent = Agent::where("id_agent",$id_agent)->get();
+
+        $anneeD = $request["anneeD"];
+        $anneeF = $request["anneeF"];
+        if($agent){
+            for ($i=$anneeD; $i <=$anneeF ; $i++) {
+                $agents[$i] = $agent;
+            }
+
+        }
+        }
+
+
+      //  $agents = $agents[0];
+
+      //  dd($agents);
+
+        return view("pdf.fiche_notation",compact("agents"));
     }
 
     /**

@@ -30,7 +30,8 @@ class FormationController extends Controller
      */
     public function create()
     {
-        $agents = Agent::all();
+        $agents = Agent::where('id_position','1')->get();
+
         return view('pages.formations.create', compact('agents'));
     }
 
@@ -118,7 +119,8 @@ class FormationController extends Controller
     public function edit(Request $request)
     {
         $formation = Formation::findOrFail($request->id_formation);
-       return view('pages.formations.edit', compact('formation'));
+        $agents = Agent::where('id_position','1')->get();
+       return view('pages.formations.edit', compact('formation','agents'));
     }
 
     /**

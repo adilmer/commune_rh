@@ -99,6 +99,7 @@
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <div class="modal-header">
               <h5 class="modal-title" >تحميل بطائق التنقيط </h5>
 
@@ -108,11 +109,11 @@
 
     <div class="col-4 ">
         <label for="nomperear" > من سنة </label>
-        <input type="text" value="{{date('Y')}}" class="form-control" id="nomperear" name="annee_notation[]" value="{{date('Y')-1}}">
+        <input type="text" value="{{date('Y')}}" class="form-control" id="nomperear" name="annee_notation[]" >
     </div>
     <div class="col-4 ">
         <label for="nomperear" > الى</label>
-        <input type="text" class="form-control" value="{{date('Y')-1}}" id="nomperear" name="annee_notation[]" value="{{date('Y')-1}}">
+        <input type="text" class="form-control" value="{{date('Y')-1}}" id="nomperear" name="annee_notation[]">
       </div>
 </div>
 
@@ -122,6 +123,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
                 <button type="submit" class="btn btn-primary">حفط الملف</button>
             </div>
+       
         </div>
  </div>
 
@@ -142,7 +144,8 @@ list_agents.addEventListener('change', getIdAgent);
         if (selectedOption) {
           var id_agent = selectedOption.getAttribute("data-id");
           $("#id_agent").val(id_agent);
-        $text = id_agent
+          $("#id_agents").val(id_agent);
+        $text = id_agent;
         $url = "{{ route('attestation.find_tps') }}"
         $("#info_agent").html("");
         get_table_ajax_find($text,$url,"#info_agent")

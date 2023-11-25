@@ -160,6 +160,7 @@ Route::prefix('notation')->group(function () {
     Route::any("/save","NotationController@store")->name("notation.save");
     Route::post("/update","NotationController@update")->name("notation.update");
     Route::get("/delete/{id_notation}","NotationController@destroy")->name("notation.delete");
+    Route::get('/fiche_notation', 'NotationController@fiche_notation')->name('notation.fiche_notation');
 });
 
 #grade
@@ -218,6 +219,11 @@ Route::prefix('absences')->group(function () {
 #Avancements
 Route::prefix('avancements')->group(function () {
     Route::get('/','AvancementController@index')->name('avancement.index');
+});
+
+#Imports
+Route::prefix('imports')->group(function () {
+    Route::any('/','ImportController@importData')->name('import.importData');
 });
 
 #Attestations

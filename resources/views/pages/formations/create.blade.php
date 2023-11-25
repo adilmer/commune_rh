@@ -18,6 +18,13 @@
                   </div>
                   <div class="col-12 mt-4">
                     <label for="participantes">المستفيدين من التكوين</label>
+                        <input class="form-control" style="width: 400px" list="agents_list" id="list_agents"  placeholder="بحث...">
+
+                    <datalist id="agents_list">
+                        @foreach ($agents as $agents)
+                        <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_ar}}" >
+                        @endforeach
+                    </datalist>
                     <textarea class="form-control"id="participantes" name="participantes"  rows="4"></textarea>
                   </div>
                   <div class="col-12 mt-4">
@@ -34,4 +41,23 @@
           </div>
         </form>
         </div>
+@endsection
+@section('script')
+list_agents.addEventListener('change', getIdAgent);
+    function getIdAgent() {
+        var input = document.getElementById("list_agents");
+        var selectedOption = document.querySelector("#agents_list option[value='" + input.value + "']");
+
+        if (selectedOption) {
+
+            $("#participantes").text($("#participantes").text()+" - "+$("#list_agents").val())
+            if($("#participantes").text().indexOf(" - ")==0)
+            $("#participantes").text($("#participantes").text().substring(3,100))
+
+            $("#list_agents").val("")
+
+
+        }
+      }
+
 @endsection

@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $date_echellon
  * @property int|null $indice
  * @property Carbon|null $date_position
+ * @property Carbon|null $date_fonction
  * @property string|null $lieu_position
  * @property int $id_fonction
  * @property int $id_bureau
@@ -101,6 +102,7 @@ class Agent extends Model
 		'date_echellon',
 		'indice',
 		'date_position',
+		'date_fonction',
 		'lieu_position',
 		'id_fonction',
 		'id_bureau',

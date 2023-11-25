@@ -7,9 +7,7 @@
         <a href="{{route('aptitude.details',$aptitude->id_aptitude)}}" class="btn btn-outline-success"></i>عودة</a>
     </div>
     <div class="col-sm-8">
-        @php
-            $grades = App\Models\Grade::all();
-        @endphp
+
 
       <select name="id_grade" id="id_grade" class="custom-select custom-select-lg mb-3 form-control">
           <option value="" selected>إختيار الهيئة ...</option>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Aptitude;
+use App\Models\Grade;
 use App\Models\ListeAptitude;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
@@ -108,7 +109,22 @@ class AptitudeController extends Controller
     {
         $aptitude = Aptitude::findOrFail($request->id_aptitude);
         $date_acceptation =  $aptitude->dateD_aptitude->format('Y')-6 .'-' . $aptitude->dateD_aptitude->format('m-d');
-        $agents = Agent::where('date_grade','<=',$date_acceptation)->get();
+        $not_inclut = ["MINISTERE","TECHNICIEN PREMIER","REDACTEUR 1ER","REDACTEUR PREMIER"];
+        $grades = Grade::where('nom_grade_fr','not like','%PRINCIPAL%');
+        foreach ($not_inclut as $value){
+            $grades = $grades->where('nom_grade_fr','not like',"%$value%");
+        }
+        $grades = $grades->get();
+
+        $ids = "(";
+        foreach ($grades as $key => $grade) {
+           $ids .= $grade->id_grade.',';
+        }
+        $ids[strlen($ids)-1] = ")";
+
+
+        $agents = Agent::where('date_grade','<=',$date_acceptation)->whereRAW("id_grade IN $ids")->get();
+        //dd($ids,$agents[0]);
         foreach ($agents as $key => $agent) {
             $aptitude = ListeAptitude::where('id_agent',$agent->id_agent)->where('id_aptitude',$request->id_aptitude)->first();
             if(!$aptitude)
@@ -121,7 +137,7 @@ class AptitudeController extends Controller
         $aptitudes = ListeAptitude::where('id_aptitude',$request->id_aptitude)->where('status_accepte',1)->get();
 
         $aptitude = ListeAptitude::where('id_aptitude',$request->id_aptitude)->first();
-       return view('pages.aptitudes.accepte', compact('aptitudes','aptitude'));
+       return view('pages.aptitudes.accepte', compact('aptitudes','aptitude','grades'));
     }
 
     public function accepte_save(Request $request)

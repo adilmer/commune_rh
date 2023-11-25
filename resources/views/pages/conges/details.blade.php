@@ -116,7 +116,7 @@
               </div>
               <div class="btnsucc m-4 text-start">
                 <button type="submit" name="type" value="demandeconge" class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة الطلب  </button>
-                <button type="submit" name="type" value="conge" class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة القرار</button>
+                <button type="submit" name="type" value="{{$conge->type_conge=='الأبوة' ? 'congepaternite' : ($conge->type_conge=='الولادة' ? 'congematernite' : 'conge') }}" class="btn btn-danger"><i class="ti ti-file-text"></i> طباعة القرار</button>
               </div>
             </form>
               </div>

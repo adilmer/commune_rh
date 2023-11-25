@@ -50,18 +50,19 @@
               <label for="tel">  الهاتف</label>
               <input value="{{$agent->tel}}" name="tel" type="text" class="form-control" id="tel" placeholder="">
             </div>
-            <div class="col-6 mt-3">
+            <div class="col-4 mt-3">
+                <label for="photo" >الصورة الشخصية</label>
+                <input name="photo" type="file" class="form-control" id="photo" placeholder="" accept="image/*">
+              </div>
+            <div class="col-4 mt-3">
             <label for="adresse_ar" >العنوان بالعربية</label>
             <input value="{{$agent->adresse_ar}}" name="adresse_ar" type="text" class="form-control" id="adresse_ar" placeholder="">
           </div>
-          <div class="col-6 mt-3">
+          <div class="col-4 mt-3">
             <label for="adresse_fr"></label>العنوان بالفرنسية</label>
             <input value="{{$agent->adresse_fr}}" name="adresse_fr" type="text" class="form-control" id="adresse_fr" placeholder="">
           </div>
-            <div class="col mt-3">
-              <label for="photo" >الصورة الشخصية</label>
-              <input name="photo" type="file" class="form-control" id="photo" placeholder="" accept="image/*">
-            </div>
+
           </div>
         </div>
       </div>
@@ -81,7 +82,7 @@
                 <label for="cin">رقم البطاقة الوطنية</label>
                 <input value="{{$agent->cin}}" name="cin" type="text" class="form-control" id="cin" placeholder="">
               </div>
-              <div class="col-3 mt-3">
+              <div class="col-4 mt-3">
                 <label for="id_grade" >الدرجة</label>
                 <select id="id_grade" name="id_grade" class="custom-select custom-select-lg mb-3 form-control">
                     <option value="0" disabled>اختر درجة</option>
@@ -90,11 +91,11 @@
                     @endforeach
                 </select>
               </div>
-              <div class="col-3 mt-3">
+              <div class="col-4 mt-3">
                 <label for="date_grade" >تاريخ التعيين في الدرجة</label>
                 <input value="{{ \Carbon\Carbon::parse($agent->date_grade)->format('Y-m-d') }}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
               </div>
-              <div class="col-3 mt-3">
+              <div class="col-4 mt-3">
                 <label for="echelle" >السلم</label>
                 <input value="{{$agent->echelle}}" name="echelle" type="text" class="form-control" id="echelle" placeholder="">
               </div>
@@ -107,18 +108,15 @@
                 <input value="{{$agent->echellon}}" name="echellon" type="number" class="form-control" id="echellon" placeholder="">
               </div>
               <div class="col-4 mt-3">
+                <label for="date_echellon" >تاريخ التعيين في الرتبة</label>
+                <input value="{{ \Carbon\Carbon::parse($agent->date_echellon)->format('Y-m-d') }}" name="date_echellon" type="date" class="form-control" id="date_echellon" placeholder="">
+              </div>
+              <div class="col-4 mt-3">
                 <label for="indice">الرقم الاستدلالي</label>
                 <input value="{{$agent->indice}}" name="indice" type="number" class="form-control" id="indice" placeholder="">
               </div>
+
               <div class="col-4 mt-3">
-                <label for="id_fonction">المنصب الإداري</label>
-                <select id="id_fonction" name="id_fonction" class="custom-select custom-select-lg mb-3 form-control">
-                    @foreach ($fonctions as $fonctions)
-                    <option value="{{$fonctions->id_fonction}}" {{ $agent->id_fonction == $fonctions->id_fonction ? 'selected' : '' }}>{{$fonctions->nom_fonction_ar}}</option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="col-6 mt-3">
                 <label for="departements">القسم</label>
                 <select id="departements" class="custom-select custom-select-lg mb-3 form-control">
                     <option value="0" disabled selected>اختر قسم</option>
@@ -127,7 +125,7 @@
                     @endforeach
                 </select>
               </div>
-              <div class="col-6 mt-3">
+              <div class="col-4 mt-3">
                 <label for="nom_service_ar">المصلحة</label>
                 <select id="services" class="custom-select custom-select-lg mb-3 form-control">
                     @foreach ($services as $services)
@@ -145,14 +143,28 @@
                 </select>
               </div>
               <div class="col-4 mt-3">
-                <label for="date_tuto">تاريخ الترسيم</label>
-                <input value="{{ \Carbon\Carbon::parse($agent->date_tuto)->format('Y-m-d') }}" name="date_tuto" type="date" class="form-control" id="date_tuto" placeholder="">
+                <label for="id_fonction">المنصب الإداري</label>
+                <select id="id_fonction" name="id_fonction" class="custom-select custom-select-lg mb-3 form-control">
+                    @foreach ($fonctions as $fonctions)
+                    <option value="{{$fonctions->id_fonction}}" {{ $agent->id_fonction == $fonctions->id_fonction ? 'selected' : '' }}>{{$fonctions->nom_fonction_ar}}</option>
+                    @endforeach
+                </select>
               </div>
+              <div class="col-4 mt-3">
+                <label for="date_fonction" >تاريخ التعيين في المنصب الإداري</label>
+                <input value="{{ \Carbon\Carbon::parse($agent->date_fonction)->format('Y-m-d') }}" name="date_fonction" type="date" class="form-control" id="date_fonction" placeholder="">
+              </div>
+              <div class="col-4 mt-3"></div>
               <div class="col-4 mt-3">
                 <label for="date_rec">تاريخ التوظيف</label>
                 <input value="{{ \Carbon\Carbon::parse($agent->date_rec)->format('Y-m-d') }}" name="date_rec" type="date" class="form-control" id="date_rec" placeholder="">
               </div>
-              <div class="col-8 mt-3">
+              <div class="col-4 mt-3">
+                <label for="date_tuto">تاريخ الترسيم</label>
+                <input value="{{ \Carbon\Carbon::parse($agent->date_tuto)->format('Y-m-d') }}" name="date_tuto" type="date" class="form-control" id="date_tuto" placeholder="">
+              </div>
+              <div class="col-4 mt-3"></div>
+              <div class="col-4 mt-3">
                 <label for="rib">رقم الحساب البنكي </label>
                 <input value="{{$agent->rib}}" name="rib" type="text" class="form-control" id="rib" placeholder="">
               </div>
@@ -160,7 +172,7 @@
                 <label for="agence">Agence</label>
                 <input value="{{$agent->agence}}" name="agence" type="text" class="form-control" id="agence" placeholder="">
               </div>
-
+              <div class="col-4 mt-3"></div>
               <div class="col-4 mt-3">
                 <label for="n_affilation" >رقم التعاضدية  </label>
                 <input value="{{$agent->n_affilation}}" name="n_affilation" type="text" class="form-control" id="n_affilation" placeholder="">

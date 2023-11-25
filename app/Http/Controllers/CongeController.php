@@ -307,8 +307,15 @@ class CongeController extends Controller
            $data['signature1'] = $request->signature[0] ?? '';
            $data['signature2'] = $request->signature[1] ?? '';
            $data['signature3'] = $request->signature[2] ?? '';
+            if($request->type=='conge')
+            $name ='قرار الرخصة';
+            if($request->type=='demandeconge')
+            $name ='ﻁﻠﺏ ﺭﺧــﺻﺔ';
+            if($request->type=='congematernite')
+            $name ='قرار رخصة الولادة';
+            if($request->type=='congepaternite')
+            $name ='قرار رخصة الأبوة';
 
-            $name = $request->type=='conge' ? 'قرار الرخصة' : 'ﻁﻠﺏ ﺭﺧــﺻﺔ';
         $filename = $this->exportWord($data,$request->type,$name);
 
         return response()->download($filename)->deleteFileAfterSend(true);
