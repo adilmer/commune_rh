@@ -164,9 +164,9 @@ foreach ($names as $value) {
         $data = '';
 
         foreach ($agents as $key => $agents) {
-            $nom_service_ar = $agents->bureau->service->nom_service_ar;
-            $nom_position_ar = $agents->position->nom_position_ar;
-            $nom_grade_ar = $agents->grade->nom_grade_ar;
+            $nom_service_ar = $agents->bureau->service->nom_service_ar ?? '';
+            $nom_position_ar = $agents->position->nom_position_ar ?? '';
+            $nom_grade_ar = $agents->grade->nom_grade_ar ?? '';
             $photo_url=asset('photos_agents/'.$agents->photo);
             $date_position = $agents->date_position!=null ? \Carbon\Carbon::parse($agents->date_position)->format('Y-m-d') : '';
             $data .=

@@ -20,7 +20,9 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
      Route::get('/notation', function () {
         return view('homepage.notation');
     });
-
+    Route::get('/avancementnew', function () {
+        return view('pages.avancement.index2');
+    });
     #aptitudeprofessionnelle
     Route::prefix('aptitudeprofessionnelle')->group(function () {
         /* Route::get('/', function () {
@@ -53,10 +55,8 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
         });
          Route::get('/listeexamenecrit', function () {
             return view('pages.aptitudes.listeexamenecrit');
-        });
- Route::get('/listeexamenoral', function () {
-            return view('pages.aptitudes.listeexamenoral');
         });*/
+
 
 
         Route::get('/','AptitudeController@index')->name('aptitude.index');

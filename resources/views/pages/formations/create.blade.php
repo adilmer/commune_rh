@@ -18,7 +18,7 @@
                   </div>
                   <div class="col-12 mt-4">
                     <label for="participantes">المستفيدين من التكوين</label>
-                        <input class="form-control" style="width: 400px" list="agents_list" id="list_agents"  placeholder="بحث...">
+                        <input class="form-control" style="width: 400px" list="agents_list" id="list_agents" autocomplete="off"  placeholder="بحث...">
 
                     <datalist id="agents_list">
                         @foreach ($agents as $agents)

@@ -4,6 +4,7 @@
     <form action="{{route('formation.update')}}" method="post">
         @csrf
           <div class="card-body">
+            
             <h5 class="card-title fw-semibold mb-4">تعديل التكوين</h5>
             <div class="card">
               <div class="card-body">
@@ -19,7 +20,7 @@
                   </div>
                   <div class="col-12 mt-4">
                     <label for="participantes">المستفيدين من التكوين</label>
-                    <input class="form-control" style="width: 400px" list="agents_list" id="list_agents"  placeholder="بحث...">
+                    <input class="form-control" style="width: 400px" autocomplete="off" list="agents_list" id="list_agents"  placeholder="بحث...">
 
                     <datalist id="agents_list">
                         @foreach ($agents as $agents)

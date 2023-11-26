@@ -123,7 +123,7 @@ class AptitudeController extends Controller
         $ids[strlen($ids)-1] = ")";
 
 
-        $agents = Agent::where('date_grade','<=',$date_acceptation)->whereRAW("id_grade IN $ids")->get();
+        $agents = Agent::where('id_position',11)->where('date_grade','<=',$date_acceptation)->whereRAW("id_grade IN $ids")->get();
         //dd($ids,$agents[0]);
         foreach ($agents as $key => $agent) {
             $aptitude = ListeAptitude::where('id_agent',$agent->id_agent)->where('id_aptitude',$request->id_aptitude)->first();
