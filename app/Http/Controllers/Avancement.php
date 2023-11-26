@@ -42,6 +42,8 @@ class Avancement
         }
     }
 
+
+
     public function getData(){
 
         $indemnite = Indemnite::where('id_grade', $this->id_grade)->where('indice', $this->indice)->first();

@@ -18,26 +18,23 @@ class AvancementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index2()
+    public function etat_engagement(Request $request)
     {
-        $agent = Agent::findOrFail(18);
-        $new_echellon = $agent->echellon + 1;
+        $agent0 = Agent::findOrFail($request->id_agent);
+        $old_echellon = $request->old_echellon;
         $new_grade = null ;
 
-        $Nagents =$this->newAgent($agent,$new_grade,8);
+        $agent =$this->newAgent($agent0,$new_grade,$old_echellon);
 
 
 
-        $agent =$this->newAgent($agent,$new_grade,8);
-        $Nagent =$this->newAgent($agent,$new_grade,10);
+        $Nagent =$this->newAgent($agent0,$new_grade,$old_echellon+1);
         $avancement = new Avancement($agent,$Nagent->date_echellon->format('Y-m-d'));
 
 
         $Navancement = new Avancement($Nagent,$Nagent->date_echellon->format('Y-m-d'));
-   // dd($avancement->getData(),$Navancement->getData());
-        //dd($agent,$new_agent,$new_echellon);
 
-        return view('avancement.index', compact('avancement','Navancement','agent','Nagent'));
+        return view('pages.avancement.etat_engagement', compact('avancement','Navancement','agent','Nagent'));
 
     }
 
@@ -52,13 +49,21 @@ class AvancementController extends Controller
         $new_agent = Agent::where('id_agent',$agent->id_agent)->first();
         $new_agent->echellon = $new_echellon;
         $new_agent->id_grade = $new_grade;
+        if($agent->echelle!="H*E"){
         $table_echellon0 = DB::table('table_echellons')->where('echellon',$agent->echellon)->first();
         $table_echellon = DB::table('table_echellons')->where('echellon',$new_echellon)->first();
-        $anciente = $table_echellon->anciente - $table_echellon0->anciente;
-        if($agent->echelle=="H*E")
-        $new_agent->date_echellon = $new_agent->date_echellon->addYear($anciente+1)->format('Y-m-d');
-        else
+        $anciente0 = $table_echellon->anciente - $table_echellon0->anciente ;
+        $anciente1 = $table_echellon->anciente - $table_echellon0->anciente ;
+        $anciente = $table_echellon->anciente - $table_echellon0->anciente ;
         $new_agent->date_echellon = $new_agent->date_echellon->addYear($anciente)->format('Y-m-d');
+        }
+        else{
+            $anciente = $new_agent->echellon - $agent->echellon;
+            $new_agent->date_echellon = $agent->date_echellon->addYear(3*$anciente)->format('Y-m-d');
+        }
+
+
+
 
         $avancement = new Avancement($new_agent);
 
@@ -130,13 +135,18 @@ class AvancementController extends Controller
 
     }
 
+    public function avancement_echellon(Request $request){
+        $agents = Agent::where('id_position',11)->get();
+        return view('pages.avancement.index2',compact('agents'));
+    }
+
     public function next_echellon($agent){
 
        // $agent =Agent::findOrFail(1);
        if($agent->echelle=="H*E")
         $table_echellon = ["1"=>0,"2"=>3,"3"=>3,"4"=>3,"5"=>3,"6"=>3];
         else
-        $table_echellon = ["1"=>0,"2"=>1,"3"=>1,"4"=>2,"5"=>2,"6"=>3,"7"=>3,"8"=>3,"9"=>4,"10"=>4];  
+        $table_echellon = ["1"=>0,"2"=>1,"3"=>1,"4"=>2,"5"=>2,"6"=>3,"7"=>3,"8"=>3,"9"=>4,"10"=>4];
        // dd($agent->echelle,count($table_echellon));
         //$table_echellon = ["1"=>1,"2"=>1,"3"=>2,"4"=>2,"5"=>3,"6"=>3,"7"=>3,"8"=>4,"9"=>4,"10"=>4];
         $echellon = $agent->echellon;
@@ -195,10 +205,10 @@ class AvancementController extends Controller
 
                 if ($key < count($history_echellon)-1 ) {
                     $currentDate = Carbon::parse((date('Y')+1)."-01-01");
-                    
+
                         $month_Diff = $history_echellon[$key+1]->date_echellon->diffInMonths($currentDate);
-                
-                    
+
+
 
                    // dd($month_Diff,$history_echellon[$key+1]->date_echellon,$currentDate);
                     $avancement[$key] = new Avancement($history_echellon[$key],$history_echellon[$key+1]["date_echellon"]->format('Y-m-d'));
