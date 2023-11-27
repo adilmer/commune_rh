@@ -147,9 +147,14 @@
               <div class="col-4 mt-3">
                 <label for="id_bureau">المكتب</label>
                 <select id="id_bureau" value="{{$agent->id_bureau}}" name="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
-                    @foreach ($bureaux as $bureaux)
-                    <option value="{{$bureaux->id_bureau}}" {{ $agent->bureau->id_bureau == $bureaux->id_bureau ? 'selected' : '' }} >{{$bureaux->nom_bureau_ar}}</option>
 
+                    @foreach ($bureaux as $bureaux)
+                    @if (isset($agent->bureau->id_bureau))
+                    <option value="{{$bureaux->id_bureau}}" {{ $agent->bureau->id_bureau == $bureaux->id_bureau ? 'selected' : '' }} >{{$bureaux->nom_bureau_ar}}</option>
+                    @else
+                    <option value="{{$bureaux->id_bureau}}" >{{$bureaux->nom_bureau_ar}}</option>
+
+                @endif
                     @endforeach
                 </select>
               </div>
