@@ -220,6 +220,7 @@ Route::prefix('absences')->group(function () {
 Route::prefix('avancements')->group(function () {
     Route::get('/','AvancementController@index')->name('avancement.index');
     Route::get('/avancement_echellon','AvancementController@avancement_echellon')->name('avancement.avancement_echellon');
+    Route::get('/avancement_echelle','AvancementController@avancement_echelle')->name('avancement.avancement_echelle');
     Route::get('/etat_engagement','AvancementController@etat_engagement')->name('avancement.etat_engagement');
 
 });
