@@ -121,7 +121,16 @@
                 <select id="departements" class="custom-select custom-select-lg mb-3 form-control">
                     <option value="0" disabled selected>اختر قسم</option>
                     @foreach ($departements as $departements)
-                    <option value="{{$departements->id_departement}}" {{ $agent->bureau->service->departement->id_departement == $departements->id_departement ? 'selected' : '' }} >{{$departements->nom_departement_ar}}</option>
+                    @if (isset($agent->bureau->service->departement->id_departement))
+                        <option value="{{$departements->id_departement}}"
+                        {{ $agent->bureau->service->departement->id_departement == $departements->id_departement ? 'selected' : '' }} >
+                        {{$departements->nom_departement_ar}}</option>
+
+                    @else
+                        <option value="{{$departements->id_departement}}">
+                        {{$departements->nom_departement_ar}}</option>
+                    @endif
+
                     @endforeach
                 </select>
               </div>
@@ -129,7 +138,11 @@
                 <label for="nom_service_ar">المصلحة</label>
                 <select id="services" class="custom-select custom-select-lg mb-3 form-control">
                     @foreach ($services as $services)
+                    @if (isset($agent->bureau->service->id_service))
                     <option value="{{$services->id_service}}" {{ $agent->bureau->service->id_service == $services->id_service ? 'selected' : '' }} >{{$services->nom_service_ar}}</option>
+                    @else
+                        <option value="{{$services->id_service}}" >{{$services->nom_service_ar}}</option>
+                    @endif
                     @endforeach
                 </select>
               </div>
@@ -139,6 +152,7 @@
                 <select id="id_bureau" value="{{$agent->id_bureau}}" name="id_bureau" class="custom-select custom-select-lg mb-3 form-control">
                     @foreach ($bureaux as $bureaux)
                     <option value="{{$bureaux->id_bureau}}" {{ $agent->bureau->id_bureau == $bureaux->id_bureau ? 'selected' : '' }} >{{$bureaux->nom_bureau_ar}}</option>
+
                     @endforeach
                 </select>
               </div>
