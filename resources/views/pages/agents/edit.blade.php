@@ -99,10 +99,6 @@
                 <label for="echelle" >السلم</label>
                 <input value="{{$agent->echelle}}" name="echelle" type="text" class="form-control" id="echelle" placeholder="">
               </div>
-              {{-- <div class="col-3 mt-3">
-                <label for="date_grade" >تاريخ التعيين في السلم</label>
-                <input value="{{ \Carbon\Carbon::parse($agent->date_grade}}" name="date_grade" type="date" class="form-control" id="date_grade" placeholder="">
-              </div> --}}
               <div class="col-4 mt-3">
                 <label for="echellon">الرتبة</label>
                 <input value="{{$agent->echellon}}" name="echellon" type="number" class="form-control" id="echellon" placeholder="">
@@ -115,6 +111,7 @@
                 <label for="indice">الرقم الاستدلالي</label>
                 <input value="{{$agent->indice}}" name="indice" type="number" class="form-control" id="indice" placeholder="">
               </div>
+
 
               <div class="col-4 mt-3">
                 <label for="departements">القسم</label>
