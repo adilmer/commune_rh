@@ -247,4 +247,12 @@ class AvancementController extends Controller
 
         return $history_echellon;
         }
+
+
+
+
+        public function avancement_echelle(Request $request){
+            $agents = Agent::where('id_position',11)->get();
+            return view('pages.avancement.index',compact('agents'));
+        }
 }
