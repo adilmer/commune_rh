@@ -135,7 +135,32 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     </tr>
                 </table>
               </div>
-
+                <div class="row">
+                    <div class="col-3">
+                        <label for="list_agents" >Date Commission : </label>
+                        <input type="date" class="form-control"   >
+                    </div>
+                    <div class="col-3">
+                        <label for="list_agents" >Date Arrété : </label>
+                        <input type="date" class="form-control"   >
+                    </div>
+                    <div class="col-3">
+                        <label for="list_agents" >N° Arrété : </label>
+                        <input type="text" class="form-control"   >
+                    </div>
+                    <div class="col-3">
+                        <label for="list_agents" >Grade : </label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="ADMINISTRATEUR" selected>ADMINISTRATEUR</option>
+                            <option value="REDACTEUR ">REDACTEUR </option>
+                            <option value="INFIRMIER">INFIRMIER</option>
+                            <option value="INGENIEUR ">INGENIEUR </option>
+                            <option value="ADJOINT TECHNIQUE ">ADJOINT TECHNIQUE </option>
+                            <option value="ADJOINT ADMINISTRATIF ">ADJOINT ADMINISTRATIF </option>
+                            <option value="TECHNICIEN ">TECHNICIEN </option>
+                          </select>
+                    </div>
+                </div>
             <div class="btnsucc m-4 text-end">
               <button type="submit" id="btn_submit" class="btn btn-success" ><i class="ti ti-printer"></i> طباعة القرارات </button>
               <a href="{{route('avancement.etat_engagement')}}?id_agent={{$agent->id_agent}}&old_echellon={{$echellon}}" target="_blank" class="btn btn-info" ><i class="ti ti-printer"></i> État D'engagement </a>
