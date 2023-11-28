@@ -5,7 +5,7 @@
 
             <form action="{{route('attestation.export_word_tps')}}" method="get">
                 @csrf
-            <h5 class="card-title fw-semibold mb-4">tps</h5>
+            <h5 class="card-title fw-semibold m-4">العويضات عن الأعمال الشاقة والملوثة</h5>
             <div class="row">
                 <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
                 <div class="form-group row  my-3">

@@ -8,7 +8,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
           <div class="card-body">
             <form action="" method="get">
                 @csrf
-            <h5 class="card-title fw-semibold mb-4">Avancement Echelon</h5>
+            <h5 class="card-title fw-semibold mb-4">Avancement Echelle</h5>
             <div class="form-group row  my-3">
               <div class="row">
               <div class="col-6 m-0">

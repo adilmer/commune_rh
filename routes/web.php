@@ -20,9 +20,9 @@ Route::prefix('/')->namespace('App\\Http\\Controllers\\')->group(function () {
      Route::get('/notation', function () {
         return view('homepage.notation');
     });
-    /* Route::get('/avancementnew', function () {
-        return view('pages.avancement.index2');
-    }); */
+    /* */Route::get('/table', function () {
+        return view('page.avancement.tableavancement');
+    });
     #aptitudeprofessionnelle
     Route::prefix('aptitudeprofessionnelle')->group(function () {
         /* Route::get('/', function () {
@@ -221,6 +221,7 @@ Route::prefix('avancements')->group(function () {
     Route::get('/','AvancementController@index')->name('avancement.index');
     Route::get('/avancement_echellon','AvancementController@avancement_echellon')->name('avancement.avancement_echellon');
     Route::get('/avancement_echelle','AvancementController@avancement_echelle')->name('avancement.avancement_echelle');
+    Route::get('/tableavancement','AvancementController@tableavancement')->name('avancement.tableavancement');
     Route::get('/etat_engagement','AvancementController@etat_engagement')->name('avancement.etat_engagement');
 
 });

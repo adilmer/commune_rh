@@ -137,7 +137,7 @@ class AvancementController extends Controller
 
     public function avancement_echellon(Request $request){
         $agents = Agent::where('id_position',11)->get();
-        return view('pages.avancement.index2',compact('agents'));
+        return view('pages.avancement.indexechellon',compact('agents'));
     }
 
     public function next_echellon($agent){
@@ -253,6 +253,10 @@ class AvancementController extends Controller
 
         public function avancement_echelle(Request $request){
             $agents = Agent::where('id_position',11)->get();
-            return view('pages.avancement.index',compact('agents'));
+            return view('pages.avancement.indexechelle',compact('agents'));
+        }
+        public function tableavancement(Request $request){
+            $agents = Agent::where('id_position',11)->get();
+            return view('pages.avancement.tableavancement',compact('agents'));
         }
 }
