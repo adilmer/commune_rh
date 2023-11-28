@@ -39,8 +39,8 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                 <h3 class="text-center">Ancienne Situation</h3>
                 <table class="table table-striped text-nowrap">
                     <tr>
-                        <th>Echellon</th>
                         <th>Echelle</th>
+                        <th>Echellon</th>
                         <th>Indice</th>
                         <th>Date d'effet echellon</th>
                     </tr>
@@ -115,15 +115,15 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                 <h3 class="text-center">Nouvelle Situation</h3>
                 <table class="table table-striped text-nowrap">
                     <tr>
-                        <th>Echellon</th>
                         <th>Echelle</th>
+                        <th>Echellon</th>
                         <th>Indice</th>
                         <th>Date d'effet echellon</th>
                     </tr>
                     <tr>
                         @if($new_indice!=0)
-                        <td>{{$new_echellon ?? ''}}</td>
                         <td>{{$agent->echelle ?? ''}}</td>
+                        <td>{{$new_echellon ?? ''}}</td>
                         <td>{{$new_indice ?? ''}}</td>
                         <td>{{$new_date_echellon ?? ''}}</td>
                         @else
