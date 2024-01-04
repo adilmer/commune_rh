@@ -29,7 +29,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                    PPR : <span class='text-bold mx-2  px-1'>{{$agent->ppr ?? ''}}</span>
                     MAT : <span class='text-bold mx-2  px-1'>{{$agent->mat ?? ''}}</span>
                     Echellon : <span class='text-bold mx-2  px-1'>{{$agent->echellon ?? ''}}</span>
-                    Date_chellon : <span class='text-bold mx-2  px-1'>{{$agent->date_echellon->format('Y/m/d') ?? ''}} </span>
+                    Date_Echelle : <span class='text-bold mx-2  px-1'>{{$agent->date_grade->format('Y/m/d') ?? ''}} </span>
                 </p>
 
               </div>

@@ -86,7 +86,7 @@
     </div>
   </div>
 
-
+    <h1></h1>
         <!--  Row 1 -->
         <div class="row ">
       <!--
@@ -281,9 +281,23 @@
         </div>
       </div>
         </div>
+
+        <iframe id="iframeQuiz"   aria-label='استمارة طلب تطبيق التدبير اليومي للحراسة العامة' frameborder="0" style="height:800px;max-height:600px;width:99%;border:none;overflow: hidden;"  src='https://forms.zohopublic.com/adilelmerzougui/form/Untitled/formperma/qtc2fGgbXND6XJHaxA0niN2lX6NN9YletWjIOUvcwCA'></iframe>
 @endsection
 
 @section('script')
+function removeDivFromIframe() {
+    var iframe = document.getElementById('iframeQuiz');
+    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+    // Replace 'divToRemove' with the actual ID or class of the div
+    var divToRemove = iframeDocument.querySelector('[elname="freePlanBrandingFooter"]');
+    alert(divToRemove.className)
+    if (divToRemove) {
+      divToRemove.parentNode.removeChild(divToRemove);
+    }
+  }
+
 const daysTag = document.querySelector(".days"),
 currentDate = document.querySelector(".current-date"),
 prevNextIcon = document.querySelectorAll(".icons span");

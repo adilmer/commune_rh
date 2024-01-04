@@ -8,7 +8,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
           <div class="card-body">
             <form action="" method="get">
                 @csrf
-            <h5 class="card-title fw-semibold mb-4">Avancement Echelon</h5>
+            <h5 class="card-title fw-semibold mb-4">Avancement Echellon</h5>
             <div class="form-group row  my-3">
               <div class="row">
               <div class="col-6 m-0">
@@ -29,7 +29,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                    PPR : <span class='text-bold mx-2  px-1'>{{$agent->ppr ?? ''}}</span>
                     MAT : <span class='text-bold mx-2  px-1'>{{$agent->mat ?? ''}}</span>
                     Echellon : <span class='text-bold mx-2  px-1'>{{$agent->echellon ?? ''}}</span>
-                    Date_chellon : <span class='text-bold mx-2  px-1'>{{$agent->date_echellon->format('Y/m/d') ?? ''}} </span>
+                    Date d'échellon : <span class='text-bold mx-2  px-1'>{{$agent->date_echellon->format('Y/m/d') ?? ''}} </span>
                 </p>
 
               </div>

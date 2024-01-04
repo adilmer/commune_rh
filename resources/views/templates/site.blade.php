@@ -14,6 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
 <style>
     @yield('style');
+
+    iframe .zfbrandingWrapper{
+        background-color: red;
+    }
+    iframe .brandingWrapper{
+        background-color: red;
+    }
 </style>
 </head>
 
@@ -51,8 +58,28 @@
 
 
 <script>
+
     $(document).ready(function() {
-   @yield('script')
+       /* // $('iframe').contents().find('#leftpanel').hide();
+        $('#iframeQuiz').contents().find("[elname='freePlanBrandingFooter']").hide();
+         // Get the iframe element
+    var iframe = document.getElementById('iframeQuiz');
+
+// Check if the iframe is loaded
+iframe.onload = function() {
+    // Access the contentWindow of the iframe
+    var iframeContent = iframe.contentWindow;
+
+    // Access the document inside the iframe
+    var iframeDocument = iframeContent.document;
+
+    // Hide the element with attribute 'elname="freePlanBrandingFooter"'
+    var elementToHide = iframeDocument.querySelector('[elname="freePlanBrandingFooter"]');
+    if (elementToHide) {
+        elementToHide.style.display = 'none';
+    }
+}; */
+        @yield('script')
 });
 </script>
 

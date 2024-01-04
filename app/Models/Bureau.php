@@ -40,5 +40,10 @@ class Bureau extends Model
 		return $this->belongsTo(Service::class, 'id_service');
 	}
 
+    public function agents()
+	{
+		return $this->hasMany(Agent::class, 'id_bureau');
+	}
+
 
 }

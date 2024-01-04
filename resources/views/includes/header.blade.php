@@ -26,8 +26,8 @@
                   <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                     <i class="ti ti-settings fs-6"></i>
                     <p class="mb-0 fs-3"> الإعدادات</p>
-                  </a> 
-                  <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </a>
+                  <a href="{{route('logout')}}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                 </div>
               </div>
             </li>
