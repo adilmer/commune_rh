@@ -1,4 +1,4 @@
-<nav class="sidebar-nav scroll-sidebar" >
+<nav class="navbar navbar-expand-lg sidebar-nav scroll-sidebar" >
       <ul id="sidebarnav">
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
