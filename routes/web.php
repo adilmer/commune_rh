@@ -130,6 +130,19 @@ Route::prefix('agents')->group(function () {
     Route::get("/delete/{id_agent}","AgentController@destroy")->name("agent.delete");
 });
 
+ #Members
+ Route::prefix('members')->group(function () {
+    Route::get('/','MemberController@index')->name('member.index');
+    Route::get('/create','MemberController@create')->name('member.create');
+    Route::post("/save","MemberController@store")->name("member.save");
+    Route::get('/edit/{id_member}','MemberController@edit')->name('member.edit');
+    Route::get('/details/{id_member}','MemberController@show')->name('member.details');
+    Route::any("/update","MemberController@update")->name("member.update");
+    Route::get("/delete/{id_member}","MemberController@destroy")->name("member.delete");
+    Route::get("/salaire","MemberController@salaire")->name("member.salaire");
+});
+
+
     #Archives
 Route::prefix('archives')->group(function () {
     Route::get('/','ArchiveController@index')->name('archive.index');

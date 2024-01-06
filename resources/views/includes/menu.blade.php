@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg sidebar-nav scroll-sidebar" >
+<nav class=" navbar-expand sidebar-nav scroll-sidebar" >
+
       <ul id="sidebarnav">
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -26,7 +27,11 @@
                 @can('agent.index')
                 <li> <a class="dropdown-item" href="{{route('agent.index')}}"> لائحة الموظفين </a></li>
                 @endcan
+                @can('agent.index')
+                <li> <a class="dropdown-item" href="{{route('member.index')}}"> لائحة الأعضاء </a></li>
+                @endcan
                 @can('absence.index')
+                <li> <a class="dropdown-item" href="{{route('member.salaire')}}"> تعويضات الأعضاء</a></li>
             <li> <a class="dropdown-item" href="{{route('absence.index')}}"> الحضور</a> </li>
             @endcan
             @can('avancement.avancement_echelle')
@@ -155,44 +160,11 @@
           </ul>
         </li>
         @endcan
-        @can('grade')
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="#" data-bs-toggle="dropdown" >
-              <span>
-                <i class="ti ti-settings"></i>
-              </span>
-              <span class="hide-menu"> الإعدادات</span>
-            </a>
-            <ul class="dropdown-menu text-end">
-                @can('grade.index')
-              <li> <a class="dropdown-item" href="{{route('grade.index')}}"> اعدادات الترقية </a></li>
-              @endcan
-            </ul>
-            </li>
-            @endcan
-            {{-- @can('users') --}}
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="#123" data-bs-toggle="dropdown" >
-                  <span>
-                    <i class="ti ti-cards"></i>
-                  </span>
-                  <span class="hide-menu">  المستخدمين</span>
-                </a>
-                <ul class="dropdown-menu text-end">
-                    @can('users.index')
-                  <li> <a class="dropdown-item" href="{{route('users.index')}}"> ادارة المستخدمين </a></li>
-                  @endcan
-                  @can('roles.index')
-                  <li> <a class="dropdown-item" href="{{route('roles.index')}}"> ادارة الأدوار </a></li>
-                  @endcan
-                  @can('permissions.index')
-                  <li> <a class="dropdown-item" href="{{route('permissions.index')}}"> ادارة الصلاحيات </a></li>
-                  @endcan
-                </ul>
-                </li>
-                {{-- @endcan --}}
       </ul>
-
-
     </nav>
+
+
+
+
+
 
