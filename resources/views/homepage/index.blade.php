@@ -77,7 +77,7 @@
                   class="text-white bg-danger rounded-circle p-6 d-flex align-items-center justify-content-center">
                   <i class="ti ti-users fs-6"></i>
                 </div>
-              </div>
+            </div>
             </div>
           </div>
         </div>
