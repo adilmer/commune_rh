@@ -316,5 +316,5 @@ Route::resource('permissions', PermissionsController::class);
 });
 
 Auth::routes();
-
+Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
