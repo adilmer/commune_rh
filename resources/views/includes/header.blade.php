@@ -27,17 +27,17 @@
                     <i class="ti ti-user fs-6"></i>
                     <p class="mb-0 fs-3">إعدادات الترقية</p>
                   </a>
-                  <a href="{{route('grade.index')}}" class="d-flex align-items-center gap-2 dropdown-item">
+                  <a href="{{route('users.index')}}" class="d-flex align-items-center gap-2 dropdown-item">
                     <i class="ti ti-user fs-6"></i>
                     <p class="mb-0 fs-3">ادارة المستخدمين  </p>
-                  </a><a href="{{route('grade.index')}}" class="d-flex align-items-center gap-2 dropdown-item">
+                  </a><a href="{{route('roles.index')}}" class="d-flex align-items-center gap-2 dropdown-item">
                     <i class="ti ti-user fs-6"></i>
                     <p class="mb-0 fs-3">ادارة الأدوار </p>
-                  </a><a href="{{route('grade.index')}}" class="d-flex align-items-center gap-2 dropdown-item">
+                  </a><a href="{{route('permissions.index')}}" class="d-flex align-items-center gap-2 dropdown-item">
                     <i class="ti ti-user fs-6"></i>
                     <p class="mb-0 fs-3"> ادارة الصلاحيات </p>
                   </a>
-                  <a href="{{route('logout')}}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  <a href="{{route('logout')}}" class="btn btn-outline-primary mx-3 mt-2 d-block">تسجيل الخروج</a>
                 </div>
               </div>
             </li>

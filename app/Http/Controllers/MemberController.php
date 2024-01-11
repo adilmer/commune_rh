@@ -38,9 +38,9 @@ class MemberController extends Controller
     public function create()
     {
 
-       // $grademembers = grademember::all();
 
-        return \view('member.create');
+       $grademembres = Grademembre::all();
+        return \view('member.create',compact('grademembres'));
 
     }
 
@@ -69,10 +69,9 @@ class MemberController extends Controller
      */
     public function show(Request $request)
     {
-        /**/
+
         $member = Member::findOrFail($request->id_member);
-       // dd($member);
-     //  $documents = Document::where('id_member',$request->id_member)->get();
+
        return view('member.details',compact('member'));
     }
 
@@ -125,5 +124,20 @@ class MemberController extends Controller
         $members = Member::all();
         $grademembre = Grademembre::all();
         return view('member.salaire',compact('members','grademembre'));
+    }
+
+    public function decision(Request $request)
+    {
+        $member = Member::findOrFail($request->id_member);
+        $grademembre = Grademembre::all();
+        $data =[];
+
+        $data['nomfr'] = $member->nomfr_member;
+        $data['echelle'] = $member->echelle;
+        $filename = $this->exportWord($data,$request->type,$name);
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+
     }
 }

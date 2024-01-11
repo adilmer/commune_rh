@@ -31,6 +31,8 @@ class AgentController extends Controller
 
     public function index()
     {
+
+        
         $agents = Agent::all();
         $positions = Position::all();
 

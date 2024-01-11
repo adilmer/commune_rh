@@ -36,12 +36,17 @@
           </div>
           <div class="col-12 mt-3">
             <label for="id_grademember"> الصفة  </label>
-            <input name="id_grademember" type="text" class="form-control" id="id_grademember" placeholder="">
+            <select name="id_grademember" id="id_grademember" class="custom-select custom-select-lg mb-3 form-control">
+                <option value="0" disabled selected>اختر الصفة</option>
+                @foreach ( $grademembres as $grademembres )
+                <option value="{{$grademembres->id_grademember}}">{{$grademembres->nomar_grade}}</option>
+                @endforeach
+            </select>
           </div>
+          
           </div>
         </div>
       </div>
-
     </div>
     <div class="btnsimple text-start m-4 ">
       <button type="submit" class="btn btn-primary">حفظ المعلومــات</button>
