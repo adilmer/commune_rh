@@ -144,7 +144,6 @@ class StagiaireController extends Controller
         $stagiaire->update($request->all());
        return redirect()->route('stagiaire.index');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -182,7 +181,6 @@ class StagiaireController extends Controller
         $filename = $this->exportWord($data,$request->type,$name);
 
         return response()->download($filename)->deleteFileAfterSend(true);
-
     }
 
     public function export_presence_stagiaire(Request $request)
