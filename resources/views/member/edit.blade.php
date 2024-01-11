@@ -44,6 +44,13 @@
                 @endforeach
             </select>
         </div>
+        <div class="col-12 mt-3">
+            <label for="status_member"> الوضعية الحالية  </label>
+            <select id="status_member" name="status_member" class="custom-select custom-select-lg mb-3 form-control">
+                <option value="0" {{ $member->status_member == 0 ? 'selected':'' }}>غير متواجد</option>
+                <option value="1" {{ $member->status_member == 1 ? 'selected':'' }}>متواجد</option>
+            </select>
+        </div>
           </div>
         </div>
       </div>

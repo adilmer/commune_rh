@@ -12,7 +12,9 @@ class Member extends Model
 	public $timestamps = false;
 
     protected $casts = [
-		'date_naiss'=>'datetime'
+		'date_naiss'=>'datetime',
+		'status_member'=>'int'
+
 	];
 
 	protected $fillable = [
@@ -22,7 +24,8 @@ class Member extends Model
 		'date_naiss',
 		'banque',
 		'rib',
-		'id_grademember'
+		'id_grademember',
+		'status_member'
 	];
     public function grademember()
 	{

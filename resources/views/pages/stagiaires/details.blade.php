@@ -60,9 +60,9 @@
                           <h6 class="fw-semibold mb-0">الوثائق  :</h6>
                         </td>
                           <td class="border-bottom-0">
-                            <a href="{{asset('documents_stagiaires/'.$stagiaire->path_stagiaire)}}"  class="btn btn-danger"><i class="ti ti-file-text"></i> طلب المتدرب </a>
+                            <a {{$stagiaire->path_stagiaire==null ? 'x' : ''}}href="{{asset('documents_stagiaires/'.$stagiaire->path_stagiaire)}}"  class="btn btn-danger"><i class="ti ti-file-text"></i> طلب المتدرب </a>
                             <button name="type" value="acceptationstage" class="btn btn-danger"><i class="ti ti-file-text"></i> الموافقة</button><br><br>
-                            <button class="btn btn-danger"><i class="ti ti-file-text"></i>  ورقة الحضور</button>
+                            <a href="{{route('stagiaire.export_presence_stagiaire')}}?id_stagiaire={{$stagiaire->id_stagiaire}}"  class="btn btn-danger"><i class="ti ti-file-text"></i>  ورقة الحضور</a>
                             <button name="type" value="attestationstage" class="btn btn-danger"><i class="ti ti-file-text"></i> شهادة التدريب  </button>
                         </td>
                       </tr>

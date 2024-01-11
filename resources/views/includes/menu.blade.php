@@ -27,10 +27,10 @@
                 @can('agent.index')
                 <li> <a class="dropdown-item" href="{{route('agent.index')}}"> لائحة الموظفين </a></li>
                 @endcan
-                @can('agent.index')
+                @can('member.index')
                 <li> <a class="dropdown-item" href="{{route('member.index')}}"> لائحة الأعضاء </a></li>
                 @endcan
-                @can('absence.index')
+                @can('member.salaire')
                 <li> <a class="dropdown-item" href="{{route('member.salaire')}}"> تعويضات الأعضاء</a></li>
             <li> <a class="dropdown-item" href="{{route('absence.index')}}"> الحضور</a> </li>
             @endcan
