@@ -33,7 +33,7 @@
                           <h6 class="fw-semibold mb-0">الإسم الكامل</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">الدرجة</h6>
+                          <h6 class="fw-semibold mb-0">المهمة</h6>
                         </th>
 
                         <th class="border-bottom-0">
@@ -63,7 +63,7 @@
        <span class="fw-normal">{{$members->nomfr_member}}</span>
    </td>
    <td class="border-bottom-0">
-     <p class="mb-0 fw-normal">{{$members->grademember->nomar_grade ?? 'بدون'}}</p>
+     <p class="mb-0 fw-normal">{{$members->grademember->nomar_grade }}</p>
 
    </td>
    <td class="border-bottom-0">

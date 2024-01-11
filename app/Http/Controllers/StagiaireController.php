@@ -164,9 +164,9 @@ class StagiaireController extends Controller
 
            $data['nomfr'] = $stagiaire->nom_stagiaire_fr;
            $data['nomar'] = $stagiaire->nom_stagiaire_ar;
-           $data['direction'] = $stagiaire->direction_stagiaire;
-           $data['datedebut'] = $stagiaire->date_debut_stage;
-           $data['datefin'] = $stagiaire->date_debut_stage;
+           $data['direction'] = $stagiaire->direction_stagiaire; 
+           $data['datefin'] = \Carbon\Carbon::parse($stagiaire->date_fin_stage)->format('Y/m/d');
+           $data['datedebut']= \Carbon\Carbon::parse($stagiaire->date_debut_stage)->format('Y/m/d');
 
 
 

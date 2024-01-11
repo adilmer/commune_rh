@@ -35,8 +35,14 @@
             <input name="rib" type="text" class="form-control" id="rib" placeholder="">
           </div>
           <div class="col-12 mt-3">
-            <label for="id_grademember"> الصفة  </label>
-            <input name="id_grademember" type="text" class="form-control" id="id_grademember" placeholder="">
+            <label for="id_grademember"> المهمة  </label>
+
+            <select id="id_grademember" name="id_grademember" class="custom-select custom-select-lg mb-3 form-control">
+                <option value="" selected> - تصنيف الوثيقة   ...  </option>
+                @foreach ($grademembers as $grademembers)
+                <option value="{{$grademembers->id_grademember}}">{{$grademembers->nomar_grade}}</option>
+                @endforeach
+            </select>
           </div>
           </div>
         </div>

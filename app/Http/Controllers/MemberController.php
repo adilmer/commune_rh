@@ -38,9 +38,9 @@ class MemberController extends Controller
     public function create()
     {
 
-       // $grademembers = grademember::all();
+        $grademembers = Grademembre::all();
 
-        return \view('member.create');
+        return \view('member.create',compact('grademembers'));
 
     }
 

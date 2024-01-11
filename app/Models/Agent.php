@@ -119,7 +119,9 @@ class Agent extends Model
 		'tel',
 		'adresse_fr',
 		'adresse_ar',
-		'photo'
+		'photo',
+        'lieu_naiss_ar',
+		'rcar'
 	];
     public function grade()
 	{

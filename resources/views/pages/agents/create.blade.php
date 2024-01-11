@@ -37,15 +37,19 @@
               <label for="nbr_enfant">عدد الأبناء</label>
               <input name="nbr_enfant" type="number" class="form-control" id="nbr_enfant" placeholder="" value="0">
             </div>
-            <div class="col-4 mt-3">
-              <label for="lieu_naiss" >مكان الإزدياد</label>
+            <div class="col-3 mt-3">
+                <label for="lieu_naiss"> مكان الإزدياد بالعربية</label>
+                <input  name="lieu_naiss_ar" type="text" class="form-control" id="lieu_naiss_ar" placeholder="">
+              </div>
+            <div class="col-3 mt-3">
+              <label for="lieu_naiss" >مكان الإزدياد بالفرنسية</label>
               <input name="lieu_naiss" type="text" class="form-control" id="lieu_naiss" placeholder="">
             </div>
-            <div class="col-4 mt-3">
+            <div class="col-3 mt-3">
               <label for="date_naiss">تاريخ الإزدياد</label>
               <input name="date_naiss" type="date" class="form-control" id="date_naiss" placeholder="">
             </div>
-            <div class="col-4 mt-3">
+            <div class="col-3 mt-3">
               <label for="tel">  الهاتف</label>
               <input name="tel" type="text" class="form-control" id="tel" placeholder="">
             </div>
@@ -80,7 +84,7 @@
                 <label for="cin">رقم البطاقة الوطنية</label>
                 <input name="cin" type="text" class="form-control" id="cin" placeholder="">
               </div>
-              <div class="col-3 mt-3">
+              <div class="col-4 mt-3">
                 <label for="id_grade" >الدرجة</label>
                 <select id="id_grade" name="id_grade" class="custom-select custom-select-lg mb-3 form-control">
                     <option value="0"></option>
@@ -89,11 +93,11 @@
                     @endforeach
                 </select>
               </div>
-              <div class="col-3 mt-3">
+              <div class="col-4 mt-3">
                 <label for="date_grade" >تاريخ التعيين في الدرجة</label>
                 <input name="date_grade" type="date"  class="form-control" id="date_grade" placeholder="">
               </div>
-              <div class="col-3 mt-3">
+              <div class="col-4 mt-3">
                 <label for="echelle" >السلم</label>
                 <input name="echelle" type="text" class="form-control" id="echelle" placeholder="">
               </div>
@@ -151,22 +155,25 @@
                 <input name="agence" type="text" class="form-control" id="agence" placeholder="">
               </div>
 
-              <div class="col-4 mt-3">
+              <div class="col-3 mt-3">
                 <label for="n_affilation" >رقم التعاضدية  </label>
                 <input name="n_affilation" type="text" class="form-control" id="n_affilation" placeholder="">
               </div>
-              <div class="col-4 mt-3">
+              <div class="col-3 mt-3">
                 <label for="aff_mutuelle">نوع الإنخراط</label>
                 <select name="aff_mutuelle" class="custom-select custom-select-lg mb-3 form-control">
                   <option selected>General</option>
                   <option selected>omfam</option>
                 </select>
               </div>
-              <div class="col-4 mt-3">
+              <div class="col-3 mt-3">
                 <label for="aff_cmr" >CMR رقم الإنخراط </label>
                 <input name="aff_cmr" type="text" class="form-control" id="aff_cmr" placeholder="">
               </div>
-
+              <div class="col-3 mt-3">
+                <label for="rcar" >RCAR رقم الإنخراط </label>
+                <input name="rcar" type="text" class="form-control" id="rcar" placeholder="">
+              </div>
           </div>
         </div>
       </div>
