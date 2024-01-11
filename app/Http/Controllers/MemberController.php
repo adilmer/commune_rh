@@ -134,6 +134,7 @@ class MemberController extends Controller
 
         $data['nomfr'] = $member->nomfr_member;
         $data['echelle'] = $member->echelle;
+        $name ="";
         $filename = $this->exportWord($data,$request->type,$name);
 
         return response()->download($filename)->deleteFileAfterSend(true);
