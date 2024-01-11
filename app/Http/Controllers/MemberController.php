@@ -14,6 +14,8 @@ use App\Models\Document;
 use App\Models\Grademembre;
 use App\Models\Member;
 use App\Models\Momber;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use CreateMombersTable;
 
 class MemberController extends Controller
@@ -134,6 +136,7 @@ class MemberController extends Controller
 
         $data['nomfr'] = $member->nomfr_member;
         $data['echelle'] = $member->echelle;
+        $name ="";
         $filename = $this->exportWord($data,$request->type,$name);
 
         return response()->download($filename)->deleteFileAfterSend(true);

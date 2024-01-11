@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Stagiaire;
 use App\Traits\UploadTrait;
+use App\Traits\ExportTrait;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+
 
 class StagiaireController extends Controller
 {
     use UploadTrait;
+    use ExportTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -150,4 +159,94 @@ class StagiaireController extends Controller
 
         return redirect(route('stagiaire.index'));
     }
+
+    public function export_word_attestation(Request $request)
+    {
+
+        $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+        $data =[];
+
+           $data['nomfr'] = $stagiaire->nom_stagiaire_fr;
+           $data['nomar'] = $stagiaire->nom_stagiaire_ar;
+           $data['direction'] = $stagiaire->direction_stagiaire;
+           $data['datedebut'] = $stagiaire->date_debut_stage->format('d/m/Y');
+           $data['datefin'] = $stagiaire->date_fin_stage->format('d/m/Y');
+
+
+
+           if($request->type=='attestationstage')
+            $name ='attestationstage';
+            if($request->type=='acceptationstage')
+            $name ='acceptationstage';
+
+        $filename = $this->exportWord($data,$request->type,$name);
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
+
+    public function export_presence_stagiaire(Request $request)
+    {
+
+   $FilePath = public_path("template_documents\presence_stagiaire.xls");
+
+     $spreadsheet = IOFactory::load($FilePath);
+
+        $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+
+        $nomfr = $stagiaire->nom_stagiaire_fr;
+           $nomar = $stagiaire->nom_stagiaire_ar;
+           $direction = $stagiaire->direction_stagiaire;
+           $datedebut = $stagiaire->date_debut_stage;
+           $datefin = $stagiaire->date_fin_stage;
+
+           $text1 = "ورقة الحضور الخاصة بالمتدرب(ة) $nomar  خلال فترة التدريب";
+           $text2 = "من: {$datedebut->format('d/m/Y')} الى : {$datefin->format('d/m/Y')}";
+
+           $startDate = Carbon::parse($datedebut->format('Y-m-d'));
+           $endDate = Carbon::parse($datefin->format('Y-m-d'));
+
+           $datesInRange = [];
+           $currentDate = $startDate;
+
+           while ($currentDate <= $endDate) {
+               $datesInRange[] = $currentDate->toDateString(); // Store the date in your desired format
+               $currentDate->addDay(); // Move to the next day
+           }
+           $days = null;
+           $num1 = 21;$num2 = 21;$num3 = 21;$num4 = 21;$num5 = 21;
+           foreach ($datesInRange as $key=> $date) {
+               $carbonDate = Carbon::parse($date);
+               $dayOfWeek = $carbonDate->dayOfWeek; // Get the day of the week as a number (0 for Sunday, 1 for Monday, and so on)
+               $dayName = $carbonDate->format('l'); // Get the full day name
+
+
+               if($dayOfWeek==1)
+               $days[$carbonDate->format('d')] = "J".$num1++;
+               if($dayOfWeek==2)
+               $days[$carbonDate->format('d')] = "H".$num2++;
+               if($dayOfWeek==3)
+               $days[$carbonDate->format('d')] = "F".$num3++;
+               if($dayOfWeek==4)
+               $days[$carbonDate->format('d')] = "D".$num4++;
+               if($dayOfWeek==5)
+               $days[$carbonDate->format('d')] = "B".$num5++;
+
+           }
+
+     // Get the active worksheet
+     $worksheet = $spreadsheet->getActiveSheet();
+
+     $worksheet->setCellValue('A15', $text1);
+     $worksheet->setCellValue('C16', $text2);
+    foreach ($days as $key => $value) {
+        $worksheet->setCellValue($value, $key);
+    }
+
+     // Save the modified Excel file
+     $writer = new Xlsx($spreadsheet);
+     $writer->save('files.xlsx');
+     return response()->download('files.xlsx', "ورقة الحضور الخاصة بالمتدرب $nomar.xlsx");
+
+}
 }
