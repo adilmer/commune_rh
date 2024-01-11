@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Stagiaire;
 use App\Traits\UploadTrait;
+use App\Traits\ExportTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+
+
 
 class StagiaireController extends Controller
 {
     use UploadTrait;
+    use ExportTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -149,5 +155,28 @@ class StagiaireController extends Controller
         $stagiaire->delete();
 
         return redirect(route('stagiaire.index'));
+    }
+
+    public function export_word_attestation(Request $request)
+    {
+        $stagiaire = Stagiaire::findOrFail($request->id_stagiaire);
+        $data =[];
+
+           $data['nomfr'] = $stagiaire->nom_stagiaire_fr;
+           $data['nomar'] = $stagiaire->nom_stagiaire_ar;
+           $data['direction'] = $stagiaire->direction_stagiaire;
+           $data['datedebut'] = $stagiaire->date_debut_stage;
+           $data['datefin'] = $stagiaire->date_debut_stage;
+
+
+
+           if($request->type=='attestationstage')
+            $name ='attestationstage';
+            if($request->type=='acceptationstage')
+            $name ='acceptationstage';
+        $filename = $this->exportWord($data,$request->type,$name);
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
     }
 }

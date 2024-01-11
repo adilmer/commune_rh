@@ -203,6 +203,8 @@ Route::prefix('stagiaires')->group(function () {
     Route::post("/update","StagiaireController@update")->name("stagiaire.update");
     Route::post("/uploadDocuments","StagiaireController@uploadDocuments")->name("stagiaire.uploadDocuments");
     Route::get("/delete/{id_stagiaire}","StagiaireController@destroy")->name("stagiaire.delete");
+    Route::get('/export_word_attestation', 'StagiaireController@export_word_attestation')->name('stagiaire.export_word_attestation');
+
 });
 
     #Conges
@@ -263,6 +265,7 @@ Route::prefix('attestations')->group(function () {
     Route::get('/find_allocationfamilial','AttestationController@find_allocationfamilial')->name('attestation.find_allocationfamilial');
     Route::get('/export_word_allocationfamilial', 'AttestationController@export_word_allocationfamilial')->name('attestation.export_word_allocationfamilial');
 
+
     Route::get('/tps','AttestationController@tps')->name('attestation.tps');
     Route::get('/find_tps','AttestationController@find_tps')->name('attestation.find_tps');
     Route::get('/export_word_tps', 'AttestationController@export_word_tps')->name('attestation.export_word_tps');
@@ -302,10 +305,10 @@ Route::prefix('avancement')->group(function () {
     Route::get('/','AvancementController@index')->name('avancement.index');
 });
 
+Route::resource('roles', RolesController ::class); 
+Route::resource('permissions', PermissionsController::class);
 
 
-    Route::resource('roles', RolesController::class);
-    Route::resource('permissions', PermissionsController::class);
 });
 
 
