@@ -40,6 +40,9 @@
             @can('avancement.avancement_echellon')
             <li> <a class="dropdown-item" href="{{route('avancement.avancement_echellon')}}">الترقية في الرتبة</a> </li>
             @endcan
+            @can('avancement.tableavancement')
+            <li> <a class="dropdown-item" href="{{route('avancement.tableavancement')}}"> جدول الترقية </a> </li>
+            @endcan
             @can('aptitude.index')
             <li> <a class="dropdown-item" href="{{route('aptitude.index')}}"> الكفاءة المهنية</a> </li>
             @endcan
