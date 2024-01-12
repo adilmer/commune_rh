@@ -1,15 +1,16 @@
 @extends('templates.site')
 @section('content')
-
+<form action="{{route('member.decision')}}" method="get">
 <div class="inputsearch row" style="justify-content: flex-end;">
+
     <div class="col-sm-4 ">
-        <a href="{{route('member.create')}}" class="btn btn-primary"><i class="ti ti-download"></i> Telecharger Etat des Indemnité</a>
+        <button name="ind_member" value="download" class="btn btn-primary"><i class="ti ti-download"></i> Telecharger Etat des Indemnité</button>
       </div>
     <div   class="col-sm-8 pl-0 mb-2 d-flex ">
-        <input class="form-control " type="month">
-        <h4 class=" fw-semibold m-2 ">a</h4>
-        <input class="form-control" type="month">
-        <h4 class="fw-semibold m-2">De</h4>
+        <input class="form-control " name="dateF" type="month">
+        <h4 class=" fw-semibold m-2 "> Jusqu'à </h4>
+        <input class="form-control " name="dateD" type="month">
+        <h4 class="fw-semibold m-2"> De </h4>
     </div>
 
         <div class="row" >
@@ -67,7 +68,7 @@
    </td>
    <td class="border-bottom-0">
      <div class="d-flex  align-items-center gap-2">
-       <a href="" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-download"> Décision</i></a>
+       <button name="id_member" value="{{$members->id_member}}" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-download"> Décision</i></a>
      </div>
    </td>
  </tr>
@@ -79,8 +80,9 @@
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
+ </form>
 
 @endsection
 
