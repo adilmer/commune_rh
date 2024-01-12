@@ -140,6 +140,8 @@ Route::prefix('agents')->group(function () {
     Route::any("/update","MemberController@update")->name("member.update");
     Route::get("/delete/{id_member}","MemberController@destroy")->name("member.delete");
     Route::get("/salaire","MemberController@salaire")->name("member.salaire");
+    Route::get("/decision","MemberController@decision")->name("member.decision");
+    Route::get("/ind_member","MemberController@ind_member")->name("member.ind_member");
 });
 
 

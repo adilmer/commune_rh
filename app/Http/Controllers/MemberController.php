@@ -14,12 +14,16 @@ use App\Models\Document;
 use App\Models\Grademembre;
 use App\Models\Member;
 use App\Models\Momber;
+use App\Traits\ExportTrait;
+use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use CreateMombersTable;
+use NumberFormatter;
 
 class MemberController extends Controller
 {
+    use ExportTrait;
     /**
      * Display a listing of the resource.
      *
@@ -134,19 +138,145 @@ class MemberController extends Controller
         return view('member.salaire',compact('members','grademembre'));
     }
 
+    public function ind_member(Request $request)
+    {
+        $members = Member::where('status_member',1)->get();
+        $moisD = Carbon::parse($request->dateD);
+        $moisF = Carbon::parse($request->dateF);
+        $mD = $moisD->format('m');
+        $mF = $moisF->format('m');
+
+    $dateD = $moisD->firstOfMonth()->toDateString();
+    $dateF = $moisF->lastOfMonth()->toDateString();
+
+        $FilePath = public_path("template_documents\ind_member.xlsx");
+
+     $spreadsheet = IOFactory::load($FilePath);
+     $text1 = "DU $dateD AU $dateF";
+     // Get the active worksheet
+     $worksheet = $spreadsheet->getActiveSheet();
+
+     $worksheet->setCellValue('F8', $text1);
+
+       foreach ($members as $key => $member) {
+
+       $nomfr_member = strtoupper($member->nomfr_member);
+       $date_naiss =  $member->date_naiss;
+       $cin = strtoupper($member->cin) ;
+       $rib = $member->rib;
+       $nomfr_grade = strtoupper($member->grademember->nomfr_grade);
+       $indeminite = $member->grademember->indeminite * ($mF - $mD + 1);
+
+       $worksheet->setCellValue('D'.($key+10),$nomfr_member );
+       $worksheet->setCellValue('E'.($key+10),$date_naiss );
+       $worksheet->setCellValue('F'.($key+10),$nomfr_grade );
+       $worksheet->setCellValue('G'.($key+10),$cin );
+       $worksheet->setCellValue('H'.($key+10),$rib );
+       $worksheet->setCellValue('I'.($key+10),$indeminite);
+
+
+        }
+
+
+     // Save the modified Excel file
+     $writer = new Xlsx($spreadsheet);
+     $writer->save('files.xlsx');
+     return response()->download('files.xlsx', "Etat nominatif des Indéminité.xlsx");
+    }
+
     public function decision(Request $request)
     {
+       // dd($request->all());
+        if($request->id_member){
         $member = Member::findOrFail($request->id_member);
-        $grademembre = Grademembre::all();
+        $moisD = Carbon::parse($request->dateD);
+        $moisF = Carbon::parse($request->dateF);
+        $mD = $moisD->format('m');
+        $mF = $moisF->format('m');
+
+    $dateD = $moisD->firstOfMonth()->toDateString();
+    $dateF = $moisF->lastOfMonth()->toDateString();
+    $list_month = [
+        "janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"
+    ];
+    $text ="";
+    for ($i=$mD; $i < $mF; $i++) {
+        $text .= $list_month[$i-1] . ", ";
+    }
+    $text .= "et " .$list_month[$mF-1];
         $data =[];
 
-        $data['nomfr'] = $member->nomfr_member;
-        $data['echelle'] = $member->echelle;
-        $name ="";
-        $filename = $this->exportWord($data,$request->type,$name);
+        $data['nomfr_member'] = $member->nomfr_member;
+        $data['rib'] = $member->rib;
+        $data['banque'] = $member->banque;
+        $data['nomfr_grade'] = $member->grademember->nomfr_grade;
+        $data['indeminite'] = $member->grademember->indeminite;
+        $data['dateD'] = $dateD;
+        $data['dateF'] = $dateF;
+        $data['text'] = $text;
+        $data['N'] = $mF - $mD + 1 ;
+        //$data['Montant'] = $data['indeminite'] * $data['N'] ;
 
+
+
+
+        $name ="decision de $member->nomfr_member ";
+        $filename = $this->exportWord($data,"decisionmember",$name);
         return response()->download($filename)->deleteFileAfterSend(true);
+}
+    else{
+        $members = Member::where('status_member',1)->get();
+        $moisD = Carbon::parse($request->dateD);
+        $moisF = Carbon::parse($request->dateF);
+        $mD = $moisD->format('m');
+        $mF = $moisF->format('m');
+
+    $dateD = $moisD->firstOfMonth()->toDateString();
+    $dateF = $moisF->lastOfMonth()->toDateString();
+
+        $FilePath = public_path("template_documents\ind_member.xlsx");
+
+     $spreadsheet = IOFactory::load($FilePath);
+     $text1 = "DU $dateD AU $dateF";
+     // Get the active worksheet
+     $worksheet = $spreadsheet->getActiveSheet();
+
+     $worksheet->setCellValue('F8', $text1);
+
+       foreach ($members as $key => $member) {
+
+       $nomfr_member = strtoupper($member->nomfr_member);
+       $date_naiss =  $member->date_naiss->format('Y-m-d');
+       $cin = strtoupper($member->cin) ;
+       $rib = $member->rib;
+       $nomfr_grade = strtoupper($member->grademember->nomfr_grade);
+       $indeminite = $member->grademember->indeminite * ($mF - $mD + 1);
+        $text0 = "02-10-10.10-10-11";
+        $text2 = "Indéminité au Président  et aux Conseillers y Ayant Droit";
+       $worksheet->setCellValue('B'.($key+11),$text0 );
+       $worksheet->setCellValue('C'.($key+11),$text2 );
+       $worksheet->setCellValue('D'.($key+11),$nomfr_member );
+       $worksheet->setCellValue('E'.($key+11),$date_naiss );
+       $worksheet->setCellValue('F'.($key+11),$nomfr_grade );
+       $worksheet->setCellValue('G'.($key+11),$cin );
+       $worksheet->setCellValue('H'.($key+11),$rib );
+       $worksheet->setCellValue('I'.($key+11),$indeminite);
+
+
+        }
+
+
+     // Save the modified Excel file
+     $writer = new Xlsx($spreadsheet);
+     $writer->save('files.xlsx');
+     return response()->download('files.xlsx', "Etat nominatif des Indéminité.xlsx");
+    }
+
+
 
 
     }
+
+
+
 }
