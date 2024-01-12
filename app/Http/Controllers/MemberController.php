@@ -14,6 +14,8 @@ use App\Models\Document;
 use App\Models\Grademembre;
 use App\Models\Member;
 use App\Models\Momber;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use CreateMombersTable;
 
 class MemberController extends Controller
@@ -37,7 +39,6 @@ class MemberController extends Controller
      */
     public function create()
     {
-
        $grademembres = Grademembre::all();
         return \view('member.create',compact('grademembres'));
     }
