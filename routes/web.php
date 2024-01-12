@@ -308,6 +308,9 @@ Route::prefix('avancement')->group(function () {
 
 
 
+Route::resource('roles', App\Http\Controllers\RolesController ::class);
+Route::resource('permissions', App\Http\Controllers\PermissionsController::class);
+
 });
 
 
