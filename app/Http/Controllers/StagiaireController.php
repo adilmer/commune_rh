@@ -144,7 +144,6 @@ class StagiaireController extends Controller
         $stagiaire->update($request->all());
        return redirect()->route('stagiaire.index');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -168,10 +167,10 @@ class StagiaireController extends Controller
 
            $data['nomfr'] = $stagiaire->nom_stagiaire_fr;
            $data['nomar'] = $stagiaire->nom_stagiaire_ar;
+
            $data['direction'] = $stagiaire->direction_stagiaire;
            $data['datedebut'] = $stagiaire->date_debut_stage->format('d/m/Y');
            $data['datefin'] = $stagiaire->date_fin_stage->format('d/m/Y');
-
 
 
            if($request->type=='attestationstage')
@@ -182,7 +181,6 @@ class StagiaireController extends Controller
         $filename = $this->exportWord($data,$request->type,$name);
 
         return response()->download($filename)->deleteFileAfterSend(true);
-
     }
 
     public function export_presence_stagiaire(Request $request)

@@ -57,7 +57,7 @@
                                     <span class="  mb-1"> الجنس: {{ $agent->sexe=='Masculin' ? 'ذكر' : 'أنثى' }}</span>
                                 </div>
                                 <div class="d">
-                                    <span class="  mb-1"> مكان الإزدياد: {{ $agent->lieu_naiss }}</span>
+                                    <span class="  mb-1"> مكان الإزدياد: {{ $agent->lieu_naiss_ar }}</span>
                                 </div>
                                 <div class="d">
                                     <span class="  mb-1"> تاريخ الإزدياد: {{ $agent->date_naiss?->format('Y-m-d') ?? '' }}</span>
@@ -271,8 +271,9 @@
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0"> تاريخ التعيين في المنصب</h6>
                                         </th>
-
-
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0"> رقم الإنخراط RCAR</h6>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -283,7 +284,9 @@
                                         <td class="border-bottom-0">
                                             <p class="mb-0 fw-normal">{{ $agent->date_fonction }}</p>
                                         </td>
-
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">{{ $agent->rcar }}</p>
+                                        </td>
 
                                     </tr>
                                 </tbody>

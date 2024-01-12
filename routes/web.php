@@ -306,8 +306,6 @@ Route::prefix('avancement')->group(function () {
     Route::get('/','AvancementController@index')->name('avancement.index');
 });
 
-Route::resource('roles', App\Http\Controllers\RolesController ::class);
-Route::resource('permissions', App\Http\Controllers\PermissionsController::class);
 
 
 });

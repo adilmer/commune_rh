@@ -31,4 +31,5 @@ class Member extends Model
 	{
 		return $this->belongsTo(Grademembre::class, 'id_grademember');
 	}
+   
 }

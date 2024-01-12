@@ -41,8 +41,14 @@ class MemberController extends Controller
     {
 
 
+        $grademembers = Grademembre::all();
+
+        return \view('member.create',compact('grademembers'));
+
+
        $grademembres = Grademembre::all();
         return \view('member.create',compact('grademembres'));
+
 
     }
 

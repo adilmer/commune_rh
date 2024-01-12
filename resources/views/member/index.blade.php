@@ -31,10 +31,14 @@
                           <h6 class="fw-semibold mb-0">الإسم الكامل</h6>
                         </th>
                         <th class="border-bottom-0">
+<<<<<<< HEAD
+                          <h6 class="fw-semibold mb-0">المهمة</h6>
+=======
                             <h6 class="fw-semibold mb-0">CIN</h6>
                           </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">الصفة</h6>
+>>>>>>> 873db83e64cc1fd2b44dd362c68233dffc9f198e
                         </th>
                         <th class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">الوضعية الحالية</h6>
@@ -65,10 +69,15 @@
        <span class="fw-normal">{{$members->nomfr_member}}</span>
    </td>
    <td class="border-bottom-0">
+<<<<<<< HEAD
+     <p class="mb-0 fw-normal">{{$members->grademember->nomar_grade }}</p>
+
+=======
     <p class="mb-0 fw-normal">{{$members->cin}}</p>
   </td>
    <td class="border-bottom-0">
      <p class="mb-0 fw-normal">{{$members->grademember->nomar_grade ?? 'بدون'}}</p>
+>>>>>>> 873db83e64cc1fd2b44dd362c68233dffc9f198e
    </td>
    <td class="border-bottom-0">
     <p class="mb-0 fw-normal">{{$members->status_member==0 ? 'غير متواجد' : 'متواجد'}}</p>

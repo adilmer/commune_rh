@@ -38,15 +38,19 @@
               <label for="nbr_enfant">عدد الأبناء</label>
               <input value="{{$agent->nbr_enfant}}" name="nbr_enfant" type="number" class="form-control" id="nbr_enfant" placeholder="" >
             </div>
-            <div class="col-4 mt-3">
-              <label for="lieu_naiss" >مكان الإزدياد</label>
-              <input value="{{$agent->lieu_naiss}}" name="lieu_naiss" type="text" class="form-control" id="lieu_naiss" placeholder="">
+            <div class="col-3 mt-3">
+              <label for="lieu_naiss"> مكان الإزدياد بالعربية</label>
+              <input value="{{$agent->lieu_naiss_ar}}" name="lieu_naiss_ar" type="text" class="form-control" id="lieu_naiss_ar" placeholder="">
             </div>
-            <div class="col-4 mt-3">
+            <div class="col-3 mt-3">
+                <label for="lieu_naiss"> مكان الإزدياد بالفرنسية</label>
+                <input value="{{$agent->lieu_naiss}}" name="lieu_naiss" type="text" class="form-control" id="lieu_naiss" placeholder="">
+              </div>
+            <div class="col-3 mt-3">
               <label for="date_naiss">تاريخ الإزدياد</label>
               <input value="{{ \Carbon\Carbon::parse($agent->date_naiss)->format('Y-m-d') }}" name="date_naiss" type="date" class="form-control" id="date_naiss" placeholder="">
             </div>
-            <div class="col-4 mt-3">
+            <div class="col-3 mt-3">
               <label for="tel">  الهاتف</label>
               <input value="{{$agent->tel}}" name="tel" type="text" class="form-control" id="tel" placeholder="">
             </div>
@@ -158,7 +162,7 @@
                     @endforeach
                 </select>
               </div>
-              <div class="col-4 mt-3">
+              <div class="col-6 mt-3">
                 <label for="id_fonction">المنصب الإداري</label>
                 <select id="id_fonction" name="id_fonction" class="custom-select custom-select-lg mb-3 form-control">
                     @foreach ($fonctions as $fonctions)
@@ -166,20 +170,18 @@
                     @endforeach
                 </select>
               </div>
-              <div class="col-4 mt-3">
+              <div class="col-6 mt-3">
                 <label for="date_fonction" >تاريخ التعيين في المنصب الإداري</label>
                 <input value="{{ \Carbon\Carbon::parse($agent->date_fonction)->format('Y-m-d') }}" name="date_fonction" type="date" class="form-control" id="date_fonction" placeholder="">
               </div>
-              <div class="col-4 mt-3"></div>
-              <div class="col-4 mt-3">
+              <div class="col-6 mt-3">
                 <label for="date_rec">تاريخ التوظيف</label>
                 <input value="{{ \Carbon\Carbon::parse($agent->date_rec)->format('Y-m-d') }}" name="date_rec" type="date" class="form-control" id="date_rec" placeholder="">
               </div>
-              <div class="col-4 mt-3">
+              <div class="col-6 mt-3">
                 <label for="date_tuto">تاريخ الترسيم</label>
                 <input value="{{ \Carbon\Carbon::parse($agent->date_tuto)->format('Y-m-d') }}" name="date_tuto" type="date" class="form-control" id="date_tuto" placeholder="">
               </div>
-              <div class="col-4 mt-3"></div>
               <div class="col-4 mt-3">
                 <label for="rib">رقم الحساب البنكي </label>
                 <input value="{{$agent->rib}}" name="rib" type="text" class="form-control" id="rib" placeholder="">
@@ -188,7 +190,6 @@
                 <label for="agence">Agence</label>
                 <input value="{{$agent->agence}}" name="agence" type="text" class="form-control" id="agence" placeholder="">
               </div>
-              <div class="col-4 mt-3"></div>
               <div class="col-4 mt-3">
                 <label for="n_affilation" >رقم التعاضدية  </label>
                 <input value="{{$agent->n_affilation}}" name="n_affilation" type="text" class="form-control" id="n_affilation" placeholder="">
@@ -204,7 +205,10 @@
                 <label for="aff_cmr" >CMR رقم الإنخراط </label>
                 <input value="{{$agent->aff_cmr}}" name="aff_cmr" type="text" class="form-control" id="aff_cmr" placeholder="">
               </div>
-
+              <div class="col-4 mt-3">
+                <label for="rcar" >RCAR رقم الإنخراط </label>
+                <input value="{{$agent->rcar}}" name="rcar" type="text" class="form-control" id="rcar" placeholder="">
+              </div>
           </div>
         </div>
       </div>
