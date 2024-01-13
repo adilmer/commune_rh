@@ -124,7 +124,7 @@ class MemberController extends Controller
     }
     public function salaire()
     {
-        $members = Member::all();
+        $members = Member::orderby('id_member')->get();
         $grademembre = Grademembre::all();
         return view('member.salaire',compact('members','grademembre'));
     }
@@ -216,7 +216,7 @@ class MemberController extends Controller
         return response()->download($filename)->deleteFileAfterSend(true);
 }
     else{
-        $members = Member::where('status_member',1)->get();
+        $members = Member::where('status_member',1)->orderby('id_member')->get();
         $moisD = Carbon::parse($request->dateD);
         $moisF = Carbon::parse($request->dateF);
         $mD = $moisD->format('m');
