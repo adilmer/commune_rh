@@ -216,6 +216,7 @@ class AttestationController extends Controller
         $data['dategrade'] = \Carbon\Carbon::parse($agent->date_grade->format('Y/m/d'));
         $data['rib'] = $agent->rib;
         $data['ppr'] = $agent->ppr;
+        $data['rcar'] = $agent->rcar;
         $data['nomperear'] = $request->nomperear;
         $data['nommerear'] = $request->nommerear;
         $data['nomperefr'] = Str::upper($request->nomperefr);

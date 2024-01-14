@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 set_time_limit(0);
 
+
 use App\Models\Agent;
 use App\Models\Indemnite;
 use Illuminate\Http\Request;
@@ -12,9 +13,13 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Stmt\Else_;
+use App\Traits\ExportTrait;
+use App\Traits\UploadTrait;
+use NumberFormatter;
 
 class AvancementController extends Controller
 {
+    use ExportTrait;
     /**
      * Display a listing of the resource.
      *
@@ -266,4 +271,39 @@ class AvancementController extends Controller
         return view('pdf.decision_reclacement', compact('agents'));
     }
 
+
+    public function export_word_arretepromotion(Request $request)
+    {
+         
+     // dd($request->a_echelle);
+        $agent = Agent::findOrFail($request->id_agent);
+        $data =[];
+        $data['nomfr'] = $agent->nom_fr;
+        $data['ppr'] = $agent->ppr;
+        $data['cin'] = $agent->cin;
+        $data['gradefr'] = $agent->grade->nom_grade_fr;
+
+        $data['n_arrete'] = $request->n_arrete;
+       //$data['date_arrete'] = $request->date_arrete;
+        $data['date_arrete'] = \Carbon\Carbon::parse($request->date_arrete)->format('d/m/Y');
+        $data['date_commission'] = \Carbon\Carbon::parse($request->date_commission)->format('d/m/Y');
+        $data['annee_arrete'] = \Carbon\Carbon::parse($request->date_arrete)->format('Y');
+
+        $data['a_echellon'] = $request->a_echellon;
+        $data['a_echelle'] = $request->a_echelle;
+        $data['a_ind'] = $request->a_ind;
+        $data['a_dateffet'] = $request->a_dateffet;
+
+        $data['n_echellon'] = $request->n_echellon;
+        $data['n_echelle'] = $request->n_echelle;
+        $data['n_ind'] = $request->n_ind;
+        $data['n_dateffet'] = $request->n_dateffet;
+        $data['dateNow'] = date('d/m/Y');
+
+        $filename = $this->exportWord($data,'arretepromotion','arretepromotion');
+
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
 }

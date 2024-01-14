@@ -246,6 +246,8 @@ Route::prefix('avancements')->group(function () {
     Route::get('/tableavancement','AvancementController@tableavancement')->name('avancement.tableavancement');
     Route::get('/etat_engagement','AvancementController@etat_engagement')->name('avancement.etat_engagement');
     Route::get('/decison_reclacement','AvancementController@decison_reclacement')->name('avancement.decison_reclacement');
+    Route::get('/export_word_arretepromotion','AvancementController@export_word_arretepromotion')->name('avancement.export_word_arretepromotion');
+
 });
 
 #Imports
