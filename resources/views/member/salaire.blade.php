@@ -68,7 +68,7 @@
    </td>
    <td class="border-bottom-0">
      <div class="d-flex  align-items-center gap-2">
-       <button name="id_member" value="{{$members->id_member}}" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-download"> Décision</i></a>
+       <button name="id_member" value="{{$members->id_member}}" class="btn btn-success rounded-3 fw-semibold"><i class="ti ti-download"> Décision</i></a>
      </div>
    </td>
  </tr>
