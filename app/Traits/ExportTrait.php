@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Traits;
-use PhpOffice\PhpWord\TemplateProcessor;
 
+use NumberFormatter ;
+use PhpOffice\PhpWord\TemplateProcessor;
+use Rmunate\Utilities\SpellNumber;
 /**
  * Summary of ExportTrait
  */
@@ -28,6 +30,15 @@ trait ExportTrait
             $path = 'word_documents/'.$file_name.' ('.time().') '.'.docx';
             $templateProcessor->saveAs($path);
             return $path;
+    }
+
+    function chiffre_en_lettre($number, $root = true)
+    {
+
+        $formatter = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
+        $num =  $formatter->format($number);
+        return $num;
+
     }
 
 

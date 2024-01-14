@@ -165,7 +165,6 @@ class MemberController extends Controller
        $worksheet->setCellValue('H'.($key+10),$rib );
        $worksheet->setCellValue('I'.($key+10),$indeminite);
 
-
         }
 
 
@@ -233,7 +232,7 @@ class MemberController extends Controller
      $worksheet = $spreadsheet->getActiveSheet();
 
      $worksheet->setCellValue('F8', $text1);
-
+     $total = 0;
        foreach ($members as $key => $member) {
 
        $nomfr_member = strtoupper($member->nomfr_member);
@@ -252,10 +251,12 @@ class MemberController extends Controller
        $worksheet->setCellValue('G'.($key+11),$cin );
        $worksheet->setCellValue('H'.($key+11),$rib );
        $worksheet->setCellValue('I'.($key+11),$indeminite);
-
+       $total += $indeminite;
 
         }
-
+        $montant = $this->chiffre_en_lettre($total) . " Dirham";
+        $worksheet->setCellValue('C32', $montant);
+        //dd(31520,$montant);
 
      // Save the modified Excel file
      $writer = new Xlsx($spreadsheet);
