@@ -74,13 +74,14 @@ tr:nth-child(even) {
         </tr>
         @foreach ($agent as $key=>$value)
         <tr>
+
             <td class="align-middle text-center">{{$agent[$key]->cin}}</td>
             <td class="align-middle text-center">{{$agent[$key]->nom_fr}}</td>
             <td class="align-middle text-center">{{$agent[$key]->echelle}}</td>
             <td class="align-middle text-center">{{$agent[$key]->echellon}}</td>
             <td class="align-middle text-center">{{$agent[$key]->indice}}</td>
             <td class="align-middle text-center">{{$agent[$key]->date_echellon->format('d/m/Y')}}</td>
-            <td class="align-middle text-center">36</td>
+            <td class="align-middle text-center">{{($Nagent[$key]->date_echellon->format('Y')-$agent[$key]->date_echellon->format('Y'))*12}}</td>
             <td class="align-middle text-center">{{$Nagent[$key]->echelle}}</td>
             <td class="align-middle text-center">{{$Nagent[$key]->echellon}}</td>
             <td class="align-middle text-center">{{$Nagent[$key]->indice}}</td>
