@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 set_time_limit(0);
 
-
+use Ap
 use App\Models\Agent;
 use App\Models\Indemnite;
 use Illuminate\Http\Request;
@@ -313,8 +313,7 @@ try{
 
 
     public function export_word_arretepromotion(Request $request)
-    {
-         
+
      // dd($request->a_echelle);
         $agent = Agent::findOrFail($request->id_agent);
         $data =[];
@@ -346,4 +345,3 @@ try{
         return response()->download($filename)->deleteFileAfterSend(true);
 
     }
-}
