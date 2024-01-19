@@ -28,6 +28,18 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
+        $routes = Route::getRoutes()->getRoutes();
+
+        foreach ($routes as $route) {
+            if ($route->getName() != '' && $route->getAction()['middleware']['0'] == 'web') {
+                $permission = Permission::where('name', $route->getName())->first();
+
+                if (is_null($permission)) {
+                    permission::create(['name' => $route->getName()]);
+                }
+            }
+        }
+
         $roles = Role::orderBy('id','DESC')->paginate(5);
         return view('roles.index',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);

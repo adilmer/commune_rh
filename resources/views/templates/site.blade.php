@@ -55,30 +55,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{{asset('assets/js/ajax.js')}}"></script>
   <script src="{{asset('assets/js/script.js')}}"></script>
-
-
+  
 <script>
 
     $(document).ready(function() {
-       /* // $('iframe').contents().find('#leftpanel').hide();
-        $('#iframeQuiz').contents().find("[elname='freePlanBrandingFooter']").hide();
-         // Get the iframe element
-    var iframe = document.getElementById('iframeQuiz');
-
-// Check if the iframe is loaded
-iframe.onload = function() {
-    // Access the contentWindow of the iframe
-    var iframeContent = iframe.contentWindow;
-
-    // Access the document inside the iframe
-    var iframeDocument = iframeContent.document;
-
-    // Hide the element with attribute 'elname="freePlanBrandingFooter"'
-    var elementToHide = iframeDocument.querySelector('[elname="freePlanBrandingFooter"]');
-    if (elementToHide) {
-        elementToHide.style.display = 'none';
-    }
-}; */
         @yield('script')
 });
 </script>

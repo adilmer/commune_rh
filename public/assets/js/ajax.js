@@ -37,13 +37,30 @@ function get_table_ajax(id,url,adress) {
        url: url,
       data: {'text':text},
       success: function (data) {
-      $(adress).html(data.data); 
+      $(adress).html(data.data);
+
       }, error: function (reject) {
 
 
       }
   });
     }
+
+    function get_table_ajax_array(text,url,adress) {
+        url = url + "?text=" + text
+        return $.ajax({
+          type: 'GET',
+           url: url,
+          data: {'text':text},
+          success: function (success) {
+
+
+          }, error: function (reject) {
+
+            console.error('Error:', reject);
+          }
+      });
+        }
 //////////////////Post AJAX//////////////////////////
 
 function post_ajax(params) {

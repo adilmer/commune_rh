@@ -48,8 +48,8 @@ tr:nth-child(even) {
 
 
 <div class="center" style="margin-top: 100px;">
-    <h3>TABLE D'AVANCEMENT D'ECHELON AU TITRE DE L'ANNÉE <span>XX</span> ET ANNÉES ANTÉRIEURES</h3>
-    <h5>Grade : <span>TEST GRADE </span></H5>
+    <h3>TABLE D'AVANCEMENT D'ECHELON AU TITRE DE L'ANNÉE <span>{{$annee}}</span> ET ANNÉES ANTÉRIEURES</h3>
+    <h5>Grade : <span> {{$grade}} </span></H5>
 </div>
 
     <table class="table  ">
@@ -72,21 +72,23 @@ tr:nth-child(even) {
             <th ><h5>Indice</h5></th>
             <th ><h5>Date d'effet echellon</h5></th>
         </tr>
+        @foreach ($agent as $key=>$value)
         <tr>
-
-            <td class="align-middle text-center">SH179390</td>
-            <td class="align-middle text-center">EL MERZOUGUI OUALID</td>
-            <td class="align-middle text-center">9</td>
-            <td class="align-middle text-center">1</td>
-            <td class="align-middle text-center">342</td>
-            <td class="align-middle text-center">01/10/2022</td>
+            <td class="align-middle text-center">{{$agent[$key]->cin}}</td>
+            <td class="align-middle text-center">{{$agent[$key]->nom_fr}}</td>
+            <td class="align-middle text-center">{{$agent[$key]->echelle}}</td>
+            <td class="align-middle text-center">{{$agent[$key]->echellon}}</td>
+            <td class="align-middle text-center">{{$agent[$key]->indice}}</td>
+            <td class="align-middle text-center">{{$agent[$key]->date_echellon->format('d/m/Y')}}</td>
             <td class="align-middle text-center">36</td>
-            <td class="align-middle text-center">9</td>
-            <td class="align-middle text-center">2</td>
-            <td class="align-middle text-center">357</td>
-            <td class="align-middle text-center">01/10/2022</td>
+            <td class="align-middle text-center">{{$Nagent[$key]->echelle}}</td>
+            <td class="align-middle text-center">{{$Nagent[$key]->echellon}}</td>
+            <td class="align-middle text-center">{{$Nagent[$key]->indice}}</td>
+            <td class="align-middle text-center">{{$Nagent[$key]->date_echellon->format('d/m/Y')}}</td>
             <td class="align-middle text-center"></td>
         </tr>
+        @endforeach
+
     </table>
 
     <h3 style="text-align: end; font-weight: bold;text-decoration: underline; margin-top: 50px;">Le President du Conseil Communal</h3>

@@ -56,9 +56,7 @@ Route::group(['middleware' => ['auth', 'permission']], function() {
     Route::get('/notation', function () {
         return view('homepage.notation');
     });
-    /* */Route::get('/table', function () {
-        return view('page.avancement.tableavancement');
-    });
+
     #aptitudeprofessionnelle
     Route::prefix('aptitudeprofessionnelle')->group(function () {
 
@@ -244,8 +242,10 @@ Route::prefix('avancements')->group(function () {
     Route::get('/avancement_echellon','AvancementController@avancement_echellon')->name('avancement.avancement_echellon');
     Route::get('/avancement_echelle','AvancementController@avancement_echelle')->name('avancement.avancement_echelle');
     Route::get('/tableavancement','AvancementController@tableavancement')->name('avancement.tableavancement');
+    Route::get('/exporttableavancement','AvancementController@exporttableavancement')->name('avancement.exporttableavancement');
     Route::get('/etat_engagement','AvancementController@etat_engagement')->name('avancement.etat_engagement');
     Route::get('/decison_reclacement','AvancementController@decison_reclacement')->name('avancement.decison_reclacement');
+    Route::get('/getinfoAgent','AvancementController@getinfoAgent')->name('avancement.getinfoAgent');
 });
 
 #Imports
@@ -303,10 +303,7 @@ Route::prefix('exports')->group(function () {
 
 
 
-#Absences
-Route::prefix('avancement')->group(function () {
-    Route::get('/','AvancementController@index')->name('avancement.index');
-});
+
 
 
 

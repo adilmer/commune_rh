@@ -256,10 +256,50 @@ class AvancementController extends Controller
 
     public function tableavancement(Request $request)
     {
+
         $agents = Agent::where('id_position', 11)->get();
+
         return view('pages.avancement.tableavancement', compact('agents'));
     }
 
+
+    public function getinfoAgent(Request $request)
+    {
+
+        $agent = Agent::where('id_position', 11)->where('id_agent',$request->text)->first();
+
+        $data = ["echelle"=>$agent->echelle,"echellon"=>$agent->echellon,"indice"=>$agent->indice,"date_echellon"=>$agent->date_echellon->format('Y-m-d')];
+ //dd($agent,$data);
+        return Response(['data' => $data]);
+    }
+
+
+    public function exporttableavancement(Request $request)
+    {
+
+try{
+
+
+        $annee = $request->annee;
+        $grade = $request->grade;
+        $id_agents = $request->id_agent;
+        //dd($id_agents);
+        $echellons = $request->echellon;
+        $new_echellons = $request->new_echellon;
+        foreach ($echellons as $key => $value) {
+            $myAgent = Agent::where('id_agent',$id_agents[$key])->first();
+            $agent[] = $this->newAgent($myAgent, null,$echellons[$key]);
+            $Nagent[] = $this->newAgent($myAgent, null,$new_echellons[$key]);
+        }
+       // dd($request->all(),$agent,$Nagent);
+
+    }catch(Exception $e){
+
+    }
+
+
+        return view('pdf.decision_reclacement', compact('grade','annee','agent','Nagent'));
+    }
     public function decison_reclacement(Request $request)
     {
         $agents = Agent::where('id_position', 11)->get();
