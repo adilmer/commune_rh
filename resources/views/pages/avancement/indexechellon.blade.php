@@ -6,7 +6,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
 @endphp
 <div class="card" dir="ltr">
           <div class="card-body">
-            <form action="" method="get">
+            <form action="{{route('avancement.export_word_arretepromotion')}}" method="get">
                 @csrf
             <h5 class="card-title fw-semibold mb-4">Avancement Echellon</h5>
             <div class="form-group row  my-3">
@@ -35,7 +35,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
               </div>
 
             <div class="row">
-              <div class="col-5 mt-3">
+              <div class="col-6 mt-3">
                 <h3 class="text-center">Ancienne Situation</h3>
                 <table class="table table-striped text-nowrap">
                     <tr>
@@ -45,7 +45,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                         <th>Date d'effet echellon</th>
                     </tr>
                     <tr>
-                        <td><select class="form-select" id="echellonSelect"  aria-label="Floating label select example">
+                        <td><select class="form-select" name="a_echellon" id="echellonSelect"  aria-label="Floating label select example">
 
                             <option  {{$echellon=="1" ? "selected" : ""}}>1</option>
                             <option  {{$echellon=="2" ? "selected" : ""}}>2</option>
@@ -61,7 +61,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
 
 
                           </select></td>
-                        <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example" disabled>
+                        <td><select class="form-select"  name="a_echelle"  id="floatingSelect" aria-label="Floating label select example" readonly>
 
                             <option  {{$agent->echelle=="1" ? "selected" : ""}}>1</option>
                             <option  {{$agent->echelle=="2" ? "selected" : ""}}>2</option>
@@ -88,17 +88,17 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
 
                       @endphp
                           @if($new_indice0 !=0)
-                        <td><input class="form-control" type="text" value="{{$new_indice0 ?? ''}}" disabled></td>
-                        <td><input class="form-control" type="text" value="{{$new_date_echellon0 ?? ''}}" disabled></td>
+                        <td><input class="form-control"  name="a_ind" type="text" value="{{$new_indice0 ?? ''}}" readonly></td>
+                        <td><input class="form-control" name="a_dateffet" type="text" value="{{$new_date_echellon0 ?? ''}}" readonly></td>
                         @else
-                        <td><input class="form-control" type="text" value="" disabled></td>
-                        <td><input class="form-control" type="text" value="" disabled></td>
+                        <td><input class="form-control" type="text" value="" readonly></td>
+                        <td><input class="form-control" type="text" value="" readonly></td>
                         @endif
 
                     </tr>
                 </table>
               </div>
-              <div id="calculer_situation" class="col-2 d-flex align-items-center justify-content-center ">
+              <div id="calculer_situation" class="col-1 d-flex align-items-center justify-content-center ">
 
             </div>
             @php
@@ -122,10 +122,10 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     </tr>
                     <tr>
                         @if($new_indice!=0)
-                        <td>{{$new_echellon ?? ''}}</td>
-                        <td>{{$agent->echelle ?? ''}}</td>
-                        <td>{{$new_indice ?? ''}}</td>
-                        <td>{{$new_date_echellon ?? ''}}</td>
+                        <td><input class="form-control" type="text" name="n_echellon"  value="{{$new_echellon ?? ''}}"></td>
+                        <td><input class="form-control" type="text" name="n_echelle"  value="{{$agent->echelle ?? ''}}"></td>
+                        <td><input class="form-control" type="text" name="n_ind"  value="{{$new_indice ?? ''}}"></td>
+                        <td><input class="form-control" type="text"  name="n_dateffet" value="{{$new_date_echellon ?? ''}}"></td>
                         @else
                         <td></td>
                         <td></td>
@@ -135,18 +135,18 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     </tr>
                 </table>
               </div>
-                <div class="row">
+                  <div class="row">
                     <div class="col-3">
-                        <label for="list_agents" >Date Commission : </label>
-                        <input type="date" class="form-control"   >
+                        <label for="date_commission" >Date Commission : </label>
+                        <input id="date_commission" name="date_commission" type="date" class="form-control"   >
                     </div>
                     <div class="col-3">
-                        <label for="list_agents" >Date Arrété : </label>
-                        <input type="date" class="form-control"   >
+                        <label for="date_arrete" >Date Arrété : </label>
+                        <input id="date_arrete" name="date_arrete" type="date" class="form-control"   >
                     </div>
                     <div class="col-3">
-                        <label for="list_agents" >N° Arrété : </label>
-                        <input type="text" class="form-control"   >
+                        <label for="n_arrete" >N° Arrété : </label>
+                        <input id="n_arrete" name="n_arrete" type="text" class="form-control"   >
                     </div>
                     <div class="col-3">
                         <label for="list_agents" >Grade : </label>
