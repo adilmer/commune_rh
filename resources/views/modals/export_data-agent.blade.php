@@ -76,7 +76,7 @@
                             <span class="form-check-sign">تاريخ التعيين في الدرجة</span>
                         </label>
                         <label class="form-check-label m-2">
-                            <input class="form-check-input" type="checkbox" name="names[]" value="echelle as السلم">
+                            <input class="form-check-input" type="checkbox" name="names[]" value="agents.echelle as السلم">
                             <span class="form-check-sign">السلم</span>
                         </label>
                         <label class="form-check-label m-2">
