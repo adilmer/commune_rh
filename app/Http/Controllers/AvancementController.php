@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 set_time_limit(0);
 
-use Ap
+
 use App\Models\Agent;
 use App\Models\Indemnite;
 use Illuminate\Http\Request;
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Stmt\Else_;
 use App\Traits\ExportTrait;
 use App\Traits\UploadTrait;
+use Exception;
 use NumberFormatter;
 
 class AvancementController extends Controller
@@ -313,7 +314,7 @@ try{
 
 
     public function export_word_arretepromotion(Request $request)
-
+{
      // dd($request->a_echelle);
         $agent = Agent::findOrFail($request->id_agent);
         $data =[];
@@ -345,3 +346,4 @@ try{
         return response()->download($filename)->deleteFileAfterSend(true);
 
     }
+}
