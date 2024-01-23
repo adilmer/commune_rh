@@ -34,12 +34,12 @@
           </div>
           <div class="col-6 mt-3">
             <label for="rib"></label>رقم الحساب </label>
-            <h4 class="fw-normal mb-1">{{ $member->rib }}</h4>
+            <h4 style="text-align: end;direction: ltr; class="fw-normal mb-1">{{ $member->rib }}</h4>
 
           </div>
           <div class="col-12 mt-3">
             <label for="id_grademember"> الصفة  </label>
-            <h4 class="fw-normal mb-1">{{ $member->id_grademember }}</h4>
+            <h4 class="fw-normal mb-1">{{ $member->grademember->nomar_grade	 }}</h4>
         </div>
           </div>
         </div>

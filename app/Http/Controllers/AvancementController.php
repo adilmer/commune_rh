@@ -275,7 +275,7 @@ class AvancementController extends Controller
         $agent = Agent::where('id_position', 11)->where('id_agent',$request->text)->first();
 
         $data = ["echelle"=>$agent->echelle,"echellon"=>$agent->echellon,"indice"=>$agent->indice,"date_echellon"=>$agent->date_echellon->format('Y-m-d')];
- //dd($agent,$data);
+       // dd($agent,$data);
         return Response(['data' => $data]);
     }
 
@@ -316,34 +316,55 @@ try{
     public function export_word_arretepromotion(Request $request)
 {
      // dd($request->a_echelle);
-        $agent = Agent::findOrFail($request->id_agent);
-        $data =[];
-        $data['nomfr'] = $agent->nom_fr;
-        $data['ppr'] = $agent->ppr;
-        $data['cin'] = $agent->cin;
-        $data['gradefr'] = $agent->grade->nom_grade_fr;
+     $agent = Agent::findOrFail($request->id_agent);
+     $data =[];
+     $data['nomfr'] = $agent->nom_fr;
+     $data['ppr'] = $agent->ppr;
+     $data['cin'] = $agent->cin;
+     $data['gradefr'] = $agent->grade->nom_grade_fr;
 
-        $data['n_arrete'] = $request->n_arrete;
-       //$data['date_arrete'] = $request->date_arrete;
-        $data['date_arrete'] = \Carbon\Carbon::parse($request->date_arrete)->format('d/m/Y');
-        $data['date_commission'] = \Carbon\Carbon::parse($request->date_commission)->format('d/m/Y');
-        $data['annee_arrete'] = \Carbon\Carbon::parse($request->date_arrete)->format('Y');
+     $data['n_arrete'] = $request->n_arrete;
+    //$data['date_arrete'] = $request->date_arrete;
+     $data['date_arrete'] = \Carbon\Carbon::parse($request->date_arrete)->format('d/m/Y');
+     $data['date_commission'] = \Carbon\Carbon::parse($request->date_commission)->format('d/m/Y');
+     $data['annee_arrete'] = \Carbon\Carbon::parse($request->date_arrete)->format('Y');
 
-        $data['a_echellon'] = $request->a_echellon;
-        $data['a_echelle'] = $request->a_echelle;
-        $data['a_ind'] = $request->a_ind;
-        $data['a_dateffet'] = $request->a_dateffet;
+     $data['a_echellon'] = $request->a_echellon;
+     $data['a_echelle'] = $request->a_echelle;
+     $data['a_ind'] = $request->a_ind;
+     $data['a_dateffet'] = $request->a_dateffet;
 
-        $data['n_echellon'] = $request->n_echellon;
-        $data['n_echelle'] = $request->n_echelle;
-        $data['n_ind'] = $request->n_ind;
-        $data['n_dateffet'] = $request->n_dateffet;
-        $data['dateNow'] = date('d/m/Y');
+     $data['n_echellon'] = $request->n_echellon;
+     $data['n_echelle'] = $request->n_echelle;
+     $data['n_ind'] = $request->n_ind;
+     $data['n_dateffet'] = $request->n_dateffet;
+     $data['grade'] = $request->grade;
+     $data['dateNow'] = date('d/m/Y');
 
-        $filename = $this->exportWord($data,'arretepromotion','arretepromotion');
+     if($request->grade=='ADMINISTRATEURM')
+     $name =' Le  décret n° 2.63.047  du 06 chaoual 1382 ( 02-03-1963) fixant l échelonnement indiciaire des gouverneurs de préféctures et provinces , des Administrateurs principaux administrateurs et administrateurs adjoints du ministére de l intérieur , tel qu il a été modifié et complété .';
+     if($request->grade=='ADMINISTRATEUR')
+     $name =' Le  décret n° 2.06.377  du 20 kaada 1431 ( 29-10-2010) portant statut du corps interministériels des Administrateurs .';
+     if($request->grade=='REDACTEUR')
+     $name =' Le décret  N° 2.10 . 445  du 20 kaada 1431 ( 29-10-2010 ) portant statut du corps  Interministériels des Rédacteurs .';
+     if($request->grade=='INFIRMIERS ET TECHNICIENS DE SANTÉ')
+     $name ='Le  Décret n° 2-17-535 du 7 moharrem 1439 (28 septembre 2017) portant statut particulier du corps interministériel des infirmiers et des techniciens de santé.';
+     if($request->grade=='INGENIEUR')
+     $name ='Le  Décret n° 2-11-471 du 15 chaoual 1432 (14 septembre 2011) portant statut particulier du corps intérministriel des ingénieurs';
+     if($request->grade=='ADJOINT TECHNIQUE')
+     $name ='Le  décret n° 2.14.416 du 24 Juin 2014 modifiant et coplétant Le décret  N° 2.10 . 452  du 29 Octobre 2010 portant statut du corps des Adjoints techniques Interministériels ';
+     if($request->grade=='ADJOINT ADMINISTRATIF')
+     $name ='décret n° 2.14.417 du 24 Juin 2014 modifiant et complétant Le décret  N° 2.10 . 453  du 29 Octobre 2010 portant statut du corps des Adjoints Administratifs Interministériels . ';
+     if($request->grade=='TECHNICIEN')
+     $name ='Le décret  N° 2-05-72  du 29 Chaoual 1426 ( 02-12-2005 ) portant statut du corps  Interministériels des Techniciens.';
+     if($request->grade=='MÉDECINS ET PHARMACIENS')
+     $name ='Le  Décret n° 2-99-651 du 25 joumada Il 1420 (6 octobre 1999) portant statut particulier du corps interministériel des médecins, pharmaciens et chirurgiens-dentistes (B.O n° 4736 du 21 octobre 1999).';
+     $data['gradex'] = $name;
+
+     $filename = $this->exportWord($data,'arretepromotion','arretepromotion');
 
 
-        return response()->download($filename)->deleteFileAfterSend(true);
+     return response()->download($filename)->deleteFileAfterSend(true);
 
     }
 }

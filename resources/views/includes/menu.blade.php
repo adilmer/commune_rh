@@ -32,7 +32,9 @@
                 @endcan
                 @can('member.salaire')
                 <li> <a class="dropdown-item" href="{{route('member.salaire')}}"> تعويضات الأعضاء</a></li>
+                @can('absence.index')
             <li> <a class="dropdown-item" href="{{route('absence.index')}}"> الحضور</a> </li>
+            @endcan
             @endcan
             @can('avancement.avancement_echelle')
             <li> <a class="dropdown-item" href="{{route('avancement.avancement_echelle')}}">الترقية في الدرجة</a> </li>
@@ -127,15 +129,6 @@
             <span class="hide-menu">مكتبة الوثائق</span>
           </a>
           <ul class="dropdown-menu text-end">
-            @can('attestation.index')
-            <li> <a class="dropdown-item" href="stagiaire.html">قرار الإلحاق</a></li>
-            @endcan
-            @can('attestation.index')
-            <li> <a class="dropdown-item" href="createstagiaire.html"> طلب الإلحاق</a> </li>
-            @endcan
-            @can('attestation.index')
-            <li> <a class="dropdown-item" href="createstagiaire.html"> قرار الإدماج </a> </li>
-            @endcan
             @can('attestation.allocationfamilial')
             <li> <a class="dropdown-item" href="{{route('attestation.allocationfamilial')}}">Allocation familiale </a> </li>
             @endcan
@@ -156,9 +149,6 @@
             @endcan
             @can('absence.index')
             <li> <a href="{{route('attestation.decisionretraite')}}" class="dropdown-item" > وثائق الإحالة على التقاعد</a> </li>
-            @endcan
-            @can('absence.index')
-            <li> <a href="{{route('home.listconge')}}" class="dropdown-item"> وثائق تسوية الوضعية الإدارية</a> </li>
             @endcan
           </ul>
         </li>

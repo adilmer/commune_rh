@@ -31,7 +31,8 @@ class HomeController extends Controller
                     END as dateret
                 ")
             ])
-            ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE()) + 1')])
+            ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE())+1 ')])
+            ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
             ->orderBy('dateret', 'ASC')
             ->limit(5)
             ->get();
@@ -43,8 +44,8 @@ class HomeController extends Controller
         ->where('id_position', 2)
         ->count();
         //$misedisposition= DB::select(DB::raw('SELECT COUNT(*) as n2 FROM `agents` WHERE id_position=3'));
-        $misedisposition = DB::table('agents')
-        ->where('id_position', 3)
+        $totalagent = DB::table('agents')
+       ->where('id_position', 11)
         ->count();
 
        // $integration= DB::select(DB::raw('SELECT COUNT(*) as n3 FROM `agents` WHERE id_position=4'));
@@ -53,9 +54,33 @@ class HomeController extends Controller
        ->count();
 
 
+       $stage = DB::table('stagiaires')
+        ->select('nom_stagiaire_ar')
+        ->whereDate('date_debut_stage', '<=', now())
+        ->whereDate('date_fin_stage', '>=', now())
+        ->count();
+
+
+
        // $retraites= DB::select(DB::raw('SELECT COUNT(*) as n4 FROM `agents` WHERE id_position=5'));
         $retraites = DB::table('agents')
-        ->where('id_position', 5)
+        ->select([
+            'nom_ar',
+            'nom_fr',
+            DB::raw("
+                CASE
+                    WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
+                    WHEN YEAR(date_naiss) = 1958 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 61 YEAR))
+                    WHEN YEAR(date_naiss) = 1959 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 61 YEAR), INTERVAL 6 MONTH))
+                    WHEN YEAR(date_naiss) = 1960 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR))
+                    WHEN YEAR(date_naiss) = 1961 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 62 YEAR), INTERVAL 6 MONTH))
+                    WHEN YEAR(date_naiss) >= 1962 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR))
+                END as dateret
+            ")
+        ])
+        ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE()) ')])
+        ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
+        ->orderBy('dateret', 'ASC')
         ->count();
 
 
@@ -66,12 +91,12 @@ class HomeController extends Controller
         ->whereDate('date_prise', '>=', now())
         ->limit(5)
         ->get();
+        $countconge = $listconge->count();
 
 
 
 
-
-        return view ('homepage.index',['detachement'=>$detachement,'misedisposition'=>$misedisposition,'integration'=>$integration,'retraites'=>$retraites,'listretraites'=>$listretraites,'listconge'=>$listconge]);
+        return view ('homepage.index',['countconge'=>$countconge,'totalagent'=>$totalagent,'countstage'=>$stage,'retraites'=>$retraites,'listretraites'=>$listretraites,'listconge'=>$listconge]);
 
     }
 
@@ -93,7 +118,8 @@ class HomeController extends Controller
                 END as dateret
             ")
         ])
-        ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE()) + 1')])
+        ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE())+1')])
+        ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
         ->orderBy('dateret', 'ASC')
         ->get();
 

@@ -32,7 +32,7 @@ class AgentController extends Controller
     public function index()
     {
 
-        
+
         $agents = Agent::all();
         $positions = Position::all();
 
@@ -272,6 +272,8 @@ foreach ($names as $value) {
     public function show(Request $request)
     {
         $agent = Agent::findOrFail($request->id_agent);
+
+        
         $documents = Document::where('id_agent',$request->id_agent)->get();
         //dd($documents);
         return \view('pages.agents.details',compact('agent','documents'));

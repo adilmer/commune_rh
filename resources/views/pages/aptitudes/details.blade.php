@@ -22,7 +22,7 @@
                           <p class="mb-0 fw-normal">{{$aptitude->annee_aptitude}}</p>
                         </td>
                       </tr>
-                     
+
                       <tr>
                         <td class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">تاريخ إجراء الإمتحان :</h6>
@@ -47,25 +47,54 @@
                           <p class="mb-0 fw-normal">{{$aptitude->dateF_aptitude->format('Y-m-d')}}</p>
                         </td>
                       </tr>
-                      <tr>
-                        <td class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0"></h6>
-                        </td>
-                          <td class="border-bottom-0 mx-0 px-0">
-                            <a href="{{route('aptitude.accepte',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-file-text"></i> تحديد المستوفون للشروط</a>
-                            <a href="#" class="btn btn-danger"><i class="ti ti-file-text"></i> تحميل الإعلان</a>
-                            <a href="#" class="btn btn-danger"><i class="ti ti-file-text"></i>تحميل القرار </a>
-                            <a href="{{route('aptitude.comiteExamen',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-file-text"></i> لجنة الإمتحان</a>
-                            <a href="{{route('aptitude.comiteSurve',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-file-text"></i> لجنة الحراسة</a><br><br>
-                            <a href="{{route('aptitude.ecrit',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-file-text"></i> المدعوون للإمتحان الكتابي</a>
-                            <a href="{{route('aptitude.notationEcrit',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-file-text"></i>  نقط الإمتحان الكتابي </a>
-                            <a href="{{route('aptitude.orale',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-file-text"></i> المدعوون للإمتحان الشفوي  </a>
-                            <a href="{{route('aptitude.notationOrale',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-file-text"></i>  نقط الإمتحان الشفوي </a>
-                            <a href="#" class="btn btn-danger"><i class="ti ti-file-text"></i> النتائج النهائية</a>
-                        </td>
-                      </tr>
                     </tbody>
-                  </table>
+                </table>
+                <h5 class="card-title fw-semibold mt-5">الوثائق المرفقة </h5>
+                <table class="table text-nowrap mb-0 align-middle">
+                    <tr>
+                        <th>نوع الوثيقة</th>
+                            <th>الإجراء</th>
+                    </tr>
+                    <tr>
+                        <td>تحميل الإعلان</td>
+                        <td><a href="#" class="btn btn-danger"><i class="ti ti-file-download"></i> تحميل </a></td>
+                    </tr>
+                    <tr>
+                        <td>تحميل القرار</td>
+                        <td><a href="#" class="btn btn-danger"><i class="ti ti-file-download"></i> تحميل </a></td>
+                    </tr>
+                    <tr>
+                        <td>تحديد المستوفين للشروط</td>
+                        <td> <a href="{{route('aptitude.accepte',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-eye"></i> مشاهدة </a></td>
+                    </tr>
+                    <tr>
+                        <td>لجنة الإمتحان</td>
+                        <td><a href="{{route('aptitude.comiteExamen',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-eye"></i> مشاهدة </a></td>
+                    </tr>
+                    <tr>
+                        <td>لجنة الحراسة</td>
+                        <td><a href="{{route('aptitude.comiteSurve',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-eye"></i> مشاهدة </a></td>
+                    </tr>
+                    <tr>
+                        <td>المدعوون للإمتحان الكتابي</td>
+                        <td><a href="{{route('aptitude.ecrit',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-eye"></i> مشاهدة  </a></td>
+                    </tr>
+                    <tr>
+                        <td>نقط الامتحان الكتابي </td>
+                        <td><a href="{{route('aptitude.notationEcrit',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-eye"></i> مشاهدة </a></td>
+                    </tr>
+                    <tr>
+                        <td>نقط الامتحان الشفوي</td>
+                        <td><a href="{{route('aptitude.notationOrale',$aptitude->id_aptitude)}}" class="btn btn-danger"><i class="ti ti-eye"></i> مشاهدة </a></td>
+                    </tr>
+                    <tr>
+                        <td>النتائج النهائية</td>
+                        <td><a href="#" class="btn btn-danger"><i class="ti ti-file-download"></i> تحميل </a></td>
+                    </tr>
+                </table>
+
+
+
                 </div>
               </div>
             </div>

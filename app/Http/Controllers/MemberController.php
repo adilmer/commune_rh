@@ -117,8 +117,6 @@ class MemberController extends Controller
     public function destroy(Request $request)
     {
         $member = Member::findOrFail($request->id_member);
-        $documents = Document::where('id_member',$request->id_member)->get();
-        foreach($documents as $documents)
         $member->delete();
         return redirect(route('member.index'));
     }

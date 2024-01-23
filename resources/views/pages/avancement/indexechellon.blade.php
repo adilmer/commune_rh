@@ -30,10 +30,9 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     MAT : <span class='text-bold mx-2  px-1'>{{$agent->mat ?? ''}}</span>
                     Echellon : <span class='text-bold mx-2  px-1'>{{$agent->echellon ?? ''}}</span>
                     Date d'échellon : <span class='text-bold mx-2  px-1'>{{$agent->date_echellon->format('Y/m/d') ?? ''}} </span>
+                    Grade : <span class='text-bold mx-2  px-1'>{{$agent->grade->nom_grade_fr ??  ''}} </span>
                 </p>
-
               </div>
-
             <div class="row">
               <div class="col-6 mt-3">
                 <h3 class="text-center">Ancienne Situation</h3>
@@ -150,14 +149,16 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     </div>
                     <div class="col-3">
                         <label for="list_agents" >Grade : </label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="ADMINISTRATEUR" selected>ADMINISTRATEUR</option>
+                        <select name="grade" class="form-select" aria-label="Default select example">
+                            <option  value="ADMINISTRATEURM" selected>ADMINISTRATEUR ADJOINT DU MINISTÉRE DE L'INTÉRIEUR</option>
+                            <option  value="ADMINISTRATEUR" selected>ADMINISTRATEUR</option>
                             <option value="REDACTEUR ">REDACTEUR </option>
-                            <option value="INFIRMIER">INFIRMIER</option>
+                            <option value="INFIRMIERS ET TECHNICIENS DE SANTÉ">INFIRMIERS ET TECHNICIENS DE SANTÉ</option>
                             <option value="INGENIEUR ">INGENIEUR </option>
                             <option value="ADJOINT TECHNIQUE ">ADJOINT TECHNIQUE </option>
                             <option value="ADJOINT ADMINISTRATIF ">ADJOINT ADMINISTRATIF </option>
                             <option value="TECHNICIEN ">TECHNICIEN </option>
+                            <option value="MÉDECINS ET PHARMACIENS ">MÉDECINS ET PHARMACIENS </option>
                           </select>
                     </div>
                 </div>

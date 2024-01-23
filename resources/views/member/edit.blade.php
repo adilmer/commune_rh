@@ -33,7 +33,7 @@
           </div>
           <div class="col-6 mt-3">
             <label for="rib"></label>رقم الحساب </label>
-            <input name="rib" type="text" class="form-control" id="rib" value="{{$member->rib}}" placeholder="">
+            <input style=" text-align: end;  direction: ltr;" name="rib" type="text" class="form-control" id="rib" value="{{$member->rib}}" placeholder="">
           </div>
           <div class="col-12 mt-3">
             <label for="id_grademember"> الصفة  </label>
