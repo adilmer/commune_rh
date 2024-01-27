@@ -19,8 +19,8 @@ class HomeController extends Controller
             $listretraites = DB::table('agents')
             ->select([
                 'id_agent',
-                'nom_ar',
-                'nom_fr',
+                    'nom_ar',
+                    'nom_fr',
                 DB::raw("
                     CASE
                         WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
@@ -32,18 +32,17 @@ class HomeController extends Controller
                     END as dateret
                 ")
             ])
-            ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE())+1 ')])
-            ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
+            ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE()) ')])
+            ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
             ->orderBy('dateret', 'ASC')
-            ->limit(5)
             ->get();
-           // dd($listretraites);
+
             foreach ($listretraites as $key => $value) {
                 if($value->dateret <= date('Y').'-01-01'){
                  unset($listretraites[$key]);
                 }
              }
-
+            // dd($listretraites);
 
        //$detachement= DB::select(DB::raw('SELECT COUNT(*) as n1 FROM `agents` WHERE id_position=2'));
         $detachement = DB::table('agents')
@@ -71,8 +70,9 @@ class HomeController extends Controller
        // $retraites= DB::select(DB::raw('SELECT COUNT(*) as n4 FROM `agents` WHERE id_position=5'));
         $retraites = DB::table('agents')
         ->select([
-            'nom_ar',
-            'nom_fr',
+            'id_agent',
+                'nom_ar',
+                'nom_fr',
             DB::raw("
                 CASE
                     WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
@@ -85,9 +85,10 @@ class HomeController extends Controller
             ")
         ])
         ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE()) ')])
-        ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), '=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
+        ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
         ->orderBy('dateret', 'ASC')
         ->get();
+
 
         foreach ($retraites as $key => $value) {
            if($value->dateret <= date('Y').'-01-01'){
@@ -111,7 +112,7 @@ class HomeController extends Controller
 
 
 
-        return view ('homepage.index',['countconge'=>$countconge,'totalagent'=>$totalagent,'countstage'=>$stage,'retraites'=>$retraites->count(),'listretraites'=>$listretraites,'listconge'=>$listconge]);
+        return view ('homepage.index',['countconge'=>$countconge,'totalagent'=>$totalagent,'countstage'=>$stage,'retraites'=>$retraites->count(),'listretraites'=>$retraites,'listconge'=>$listconge]);
 
     }
 
@@ -119,24 +120,31 @@ class HomeController extends Controller
     {
 
         $listretraites2 = DB::table('agents')
-        ->select([
-            'nom_ar',
-            'nom_fr',
-            DB::raw("
-                CASE
-                    WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
-                    WHEN YEAR(date_naiss) = 1958 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 61 YEAR))
-                    WHEN YEAR(date_naiss) = 1959 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 61 YEAR), INTERVAL 6 MONTH))
-                    WHEN YEAR(date_naiss) = 1960 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR))
-                    WHEN YEAR(date_naiss) = 1961 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 62 YEAR), INTERVAL 6 MONTH))
-                    WHEN YEAR(date_naiss) >= 1962 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR))
-                END as dateret
-            ")
-        ])
-        ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE())+1')])
-        ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
-        ->orderBy('dateret', 'ASC')
-        ->get();
+            ->select([
+                'id_agent',
+                    'nom_ar',
+                    'nom_fr',
+                DB::raw("
+                    CASE
+                        WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
+                        WHEN YEAR(date_naiss) = 1958 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 61 YEAR))
+                        WHEN YEAR(date_naiss) = 1959 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 61 YEAR), INTERVAL 6 MONTH))
+                        WHEN YEAR(date_naiss) = 1960 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 62 YEAR))
+                        WHEN YEAR(date_naiss) = 1961 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 62 YEAR), INTERVAL 6 MONTH))
+                        WHEN YEAR(date_naiss) >= 1962 THEN LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR))
+                    END as dateret
+                ")
+            ])
+            ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE()) ')])
+            ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
+            ->orderBy('dateret', 'ASC')
+            ->get();
+           // dd($listretraites);
+            foreach ($listretraites2 as $key => $value) {
+                if($value->dateret <= date('Y').'-01-01'){
+                 unset($listretraites2[$key]);
+                }
+             }
 
 
                 // return view ('homepage.listretraites'['listretraites'=>$listretraites]);

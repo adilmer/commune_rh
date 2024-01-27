@@ -13,13 +13,13 @@
 
 
     if ($date_naissance->year == 1957) {
-        $dateRetrait = $date_naissance->copy()->addYears(60)->addMonths(6)->lastOfMonth();
+        $dateRetrait = $date_naissance->copy()->addYears(60)->addMonths(6);
     } elseif ($date_naissance->year >= 1958 && $date_naissance->year <= 1959) {
-        $dateRetrait = $date_naissance->copy()->addYears(61)->addMonths(6)->lastOfMonth();
+        $dateRetrait = $date_naissance->copy()->addYears(61)->addMonths(6);
     } elseif ($date_naissance->year == 1960) {
-        $dateRetrait = $date_naissance->copy()->addYears(62)->lastOfMonth();
+        $dateRetrait = $date_naissance->copy()->addYears(62);
     } elseif ($date_naissance->year == 1961) {
-        $dateRetrait = $date_naissance->copy()->addYears(62)->addMonths(6)->lastOfMonth();
+        $dateRetrait = $date_naissance->copy()->addYears(62)->addMonths(6);
     } elseif ($date_naissance->year >= 1962) {
         $dateRetrait = $date_naissance->copy()->addYears(63);
     }

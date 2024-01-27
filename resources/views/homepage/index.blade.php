@@ -262,6 +262,7 @@
                     </thead>
                     <tbody>
                     @foreach ($listretraites as $listretraite)
+                        @if($loop->iteration <= 5)
                       <tr>
                         <td class="border-bottom-1"><a href="{{route('agent.details',$listretraite->id_agent)}}">
                             <h6 class="fw-semibold mb-1">{{$listretraite -> nom_ar}}</h6>
@@ -273,6 +274,7 @@
                           <p class="mb-0 fw-normal">{{ date('Y/m/d', strtotime($listretraite->dateret)) }}</p>
                         </td>
                       </tr>
+                      @endif
                       @endforeach
                     </tbody>
                   </table>
