@@ -18,8 +18,10 @@ class HomeController extends Controller
     {
             $listretraites = DB::table('agents')
             ->select([
+                'id_agent',
                 'nom_ar',
                 'nom_fr',
+                'date_naiss',
                 DB::raw("
                     CASE
                         WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))
@@ -36,7 +38,12 @@ class HomeController extends Controller
             ->orderBy('dateret', 'ASC')
             ->limit(5)
             ->get();
-
+           // dd($listretraites);
+            foreach ($listretraites as $key => $value) {
+                if($value->dateret <= date('Y').'-01-01'){
+                 unset($listretraites[$key]);
+                }
+             }
 
 
        //$detachement= DB::select(DB::raw('SELECT COUNT(*) as n1 FROM `agents` WHERE id_position=2'));
@@ -79,9 +86,18 @@ class HomeController extends Controller
             ")
         ])
         ->whereBetween(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), [DB::raw('YEAR(CURDATE())'), DB::raw('YEAR(CURDATE()) ')])
-        ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), '<=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
+        ->where(DB::raw('YEAR(LAST_DAY(DATE_ADD(date_naiss, INTERVAL 63 YEAR)))'), '=', DB::raw('YEAR(NOW())')) // فقط المتقاعدين في السنة الحالية
         ->orderBy('dateret', 'ASC')
-        ->count();
+        ->get();
+
+        foreach ($retraites as $key => $value) {
+           if($value->dateret <= date('Y').'-01-01'){
+            unset($retraites[$key]);
+           }
+        }
+
+
+        //dd($retraites);
 
 
         $listconge = DB::table('conges')
@@ -96,7 +112,7 @@ class HomeController extends Controller
 
 
 
-        return view ('homepage.index',['countconge'=>$countconge,'totalagent'=>$totalagent,'countstage'=>$stage,'retraites'=>$retraites,'listretraites'=>$listretraites,'listconge'=>$listconge]);
+        return view ('homepage.index',['countconge'=>$countconge,'totalagent'=>$totalagent,'countstage'=>$stage,'retraites'=>$retraites->count(),'listretraites'=>$listretraites,'listconge'=>$listconge]);
 
     }
 

@@ -140,23 +140,25 @@
                       </tr>
                     </thead>
                         <tbody>
-                        @foreach ($listconge as $listconge)
+                        @foreach ($listconge as $listconges)
                         <tr>
                             <td class="border-bottom-0">
-                                <h6 class="fw-semibold mb-1">{{$listconge -> nom_ar}}</h6>
+                                <h6 class="fw-semibold mb-1">{{$listconges -> nom_ar}}</h6>
                             </td>
                             <td class="border-bottom-0">
-                              <p class="mb-0 fw-normal">{{$listconge -> date_prise}}</p>
+                              <p class="mb-0 fw-normal">{{$listconges -> date_prise}}</p>
                             </td>
                             <td class="border-bottom-0">
-                                <p class="mb-0 fw-normal">{{$listconge -> remplacant}}</p>
+                                <p class="mb-0 fw-normal">{{$listconges -> remplacant}}</p>
                               </td>
                           </tr>
                           @endforeach
                         </tbody>
                       </table>
                       <div class="text-start">
+                        @if ($listconge->count()>5)
                         <a href="{{route('home.listconge')}}">مشاهدة الكل  </a>
+                        @endif
                       </div>
                     </div>
               </div>
@@ -244,7 +246,7 @@
             <div class="card pb-3">
               <div class="card-body">
                 <div class="mb-3 mb-sm-0">
-                  <h5 class="card-title fw-semibold">الموظفين المحالين على التقاعد </h5>
+                  <h5 class="card-title fw-semibold">الموظفين المحالين على التقاعد في سنة {{date('Y')}}</h5>
                 </div>
                 <div class="table-responsive">
                   <table class="table  mb-0 align-middle">
@@ -259,21 +261,26 @@
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach ($listretraites as $listretraites)
+                    @foreach ($listretraites as $listretraite)
                       <tr>
-                        <td class="border-bottom-1">
-                            <h6 class="fw-semibold mb-1">{{$listretraites -> nom_ar}}</h6>
-                            <span class="fw-normal">{{$listretraites -> nom_fr}}</span>
+                        <td class="border-bottom-1"><a href="{{route('agent.details',$listretraite->id_agent)}}">
+                            <h6 class="fw-semibold mb-1">{{$listretraite -> nom_ar}}</h6>
+                            <span class="fw-normal">{{$listretraite -> nom_fr}}</span>
+                        </a>
                         </td>
+
                         <td class="border-bottom-1">
-                          <p class="mb-0 fw-normal">{{ date('Y/m/d', strtotime($listretraites->dateret)) }}</p>
+                          <p class="mb-0 fw-normal">{{ date('Y', strtotime($listretraite->dateret)).date('/m/d', strtotime($listretraite->date_naiss)) }}</p>
                         </td>
                       </tr>
                       @endforeach
                     </tbody>
                   </table>
                   <div class="text-start">
+                    @if ($listretraites->count()>5)
                     <a href="{{route('home.listretraites')}}">مشاهدة الكل</a>
+                    @endif
+
                   </div>
                 </div>
           </div>

@@ -1,7 +1,32 @@
 @extends('templates.site')
 @section('content')
     <div class="container-fluid">
+        @php
 
+    use Carbon\Carbon;
+    $date_naiss = $agent->date_naiss->format('Y-m-d');
+
+    $date_naissance = Carbon::createFromFormat('Y-m-d', $date_naiss);
+
+
+    $age = $date_naissance->diffInYears(Carbon::now());
+
+
+    if ($date_naissance->year == 1957) {
+        $dateRetrait = $date_naissance->copy()->addYears(60)->addMonths(6)->lastOfMonth();
+    } elseif ($date_naissance->year >= 1958 && $date_naissance->year <= 1959) {
+        $dateRetrait = $date_naissance->copy()->addYears(61)->addMonths(6)->lastOfMonth();
+    } elseif ($date_naissance->year == 1960) {
+        $dateRetrait = $date_naissance->copy()->addYears(62)->lastOfMonth();
+    } elseif ($date_naissance->year == 1961) {
+        $dateRetrait = $date_naissance->copy()->addYears(62)->addMonths(6)->lastOfMonth();
+    } elseif ($date_naissance->year >= 1962) {
+        $dateRetrait = $date_naissance->copy()->addYears(63);
+    }
+
+   // dd($dateRetrait);
+
+        @endphp
 
         <div class="row">
             <div class="col-lg-8 d-flex align-items-strech">
@@ -193,13 +218,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        @php
-                                            use Carbon\Carbon;
-                                            $dateRetrait = $agent->date_naiss;
-                                            $dateRetrait = $dateRetrait->addYears(62);
-                                            $dateTutularisation = $agent->date_rec;
-                                            $dateTutularisation = $dateTutularisation->addYears(1);
-                                        @endphp
+
                                         <td class="border-bottom-0">
                                             <p class="mb-0 fw-normal">{{ $agent->date_rec?->format('Y-m-d') }}</p>
                                         </td>
@@ -246,7 +265,7 @@
                                             <h6 class="fw-semibold mb-0"> رقم الحساب</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">تاريخ الإحالة على القاعد</h6>
+                                            <h6 class="fw-semibold mb-0">تاريخ الإحالة على التقاعد</h6>
                                         </th>
                                     </tr>
                                 </thead>

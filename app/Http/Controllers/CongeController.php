@@ -20,7 +20,7 @@ class CongeController extends Controller
      */
     public function index()
     {
-        $conges = Conge::orderby('statut_conge')->get();
+        $conges = Conge::orderbyDesc('date_debut_conge')->get();
 
        return view('pages.conges.index', compact('conges'));
     }
@@ -322,6 +322,6 @@ class CongeController extends Controller
 
     }
 
-    
+
 
 }
