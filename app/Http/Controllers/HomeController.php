@@ -21,7 +21,6 @@ class HomeController extends Controller
                 'id_agent',
                 'nom_ar',
                 'nom_fr',
-                'date_naiss',
                 DB::raw("
                     CASE
                         WHEN YEAR(date_naiss) = 1957 THEN LAST_DAY(DATE_ADD(DATE_ADD(date_naiss, INTERVAL 60 YEAR), INTERVAL 6 MONTH))

@@ -270,7 +270,7 @@
                         </td>
 
                         <td class="border-bottom-1">
-                          <p class="mb-0 fw-normal">{{ date('Y', strtotime($listretraite->dateret)).date('/m/d', strtotime($listretraite->date_naiss)) }}</p>
+                          <p class="mb-0 fw-normal">{{ date('Y/m/d', strtotime($listretraite->dateret)) }}</p>
                         </td>
                       </tr>
                       @endforeach
