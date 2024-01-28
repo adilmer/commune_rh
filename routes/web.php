@@ -230,6 +230,15 @@ Route::prefix('services')->group(function () {
     Route::get('/filter_service','ServiceController@filter_service')->name('service.filter_service');
 });
 
+   #commissions
+   Route::prefix('commissions')->group(function () {
+    Route::get('/','CommissionController@index')->name('commission.index');
+    Route::get('/create','CommissionController@create')->name('commission.create');
+    Route::post("/save","CommissionController@store")->name("commission.save");
+
+});
+
+
 #Absences
 Route::prefix('absences')->group(function () {
     Route::get('/','AbsenceController@index')->name('absence.index');
