@@ -10,7 +10,9 @@
     <select id="id_position" class="form-select">
       <option value="0" selected> - كل الموظفين  ...  </option>
       @foreach($positions as $positions)
+      @if($positions->nom_position_ar!="")
       <option value="{{$positions->id_position}}">{{$positions->nom_position_ar}}</option>
+      @endif
       @endforeach
     </select>
   </div>

@@ -154,7 +154,7 @@ class AttestationController extends Controller
     }
 
 
-    public function export_word_demandeconge(Request $request)
+    public function export_word_ordervirement(Request $request)
     {
         $agent = Agent::findOrFail($request->id_agent);
         $data =[];
