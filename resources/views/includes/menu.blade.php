@@ -17,7 +17,7 @@
         </li>
         @can('agent')
         <li class="sidebar-item">
-            <a class="sidebar-link" href="#" data-bs-toggle="dropdown" >
+            <a class="sidebar-link" href="#1" data-bs-toggle="dropdown" >
               <span>
                 <i class="ti ti-users"></i>
               </span>
@@ -27,15 +27,39 @@
                 @can('agent.index')
                 <li> <a class="dropdown-item" href="{{route('agent.index')}}"> لائحة الموظفين </a></li>
                 @endcan
+                @can('absence.index')
+            <li> <a class="dropdown-item" href="{{route('absence.index')}}"> الحضور</a> </li>
+            @endcan
+          </ul>
+        </li>
+        @endcan
+        @can('member')
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="#2" data-bs-toggle="dropdown" >
+              <span>
+                <i class="ti ti-id-badge"></i>
+              </span>
+              <span class="hide-menu">الأعضاء</span>
+            </a>
+            <ul class="dropdown-menu text-end">
                 @can('member.index')
                 <li> <a class="dropdown-item" href="{{route('member.index')}}"> لائحة الأعضاء </a></li>
                 @endcan
                 @can('member.salaire')
                 <li> <a class="dropdown-item" href="{{route('member.salaire')}}"> تعويضات الأعضاء</a></li>
-                @can('absence.index')
-            <li> <a class="dropdown-item" href="{{route('absence.index')}}"> الحضور</a> </li>
-            @endcan
-            @endcan
+                @endcan
+          </ul>
+        </li>
+        @endcan
+        @can('avancement')
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="#3" data-bs-toggle="dropdown" >
+              <span>
+                <i class="ti ti-arrow-up"></i>
+              </span>
+              <span class="hide-menu">الترقية</span>
+            </a>
+            <ul class="dropdown-menu text-end">
             @can('avancement.avancement_echelle')
             <li> <a class="dropdown-item" href="{{route('avancement.avancement_echelle')}}">الترقية في الدرجة</a> </li>
             @endcan
@@ -59,7 +83,7 @@
         @endcan
         @can('attestation')
         <li class="sidebar-item">
-          <a class="sidebar-link" href="#" data-bs-toggle="dropdown" >
+          <a class="sidebar-link" href="#4" data-bs-toggle="dropdown" >
             <span>
               <i class="ti ti-cards"></i>
             </span>
@@ -125,7 +149,7 @@
         @endcan
         @can('attestation.')
         <li class="sidebar-item"  id="myDropdown">
-          <a class="sidebar-link" href="#" data-bs-toggle="dropdown">
+          <a class="sidebar-link" href="#5" data-bs-toggle="dropdown">
             <span>
               <i class="ti ti-file-description"></i>
             </span>
