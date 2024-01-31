@@ -1,7 +1,7 @@
 @extends('templates.site')
 @section('content')
 <div class="card">
-    <form action="" enctype="multipart/form-data" method="post">
+    <form action="{{route('commission.save')}}" enctype="multipart/form-data" method="post">
         @csrf
           <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">تكوين جديد </h5>
@@ -19,11 +19,11 @@
                 </div>
                   <div class="col-4 my-4">
                     <label for="date_formation">تاريخ الهيئة</label>
-                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                   </div>
                   <div class="col-4 my-4">
                     <label for="participantes"> تاريخ القرار </label>
-                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                     <label for="participantes"> رقم القرار </label>
@@ -34,11 +34,11 @@
                 </div>
                   <div class="col-4 my-4">
                     <label for="date_formation">تاريخ الهيئة</label>
-                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                   </div>
                   <div class="col-4 my-4">
                     <label for="participantes"> تاريخ القرار </label>
-                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                     <label for="participantes"> رقم القرار </label>
@@ -49,11 +49,11 @@
                   </div>
                   <div class="col-4 my-4">
                     <label for="date_formation">تاريخ الهيئة</label>
-                    <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="">
+                    <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                   </div>
                   <div class="col-4 my-4">
                     <label for="participantes"> تاريخ القرار </label>
-                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                     <label for="participantes"> رقم القرار </label>
@@ -64,11 +64,11 @@
                   </div>
                   <div class="col-4 my-4">
                     <label for="date_formation">تاريخ الهيئة</label>
-                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                   </div>
                   <div class="col-4 my-4">
                     <label for="participantes"> تاريخ القرار </label>
-                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                     <label for="participantes"> رقم القرار </label>
@@ -79,11 +79,11 @@
                   </div>
                   <div class="col-4 my-4">
                     <label for="date_formation">تاريخ الهيئة</label>
-                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                   </div>
                   <div class="col-4 my-4">
                     <label for="participantes"> تاريخ القرار </label>
-                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                    <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                     <label for="participantes"> رقم القرار </label>
@@ -94,11 +94,11 @@
                 </div>
                 <div class="col-4 my-4">
                   <label for="date_formation">تاريخ الهيئة</label>
-                  <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="">
+                  <input name="date_commission[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                   <label for="participantes"> تاريخ القرار </label>
-                  <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                  <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
               </div>
               <div class="col-4 my-4">
                   <label for="participantes"> رقم القرار </label>
@@ -109,11 +109,11 @@
                 </div>
                 <div class="col-4 my-4">
                   <label for="date_formation">تاريخ الهيئة</label>
-                  <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="">
+                  <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                   <label for="participantes"> تاريخ القرار </label>
-                  <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                  <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
               </div>
               <div class="col-4 my-4">
                   <label for="participantes"> رقم القرار </label>
@@ -124,11 +124,11 @@
                 </div>
                 <div class="col-4 my-4">
                   <label for="date_formation">تاريخ الهيئة</label>
-                  <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="">
+                  <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="col-4 my-4">
                   <label for="participantes"> تاريخ القرار </label>
-                  <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+                  <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
               </div>
               <div class="col-4 my-4">
                   <label for="participantes"> رقم القرار </label>
@@ -139,24 +139,16 @@
             </div>
             <div class="col-4 my-4">
               <label for="date_formation">تاريخ الهيئة</label>
-              <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="">
+              <input name="date_commission[]" type="date"  class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
             </div>
             <div class="col-4 my-4">
               <label for="participantes"> تاريخ القرار </label>
-              <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="">
+              <input name="date_arrete[]" type="date" class="form-control" id="date_formation" placeholder="" value="{{ now()->format('Y-m-d') }}">
           </div>
           <div class="col-4 my-4">
               <label for="participantes"> رقم القرار </label>
               <input name="n_arrete[]" type="number" class="form-control" id="date_formation" placeholder="">
           </div>
-
-
-
-
-
-
-
-
               </div>
             </div>
 

@@ -51,6 +51,9 @@
             @can('notation.index')
             <li> <a class="dropdown-item" href="{{route('notation.index')}}"> تنقيط الموظفين </a> </li>
             @endcan
+            @can('commission.index')
+            <li> <a class="dropdown-item" href="{{route('commission.index')}}"> تواريخ اللجان والقرارات</a> </li>
+            @endcan
           </ul>
         </li>
         @endcan

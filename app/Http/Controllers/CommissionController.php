@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 use App\Models\Statugrade;
 use App\Models\Commission;
 use Illuminate\Http\Request;
@@ -15,7 +16,13 @@ class CommissionController extends Controller
      */
     public function index()
     {
-        $commissions = Commission::all();
+        //$commissions = Commission::all()
+       // $commissions = Commission::groupBy('annee_commission')->get();
+        $commissions = Commission::select('annee_commission', \Illuminate\Support\Facades\DB::raw('count(*) as commission_count'))
+        ->groupBy('annee_commission')
+        ->get();
+
+
         return view('pages.commissions.index',compact('commissions'));
     }
 
@@ -37,7 +44,23 @@ class CommissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            for ($i=0; $i < 9; $i++) {
+                Commission::create([
+                    "annee_commission"=>$request->annee_commission,
+                        "date_commission"=>$request->date_commission[$i],
+                        "date_arrete"=>$request->date_arrete[$i],
+                        "n_arrete"=>$request->n_arrete[$i],
+                        "id_statu"=>$i+1
+
+                    ]);
+            }
+
+
+
+
+
+
+            return redirect(route('commission.index'));
     }
 
     /**
@@ -46,9 +69,13 @@ class CommissionController extends Controller
      * @param  \App\Models\commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function show(commission $commission)
+    public function show(Request $request)
     {
-        //
+        $commissions = Commission::where('annee_commission', $request->annee_commission)->get();
+        $annee_commissions=$request->annee_commission;
+        //dd($annee_commissions);
+
+       return view('pages.commissions.details', compact('commissions','annee_commissions'));
     }
 
     /**
@@ -57,9 +84,11 @@ class CommissionController extends Controller
      * @param  \App\Models\commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function edit(commission $commission)
+    public function edit(request $request)
     {
-        //
+        $commissions = Commission::where('annee_commission', $request->annee_commission)->get();
+        $annee_commissions=$request->annee_commission;
+       return view('pages.commissions.edit', compact('commissions','annee_commissions'));
     }
 
     /**
@@ -69,9 +98,41 @@ class CommissionController extends Controller
      * @param  \App\Models\commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, commission $commission)
+    public function update(Request $request)
     {
-        //
+        for ($i=0; $i < 9; $i++) {
+            /*  $commissions = Commission::where('annee_commission', $request->annee_commission)->get();
+            $commissions->update([
+                "annee_commission"=>$request->annee_commission,
+                "date_commission"=>$request->date_commission[$i],
+                "date_arrete"=>$request->date_arrete[$i],
+                "n_arrete"=>$request->n_arrete[$i],
+                "id_statu"=>$i+1
+
+            ]);
+            */
+
+            $anneeCommission = $request->annee_commission;
+
+
+
+                Commission::where('annee_commission', $anneeCommission)
+                ->where('id_statu', $i+1)
+                ->update([
+
+
+                'date_commission' => $request->date_commission[$i],
+                'date_arrete' => $request->date_arrete[$i],
+                'n_arrete' => $request->n_arrete[$i],
+            ]);
+
+        }
+
+
+
+        return redirect(route('commission.index'));
+
+
     }
 
     /**
@@ -80,8 +141,10 @@ class CommissionController extends Controller
      * @param  \App\Models\commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(commission $commission)
+    public function destroy(request $request)
     {
-        //
+        Commission::where('annee_commission', $request->annee_commission)->delete();
+
+        return redirect(route('commission.index'));
     }
 }

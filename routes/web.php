@@ -234,7 +234,11 @@ Route::prefix('services')->group(function () {
    Route::prefix('commissions')->group(function () {
     Route::get('/','CommissionController@index')->name('commission.index');
     Route::get('/create','CommissionController@create')->name('commission.create');
-    Route::post("/save","CommissionController@store")->name("commission.save");
+    Route::post('/save','CommissionController@store')->name('commission.save');
+    Route::get("/details/{annee_commission}","CommissionController@show")->name("commission.details");
+    Route::get("/delete/{annee_commission}","CommissionController@destroy")->name("commission.delete");
+    Route::get('/edit/{annee_commission}','CommissionController@edit')->name('commission.edit');
+    Route::post("/update","CommissionController@update")->name("commission.update");
 
 });
 

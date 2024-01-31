@@ -22,9 +22,9 @@
                     <div class="card-body text-center">
                       <h4 class="cardt_itle ">تواريخ وقرارات اللجان لسنة <b>{{$commissions->annee_commission}}</b></h4>
                       <div class="d-flex align-items-center justify-content-center gap-2">
-                        <a href="" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></a>
-                        <a href="" class="badge bg-success rounded-3 fw-semibold"><i class="ti ti-edit"></i></a>
-                        <a href="" onclick='return confirm(`هل تريد حذف هذه الرخصة من قاعدة البيانات ؟`)' class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></a>
+                        <a href="{{route('commission.details',$commissions->annee_commission)}}" class="badge bg-primary rounded-3 fw-semibold"><i class="ti ti-eye"></i></a>
+                        <a href="{{route('commission.edit',$commissions->annee_commission)}}" class="badge bg-success rounded-3 fw-semibold"><i class="ti ti-edit"></i></a>
+                        <a href="{{route('commission.delete',$commissions->annee_commission)}}" onclick='return confirm(`هل تريد حذف هذه السنة من قاعدة البيانات ؟`)' class="badge bg-danger rounded-3 fw-semibold"><i class="ti ti-trash"></i></a>
                       </div>
                     </div>
                   </div>
