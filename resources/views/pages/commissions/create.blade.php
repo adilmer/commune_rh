@@ -4,7 +4,7 @@
     <form action="{{route('commission.save')}}" enctype="multipart/form-data" method="post">
         @csrf
           <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4">تكوين جديد </h5>
+            <h5 class="card-title fw-semibold mb-4">لائحة وتواريخ اللجان جديدة </h5>
             <div class="card">
               <div class="card-body">
                 <div class="row">

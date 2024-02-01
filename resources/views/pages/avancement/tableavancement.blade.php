@@ -6,7 +6,7 @@ $agents = App\Models\Agent::get();
 @endphp
 <div class="card" dir="ltr">
           <div class="card-body">
-            <form action="{{route('avancement.exporttableavancement')}}" method="get">
+            <form action="{{route('avancement.exporttableavancement')}}" target="_blank" method="get">
                 @csrf
             <h5 class="card-title fw-semibold mb-4">Table Avancement </h5>
             <div class="form-group row  my-3">
@@ -22,7 +22,7 @@ $agents = App\Models\Agent::get();
             @endphp
 
 
-                <div class="row"><div class="col-3">   </div>
+                <div class="row"><div class="col-3"></div>
                     <div class="col-3">
                         <label for="list_agents" >Année : </label>
                         <input type="number" min="2023" value="{{date('Y')}}" step="1" class="form-control" name="annee"   >
@@ -40,7 +40,16 @@ $agents = App\Models\Agent::get();
                             <option value="ADJOINT ADMINISTRATIF ">ADJOINT ADMINISTRATIF </option>
                             <option value="TECHNICIEN ">TECHNICIEN </option>
                           </select>
+
                     </div>
+                        <div class="col-2">
+                            <label for=""></label>
+                            <button  class="btn btn-success form-control">
+                                <i class="ti ti-download p-0"></i>
+                                 تحميل لائحة المترقين
+                            </button>
+                        </div>
+
                 </div>
 
                 <table class="table  table-bordered border-dark mt-3">
@@ -107,7 +116,7 @@ $agents = App\Models\Agent::get();
                 </table>
                 <button type="button" id="addRowBtn" class="btn btn-sm btn-info col-3">+</button>
             <div class="btnsucc m-4 text-end">
-              <button type="submit" id="btn_submit" class="btn btn-success" ><i class="ti ti-printer"></i> imprimer Table  </button>
+              <button type="submit" name="print" id="btn_submit" class="btn btn-primary" ><i class="ti ti-printer"></i> imprimer Table  </button>
             </div>
           </div>
         </div>

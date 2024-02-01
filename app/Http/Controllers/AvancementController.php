@@ -47,6 +47,9 @@ class AvancementController extends Controller
 
     public function newAgent($agent, $new_grade = null, $new_echellon = null)
     {
+        try{
+
+
         if ($new_echellon == null) {
             $new_echellon = $agent->echellon;
             $new_date_echellon = $agent->date_echellon;
@@ -77,6 +80,10 @@ class AvancementController extends Controller
         $new_agent->indice = $avancement->Indice($new_grade, $new_echellon);
 
         return $new_agent;
+    }catch(Exception $ex) {
+        return null;
+    }
+
     }
 
     public function index(Request $request)
@@ -144,9 +151,10 @@ class AvancementController extends Controller
         return view('pages.avancement.indexechellon', compact('agents'));
     }
 
-    public function next_echellon($agent)
+    public function next_echellon($agent,$annee = null)
     {
-
+        if($annee == null)
+        $annee = date('Y');
         // $agent =Agent::findOrFail(1);
         if ($agent->echelle == "H*E")
             $table_echellon = ["1" => 0, "2" => 3, "3" => 3, "4" => 3, "5" => 3, "6" => 3];
@@ -165,7 +173,7 @@ class AvancementController extends Controller
             $Nagent = $this->newAgent($agent, null, $echellon + $key);
 
 
-            if ($date_echellon->format('Y') <= date('Y')) {
+            if ($date_echellon->format('Y') <= $annee) {
                 $currentDate = Carbon::now();
                 $date_diff = $date_echellon->diffInYears($currentDate);
                 $date_echellon = Carbon::parse($Nagent->date_echellon);
@@ -185,8 +193,11 @@ class AvancementController extends Controller
         }
 
         $ags = $this->newAgent($history_echellon[count($history_echellon) - 1], null, null);
-        $ags->date_echellon = (date('Y')) . '-12-31';
+        if($ags){
+        $ags->date_echellon = ($annee) . '-12-31';
+        }
         $history_echellon[count($history_echellon)] = $ags;
+
         // dd($history_echellon);
         return $history_echellon;
     }
@@ -282,7 +293,7 @@ class AvancementController extends Controller
 
     public function exporttableavancement(Request $request)
     {
-
+if($request->print){
 try{
 
 
@@ -305,6 +316,30 @@ try{
 
 
         return view('pdf.decision_reclacement', compact('grade','annee','agent','Nagent'));
+    }
+    else{
+        $annee = $request->annee;
+        $agents = Agent::where('id_position',11)->orderby('id_grade')->get();
+        $grade = "Tous Les Grades";
+        foreach ($agents as $key => $ag) {
+            $Newagent = $this->newAgent($ag, null,$ag->echellon + 1);
+            $ss = $this->next_echellon($ag,$annee);
+
+            $Newagent = $ss[count($ss)-2];
+            $oldagent = $ss[count($ss)-3] ?? $ag;
+            //dd($Newagent->date_echellon->format('Y'));
+            if($Newagent != null){
+            if($Newagent->date_echellon->format('Y')==$annee){
+                $agent[] = $this->newAgent($ag, null,$oldagent->echellon);
+                $Nagent[] = $this->newAgent($ag, null,$Newagent->echellon);
+            }
+
+        }
+
+        }
+       //dd($Oagent,$Nagent);
+        return view('pdf.decision_reclacement', compact('grade','annee','agent','Nagent'));
+    }
     }
     public function decison_reclacement(Request $request)
     {
