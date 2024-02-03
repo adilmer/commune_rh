@@ -128,6 +128,21 @@ Route::prefix('agents')->group(function () {
     Route::get("/delete/{id_agent}","AgentController@destroy")->name("agent.delete");
 });
 
+#Agents
+Route::prefix('situationfamiliales')->group(function () {
+    Route::get('/','SituationFamilialeController@index')->name('situationfamiliale.index');
+    Route::get('/create','SituationFamilialeController@create')->name('situationfamiliale.create');
+    Route::get('/export','SituationFamilialeController@export')->name('situationfamiliale.export');
+    Route::get('/edit/{id_agent}','SituationFamilialeController@edit')->name('situationfamiliale.edit');
+    Route::get("/details/{id_agent}","SituationFamilialeController@show")->name("situationfamiliale.details");
+    Route::get("/filter/{name?}","SituationFamilialeController@filter")->name("situationfamiliale.filter");
+    Route::get("/filterByPosition/{name?}","SituationFamilialeController@filterByPosition")->name("situationfamiliale.filterByPosition");
+    Route::post("/save","SituationFamilialeController@store")->name("situationfamiliale.save");
+    Route::post("/update","SituationFamilialeController@update")->name("situationfamiliale.update");
+    Route::post("/uploadDocuments","SituationFamilialeController@uploadDocuments")->name("situationfamiliale.uploadDocuments");
+    Route::get("/delete/{id_agent}","SituationFamilialeController@destroy")->name("situationfamiliale.delete");
+});
+
  #Members
  Route::prefix('members')->group(function () {
     Route::get('/','MemberController@index')->name('member.index');
