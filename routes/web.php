@@ -298,6 +298,8 @@ Route::prefix('attestations')->group(function () {
     Route::get('/find_decisionretraite','AttestationController@find_decisionretraite')->name('attestation.find_decisionretraite');
     Route::get('/export_word_decisionretraite', 'AttestationController@export_word_decisionretraite')->name('attestation.export_word_decisionretraite');
     Route::get('/allocationfamilial','AttestationController@allocationfamilial')->name('attestation.allocationfamilial');
+    Route::get('/ordermission','AttestationController@ordermission')->name('attestation.ordermission');
+    Route::get('/export_word_ordermission','AttestationController@export_word_ordermission')->name('attestation.export_word_ordermission');
     Route::get('/find_allocationfamilial','AttestationController@find_allocationfamilial')->name('attestation.find_allocationfamilial');
     Route::get('/export_word_allocationfamilial', 'AttestationController@export_word_allocationfamilial')->name('attestation.export_word_allocationfamilial');
 

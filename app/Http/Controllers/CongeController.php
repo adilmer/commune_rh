@@ -45,11 +45,19 @@ class CongeController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->all();
-        Conge::create(
-            $requestData);
+        if($request-> id_agent!=''){
+            $requestData = $request->all();
+            Conge::create(
+                $requestData);
 
-        return redirect(route('conge.index'));
+            return redirect(route('conge.index'));
+        }else{
+
+            return redirect(route('conge.create'));
+        }
+
+
+
     }
 
     /**
