@@ -132,15 +132,19 @@ Route::prefix('agents')->group(function () {
 Route::prefix('situationfamiliales')->group(function () {
     Route::get('/','SituationFamilialeController@index')->name('situationfamiliale.index');
     Route::get('/create','SituationFamilialeController@create')->name('situationfamiliale.create');
+    Route::get('/create_enfant','SituationFamilialeController@create_enfant')->name('situationfamiliale.create_enfant');
     Route::get('/export','SituationFamilialeController@export')->name('situationfamiliale.export');
-    Route::get('/edit/{id_agent}','SituationFamilialeController@edit')->name('situationfamiliale.edit');
+    Route::get('/edit/{id_conjoint}','SituationFamilialeController@edit')->name('situationfamiliale.edit');
+    Route::get('/edit_enfant/{id_enfant}','SituationFamilialeController@edit_enfant')->name('situationfamiliale.edit_enfant');
     Route::get("/details/{id_agent}","SituationFamilialeController@show")->name("situationfamiliale.details");
     Route::get("/filter/{name?}","SituationFamilialeController@filter")->name("situationfamiliale.filter");
     Route::get("/filterByPosition/{name?}","SituationFamilialeController@filterByPosition")->name("situationfamiliale.filterByPosition");
     Route::post("/save","SituationFamilialeController@store")->name("situationfamiliale.save");
+    Route::post("/save_enfant","SituationFamilialeController@store_enfant")->name("situationfamiliale.save_enfant");
     Route::post("/update","SituationFamilialeController@update")->name("situationfamiliale.update");
-    Route::post("/uploadDocuments","SituationFamilialeController@uploadDocuments")->name("situationfamiliale.uploadDocuments");
-    Route::get("/delete/{id_agent}","SituationFamilialeController@destroy")->name("situationfamiliale.delete");
+    Route::post("/update_enfant","SituationFamilialeController@update_enfant")->name("situationfamiliale.update_enfant");
+    Route::get("/delete/{id_conjoint}","SituationFamilialeController@destroy")->name("situationfamiliale.delete");
+    Route::get("/delete_enfant/{id_enfant}","SituationFamilialeController@destroy_enfant")->name("situationfamiliale.delete_enfant");
 });
 
  #Members
