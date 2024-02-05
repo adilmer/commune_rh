@@ -1,7 +1,7 @@
 @extends('templates.site')
 @section('content')
 <div class="card">
-    <form action="{{route('situationfamiliale.save')}}" enctype="multipart/form-data" method="post">
+    <form action="{{route('situationfamiliale.save_enfant')}}" enctype="multipart/form-data" method="post">
         @csrf
           <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">Nouveau conjont(e)</h5>

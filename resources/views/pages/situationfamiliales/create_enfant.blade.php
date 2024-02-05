@@ -1,18 +1,22 @@
 @extends('templates.site')
 @section('content')
 <div class="card">
-    <form action="{{route('situationfamiliale.save')}}" enctype="multipart/form-data" method="post">
-        @csrf
+    <form action="{{route('situationfamiliale.save_enfant')}}" enctype="multipart/form-data" method="post">
+       @csrf
           <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4">Nouveau conjont(e)</h5>
+            <h5 class="card-title fw-semibold mb-4">Nouveau enfant</h5>
             <div class="card">
               <div class="card-body">
                 <div class="row">
                     <div class="col-12 ">
                         <label for="combo_agent" > Nom et prénom de l'agent :</label>
-        <input class="form-control" value="{{$conjoint->agent->nom_fr}}" id="list_agents"  placeholder="بحث...">
-        <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="{{$conjoint->agent->id_agent}}" required>
-
+        <input class="form-control" list="agents_list" id="list_agents"  placeholder="بحث...">
+        <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
+        <datalist id="agents_list">
+            @foreach ($agents as $agents)
+            <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_fr}}" >
+            @endforeach
+        </datalist>
                       </div>
                   <div class="col-6 mt-4 ">
                     <label for="nom_cj" >Nom et prénom de conjont(e)  </label>

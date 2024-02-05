@@ -4,34 +4,38 @@
     <form action="{{route('situationfamiliale.save')}}" enctype="multipart/form-data" method="post">
         @csrf
           <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4">تكوين جديد </h5>
+            <h5 class="card-title fw-semibold mb-4">Nouveau conjont(e)</h5>
             <div class="card">
               <div class="card-body">
                 <div class="row">
+                    <div class="col-12 ">
+                        <label for="combo_agent" > Nom et prénom de l'agent :</label>
+        <input class="form-control" list="agents_list" id="list_agents"  placeholder="بحث...">
+        <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
+        <datalist id="agents_list">
+            @foreach ($agents as $agents)
+            <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_fr}}" >
+            @endforeach
+        </datalist>
 
-                  <div class="col-12 mt-4">
-                    <label for="participantes">المستفيدين من التكوين</label>
-                        <input class="form-control" style="width: 400px" list="agents_list" id="list_agents" autocomplete="off"  placeholder="بحث...">
+                      </div>
+                  <div class="col-6 mt-4 ">
+                    <label for="nom_cj" >Nom et prénom de conjont(e)  </label>
+                    <input type="text" class="form-control" id="nom_cj" name="nom_cj" placeholder="">
+                  </div>
+                  <div class="col-6  mt-4">
+                    <label for="cin_cj" >CIN de conjont(e)  </label>
+                    <input type="text" class="form-control" id="cin_cj" name="cin_cj" placeholder="">
+                  </div>
+                  <div class="col-6  mt-4">
+                    <label for="status_conjoint" >Motif d'effet (mariage,remariage,divorce...)  </label>
+                    <input type="text" class="form-control" id="status_conjoint" name="status_conjoint" placeholder="mariage,remariage,divorce...">
+                  </div>
+                  <div class="col-6  mt-4">
+                    <label for="date_effet">date d'effet (mariage,remariage,divorce...) </label>
+                    <input name="date_effet" type="date" class="form-control" id="date_effet" placeholder="">
+                  </div>
 
-                    <datalist id="agents_list">
-                        @foreach ($agents as $agents)
-                        <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_ar}}" >
-                        @endforeach
-                    </datalist>
-                    <textarea class="form-control"id="participantes" name="participantes"  rows="4"></textarea>
-                  </div>
-                  <div class="col-6 ">
-                    <label for="nom_formation_ar" >موضوع التكوين  </label>
-                    <input type="text" class="form-control" id="nom_formation_ar" name="nom_formation_ar" placeholder="">
-                  </div>
-                  <div class="col-6 ">
-                    <label for="date_formation">تاريخ التكوين</label>
-                    <input name="date_formation" type="date" class="form-control" id="date_formation" placeholder="">
-                  </div>
-                  <div class="col-12 mt-4">
-                    <label for="path_formation" >رسالة التكوين </label>
-                    <input name="path_formation" type="file" class="form-control" id="path_formation" placeholder="">
-                  </div>
                 </div>
               </div>
             </div>
@@ -50,14 +54,9 @@ list_agents.addEventListener('change', getIdAgent);
         var selectedOption = document.querySelector("#agents_list option[value='" + input.value + "']");
 
         if (selectedOption) {
-
-            $("#participantes").text($("#participantes").text()+" - "+$("#list_agents").val())
-            if($("#participantes").text().indexOf(" - ")==0)
-            $("#participantes").text($("#participantes").text().substring(3,100))
-
-            $("#list_agents").val("")
-
-
+          var id_agent = selectedOption.getAttribute("data-id");
+          $("#id_agent").val(id_agent);
+          filterHistory(id_agent)
         }
       }
 
