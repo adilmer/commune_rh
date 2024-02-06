@@ -24,6 +24,9 @@
               @can('absence.index')
               <li><a class="dropdown-item text-end" href="{{route('absence.index')}}"> الحضور</a></li>
               @endcan
+              @can('absence.index')
+              <li><a class="dropdown-item text-end" href="{{route('situationfamiliale.index')}}"> Situation familiale</a></li>
+              @endcan
             </ul>
           </li>
           @endcan

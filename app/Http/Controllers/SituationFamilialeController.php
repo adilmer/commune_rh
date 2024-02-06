@@ -30,10 +30,14 @@ class SituationFamilialeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $agents = Agent::where('id_position',11)->get();
-        return view('pages.situationfamiliales.create',compact('agents'));
+        $agent = null;
+        if($request->id_agent != null ){
+            $agent = Agent::findOrFail($request->id_agent)->first();
+        }
+        $agents = Agent::all();
+        return view('pages.situationfamiliales.create',compact('agents','agent'));
     }
 
     /**
@@ -57,11 +61,32 @@ class SituationFamilialeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create_enfant()
+    public function show(Request $request)
     {
+
+
+            $conjoint = Conjoint::where('id_conjoint',$request->id_conjoint)->first();
+
+
+        return view('pages.situationfamiliales.details',compact('conjoint'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_enfant(Request $request)
+    {
+        $agent = null;
+        $conjoint = null;
+        if($request->id_conjoint != null ){
+            $conjoint = Conjoint::findOrFail($request->id_conjoint)->first();
+            $agent = Agent::findOrFail($conjoint->id_agent)->first();
+        }
         $agents = Agent::where('id_position',11)->get();
         $conjoints = Conjoint::all();
-        return view('pages.situationfamiliales.create_enfant',compact('agents','conjoints'));
+        return view('pages.situationfamiliales.create_enfant',compact('agents','conjoints','agent','conjoint'));
     }
 
     /**
@@ -74,11 +99,25 @@ class SituationFamilialeController extends Controller
     {
         $requestData = $request->all();
 
-        Conjoint::create(
+        Enfant::create(
             $requestData);
 
         return redirect(route('situationfamiliale.index'));
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show_enfant(Request $request)
+    {
+        $enfant = Enfant::where('id_enfant',$request->id_enfant)->first();
+
+
+        return view('pages.situationfamiliales.details_enfant',compact('enfant'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -88,8 +127,8 @@ class SituationFamilialeController extends Controller
      */
     public function edit(Request $request)
     {
-        $conjoint = Conjoint::findOrFail($request->id_conjoint);
-        return view('pages.situationfamiliale.edit', compact('conjoint'));
+        $conjoint = Conjoint::where('id_conjoint',$request->id_conjoint)->first();
+        return view('pages.situationfamiliales.edit', compact('conjoint'));
     }
 
     /**
@@ -108,8 +147,8 @@ class SituationFamilialeController extends Controller
 
     public function edit_enfant(Request $request)
     {
-        $enfant = Enfant::findOrFail($request->id_enfant);
-        return view('pages.situationfamiliale.edit_enfant', compact('enfant'));
+        $enfant = Enfant::where('id_enfant',$request->id_enfant)->first();
+        return view('pages.situationfamiliales.edit_enfant', compact('enfant'));
     }
 
     /**
@@ -121,7 +160,8 @@ class SituationFamilialeController extends Controller
      */
     public function update_enfant(Request $request)
     {
-        $enfant = Enfant::findOrFail($request->id_enfant);
+
+        $enfant = Enfant::where('id_enfant',$request->id_enfant)->first();
         $enfant->update($request->all());
        return redirect()->route('situationfamiliale.index');
     }
@@ -135,7 +175,7 @@ class SituationFamilialeController extends Controller
     public function destroy(Request $request)
     {
         $conjoint = Conjoint::findOrFail($request->id_conjoint);
-
+       // dd($conjoint);
         $conjoint->delete();
 
         return redirect(route('situationfamiliale.index'));

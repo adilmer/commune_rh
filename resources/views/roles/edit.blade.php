@@ -30,7 +30,7 @@
                 </div>
 
 
-
+                <button type="submit" class="btn btn-primary ">حفظ التغييرات</button>
                 <table class="table table-striped">
                     <thead>
                         <th scope="col" width="1%"><input type="checkbox" name="all_permission"></th>
@@ -56,7 +56,7 @@
                     @endforeach
                 </table>
 
-                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                <button type="submit" class="btn btn-primary ">حفظ التغييرات</button>
                 <a href="{{ route('roles.index') }}" class="btn btn-success">عودة</a>
             </form>
         </div>

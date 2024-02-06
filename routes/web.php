@@ -131,12 +131,13 @@ Route::prefix('agents')->group(function () {
 #Agents
 Route::prefix('situationfamiliales')->group(function () {
     Route::get('/','SituationFamilialeController@index')->name('situationfamiliale.index');
-    Route::get('/create','SituationFamilialeController@create')->name('situationfamiliale.create');
-    Route::get('/create_enfant','SituationFamilialeController@create_enfant')->name('situationfamiliale.create_enfant');
+    Route::get('/create/{id_agent?}','SituationFamilialeController@create')->name('situationfamiliale.create');
+    Route::get('/create_enfant/{id_conjoint?}','SituationFamilialeController@create_enfant')->name('situationfamiliale.create_enfant');
     Route::get('/export','SituationFamilialeController@export')->name('situationfamiliale.export');
     Route::get('/edit/{id_conjoint}','SituationFamilialeController@edit')->name('situationfamiliale.edit');
     Route::get('/edit_enfant/{id_enfant}','SituationFamilialeController@edit_enfant')->name('situationfamiliale.edit_enfant');
-    Route::get("/details/{id_agent}","SituationFamilialeController@show")->name("situationfamiliale.details");
+    Route::get("/details/{id_conjoint}","SituationFamilialeController@show")->name("situationfamiliale.details");
+    Route::get("/details_enfant/{id_enfant}","SituationFamilialeController@show_enfant")->name("situationfamiliale.details_enfant");
     Route::get("/filter/{name?}","SituationFamilialeController@filter")->name("situationfamiliale.filter");
     Route::get("/filterByPosition/{name?}","SituationFamilialeController@filterByPosition")->name("situationfamiliale.filterByPosition");
     Route::post("/save","SituationFamilialeController@store")->name("situationfamiliale.save");
@@ -352,5 +353,5 @@ Route::resource('permissions', PermissionsController::class);
 });
 
 Auth::routes();
-Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+//Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 

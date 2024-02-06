@@ -1,6 +1,6 @@
 @extends('templates.site')
 @section('content')
-<div class="card">
+<div class="card" style="direction: ltr">>
     <form action="{{route('situationfamiliale.save')}}" enctype="multipart/form-data" method="post">
         @csrf
           <div class="card-body">
@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col-12 ">
                         <label for="combo_agent" > Nom et prénom de l'agent :</label>
-        <input class="form-control" list="agents_list" id="list_agents"  placeholder="بحث...">
-        <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
+        <input class="form-control" list="agents_list" id="list_agents" value="{{$agent->nom_fr ?? ''}}"  placeholder="بحث..." {{$agent != null ? 'disabled' : ''}}>
+        <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="{{$agent->id_agent ?? ''}}" required>
         <datalist id="agents_list">
             @foreach ($agents as $agents)
             <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_fr}}" >
