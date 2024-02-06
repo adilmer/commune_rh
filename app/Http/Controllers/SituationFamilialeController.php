@@ -80,10 +80,12 @@ class SituationFamilialeController extends Controller
     {
         $agent = null;
         $conjoint = null;
+
         if($request->id_conjoint != null ){
-            $conjoint = Conjoint::findOrFail($request->id_conjoint)->first();
-            $agent = Agent::findOrFail($conjoint->id_agent)->first();
+            $conjoint = Conjoint::findOrFail($request->id_conjoint);
+            $agent = Agent::where('id_agent',$conjoint->id_agent)->first();
         }
+
         $agents = Agent::where('id_position',11)->get();
         $conjoints = Conjoint::all();
         return view('pages.situationfamiliales.create_enfant',compact('agents','conjoints','agent','conjoint'));
