@@ -47,8 +47,7 @@ class FormationController extends Controller
         if ($request->path_formation!=null){
             $requestData['path_formation'] = $this->saveAs($request->path_formation,time(),"documents_formations");
         }
-        Formation::create(
-            $requestData);
+        Formation::create($requestData);
 
         return redirect(route('formation.index'));
     }
