@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-12 ">
                         <label for="combo_agent" > Nom et prénom de l'agent :</label>
-        <input class="form-control" list="agents_list" id="list_agents"  value="{{$agent->nom_fr ?? ''}}"  placeholder="بحث..." {{$agent != null ? 'disabled' : ''}}>
+        <input class="form-control" list="agents_list" id="list_agents"  value="{{$agent->nom_fr ?? ''}}"  placeholder="chercher..." {{$agent != null ? 'disabled' : ''}}>
         <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder=""  value="{{$agent->id_agent ?? ''}}" required>
         <datalist id="agents_list">
             @foreach ($agents as $agents)
@@ -24,7 +24,7 @@
                       </div>
                   <div class="col-6 mt-4 ">
                     <label for="id_conjoint" >Nom et prénom de conjont(e)  </label>
-                    <input class="form-control" list="conjoints_list" id="list_conjoints"  value="{{$conjoint->nom_cj ?? ''}}"  placeholder="بحث..." {{$conjoint != null ? 'disabled' : ''}}>
+                    <input class="form-control" list="conjoints_list" id="list_conjoints"  value="{{$conjoint->nom_cj ?? ''}}"  placeholder="chercher..." {{$conjoint != null ? 'disabled' : ''}}>
                     <input type="hidden" class="form-control" id="id_conjoint" name="id_conjoint" placeholder=""  value="{{$conjoint->id_conjoint ?? ''}}" required>
                     <datalist id="conjoints_list">
                         @foreach ($conjoints as $conjoint)
