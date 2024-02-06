@@ -41,7 +41,7 @@ $agents_bq = App\Models\Conjoint::all();
                                 <h6 class="fw-semibold mb-0">Motif d'effet</h6>
                               </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">date d'effet</h6>
+                                <h6 class="fw-semibold mb-0">Date d'effet</h6>
                               </th>
                               <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Nom(s) de(s) enfant(s)</h6>
