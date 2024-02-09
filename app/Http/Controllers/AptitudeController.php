@@ -283,7 +283,7 @@ class AptitudeController extends Controller
     {
         $aptitude = Aptitude::findOrFail($request->id_aptitude);
         $date_acceptation =  $aptitude->dateD_aptitude->format('Y')-6 .'-' . $aptitude->dateD_aptitude->format('m-d');
-        $agents = Agent::where('date_grade','<=',$date_acceptation)->get();
+        $agents = Agent::where('id_position',11)->where('date_grade','<=',$date_acceptation)->get();
         foreach ($agents as $key => $agent) {
             $aptitude = ListeAptitude::where('id_agent',$agent->id_agent)->where('id_aptitude',$request->id_aptitude)->first();
             if(!$aptitude)
@@ -331,7 +331,7 @@ class AptitudeController extends Controller
     {
         $aptitude = Aptitude::findOrFail($request->id_aptitude);
         $date_acceptation =  $aptitude->dateD_aptitude->format('Y')-6 .'-' . $aptitude->dateD_aptitude->format('m-d');
-        $agents = Agent::where('date_grade','<=',$date_acceptation)->get();
+        $agents = Agent::where('id_position',11)->where('date_grade','<=',$date_acceptation)->get();
         foreach ($agents as $key => $agent) {
             $aptitude = ListeAptitude::where('id_agent',$agent->id_agent)->where('id_aptitude',$request->id_aptitude)->first();
             if(!$aptitude)
