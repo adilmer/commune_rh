@@ -266,7 +266,7 @@ class AvancementController extends Controller
 
     public function avancement_echelle(Request $request)
     {
-        $agents = Agent::where('id_position', 11)->get();
+        $agents = Agent::where('id_position', 11)->where('echelle','!=','H*E')->get();
         return view('pages.avancement.indexechelle', compact('agents'));
     }
 
