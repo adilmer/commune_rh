@@ -26,23 +26,23 @@
             <div class="row">
               <div class="col-6 mt-3">
                 <label for="nom_fils" >De se rendre à : </label>
-                <input type="text" class="form-control" id="nom_fils" name="nom_fils" placeholder="Agadir..">
+                <input type="text" class="form-control"  id="nom_fils" name="ville" placeholder="Agadir..">
               </div>
               <div class="col-6 mt-3">
                 <label for="date_naiss_fils">date de depart</label>
-                <input name="date_naiss_fils" type="date" class="form-control" id="date_naiss_fils" placeholder="">
+                <input  type="date" name="depart" class="form-control" id="date_naiss_fils" placeholder="">
               </div>
               <div class="col-6 mt-3">
                 <label for="lieu_naiss_fils">date de retours</label>
-                <input name="lieu_naiss_fils" type="text" class="form-control" value="dès mission terminée" id="lieu_naiss_fils" placeholder="">
+                <input  name="retour" type="text" class="form-control" value="dès mission terminée" id="lieu_naiss_fils" placeholder="">
               </div>
               <div class="col-6 mt-3">
                 <label for="n_acte_naiss" > moyen de transport</label>
-                <input type="text" class="form-control" id="n_acte_naiss" name="n_acte_naiss" placeholder="">
+                <input type="text" class="form-control" name="transport" id="n_acte_naiss"  placeholder="">
               </div>
               <div class="col-6 mt-3">
                 <label for="class_fils">nature de la mission</label>
-                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                <input class="form-control" list="datalistOptions" id="exampleDataList" name="mission" placeholder="Type to search...">
                     <datalist id="datalistOptions">
                         <option value="SERVIC">
                         <option value="FORMATION">

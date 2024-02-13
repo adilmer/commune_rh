@@ -238,11 +238,7 @@ class AttestationController extends Controller
     }
 
 
-    public function ordermission(){
-        $agents = Agent::all();
 
-        return view('pages.attestations.ordermission', compact('agents'));
-    }
 
 
 
@@ -263,20 +259,25 @@ class AttestationController extends Controller
         return Response(['data' => $data]);
     }
 
+    public function ordermission(){
+        $agents = Agent::all();
 
+        return view('pages.attestations.ordermission', compact('agents'));
+    }
     public function export_word_ordermission(Request $request)
     {
         $agent = Agent::findOrFail($request->id_agent);
         $data =[];
-        //dd($request);
-       // $data['nom_fr'] = Str::upper($agent->nom_fr);
-       /* $data['n_acte_naiss'] = $request->n_acte_naiss;
-        $data['classement'] = $request->class_fils;
-        $data['date_naiss_fils'] = \Carbon\Carbon::parse($request->date_naiss_fils)->format('d/m/Y');
-        $data['lieu_naiss_fils'] = Str::upper($request->lieu_naiss_fils);
-        $data['nom_fils'] = Str::upper($request->nom_fils);
-        $data['date_compter'] = \Carbon\Carbon::parse($request->date_naiss_fils)->firstOfMonth()->addMonth()->format('d/m/Y');*/
-        $data['dateNow'] = date('d/m/Y');
+        $data['nom_fr'] = Str::upper($agent->nom_fr);
+        $data['cin'] = Str::upper($agent->cin);
+        $data['grade'] = $agent->grade->nom_grade_fr;
+        $data['mission'] = $request->mission;
+        $data['depart'] = $request->depart;
+        $data['retour'] = $request->retour;
+        $data['transport'] = $request->transport;
+        $data['ville'] = $request->ville;
+
+
 
         $filename = $this->exportWord($data,'ordermission','mission');
 
