@@ -8,7 +8,7 @@ $agents_bq = App\Models\Conjoint::all();
 
        @endphp
           <div class="col-sm-3 pl-0 ">
-            <input class="form-control" list="agents_list" id="list_agents" value="{{$agent_bq->nom_fr ?? ''}}"  placeholder="بحث..." autocomplete="off" >
+            <input class="form-control"  list="agents_list" id="list_agents" value="{{$agent_bq->nom_fr ?? ''}}"  placeholder="chercher..." autocomplete="off" >
             <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="{{$agent_bq->id_agent ?? ''}}">
             <datalist id="agents_list">
                 @foreach ($agents_bq as $agents_bq)

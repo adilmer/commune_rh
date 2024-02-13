@@ -8,7 +8,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
           <div class="card-body">
             <form action="" method="get">
                 @csrf
-            <h5 class="card-title fw-semibold mb-4">Avancement Echelle</h5>
+            <h5 class="card-title fw-semibold mb-4">Avancement Echelle </h5>
             <div class="form-group row  my-3">
               <div class="row">
               <div class="col-6 m-0">
@@ -28,21 +28,23 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                 <p>Nom et prénom :  <span class='text-bold mx-2  px-1' id='nom_ag'>{{ $agent->nom_fr ?? ''}}</span>
                    PPR : <span class='text-bold mx-2  px-1'>{{$agent->ppr ?? ''}}</span>
                     MAT : <span class='text-bold mx-2  px-1'>{{$agent->mat ?? ''}}</span>
-                    Echellon : <span class='text-bold mx-2  px-1'>{{$agent->echellon ?? ''}}</span>
-                    Date_Echelle : <span class='text-bold mx-2  px-1'>{{$agent->date_grade->format('Y/m/d') ?? ''}} </span>
+                    Grade : <span class='text-bold mx-2  px-1'>{{$agent->grade->nom_grade_fr ?? ''}}</span>
+                    <br>Echellon : <span class='text-bold mx-2  px-1'>{{$agent->echellon ?? ''}}</span>
+                    Date d'effet Echellon : <span class='text-bold mx-2  px-1'>{{$agent->date_echellon->format('Y/m/d') ?? ''}} </span>
+                    Echelle : <span class='text-bold mx-2  px-1'>{{$agent->echelle ?? ''}}</span>
+                    Date d'effet Grade : <span class='text-bold mx-2  px-1'>{{$agent->date_grade->format('Y/m/d') ?? ''}} </span>
                 </p>
 
               </div>
 
             <div class="row">
-              <div class="col-5 mt-3">
+              <div class="col-6 mt-3">
                 <h3 class="text-center">Ancienne Situation</h3>
                 <table class="table table-striped text-nowrap">
                     <tr>
                         <th>Echellon</th>
-                        <th>Echelle</th>
-                        <th>Indice</th>
-                        <th>Date d'effet echellon</th>
+                        <th>Grade</th>
+                        <th>Date d'effet Grade</th>
                     </tr>
                     <tr>
                         <td><select class="form-select" id="echellonSelect"  aria-label="Floating label select example">
@@ -61,20 +63,22 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
 
 
                           </select></td>
-                        <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example" disabled>
+                          @php
+                            $nom_grade = $agent->grade->nom_grade_fr;
+                            $text = explode(" ",$nom_grade);
+                            $text_grade = $text[0];
+                            if($text[0]=="adjoint"){
+                                $text_grade = $text[0] ." ".$text[1];
+                            }
 
-                            <option  {{$agent->echelle=="1" ? "selected" : ""}}>1</option>
-                            <option  {{$agent->echelle=="2" ? "selected" : ""}}>2</option>
-                            <option  {{$agent->echelle=="3" ? "selected" : ""}}>3</option>
-                            <option  {{$agent->echelle=="4" ? "selected" : ""}}>4</option>
-                            <option  {{$agent->echelle=="5" ? "selected" : ""}}>5</option>
-                            <option  {{$agent->echelle=="6" ? "selected" : ""}}>6</option>
-                            <option  {{$agent->echelle=="7" ? "selected" : ""}}>7</option>
-                            <option  {{$agent->echelle=="8" ? "selected" : ""}}>8</option>
-                            <option  {{$agent->echelle=="9" ? "selected" : ""}}>9</option>
-                            <option  {{$agent->echelle=="10" ? "selected" : ""}}>10</option>
-                            <option  {{$agent->echelle=="11" ? "selected" : ""}}>11</option>
-                            <option  {{$agent->echelle=="H*E" ? "selected" : ""}}>H*E</option>
+                              $grade_list = App\Models\Grade::where('nom_grade_fr','like','%'.$text_grade.'%')->get();
+                          @endphp
+                        <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            @foreach ($grade_list as $Grades)
+                            <option  {{$Grades->id_grade==$agent->id_grade ? "selected" : ""}}>{{$Grades->nom_grade_fr}}</option>
+                            @endforeach
+
+
                           </select></td>
                           @php
                           $agente = App\Models\Agent::where('id_agent',request()->query('id_agent'))->first() ?? false;
@@ -82,14 +86,14 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                           //dd($agente,$newAgent0);
                           $new_echellon0 = $newAgent0->echellon;
                           $new_indice0 = $newAgent0->indice;
-                          $new_date_echellon0 = $newAgent0->date_echellon->format('Y-m-d');
+                          $new_date_grade0 = $newAgent0->date_grade->format('Y-m-d');
 
                           //dd($new_echellon,$new_indice,$new_date_echellon);
 
                       @endphp
                           @if($new_indice0 !=0)
-                        <td><input class="form-control" type="text" value="{{$new_indice0 ?? ''}}" disabled></td>
-                        <td><input class="form-control" type="text" value="{{$new_date_echellon0 ?? ''}}" disabled></td>
+
+                        <td><input class="form-control" type="text" value="{{$new_date_grade0 ?? ''}}"></td>
                         @else
                         <td><input class="form-control" type="text" value="" disabled></td>
                         <td><input class="form-control" type="text" value="" disabled></td>
@@ -98,18 +102,13 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     </tr>
                 </table>
               </div>
-              <div id="calculer_situation" class="col-2 d-flex align-items-center justify-content-center ">
 
-            </div>
             @php
                 $agentt = App\Models\Agent::where('id_agent',request()->query('id_agent'))->first() ?? false;
-                $newAgent = app('App\Http\Controllers\AvancementController')->newAgent($agentt,null, $echellon + 1 ) ?? null;
+                $echelle  = $agentt->echelle + 1 ?? null;
+                $newAgent = app('App\Http\Controllers\AvancementController')->newAgent($agentt,null, $echellon - 1 ) ?? null;
                 $new_echellon = $newAgent->echellon;
-                $new_indice = $newAgent->indice;
                 $new_date_echellon = $newAgent->date_echellon->format('Y-m-d');
-
-                //dd($new_echellon,$new_indice,$new_date_echellon);
-
             @endphp
               <div class="col-5 mt-3">
                 <h3 class="text-center">Nouvelle Situation</h3>
@@ -117,21 +116,35 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     <tr>
                         <th>Echellon</th>
                         <th>Echelle</th>
-                        <th>Indice</th>
                         <th>Date d'effet echellon</th>
                     </tr>
                     <tr>
-                        @if($new_indice!=0)
-                        <td>{{$new_echellon ?? ''}}</td>
-                        <td>{{$agent->echelle ?? ''}}</td>
-                        <td>{{$new_indice ?? ''}}</td>
-                        <td>{{$new_date_echellon ?? ''}}</td>
-                        @else
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                            @endif
+
+                        <td><select class="form-select" id="echellonSelect"  aria-label="Floating label select example">
+
+                            <option  {{$new_echellon=="1" ? "selected" : ""}}>1</option>
+                            <option  {{$new_echellon=="2" ? "selected" : ""}}>2</option>
+                            <option  {{$new_echellon=="3" ? "selected" : ""}}>3</option>
+                            <option  {{$new_echellon=="4" ? "selected" : ""}}>4</option>
+                            <option  {{$new_echellon=="5" ? "selected" : ""}}>5</option>
+                            <option  {{$new_echellon=="6" ? "selected" : ""}}>6</option>
+                            <option  {{$new_echellon=="7" ? "selected" : ""}}>7</option>
+                            <option  {{$new_echellon=="8" ? "selected" : ""}}>8</option>
+                            <option  {{$new_echellon=="9" ? "selected" : ""}}>9</option>
+                            <option  {{$new_echellon=="10" ? "selected" : ""}}>10</option>
+                            <option  {{$new_echellon=="exp" ? "selected" : ""}}>exp</option>
+
+
+                          </select></td>
+                        <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            @foreach ($grade_list as $Grades)
+                            <option  {{$Grades->id_grade==$agent->id_grade-1 ? "selected" : ""}}>{{$Grades->nom_grade_fr}}</option>
+                            @endforeach
+
+
+                          </select></td>
+                        <td><input type="date" class="form-control" value="{{$agent->date_grade->addYear(5)->format('Y-m-d')}}" ></td>
+
                     </tr>
                 </table>
               </div>
