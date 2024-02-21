@@ -6,9 +6,9 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
 @endphp
 <div class="card" dir="ltr">
           <div class="card-body">
-            <form action="" method="get">
+            <form action="{{route('avancement.export_word_avgrade')}}" method="get">
                 @csrf
-            <h5 class="card-title fw-semibold mb-4">Avancement Echelle </h5>
+            <h5 class="card-title fw-semibold mb-4">Avancement De Grade </h5>
             <div class="form-group row  my-3">
               <div class="row">
               <div class="col-6 m-0">
@@ -47,7 +47,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                         <th>Date d'effet Grade</th>
                     </tr>
                     <tr>
-                        <td><select class="form-select" id="echellonSelect"  aria-label="Floating label select example">
+                        <td><select name="an_echl" class="form-select" id="echellonSelect"  aria-label="Floating label select example">
 
                             <option  {{$echellon=="1" ? "selected" : ""}}>1</option>
                             <option  {{$echellon=="2" ? "selected" : ""}}>2</option>
@@ -73,7 +73,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
 
                               $grade_list = App\Models\Grade::where('nom_grade_fr','like','%'.$text_grade.'%')->get();
                           @endphp
-                        <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <td><select name="an_grade" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                             @foreach ($grade_list as $Grades)
                             <option  {{$Grades->id_grade==$agent->id_grade ? "selected" : ""}}>{{$Grades->nom_grade_fr}}</option>
                             @endforeach
@@ -93,7 +93,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                       @endphp
                           @if($new_indice0 !=0)
 
-                        <td><input class="form-control" type="text" value="{{$new_date_grade0 ?? ''}}"></td>
+                        <td><input name="an_dateff" class="form-control" type="text" value="{{$new_date_grade0 ?? ''}}"></td>
                         @else
                         <td><input class="form-control" type="text" value="" disabled></td>
                         <td><input class="form-control" type="text" value="" disabled></td>
@@ -120,7 +120,7 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
                     </tr>
                     <tr>
 
-                        <td><select class="form-select" id="echellonSelect"  aria-label="Floating label select example">
+                        <td><select class="form-select" name="nv_echl" id="echellonSelect"  aria-label="Floating label select example">
 
                             <option  {{$new_echellon=="1" ? "selected" : ""}}>1</option>
                             <option  {{$new_echellon=="2" ? "selected" : ""}}>2</option>
@@ -136,18 +136,78 @@ $echellon = request()->query('echellon') ?? $agent->echellon ?? '';
 
 
                           </select></td>
-                        <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <td><select class="form-select" name="nv_grade" id="floatingSelect" aria-label="Floating label select example">
                             @foreach ($grade_list as $Grades)
                             <option  {{$Grades->id_grade==$agent->id_grade-1 ? "selected" : ""}}>{{$Grades->nom_grade_fr}}</option>
                             @endforeach
 
 
                           </select></td>
-                        <td><input type="date" class="form-control" value="{{$agent->date_grade->addYear(5)->format('Y-m-d')}}" ></td>
+                        <td><input type="date" name="nv_dateff" class="form-control" value="{{$agent->date_grade->addYear(5)->format('Y-m-d')}}" ></td>
 
                     </tr>
                 </table>
               </div>
+
+
+              <label for="list_agents" >Type fonctionnaire : </label>
+            <div class="checkbo">
+                <div class="form-check form-check-inline">
+                 <input class="form-check-input" value="examen" type="radio" name="inlineRadio" onclick="checkav()" id="inlineRadioexam" checked >
+                 <label class="form-check-label" for="inlineRadioexam">par examen</label>
+               </div>
+               <div class="form-check form-check-inline">
+                 <input class="form-check-input" value="ancien" type="radio" name="inlineRadio" onclick="checkav()" id="inlineRadioanc"  >
+                 <label class="form-check-label" for="inlineRadioanc">par anciennen</label>
+               </div>
+               <div class="form-check form-check-inline">
+                   <input class="form-check-input" value="chel7" type="radio" name="inlineRadio" onclick="checkav()" id="inlineRadio3"  >
+                   <label class="form-check-label" for="inlineRadio3">grade 7</label>
+                 </div>
+            </div>
+              <!--  par  -->
+              <fieldset id="fieldsetav">
+                <legend>Promotion de grade par <span id="typeav1">examen professionnel</span></legend>
+              <div class="row">
+                <div class="col-4">
+                    <label for="n_arrete" >N° Arrété <span id="typeav2">examen professionnel</span> : </label>
+                    <input id="n_arrete" name="n_arrete" type="text" class="form-control"   >
+                </div>
+                <div class="col-4">
+                    <label for="date_arrete" >Date Arrété <span id="typeav3">examen professionnel</span> : </label>
+                    <input id="date_arrete" name="date_arrete" type="date" class="form-control"   >
+                </div>
+
+                <div class="col-4">
+                    <label for="list_agents" >Grade : </label>
+                    <select name="grade" class="form-select" aria-label="Default select example">
+                        <option  value="ADMINISTRATEURM" selected>ADMINISTRATEUR ADJOINT DU MINISTÉRE DE L'INTÉRIEUR</option>
+                        <option  value="ADMINISTRATEUR" selected>ADMINISTRATEUR</option>
+                        <option value="REDACTEUR ">REDACTEUR </option>
+                        <option value="INFIRMIERS ET TECHNICIENS DE SANTÉ">INFIRMIERS ET TECHNICIENS DE SANTÉ</option>
+                        <option value="INGENIEUR ">INGENIEUR </option>
+                        <option value="ADJOINT TECHNIQUE ">ADJOINT TECHNIQUE </option>
+                        <option value="ADJOINT ADMINISTRATIF ">ADJOINT ADMINISTRATIF </option>
+                        <option value="TECHNICIEN ">TECHNICIEN </option>
+                        <option value="MÉDECINS ET PHARMACIENS ">MÉDECINS ET PHARMACIENS </option>
+                      </select>
+                </div>
+            </div>
+              </fieldset>
+              <fieldset id="fieldseechl7" style="display: none">
+                <legend>Promotion de Supprimer l'échelle 7 </legend>
+              <div class="row">
+
+                <div class="col-4">
+                    <label for="list_agents" >Grade : </label>
+                    <select name="gradeechl7" class="form-select" aria-label="Default select example">
+                        <option selected value="ADJOINT TECHNIQUE ">ADJOINT TECHNIQUE </option>
+                        <option value="ADJOINT ADMINISTRATIF ">ADJOINT ADMINISTRATIF </option>
+                      </select>
+                </div>
+            </div>
+              </fieldset>
+
 
             <div class="btnsucc m-4 text-end">
               <button type="submit" id="btn_submit" class="btn btn-success" ><i class="ti ti-printer"></i> طباعة القرارات </button>

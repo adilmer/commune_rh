@@ -4,18 +4,47 @@
           <div class="card-body">
             <form action="{{route('attestation.export_word_ordermission')}}" method="get">
                 @csrf
+
             <h5 class="card-title fw-semibold mb-4">Order de Mission</h5>
             <div class="form-group row  my-3">
               <div class="row">
               <div class="col-6 m-0">
+                <label for="list_agents" >Type fonctionnaire : </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" onclick="checkradio()" id="inlineRadio1" value="Agents" checked>
+                    <label class="form-check-label" for="inlineRadio1">Agents</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" onclick="checkradio()" id="inlineRadio2" value="Member " >
+                    <label class="form-check-label" for="inlineRadio2">Member</label>
+                  </div>
+                <br><br>
                 <input type="hidden" class="form-control" id="id_agent" name="id_agent" placeholder="" value="" required>
                 <label for="list_agents" >Nom fonctionnaire : </label>
+                <div id="dataagent">
                 <input type="text" class="form-control" list="agents_list" id="list_agents"  autocomplete="off"  placeholder="Select fonctionnaire" value="" required >
               <datalist id="agents_list" >
                 @foreach ($agents as $agents)
                 <option data-id="{{$agents->id_agent}}" value="{{$agents->nom_fr}}" >
                 @endforeach
+             </datalist>
+                </div>
+
+
+
+            <div id="datamember" style="display: none">
+                <input type="text" class="form-control" list="agents_list2" id="list_agents"  autocomplete="off"  placeholder="Select member" value="" required >
+                <datalist id="agents_list2" >
+                  @foreach ($members as $members)
+                  <option data-id="{{$members->id_member}}" value="{{$members->nomfr_member}}" >
+                  @endforeach
               </datalist>
+            </div>
+
+
+
+
+
               </div>
               </div>
 
@@ -50,7 +79,7 @@
                     </datalist>
             </div>
             <div class="btnsucc m-4 text-end">
-              <button type="submit" id="btn_submit" class="btn btn-success" style="display: none"><i class="ti ti-printer"></i> طباعة الوثائق </button>
+              <button type="submit" id="btn_submit" class="btn btn-success"  ><i class="ti ti-printer"></i> طباعة الوثائق </button>
             </div>
           </div>
         </div>
@@ -58,6 +87,7 @@
 
       </div>
         </div>
+
 @endsection
 
 @section('script')

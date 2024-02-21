@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Stmt\Else_;
 use App\Traits\ExportTrait;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Str;
 use Exception;
 use NumberFormatter;
 
@@ -402,4 +403,89 @@ try{
      return response()->download($filename)->deleteFileAfterSend(true);
 
     }
+
+
+    public function export_word_avgrade(Request $request)
+    {
+
+
+        $agent = Agent::findOrFail($request->id_agent);
+
+        $data =[];
+        $data['an_echl'] = $request->an_echl;
+        $data['an_grade'] = $request->an_grade;
+        $data['an_ind'] = $request->an_ind;
+        $data['an_dateff'] = $request->an_dateff->format('Y/m/d');
+        $data['date_eff_echl'] = $agent->date_echellon->format('Y/m/d');
+        $data['nv_echl'] = $request->nv_echl;
+        $data['nv_ind'] = $request->nv_ind;
+        $data['nv_grade'] = $request->nv_grade;
+        $data['nv_dateff'] = $request->nv_dateff->format('Y/m/d');
+        $data['nom_fr'] = Str::upper($agent->nom_fr);
+        $data['cin'] = Str::upper($agent->cin);
+        $data['ppr'] = Str::upper($agent->cin);
+        $data['grade'] = $agent->grade->nom_grade_fr;
+        $data['n_arrete'] = $request->n_arrete;
+        $data['date_arrete'] = $request->date_arrete->format('Y/m/d');
+        $data['annee_arrete'] = $request->date_arrete->format('Y');
+
+            if($request->inlineRadio=='chel7'){
+
+                if($request->gradeechl7=='ADJOINT TECHNIQUE')
+                $name ='Le  décret n° 2.14.416 du 24 Juin 2014 modifiant et coplétant Le décret  N° 2.10 . 452  du 29 Octobre 2010 portant statut du corps des Adjoints techniques Interministériels ';
+                if($request->gradeechl7=='ADJOINT ADMINISTRATIF')
+                $name ='décret n° 2.14.417 du 24 Juin 2014 modifiant et complétant Le décret  N° 2.10 . 453  du 29 Octobre 2010 portant statut du corps des Adjoints Administratifs Interministériels . ';
+                $data['gradex'] = $name;
+
+            }
+            else{
+                if($request->grade=='ADMINISTRATEURM')
+                $name =' Le  décret n° 2.63.047  du 06 chaoual 1382 ( 02-03-1963) fixant l échelonnement indiciaire des gouverneurs de préféctures et provinces , des Administrateurs principaux administrateurs et administrateurs adjoints du ministére de l intérieur , tel qu il a été modifié et complété .';
+                if($request->grade=='ADMINISTRATEUR')
+                $name =' Le  décret n° 2.06.377  du 20 kaada 1431 ( 29-10-2010) portant statut du corps interministériels des Administrateurs .';
+                if($request->grade=='REDACTEUR')
+                $name =' Le décret  N° 2.10 . 445  du 20 kaada 1431 ( 29-10-2010 ) portant statut du corps  Interministériels des Rédacteurs .';
+                if($request->grade=='INFIRMIERS ET TECHNICIENS DE SANTÉ')
+                $name ='Le  Décret n° 2-17-535 du 7 moharrem 1439 (28 septembre 2017) portant statut particulier du corps interministériel des infirmiers et des techniciens de santé.';
+                if($request->grade=='INGENIEUR')
+                $name ='Le  Décret n° 2-11-471 du 15 chaoual 1432 (14 septembre 2011) portant statut particulier du corps intérministriel des ingénieurs';
+                if($request->grade=='ADJOINT TECHNIQUE')
+                $name ='Le  décret n° 2.14.416 du 24 Juin 2014 modifiant et coplétant Le décret  N° 2.10 . 452  du 29 Octobre 2010 portant statut du corps des Adjoints techniques Interministériels ';
+                if($request->grade=='ADJOINT ADMINISTRATIF')
+                $name ='décret n° 2.14.417 du 24 Juin 2014 modifiant et complétant Le décret  N° 2.10 . 453  du 29 Octobre 2010 portant statut du corps des Adjoints Administratifs Interministériels . ';
+                if($request->grade=='TECHNICIEN')
+                $name ='Le décret  N° 2-05-72  du 29 Chaoual 1426 ( 02-12-2005 ) portant statut du corps  Interministériels des Techniciens.';
+                if($request->grade=='MÉDECINS ET PHARMACIENS')
+                $name ='Le  Décret n° 2-99-651 du 25 joumada Il 1420 (6 octobre 1999) portant statut particulier du corps interministériel des médecins, pharmaciens et chirurgiens-dentistes (B.O n° 4736 du 21 octobre 1999).';
+                $data['gradex'] = $name;
+            }
+
+
+
+
+
+
+            if($request->inlineRadio=='examen'){
+                $fileav='arreteexamen';
+            }
+            elseif($request->inlineRadio=='ancien'){
+                $fileav='arreteancienne';
+            }
+            else{
+                $fileav='arreteechl7';
+            }
+
+        $filename = $this->exportWord($data,$fileav,'arreteavgrade');
+
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
+
+
+
+
+
+
+
+
 }

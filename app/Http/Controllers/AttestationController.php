@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Member;
 use App\Traits\ExportTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -260,17 +261,34 @@ class AttestationController extends Controller
     }
 
     public function ordermission(){
-        $agents = Agent::all();
 
-        return view('pages.attestations.ordermission', compact('agents'));
+
+
+
+
+        $agents = Agent::all();
+        $members=Member::all();
+
+        return view('pages.attestations.ordermission', compact('agents','members'));
     }
     public function export_word_ordermission(Request $request)
     {
+
+
         $agent = Agent::findOrFail($request->id_agent);
+        $member =Member::findOrFail($request->id_member);
+
         $data =[];
-        $data['nom_fr'] = Str::upper($agent->nom_fr);
-        $data['cin'] = Str::upper($agent->cin);
-        $data['grade'] = $agent->grade->nom_grade_fr;
+            if($request->inlineRadioOptions=='Agents'){
+                $data['nom_fr'] = Str::upper($agent->nom_fr);
+                $data['cin'] = Str::upper($agent->cin);
+                $data['grade'] = $agent->grade->nom_grade_fr;
+            }
+            else{
+                $data['nom_fr'] = Str::upper($member->nomar_member);
+                $data['cin'] = Str::upper($member->cin);
+                $data['grade'] = $member->grademembres->nomfr_grade;
+            }
         $data['mission'] = $request->mission;
         $data['depart'] = $request->depart;
         $data['retour'] = $request->retour;
